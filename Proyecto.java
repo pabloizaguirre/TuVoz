@@ -20,11 +20,14 @@ public  class Proyecto {
   private int apoyos;
   private int apoyosMin;
   private Date fechaUltimoApoyo;
+  private ArrayList<String> listadoApoyos;
+  private ArrayList<String> listadoSuscripciones;
 	
   public Proyecto(String tit, int ident, Date fechCreacion, String desc, 
 				  double presSolicitado, double presConcedido,
 				  EstadoProyecto est, int votos, int votosMin, Date fechUltApoyo) {
-		titulo = tit; id = ident; fechaCreacion = fechCreacion; descripcion = desc;
+		this.listadoApoyos = new ArrayList();titulo = tit; id = ident; 
+		fechaCreacion = fechCreacion; descripcion = desc;
 		presupuestoSolicitado = presSolicitado; presupuestoConcedido = presConcedido;
 		estado = est; apoyos = votos; apoyosMin = votosMin; fechaUltimoApoyo = fechUltApoyo; 
 	  }
@@ -53,15 +56,27 @@ public  class Proyecto {
 	  public void setFechaUltimoApoyo(Date fecha) { fechaUltimoApoyo = fecha; }
 
 		
-	  // el tipo IVA general es 21% aplicable salvo que se redefina en una subclase
-	  public double tipoIVA() { return 0.21; }
+	  public boolean apoyarProyecto(Ciudadano ciu) {
+		  if(listadoApoyos.contais(ciu.getNombreUsuario()) {
+			  return false;
+		  }
+		  listadoApoyos.add(ciu.getNombreUsuario());
+		  apoyos++;
+
+		  return true;
+		   }
 	
-	  // cada subclase de articulo calculará el descuento que corresponda
-	  public abstract double descuento(double unidades);
-	
-	  // el precio total siempre se calcula de la misma forma
-	  public double precioTotal(double unidades) {
-		return ((precioUnitario * unidades) - descuento(unidades)) 
-                     * (1.0 + tipoIVA());
+	  public boolean suscribirProyecto(Ciudadano ciu) {
+		  if(listadoSuscripciones.contains(ciu.getNombreUsuario)) {
+			  return false;
+		  }
+		  listadoSuscripciones.add(ciu.getNombreUsuario);
+		  
+		  return true;
 	  }
+
+	  public boolean 
+	
+	
+	  
 }

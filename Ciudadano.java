@@ -9,7 +9,7 @@ import java.util.*;
  */
 
 public class Ciudadano extends Usuario {
-    
+
     
 
 
@@ -17,7 +17,8 @@ public class Ciudadano extends Usuario {
         titulo = tit;
         representante = rep;
         proyectos = new ArrayList();
-        elementos = new ArrayList(rep);
+        elementos = new ArrayList();
+        elementos.add(rep);
     }
 
     /**

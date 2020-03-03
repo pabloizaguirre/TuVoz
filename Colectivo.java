@@ -1,16 +1,13 @@
 import java.util.*;
 
 /**
- * Clase proyecto.
+ * Clase Colectivo. 
  * 
  * @author Elena Cano
  * @author Pablo Izaguirre
  * @author Miguel Escribano
  */
 
-/**
- * 
- */
 public class Colectivo extends ElementoColectivo {
 
     Private String titulo;
@@ -23,10 +20,16 @@ public class Colectivo extends ElementoColectivo {
     public Colectivo(String tit, Ciudadano rep){
         titulo = tit;
         representante = rep;
+        proyectos = new ArrayList();
+        elementos = new ArrayList(rep);
     }
 
-
-    public Bool unirseAColectivo(Ciudadano miembro){
+    /**
+     *
+     * @param miembro un ciudadano que se quiere unir al colectivo
+     * @return false si hay un error, true si el ciudadano ha sido registrado correctamente
+     */
+    public boolean unirseAColectivo(Ciudadano miembro){
         if (elementos.contains(miembro)){
             return false;
         }
@@ -34,6 +37,16 @@ public class Colectivo extends ElementoColectivo {
         elementos.add(miembro);
         return true;
     }
+
+    public boolean abandonarColectivo(Ciudadano miembro){
+        if (elementos.contains(miembro)){
+            elementos.remove(miembro);
+            return true;
+        }
+        return false;
+    }
+
+
 
 
 
