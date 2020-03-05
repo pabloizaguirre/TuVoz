@@ -10,38 +10,21 @@ import java.util.*;
 
 public class Ciudadano extends Usuario {
 
+    private String nif;
+    private boolean bloqueado;
+
+    Private ArrayList<Colectivo> misColectivos;
+    Private ArrayList<Colectivo> colectivosCreados;
+    Private ArrayList<Proyecto> proyectosCreados
+
+
+    public Ciudadano(String contr, String nomUs, String nif, boolean bloq){
+        super(nomUs, contr);
+        this.nif = nif;
+        this.bloqueado = bloq;
+    }
     
 
-
-    public Colectivo(String tit, Ciudadano rep){
-        titulo = tit;
-        representante = rep;
-        proyectos = new ArrayList();
-        elementos = new ArrayList();
-        elementos.add(rep);
-    }
-
-    /**
-     *
-     * @param miembro un ciudadano que se quiere unir al colectivo
-     * @return false si hay un error, true si el ciudadano ha sido registrado correctamente
-     */
-    public boolean unirseAColectivo(Ciudadano miembro){
-        if (elementos.contains(miembro)){
-            return false;
-        }
-        
-        elementos.add(miembro);
-        return true;
-    }
-
-    public boolean abandonarColectivo(Ciudadano miembro){
-        if (elementos.contains(miembro)){
-            elementos.remove(miembro);
-            return true;
-        }
-        return false;
-    }
 
 
 

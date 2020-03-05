@@ -1,5 +1,4 @@
-//package ads.p2.facturacion;
-
+import java.util.*;
 
 /**
  * Clase proyecto.
@@ -75,7 +74,7 @@ public  class Proyecto {
 		  return true;
 	  }
 
-	  public boolean 
+	  // Quedan por hacer metodos
 	
 	
 	  
