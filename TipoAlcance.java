@@ -7,6 +7,6 @@
  */
 
 
-enum TipoProyecto {
+public enum TipoProyecto {
     nacional, internacional;
 }

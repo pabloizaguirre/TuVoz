@@ -6,6 +6,6 @@
  * @author Miguel Escribano
  */
 
- enum TipoInforme {
+ public enum TipoInforme {
     afinidad, popularidad;
 }

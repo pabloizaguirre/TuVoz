@@ -6,6 +6,6 @@
  * @author Miguel Escribano
  */
 
-enum EstadoProyecto {
-    noEnviado, pendiente, aprobado, rechazado, caducado;
+public enum EstadoProyecto {
+    pendienteAutorizacion,noEnviado, aprobado, rechazado, caducado;
 }
