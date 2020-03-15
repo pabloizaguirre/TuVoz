@@ -7,5 +7,5 @@
  */
 
 public enum EstadoProyecto {
-    pendienteAutorizacion,noEnviado, aprobado, rechazado, caducado;
+    noEnviado,pendienteAprobacion,aprobado, rechazado, caducado;
 }

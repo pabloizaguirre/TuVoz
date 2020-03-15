@@ -10,18 +10,18 @@ import java.util.*;
 
 public class Colectivo extends ElementoColectivo {
 
-    Private String titulo;
-    Private Ciudadano representante;
-    Private ArrayList<ElementoColectivo> elementos;
-    Private ArrayList<Proyecto> proyectos;
+    private String titulo;
+    private Ciudadano representante;
+    private ArrayList<ElementoColectivo> elementos;
+    private ArrayList<Proyecto> proyectos;
     
 
 
     public Colectivo(String tit, Ciudadano rep){
         titulo = tit;
         representante = rep;
-        proyectos = new ArrayList();
-        elementos = new ArrayList(rep);
+        proyectos = new ArrayList<Proyecto>();
+        elementos = new ArrayList<ElementoColectivo>();
     }
 
     public String getTitulo() {

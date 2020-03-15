@@ -8,12 +8,11 @@ import java.util.*;
  * @author Miguel Escribano
  */
 
- public class Administrador extends Usuario {
-
- }
-
- public Administrador(String contr, String nomUs){
-        super(nomUs, contr);
-
-      
+public class Administrador extends Usuario {
+    
+    public Administrador(String nomUs, String contr){
+        super(nomUs, contr);    
     }
+
+    
+}

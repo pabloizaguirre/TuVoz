@@ -14,12 +14,15 @@ public class Ciudadano extends Usuario {
     private boolean bloqueado;
 
     //lista de colectivos de los que soy miembro
-    Private ArrayList<Colectivo> misColectivos;
+    private ArrayList<Colectivo> misColectivos;
     //lista de colectivos de los que es representante
-    Private ArrayList<Colectivo> colectivosCreados;
-    Private ArrayList<Proyecto> proyectosCreados;
-    Private ArrayList<Proyecto> proyectosApoyados;
-    Private ArrayList<Proyecto> proyectosSuscritos;
+    private ArrayList<Colectivo> colectivosCreados;
+    //lista de proyetos creados por este usuario
+    private ArrayList<Proyecto> proyectosCreados;
+    private ArrayList<Proyecto> proyectosApoyados;
+    private ArrayList<Proyecto> proyectosSuscritos;
+    //lista de notificaciones recibidas por este usuario
+    private ArrayList<Notificacion> notificaciones = new ArrayList<Notificacion>();
 
 
     public Ciudadano(String contr, String nomUs, String nif, boolean bloq){
@@ -37,10 +40,6 @@ public class Ciudadano extends Usuario {
     }
 
     public boolean isBloqueado() {
-        return this.bloqueado;
-    }
-
-    public boolean getBloqueado() {
         return this.bloqueado;
     }
 
@@ -88,8 +87,42 @@ public class Ciudadano extends Usuario {
         this.proyectosSuscritos = proyectosSuscritos;
     }
 
+    public ArrayList<Notificacion> getNotificaciones() {
+        return this.notificaciones;
+    }
+
+    public void setNotificaciones(ArrayList<Notificacion> notificaciones) {
+        this.notificaciones = notificaciones;
+    }
 
 
+    /**
+     * Esta funcion añade una notificacion al conjunto de notificaciones de este usuario
+     * @param n notificacion a añadir
+     * @return false si el usuario ya tenia la notificacion, true si se ha añadido con exito
+     */
+    public boolean addNotificacion(Notificacion n){
+        if(notificaciones.contains(n)){
+            return false;
+        } else {
+            notificaciones.add(n);
+            return true;
+        }
+    }
+    
+    /**
+     * Esta funcion elimina una notificacion de la lista de notificaciones del usuario
+     * @param n notificacion a borrar
+     * @return false si la notificacion ya ha sido borrara o true si la eliminacion se ha realizado con exito
+     */
+    public boolean removeNotificacion(Notificacion n){
+        if(notificaciones.contains(n)){
+            notificaciones.remove(n);
+            return true;
+        } else {
+            return false;
+        }
+    }
     
     /**
      * Esta funcion solo debe ser llamada por unirseAColectivo,
@@ -136,73 +169,54 @@ public class Ciudadano extends Usuario {
         return true;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public double solicitarInformePopularidad(Proyecto p){
+    /**
+     * 
+     * @param p proyecto creado por el usuario del cual se quiere solicitar el informe
+     * @return numero de apoyos que tiene el proyecto p
+     */
+    public int solicitarInformePopularidad(Proyecto p){
         if (proyectosCreados.contains(p)){
-            return p.getApoyos;
+            return p.getApoyos();
         }
 
-        else{retun -1;}
+        else{return -1;}
     }
 
-    
-}
+    /**
+     * 
+     * @param c1 Primer colectivo del cual se quiere solicitar este informe.
+     * @param c2 Segundo colectivo del cual se quiere solicitar este informe.
+     * El usuario debe pertenecer a ambos colectivos.
+     * 
+     * @return double que representa el indice de afinidad entre dos colectivos.
+     */
     public double solicitarInformeAfinidad(Colectivo c1, Colectivo c2){
         int proyeC1=0;
         int proyeC2=0;
         int proyeC1apoyC2=0;
         int proyeC2apoyC1=0;
 
-        if (misColectivos.conatins(c1) && misColectivos.contains(c2)){
-
-            for (Proyectos p:c1.getProyectos()){
+        if (misColectivos.contains(c1) && misColectivos.contains(c2)){
+            for (Proyecto p:c1.getProyectos()){
                 proyeC1+=1;
                 
-                if(p.getcolectivosApoyantes().contains(c2)){
+                if(p.getColectivosApoyantes().contains(c2)){
                     proyeC1apoyC2+=1;
                 }
             }
-
-
-            for (Proyectos p:c2.getProyectos()){
+            for (Proyecto p:c2.getProyectos()){
                 proyeC2+=1;
                 
                 if(p.getColectivosApoyantes().contains(c2)){
                     proyeC2apoyC1+=1;
                 }
             }
-            
-
             return (proyeC1apoyC2 + proyeC2apoyC1)/(proyeC1 + proyeC2) ;
         }
-
         else return -1;
     }
 
+    
 
+}
   

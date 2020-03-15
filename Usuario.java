@@ -7,19 +7,15 @@ import java.util.*;
  * @author Miguel Escribano
  */
 
-
-import java.util.*;
-
-
-abstract class Usuario {
+abstract class Usuario extends ElementoColectivo{
     private String nombreUsuario;
-    private String contrasena
+    private String contrasena;
 
-    private static ArrayList<String> listaNombres = new ArrayList();
+    private static ArrayList<String> listaNombres = new ArrayList<String>();
  
-
-    public void Usuario (String nombre, String contr){
-        nombreUsuario= nombre;
+    /* Falta: el constructor deberia devolver error cuando el nombre proporcionado ya esta en uso */
+    public Usuario (String nombre, String contr){
+        nombreUsuario = nombre;
         contrasena = contr;
     }
 
@@ -40,5 +36,21 @@ abstract class Usuario {
         
     }
 
-    public ArrayList<String> getListaNombres() { return listaNombres; }
+    public ArrayList<String> getListaNombres() { 
+        return listaNombres; 
+    }
+
+
+    public String getContrasena() {
+        return this.contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+    
+
+}
+
+
 
