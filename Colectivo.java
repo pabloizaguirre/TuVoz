@@ -69,7 +69,7 @@ public class Colectivo extends ElementoColectivo {
         }
         elementos.add(miembro);
         
-        miembro.anadirAMisColectivos(this)
+        miembro.anadirAMisColectivos(this);
         
         return true;
     }

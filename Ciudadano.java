@@ -12,6 +12,7 @@ public class Ciudadano extends Usuario {
 
     private String nif;
     private boolean bloqueado;
+    private boolean registrado;
 
     //lista de colectivos de los que soy miembro
     private ArrayList<Colectivo> misColectivos;
@@ -23,12 +24,16 @@ public class Ciudadano extends Usuario {
     private ArrayList<Proyecto> proyectosSuscritos;
     //lista de notificaciones recibidas por este usuario
     private ArrayList<Notificacion> notificaciones = new ArrayList<Notificacion>();
+    //Lista de los nifs de los usuarios que se han registrado
+    private static ArrayList<String> listaNifs = new ArrayList<String>();
 
 
     public Ciudadano(String contr, String nomUs, String nif, boolean bloq){
         super(nomUs, contr);
         this.nif = nif;
         this.bloqueado = bloq;
+        this.registrado=false;
+        listaNifs.add(nif);
     }
 
     public String getNif() {
@@ -45,6 +50,10 @@ public class Ciudadano extends Usuario {
 
     public void setBloqueado(boolean bloqueado) {
         this.bloqueado = bloqueado;
+    }
+
+    public boolean isRegistrado() {
+        return this.registrado;
     }
 
     public ArrayList<Colectivo> getMisColectivos() {
@@ -93,6 +102,24 @@ public class Ciudadano extends Usuario {
 
     public void setNotificaciones(ArrayList<Notificacion> notificaciones) {
         this.notificaciones = notificaciones;
+    }
+
+    public ArrayList<String> getListaNifs() { 
+        return listaNifs; 
+    }
+
+    
+    public boolean nifEnUso(String str) {
+        if(listaNifs.contains(nif)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public void aprobarRegistro(){
+        this.registrado=true;
     }
 
 
@@ -168,6 +195,8 @@ public class Ciudadano extends Usuario {
         
         return true;
     }
+
+    
 
     /**
      * 

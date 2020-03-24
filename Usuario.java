@@ -12,11 +12,13 @@ abstract class Usuario extends ElementoColectivo{
     private String contrasena;
 
     private static ArrayList<String> listaNombres = new ArrayList<String>();
+    
  
     /* Falta: el constructor deberia devolver error cuando el nombre proporcionado ya esta en uso */
     public Usuario (String nombre, String contr){
         nombreUsuario = nombre;
         contrasena = contr;
+        listaNombres.add(nombre);
     }
 
     public String getNombreUsuario (){
@@ -47,6 +49,15 @@ abstract class Usuario extends ElementoColectivo{
 
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
+    }
+
+    public static boolean nombreEnUso(String str) {
+        if(listaNombres.contains(str)) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
     
 
