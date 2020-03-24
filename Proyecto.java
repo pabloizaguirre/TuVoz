@@ -91,23 +91,12 @@ public class Proyecto {
 			
 		/* Falta saber como conseguir que todos los miembros del colectivo de un representante apoyen
 		un proyecto a la vez */
-		public boolean apoyarProyecto(Ciudadano ciu) {
-			/*Control de errores para comprobar si el ciudadano ya ha apoyado el proyecto */
-			if(listadoApoyos.contains(ciu)) {
+		public boolean apoyarProyecto(ElementoColectivo e) {
+			if(listadoApoyos.contains(e)) {
 				return false;
 			}
-			if(ciu.getProyectosApoyados().contains(this)) {
-				return false;
-			}
-			/*Si el ciudadano no es el representante de ningun colectivo, se realiza un apoyo individual */
-			if(ciu.getColectivosCreados().isEmpty()) {
-				
-				listadoApoyos.add(ciu);
-
-				ciu.anadirAMisProyectosApoyados(this);		  
-				apoyos++;
-	
-				return true;
+			if ()
+			
 			}
 			/*Si el ciudadano es representante de un colectivo, se realiza el apoyo de todos los miembros de dicho
 			colectivo, comprobando previamente si alguno de los miembros ya había votado el proyecto */
