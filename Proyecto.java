@@ -95,22 +95,34 @@ public class Proyecto {
 			if(listadoApoyos.contains(e)) {
 				return false;
 			}
-			if ()
-			
-			}
-			/*Si el ciudadano es representante de un colectivo, se realiza el apoyo de todos los miembros de dicho
-			colectivo, comprobando previamente si alguno de los miembros ya había votado el proyecto */
-			else {
-				for (Colectivo c:ciu.getColectivosCreados()){
-					for(Ciudadano p: c.getElementos()) {
-						if()
 
+			//Si se vota como ciudadano
+
+			if(e.getClass().equals(Ciudadano.class)) {
+				listadoApoyos.add(e);
+				(Ciudadano)e.anadirAMisProyectosApoyados(this);
+				apoyos+=1;
+				fechaUltimoApoyo = LocalDate.now();
+			}
+
+			//Si se vota como colectivo
+			else if(e.getClass().equals(Colectivo.class)) //{
+				/*if(usuarioActual.equals((Colectivo)e.getRepresentante())) {
+					for(ElementoColectivo ele : (Colectivo)e.getElementos()){
+						if(listaApoyos.contains(ele)==false) {
+							listaApoyos.add(ele);
+							if(ele.getClass().equals(Ciudadano.class)) {
+								ele.anadirAMisProyectosApoyados(this);
+								suscribirProyecto(ele);
+								apoyos+=1;
+								fechaUltimoApoyo = LocalDate.now();
+							}
+						}
 					}
+
 				}
 			}
-			
-
-
+			*/
 			
 			
 			}

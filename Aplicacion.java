@@ -11,6 +11,7 @@ import java.util.*;
 public class Aplicacion {
 
     private int apoyosMin;
+    
 
     public Aplicacion(int votosMin){
         apoyosMin = votosMin;
