@@ -125,7 +125,7 @@ public class Aplicacion {
         }
 
         //Comprobamos si user[3] (cuyo registro no ha sido aprobado) puede apoyar el proyecto
-        System.out.println("Comprobamos si user[3] (cuyo registro no ha sido aprobado) puede apoyar el proyecto");
+        System.out.println("Comprobamos si user[3] (cuyo registro no ha sido aprobado) puede apoyar el proyecto\n");
         p1.apoyarProyecto(users[3]);
         System.out.println("Numero de apoyos: " + p1.getApoyos() + "\n");
         System.out.println("Listado de apoyos al proyecto " + p1);
@@ -133,7 +133,7 @@ public class Aplicacion {
             System.out.println(elem);
         }
 
-        //Comprobamos distintas funciones de proyecto
+        //Bloquear usuario
 
         //Comprobar que un usuario bloqueado no puede apoyar proyectos
 
