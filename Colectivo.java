@@ -10,10 +10,12 @@ import java.util.*;
 
 public class Colectivo extends ElementoColectivo {
 
+    private static List<Colectivo> todosLosColectivos; = new ArrayList<Colectivo>();
+
     private String titulo;
     private Ciudadano representante;
-    private ArrayList<ElementoColectivo> elementos;
-    private ArrayList<Proyecto> proyectos;
+    private List<ElementoColectivo> elementos;
+    private List<Proyecto> proyectos;
     
 
 
@@ -91,8 +93,11 @@ public class Colectivo extends ElementoColectivo {
         return true;
     }
 
-
-
-
+    public Colectivo buscarColectivo(String str) {
+        if(todosLosColectivos.get().contains(str)) {
+            return todosLosColectivos.get().contains(str);
+        }
+        return null;
+    }
     
 }

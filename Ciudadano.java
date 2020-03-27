@@ -10,6 +10,8 @@ import java.util.*;
 
 public class Ciudadano extends Usuario {
 
+    private static List<Ciudadano> todosLosCiudadanos = new ArrayList<Ciudadano>();
+
     private String nif;
     private boolean bloqueado;
     private boolean registrado;
@@ -24,8 +26,7 @@ public class Ciudadano extends Usuario {
     private ArrayList<Proyecto> proyectosSuscritos;
     //lista de notificaciones recibidas por este usuario
     private ArrayList<Notificacion> notificaciones = new ArrayList<Notificacion>();
-    //Lista de los nifs de los usuarios que se han registrado
-    private static ArrayList<String> listaNifs = new ArrayList<String>();
+    
 
 
     public Ciudadano(String contr, String nomUs, String nif, boolean bloq){
@@ -33,7 +34,7 @@ public class Ciudadano extends Usuario {
         this.nif = nif;
         this.bloqueado = bloq;
         this.registrado=false;
-        listaNifs.add(nif);
+        todosLosCiudadanos.add(this);
     }
 
     public String getNif() {
@@ -46,10 +47,6 @@ public class Ciudadano extends Usuario {
 
     public boolean isBloqueado() {
         return this.bloqueado;
-    }
-
-    public void setBloqueado(boolean bloqueado) {
-        this.bloqueado = bloqueado;
     }
 
     public boolean isRegistrado() {
@@ -104,24 +101,60 @@ public class Ciudadano extends Usuario {
         this.notificaciones = notificaciones;
     }
 
-    public ArrayList<String> getListaNifs() { 
-        return listaNifs; 
-    }
-
     
     public boolean nifEnUso(String str) {
-        if(listaNifs.contains(nif)) {
-            return true;
+        for(Ciudadano c :todosLosCiudadanos) {
+            if(c.getNif().contains(str)){
+                return true;
+            }
         }
-        else {
-            return false;
+        return false;
+    }
+
+    public boolean nombreUsuarioEnUso(String str) {
+        for(Ciudadano c :todosLosCiudadanos) {
+            if(c.getNombreUsuario().contains(str)) {
+                return true;
+            }
         }
+        return false;
+    }
+
+    public Ciudadano registrarUsuario(String contr, String nomUs, String nif) {
+        if(nifEnUso(nif) || nombreUsuarioEnUso(nomUs)){
+            return null;
+        }
+        return Ciudadano(contr,nomUs,nif, false);
     }
 
     public void aprobarRegistro(){
         this.registrado=true;
     }
 
+
+    public void bloquearUsuario() {
+        if(Aplicacion.usuarioActual.equals(Administrador.class)) {
+            this.bloqueado = true;
+            for(Proyecto p : this.proyectosApoyados) {
+                p.eliminarApoyo(this);
+                proyectosApoyados.remove(p);
+            }
+        }
+        return;
+    }
+
+    public void desbloquearUsuario() {
+        if(Aplicacion.usuarioActual.equals(Administrador.class)) {
+            this.bloqueado = false;
+        }
+    }
+
+    public Ciudadano buscarCiudadano(String str) {
+        if(todosLosCiudadanos.get().contains(str)) {
+            return todosLosCiudadanos.get().contains(str);
+        }
+        return null;
+    }
 
     /**
      * Esta funcion añade una notificacion al conjunto de notificaciones de este usuario

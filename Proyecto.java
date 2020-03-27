@@ -106,26 +106,27 @@ public class Proyecto {
 			}
 
 			//Si se vota como colectivo
-			else if(e.getClass().equals(Colectivo.class)) //{
-				/*if(usuarioActual.equals((Colectivo)e.getRepresentante())) {
+			else if(e.getClass().equals(Colectivo.class)) {
+				if(Aplicacion.usuarioActual.equals((Colectivo)e.getRepresentante())) {
 					for(ElementoColectivo ele : (Colectivo)e.getElementos()){
-						if(listaApoyos.contains(ele)==false) {
+						if(listaApoyos.contains(ele)==false && ele.getClass().equals(Ciudadano.class)) {
 							listaApoyos.add(ele);
-							if(ele.getClass().equals(Ciudadano.class)) {
-								ele.anadirAMisProyectosApoyados(this);
-								suscribirProyecto(ele);
-								apoyos+=1;
-								fechaUltimoApoyo = LocalDate.now();
-							}
+							ele.anadirAMisProyectosApoyados(this);
+							apoyos+=1;
+							fechaUltimoApoyo = LocalDate.now();
 						}
 					}
 
 				}
+				}
 			}
-			*/
-			
-			
+		
+		public boolean eliminarApoyo(Ciudadano ciu) {
+			if(listadoApoyos.contains(ciu)) {
+				listadoApoyos.remove(ciu);
+				apoyos-=1;
 			}
+		}
 		
 		public boolean suscribirProyecto(Ciudadano ciu) {
 			if(listadoSuscripciones.contains(ciu)) {

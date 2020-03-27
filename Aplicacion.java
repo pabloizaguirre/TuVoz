@@ -11,10 +11,12 @@ import java.util.*;
 public class Aplicacion {
 
     private int apoyosMin;
+    private static Usuario usuarioActual;
     
 
-    public Aplicacion(int votosMin){
-        apoyosMin = votosMin;
+    public Aplicacion(int apoyosMin, Usuario usuarioActual){
+        this.apoyosMin = apoyosMin;
+        this.usuarioActual = usuarioActual;
     }
 
     /* Falta: yo quitaria esto */
