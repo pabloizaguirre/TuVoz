@@ -10,7 +10,7 @@ import java.util.*;
 
 public class Colectivo extends ElementoColectivo {
 
-    private static List<Colectivo> todosLosColectivos; = new ArrayList<Colectivo>();
+    private static List<Colectivo> todosLosColectivos = new ArrayList<Colectivo>();
 
     private String titulo;
     private Ciudadano representante;
@@ -42,7 +42,7 @@ public class Colectivo extends ElementoColectivo {
         this.representante = representante;
     }
 
-    public ArrayList<ElementoColectivo> getElementos() {
+    public List<ElementoColectivo> getElementos() {
         return this.elementos;
     }
 
@@ -50,15 +50,22 @@ public class Colectivo extends ElementoColectivo {
         this.elementos = elementos;
     }
 
-    public ArrayList<Proyecto> getProyectos() {
+    public List<Proyecto> getProyectos() {
         return this.proyectos;
     }
 
     public void setProyectos(ArrayList<Proyecto> proyectos) {
         this.proyectos = proyectos;
     }
-    
 
+
+    /* Falta: que compruebe dentro de los colectivos si el usuario es miembro de los subcolectivos */
+    public boolean esMiembro(Ciudadano u){
+        if(elementos.contains(u)) return true;
+        else return false;
+
+    }
+    
     /**
      * Llamar a esta funcion cuando queramos unirnos a un colectivo
      *
@@ -93,9 +100,18 @@ public class Colectivo extends ElementoColectivo {
         return true;
     }
 
-    public Colectivo buscarColectivo(String str) {
+    /* public Colectivo buscarColectivo(String str) {
         if(todosLosColectivos.get().contains(str)) {
             return todosLosColectivos.get().contains(str);
+        }
+        return null;
+    } */
+
+    public Colectivo bucarColectivo(String str){
+        for (Colectivo c:todosLosColectivos){
+            if(c.getTitulo().equals(str)){
+                return c;
+            }
         }
         return null;
     }

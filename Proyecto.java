@@ -1,6 +1,7 @@
+/* import grants.*; */
 import java.time.LocalDate;
 import java.util.*;
-import es.uam.eps.sadp.grants.*;
+
 
 /**
  * Clase proyecto.
@@ -14,7 +15,6 @@ public class Proyecto {
 	private String titulo;
 	private int id;
 	private static int ultimoIdAsignado = 0;
-	private ProjectKind tipo;
 	private LocalDate fechaCreacion;
 	private String descripcion;
 	private double presupuestoSolicitado;
@@ -31,20 +31,17 @@ public class Proyecto {
 	
 
 
-	public Proyecto(String titulo, ProjectKind tipo, 
-					String descripcion, double presupuestoSolicitado, 
-					double presupuestoConcedido, int apoyos,Ciudadano creador) {
+	public Proyecto(String titulo,
+					String descripcion, double presupuestoSolicitado, Ciudadano creador) {
 		
 		this.titulo = titulo;
 		//El id de cada proyecto será uno mayor que el del último proyecto creado
 		this.id = ultimoIdAsignado;
 		ultimoIdAsignado += 1;
 		
-		this.tipo = tipo;
 		this.fechaCreacion = LocalDate.now() ;
 		this.descripcion = descripcion;
 		this.presupuestoSolicitado = presupuestoSolicitado;
-		this.presupuestoConcedido = presupuestoConcedido;
 		this.estado = EstadoProyecto.pendienteAprobacion;
 		this.autorizado = false;
 		this.apoyos = 0;
@@ -84,9 +81,8 @@ public class Proyecto {
 		public void setApoyos(int apoyos) { this.apoyos = apoyos;}
 		public void setFechaUltimoApoyo(LocalDate fechaUltimoApoyo) { this.fechaUltimoApoyo = fechaUltimoApoyo; }
 		public void setCreador(Ciudadano creador) { this.creador = creador;}
-		public void setListadoApoyos(ArrayList<String> listadoApoyos) {this.listadoApoyos = listadoApoyos;}
-		public void setListadoSuscripciones(ArrayList<String> listadoSuscripciones) {this.listadoSuscripciones = listadoSuscripciones;}
-		public void setColectivosApoyantes(ArrayList<Colectivo> colectivosApoyantes) { this.colectivosApoyantes = colectivosApoyantes;}
+		public void setListadoApoyos(ArrayList<ElementoColectivo> listadoApoyos) {this.listadoApoyos = listadoApoyos;}
+		public void setListadoSuscripciones(List<Ciudadano> listadoSuscripciones) {this.listadoSuscripciones = listadoSuscripciones;}
 
 			
 		/* Falta saber como conseguir que todos los miembros del colectivo de un representante apoyen
@@ -100,28 +96,28 @@ public class Proyecto {
 
 			if(e.getClass().equals(Ciudadano.class)) {
 				listadoApoyos.add(e);
-				(Ciudadano)e.anadirAMisProyectosApoyados(this);
+				((Ciudadano) e).anadirAMisProyectosApoyados(this);
 				apoyos+=1;
 				fechaUltimoApoyo = LocalDate.now();
 			}
 
 			//Si se vota como colectivo
 			else if(e.getClass().equals(Colectivo.class)) {
-				if(Aplicacion.usuarioActual.equals((Colectivo)e.getRepresentante())) {
-					for(ElementoColectivo ele : (Colectivo)e.getElementos()){
-						if(listaApoyos.contains(ele)==false && ele.getClass().equals(Ciudadano.class)) {
-							listaApoyos.add(ele);
-							ele.anadirAMisProyectosApoyados(this);
+				if(true /* Aplicacion.usuarioActual.equals(((Colectivo) e).getRepresentante()) */) {
+					for(ElementoColectivo ele : ((Colectivo) e).getElementos()){
+						if(listadoApoyos.contains(ele)==false && ele.getClass().equals(Ciudadano.class)) {
+							listadoApoyos.add(ele);
+							((Ciudadano) ele).anadirAMisProyectosApoyados(this);
 							apoyos+=1;
 							fechaUltimoApoyo = LocalDate.now();
 						}
 					}
-
-				}
 				}
 			}
+			return true;
+			}
 		
-		public boolean eliminarApoyo(Ciudadano ciu) {
+		public void eliminarApoyo(Ciudadano ciu) {
 			if(listadoApoyos.contains(ciu)) {
 				listadoApoyos.remove(ciu);
 				apoyos-=1;
@@ -141,7 +137,7 @@ public class Proyecto {
 		}
 		
 
-		void enviarProyecto() throws Exception {
+		/* void enviarProyecto() throws Exception {
 			GrantRequest req = new SolicitudFinanciacion(this);
 			CCGG proxy = CCGG.getGateway();
 			String id = proxy.submitRequest(req);
@@ -152,7 +148,7 @@ public class Proyecto {
 		void consultar() throws Exception {
 			CCGG proxy = CCGG.getGateway();
 			presupuestoConcedido = proxy.getAmountGranted(this.idEnvio);
-		}
+		} */
 
 
 		// Quedan por hacer metodos

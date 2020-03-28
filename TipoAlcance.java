@@ -7,6 +7,6 @@
  */
 
 
-public enum TipoProyecto {
+public enum TipoAlcance {
     nacional, internacional;
 }

@@ -102,7 +102,7 @@ public class Ciudadano extends Usuario {
     }
 
     
-    public boolean nifEnUso(String str) {
+    public static boolean nifEnUso(String str) {
         for(Ciudadano c :todosLosCiudadanos) {
             if(c.getNif().contains(str)){
                 return true;
@@ -124,7 +124,7 @@ public class Ciudadano extends Usuario {
         if(nifEnUso(nif) || nombreUsuarioEnUso(nomUs)){
             return null;
         }
-        return Ciudadano(contr,nomUs,nif, false);
+        return new Ciudadano(contr,nomUs,nif, false);
     }
 
     public void aprobarRegistro(){
@@ -133,7 +133,8 @@ public class Ciudadano extends Usuario {
 
 
     public void bloquearUsuario() {
-        if(Aplicacion.usuarioActual.equals(Administrador.class)) {
+        /* Falta: comprobar esto */
+        if(true /* Aplicacion.usuarioActual.equals(Administrador.class) */) {
             this.bloqueado = true;
             for(Proyecto p : this.proyectosApoyados) {
                 p.eliminarApoyo(this);
@@ -144,14 +145,23 @@ public class Ciudadano extends Usuario {
     }
 
     public void desbloquearUsuario() {
-        if(Aplicacion.usuarioActual.equals(Administrador.class)) {
+        if(true /* Aplicacion.usuarioActual.equals(Administrador.class )*/) {
             this.bloqueado = false;
         }
     }
 
-    public Ciudadano buscarCiudadano(String str) {
+    /* public Ciudadano buscarCiudadano(String str) {
         if(todosLosCiudadanos.get().contains(str)) {
             return todosLosCiudadanos.get().contains(str);
+        }
+        return null;
+    } */
+
+    public Ciudadano buscarCiudadano(String str){
+        for (Ciudadano c:todosLosCiudadanos){
+            if(c.getNombreUsuario().equals(str)){
+                return c;
+            }
         }
         return null;
     }

@@ -104,7 +104,7 @@ public class Aplicacion {
 
         //Creamos dos proyectos
         //Primero de forma individual por users[1]
-        ProyectoInfraestructura p1 = new ProyectoInfraestructura(/* Aqui faltan los argumentos */);
+        /* ProyectoInfraestructura p1 = new ProyectoInfraestructura( Aqui faltan los argumentos );
 
         //Comprobamos quien lo ha apoyado. Deberia ser solamente el users[1]
         System.out.println("\nComprobamos el listado de apoyos del proyecto. El unico apoyo debería ser del creador del proyecto\n");
@@ -133,7 +133,7 @@ public class Aplicacion {
         System.out.println("Listado de apoyos al proyecto " + p1);
         for (ElementoColectivo elem:p1.getListadoApoyos()){
             System.out.println(elem);
-        }
+        } */
 
         //Bloquear usuario
 

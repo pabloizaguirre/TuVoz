@@ -8,15 +8,11 @@ import java.util.*;
  */
 
  public class ProyectoInfraestructura extends Proyecto {
-    private ;
-    private TipoAlcance alcance;
-    
-    public ProyectoSocial(String tit, int ident, Date fechCreacion, String desc, 
-				  double presSolicitado, double presConcedido,
-				  EstadoProyecto est, int votos, int votosMin, Date fechUltApoyo, 
-                  String grupo, TipoAlcance alc) {
-                super(tit,ident,fechCreacion,desc,presSolicitado,presConcedido,est,
-                votos,votosMin,fechUltApoyo);
-                grupoSocial = grupo;
-                alcance = alc;
+    private Imagen imagen;
+
+    public ProyectoInfraestructura(String tit, String desc, double presSolicitado,
+                                    Ciudadano creador, Imagen imagen){
+        super(tit, desc, presSolicitado, creador);
+        this.imagen = imagen;
     }
+ } 

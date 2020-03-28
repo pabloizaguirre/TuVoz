@@ -7,16 +7,14 @@ import java.util.*;
  * @author Miguel Escribano
  */
 
- public class ProyectoSocial extends Proyecto {
+public class ProyectoSocial extends Proyecto {
     private String grupoSocial;
     private TipoAlcance alcance;
     
-    public ProyectoSocial(String tit, int ident, Date fechCreacion, String desc, 
-				  double presSolicitado, double presConcedido,
-				  EstadoProyecto est, int votos, int votosMin, Date fechUltApoyo, 
-                  String grupoSocial, TipoAlcance alcance) {
-                super(tit,ident,fechCreacion,desc,presSolicitado,presConcedido,est,
-                votos,votosMin,fechUltApoyo);
+    public ProyectoSocial(String tit, String desc, double presSolicitado,
+                            Ciudadano creador, String grupoSocial, TipoAlcance alcance){
+                super(tit, desc, presSolicitado, creador);
                 this.grupoSocial = grupoSocial;
                 this.alcance = alcance;
     }
+}
