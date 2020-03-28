@@ -1,4 +1,4 @@
-import es.uam.eps.sadp.grants.*;
+/* import es.uam.eps.sadp.grants.*;
 
 public class SolicitudFinanciacion implements GrantRequest {
 	Proyecto p; 
@@ -18,4 +18,4 @@ public class SolicitudFinanciacion implements GrantRequest {
 	public double getRequestedAmount() {
 		return 1000;
 	}
-}
+} */

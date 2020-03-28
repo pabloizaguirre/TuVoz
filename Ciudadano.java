@@ -17,15 +17,15 @@ public class Ciudadano extends Usuario {
     private boolean registrado;
 
     //lista de colectivos de los que soy miembro
-    private ArrayList<Colectivo> misColectivos;
+    private List<Colectivo> misColectivos = new ArrayList<Colectivo>();
     //lista de colectivos de los que es representante
-    private ArrayList<Colectivo> colectivosCreados;
+    private List<Colectivo> colectivosCreados;
     //lista de proyetos creados por este usuario
-    private ArrayList<Proyecto> proyectosCreados;
-    private ArrayList<Proyecto> proyectosApoyados;
-    private ArrayList<Proyecto> proyectosSuscritos;
+    private List<Proyecto> proyectosCreados;
+    private List<Proyecto> proyectosApoyados;
+    private List<Proyecto> proyectosSuscritos;
     //lista de notificaciones recibidas por este usuario
-    private ArrayList<Notificacion> notificaciones = new ArrayList<Notificacion>();
+    private List<Notificacion> notificaciones = new ArrayList<Notificacion>();
     
 
 
@@ -53,7 +53,7 @@ public class Ciudadano extends Usuario {
         return this.registrado;
     }
 
-    public ArrayList<Colectivo> getMisColectivos() {
+    public List<Colectivo> getMisColectivos() {
         return this.misColectivos;
     }
 
@@ -61,7 +61,7 @@ public class Ciudadano extends Usuario {
         this.misColectivos = misColectivos;
     }
 
-    public ArrayList<Colectivo> getColectivosCreados() {
+    public List<Colectivo> getColectivosCreados() {
         return this.colectivosCreados;
     }
 
@@ -69,7 +69,7 @@ public class Ciudadano extends Usuario {
         this.colectivosCreados = colectivosCreados;
     }
 
-    public ArrayList<Proyecto> getProyectosCreados() {
+    public List<Proyecto> getProyectosCreados() {
         return this.proyectosCreados;
     }
 
@@ -77,7 +77,7 @@ public class Ciudadano extends Usuario {
         this.proyectosCreados = proyectosCreados;
     }
 
-    public ArrayList<Proyecto> getProyectosApoyados() {
+    public List<Proyecto> getProyectosApoyados() {
         return this.proyectosApoyados;
     }
 
@@ -85,7 +85,7 @@ public class Ciudadano extends Usuario {
         this.proyectosApoyados = proyectosApoyados;
     }
 
-    public ArrayList<Proyecto> getProyectosSuscritos() {
+    public List<Proyecto> getProyectosSuscritos() {
         return this.proyectosSuscritos;
     }
 
@@ -93,7 +93,7 @@ public class Ciudadano extends Usuario {
         this.proyectosSuscritos = proyectosSuscritos;
     }
 
-    public ArrayList<Notificacion> getNotificaciones() {
+    public List<Notificacion> getNotificaciones() {
         return this.notificaciones;
     }
 
@@ -271,15 +271,16 @@ public class Ciudadano extends Usuario {
         if (misColectivos.contains(c1) && misColectivos.contains(c2)){
             for (Proyecto p:c1.getProyectos()){
                 proyeC1+=1;
-                
-                if(p.getColectivosApoyantes().contains(c2)){
+                /* Falta: esto esta bien en el caso de que si un colectivo apoya un proyecto
+                no cuenta como que sus subcolectivos tb lo apoyan */
+                if(p.getListadoApoyos().contains(c2)){
                     proyeC1apoyC2+=1;
                 }
             }
             for (Proyecto p:c2.getProyectos()){
                 proyeC2+=1;
                 
-                if(p.getColectivosApoyantes().contains(c2)){
+                if(p.getListadoApoyos().contains(c2)){
                     proyeC2apoyC1+=1;
                 }
             }

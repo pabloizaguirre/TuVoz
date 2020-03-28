@@ -24,6 +24,16 @@ public class Colectivo extends ElementoColectivo {
         representante = rep;
         proyectos = new ArrayList<Proyecto>();
         elementos = new ArrayList<ElementoColectivo>();
+        unirseAColectivo(rep);
+    }
+
+    public Colectivo(String tit, Ciudadano rep, Colectivo colectivoSuperior){
+        titulo = tit;
+        representante = rep;
+        proyectos = new ArrayList<Proyecto>();
+        elementos = new ArrayList<ElementoColectivo>();
+        unirseAColectivo(rep);
+        colectivoSuperior.anadirSubcolectivo(this);
     }
 
     public String getTitulo() {
@@ -62,8 +72,14 @@ public class Colectivo extends ElementoColectivo {
     /* Falta: que compruebe dentro de los colectivos si el usuario es miembro de los subcolectivos */
     public boolean esMiembro(Ciudadano u){
         if(elementos.contains(u)) return true;
-        else return false;
-
+        for(ElementoColectivo elem:elementos){
+            if(elem.getClass().equals(Colectivo.class)){
+                if(((Colectivo) elem).esMiembro(u)){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
     
     /**
@@ -73,6 +89,7 @@ public class Colectivo extends ElementoColectivo {
      * @return false si hay un error, true si el ciudadano ha sido registrado correctamente
      */
     public boolean unirseAColectivo(Ciudadano miembro){
+        /* Falta comprobar si pertenece a algun subcolectivo */
         if (elementos.contains(miembro)){
             return false;
         }
@@ -81,6 +98,15 @@ public class Colectivo extends ElementoColectivo {
         miembro.anadirAMisColectivos(this);
         
         return true;
+    }
+
+    /**
+     * añade un subcolectivo a su lista de ElementosColectivo
+     * @param c subcolectivo a añadir a este
+     */
+    public void anadirSubcolectivo(Colectivo c){
+        /* Falta: manejar excepciones (el colectivo ya pertenece)*/
+        elementos.add(c);
     }
 
     /**

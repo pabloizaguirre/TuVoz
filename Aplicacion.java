@@ -14,6 +14,7 @@ public class Aplicacion {
     private static Usuario usuarioActual;
     
 
+    
     public Aplicacion(int apoyosMin, Usuario usuarioActual){
         this.apoyosMin = apoyosMin;
         this.usuarioActual = usuarioActual;
@@ -39,10 +40,10 @@ public class Aplicacion {
         }
     }
 
-    public static void main() {
+    public static void main(String[] args) {
         // La aplicacion debe tener en cuenta los usuarios creados y llamar al
         // constructor de usuario si el nombre esta disponible
-        Ciudadano[] users = new Ciudadano[3];
+        Ciudadano[] users = new Ciudadano[4];
         // Creamos el primer usuario
         if ((users[0] = registrarCiudadano("ElenitaCanocas", "123alesconditeingles", "AmoAlCoquito")) == null) {
             System.out.println("El nombre ElenitaCanocas o el nif 123alesconditeingles esta en uso\n");
@@ -82,7 +83,7 @@ public class Aplicacion {
         
 
         //Creamos un colectivo
-        System.out.println("Creamos un nuevo colectivo con " + users[0] + "como representante\n");
+        System.out.println("Creamos un nuevo colectivo con " + users[0] + " como representante\n");
         Colectivo marujeo = new Colectivo("Marujeo del bueno", users[0]);
 
         //Comprobamos distintas funciones de colectivo
@@ -96,11 +97,20 @@ public class Aplicacion {
         //Comprobamos si el representante y users[1] pertenecen al colectivo
         if(!marujeo.esMiembro(users[0])){
             System.out.println("Error, el representante no es miembro del colectivo\n");
+        } else {
+            System.out.println("Correcto, el representante es miembro del colectivo\n");
         }
         if(!marujeo.esMiembro(users[1])){
             System.out.println("Error, el usuario no se ha unido al colectivo correctamente\n");
+        } else {
+            System.out.println("Correcto, el usuario añadido anteriormente es miembro del colectivo\n");
         }
-
+        //Comprobamos si un usuario al que no hemos añadido al colectivo es miembro 
+        if(marujeo.esMiembro(users[2])){
+            System.out.println("Error, el usuario pertenece al colectivo\n");
+        } else {
+            System.out.println("Correcto, el usuario no pertenece al coletivo\n");
+        }
 
         //Creamos dos proyectos
         //Primero de forma individual por users[1]
