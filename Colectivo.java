@@ -14,22 +14,21 @@ public class Colectivo extends ElementoColectivo {
     private String titulo;
     private Ciudadano representante;
     private List<ElementoColectivo> elementos;
-    private List<Proyecto> proyectos;
+    
     
 
 
     public Colectivo(String tit, Ciudadano rep){
         titulo = tit;
         representante = rep;
-        proyectos = new ArrayList<Proyecto>();
         elementos = new ArrayList<ElementoColectivo>();
         unirseAColectivo(rep);
+        Aplicacion.getAplicacion().anadirElementoColectivo(this);
     }
 
     public Colectivo(String tit, Ciudadano rep, Colectivo colectivoSuperior){
         titulo = tit;
         representante = rep;
-        proyectos = new ArrayList<Proyecto>();
         elementos = new ArrayList<ElementoColectivo>();
         unirseAColectivo(rep);
         colectivoSuperior.anadirSubcolectivo(this);
@@ -58,23 +57,15 @@ public class Colectivo extends ElementoColectivo {
     public void setElementos(ArrayList<ElementoColectivo> elementos) {
         this.elementos = elementos;
     }
-
-    public List<Proyecto> getProyectos() {
-        return this.proyectos;
-    }
-
-    public void setProyectos(ArrayList<Proyecto> proyectos) {
-        this.proyectos = proyectos;
-    }
         
     /**
-     * Método para comprobar si un ciudadano pertenece a un colectivo o a los subcolectivos
+     * Método para comprobar si un ciudadano o colectivo pertenece a un colectivo
      * 
-     * @param u El ciudadano que queremos comprobar
+     * @param u El ciudadano o colectivo que queremos comprobar
      * 
      * @return boolean. true si pertenece, false en caso contrario
      */
-    public boolean esMiembro(Ciudadano u){
+    public boolean esMiembro(ElementoColectivo u){
         if(elementos.contains(u)) return true;
         for(ElementoColectivo elem:elementos){
             if(elem.getClass().equals(Colectivo.class)){
@@ -93,8 +84,7 @@ public class Colectivo extends ElementoColectivo {
      * @return false si hay un error, true si el ciudadano ha sido registrado correctamente
      */
     public boolean unirseAColectivo(Ciudadano miembro){
-        /* Falta comprobar si pertenece a algun subcolectivo */
-        if (elementos.contains(miembro)){
+        if (esMiembro(miembro)){
             return false;
         }
         elementos.add(miembro);
@@ -130,15 +120,13 @@ public class Colectivo extends ElementoColectivo {
         return true;
     }
 
-
-
-    //Habria que pasarlo a aplicacion??? Porque el arraylist ahora esta en aplicacion
     public Colectivo bucarColectivo(String str){
-        for (Colectivo c:todosLosColectivos){
-            if(c.getTitulo().equals(str)){
-                return c;
+        for (ElementoColectivo c:Aplicacion.getAplicacion().getListadoElementoColectivos()){
+           if(c.getClass().equals(Colectivo.class))     
+                if(c.getTitulo().equals(str)){
+                        return c;
+                    }
             }
-        }
         return null;
     }
     

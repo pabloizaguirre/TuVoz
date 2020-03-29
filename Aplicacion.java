@@ -22,16 +22,34 @@ public class Aplicacion implements Serializable {
         this.listadoElementoColectivos = new ArrayList<ElementoColectivo>();
     }
 
-    public Aplicacion getAplicacion() {
+    public static Aplicacion getAplicacion() {
         if(aplicacion == null) {
             aplicacion = new Aplicacion();
         }
         return aplicacion;
     }
 
-    /* Falta: yo quitaria esto */
     public int getApoyosMin() { return apoyosMin;}
     public void setApoyosMin(int apoyosMin) {this.apoyosMin = apoyosMin;}
+
+
+    public List<Proyecto> getListadoProyectos() {
+        return this.listadoProyectos;
+    }
+
+    public void setListadoProyectos(List<Proyecto> listadoProyectos) {
+        this.listadoProyectos = listadoProyectos;
+    }
+
+    public List<ElementoColectivo> getListadoElementoColectivos() {
+        return this.listadoElementoColectivos;
+    }
+
+    public void setListadoElementoColectivos(List<ElementoColectivo> listadoElementoColectivos) {
+        this.listadoElementoColectivos = listadoElementoColectivos;
+    }
+
+
 
     public static Ciudadano registrarCiudadano(String nombre, String nif, String contraseña) {
         if (!Usuario.nombreEnUso(nombre) && !Ciudadano.nifEnUso(nif)) {
@@ -73,6 +91,23 @@ public class Aplicacion implements Serializable {
 
         return aplicacion;
     }
+
+    public void anadirProyecto(Proyecto p) {
+        if(listadoProyectos.contains(p)) {
+            return;
+        }
+        listadoProyectos.add(p);
+        return;
+    }
+    public void anadirElementoColectivo(ElementoColectivo e) {
+        if(listadoElementoColectivos.contains(e)) {
+            return;
+        }
+        listadoElementoColectivos.add(e);
+        return;
+    }
+
+ 
 
     public static void main(String[] args) {
         // La aplicacion debe tener en cuenta los usuarios creados y llamar al

@@ -10,7 +10,6 @@ import java.util.*;
 
 public class Ciudadano extends Usuario {
 
-    private static List<Ciudadano> todosLosCiudadanos = new ArrayList<Ciudadano>();
 
     private String nif;
     private boolean bloqueado;
@@ -20,8 +19,6 @@ public class Ciudadano extends Usuario {
     private List<Colectivo> misColectivos = new ArrayList<Colectivo>();
     //lista de colectivos de los que es representante
     private List<Colectivo> colectivosCreados;
-    //lista de proyetos creados por este usuario
-    private List<Proyecto> proyectosCreados;
     private List<Proyecto> proyectosApoyados;
     private List<Proyecto> proyectosSuscritos;
     //lista de notificaciones recibidas por este usuario
@@ -34,7 +31,7 @@ public class Ciudadano extends Usuario {
         this.nif = nif;
         this.bloqueado = bloq;
         this.registrado=false;
-        todosLosCiudadanos.add(this);
+        Aplicacion.getAplicacion().anadirElementoColectivo(this);
     }
 
     public String getNif() {
@@ -67,14 +64,6 @@ public class Ciudadano extends Usuario {
 
     public void setColectivosCreados(ArrayList<Colectivo> colectivosCreados) {
         this.colectivosCreados = colectivosCreados;
-    }
-
-    public List<Proyecto> getProyectosCreados() {
-        return this.proyectosCreados;
-    }
-
-    public void setProyectosCreados(ArrayList<Proyecto> proyectosCreados) {
-        this.proyectosCreados = proyectosCreados;
     }
 
     public List<Proyecto> getProyectosApoyados() {
@@ -140,7 +129,7 @@ public class Ciudadano extends Usuario {
 
     public void bloquearUsuario() {
         /* Falta: comprobar esto */
-        if(true /* Aplicacion.usuarioActual.equals(Administrador.class) */) {
+        if(Aplicacion.usuarioActual.equals(Administrador.class)) {
             this.bloqueado = true;
             for(Proyecto p : this.proyectosApoyados) {
                 p.eliminarApoyo(this);
@@ -157,7 +146,7 @@ public class Ciudadano extends Usuario {
 	 * @return void
      */
     public void desbloquearUsuario() {
-        if(true /* Aplicacion.usuarioActual.equals(Administrador.class )*/) {
+        if(Aplicacion.usuarioActual.equals(Administrador.class )) {
             this.bloqueado = false;
         }
     }
@@ -261,7 +250,7 @@ public class Ciudadano extends Usuario {
      * @return numero de apoyos que tiene el proyecto p
      */
     public int solicitarInformePopularidad(Proyecto p){
-        if (proyectosCreados.contains(p)){
+        if (getProyectosPropuestos().contains(p)){
             return p.getApoyos();
         }
 
@@ -284,7 +273,7 @@ public class Ciudadano extends Usuario {
         int proyeC2apoyC1=0;
 
         if (misColectivos.contains(c1) && misColectivos.contains(c2)){
-            for (Proyecto p:c1.getProyectos()){
+            for (Proyecto p:c1.getProyectosPropuestos()){
                 proyeC1+=1;
                 /* Falta: esto esta bien en el caso de que si un colectivo apoya un proyecto
                 no cuenta como que sus subcolectivos tb lo apoyan */
@@ -292,7 +281,7 @@ public class Ciudadano extends Usuario {
                     proyeC1apoyC2+=1;
                 }
             }
-            for (Proyecto p:c2.getProyectos()){
+            for (Proyecto p:c2.getProyectosPropuestos()){
                 proyeC2+=1;
                 
                 if(p.getListadoApoyos().contains(c2)){

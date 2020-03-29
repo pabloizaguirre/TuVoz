@@ -13,7 +13,7 @@ public class ProyectoSocial extends Proyecto {
     
     public ProyectoSocial(String tit, String desc, double presSolicitado,
                             Ciudadano creador, String grupoSocial, TipoAlcance alcance){
-                super(tit, desc, presSolicitado, creador);
+                super(tit, desc, presSolicitado, creador, ProjectKind.social);
                 this.grupoSocial = grupoSocial;
                 this.alcance = alcance;
     }

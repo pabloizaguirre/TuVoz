@@ -12,7 +12,7 @@ import java.util.*;
 
     public ProyectoInfraestructura(String tit, String desc, double presSolicitado,
                                     Ciudadano creador, Imagen imagen){
-        super(tit, desc, presSolicitado, creador);
+        super(tit, desc, presSolicitado, creador, ProjectKind.infraestructura);
         this.imagen = imagen;
     }
  } 

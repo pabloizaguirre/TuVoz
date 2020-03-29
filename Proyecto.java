@@ -20,19 +20,21 @@ public class Proyecto {
 	private double presupuestoSolicitado;
 	private double presupuestoConcedido;
 	private EstadoProyecto estado;
+	private boolean disponible;
 	private boolean autorizado;
 	private int apoyos;
 	private LocalDate fechaUltimoApoyo;
-	private Ciudadano creador;
+	private ElementoColectivo creador;
 	private List<ElementoColectivo> listadoApoyos;
 	private List<Ciudadano> listadoSuscripciones;
 	private String idEnvio;
+	private ProjectKind tipo;
 		
 	
 
 
 	public Proyecto(String titulo,
-					String descripcion, double presupuestoSolicitado, Ciudadano creador) {
+					String descripcion, double presupuestoSolicitado, ElementoColectivo creador, ProjectKind tipo) {
 		
 		this.titulo = titulo;
 		//El id de cada proyecto será uno mayor que el del último proyecto creado
@@ -42,13 +44,19 @@ public class Proyecto {
 		this.fechaCreacion = LocalDate.now() ;
 		this.descripcion = descripcion;
 		this.presupuestoSolicitado = presupuestoSolicitado;
+		this.tipo = tipo;
 		this.estado = EstadoProyecto.pendienteAprobacion;
+		this.disponible = false;
 		this.autorizado = false;
 		this.apoyos = 0;
 		this.fechaUltimoApoyo = LocalDate.now();
 		this.creador = creador;
+		apoyarProyecto(creador);
+		/* Falta añadir a mis proyectos creados */
+		
 		this.listadoApoyos = new ArrayList<ElementoColectivo>();
 		this.listadoSuscripciones = new ArrayList<Ciudadano>();
+		Aplicacion.getAplicacion().anadirProyecto(this);
 	}
 	
 	
@@ -64,7 +72,7 @@ public class Proyecto {
 		public boolean getAutorizado() { return autorizado;}
 		public int getApoyos() { return apoyos;}
 		public LocalDate getFechaUltimoApoyo() { return fechaUltimoApoyo;}
-		public Ciudadano getCreador() { return creador; }
+		public ElementoColectivo getCreador() { return creador; }
 		public List<ElementoColectivo> getListadoApoyos() { return listadoApoyos;}
 		public List<Ciudadano> getListadoSuscripciones() { return listadoSuscripciones;}
 		
@@ -80,35 +88,44 @@ public class Proyecto {
 		public void setAutorizado(boolean autorizado) { this.autorizado = autorizado;}
 		public void setApoyos(int apoyos) { this.apoyos = apoyos;}
 		public void setFechaUltimoApoyo(LocalDate fechaUltimoApoyo) { this.fechaUltimoApoyo = fechaUltimoApoyo; }
-		public void setCreador(Ciudadano creador) { this.creador = creador;}
+		public void setCreador(ElementoColectivo creador) { this.creador = creador;}
 		public void setListadoApoyos(ArrayList<ElementoColectivo> listadoApoyos) {this.listadoApoyos = listadoApoyos;}
 		public void setListadoSuscripciones(List<Ciudadano> listadoSuscripciones) {this.listadoSuscripciones = listadoSuscripciones;}
 
 			
-		/* Falta saber como conseguir que todos los miembros del colectivo de un representante apoyen
-		un proyecto a la vez */
+		
 		public boolean apoyarProyecto(ElementoColectivo e) {
+
+			/* Falta: que pasa si el ciudadano ya ha apoyado como colectivo? Se le esta metiendo
+			otra vez de forma individual*/
 			if(listadoApoyos.contains(e)) {
 				return false;
 			}
 
 			//Si se vota como ciudadano
-
 			if(e.getClass().equals(Ciudadano.class)) {
 				listadoApoyos.add(e);
 				((Ciudadano) e).anadirAMisProyectosApoyados(this);
 				apoyos+=1;
+				/* Me parece que esto se arregla cuando hagamos Aplicacion Singleton */
+				if(apoyos >= Aplicacion.getAplicacion().getApoyosMin()){
+					disponible = true;
+				}
 				fechaUltimoApoyo = LocalDate.now();
 			}
 
 			//Si se vota como colectivo
 			else if(e.getClass().equals(Colectivo.class)) {
-				if(true /* Aplicacion.usuarioActual.equals(((Colectivo) e).getRepresentante()) */) {
+				listadoApoyos.add(e);
+				if(Aplicacion.usuarioActual.equals(((Colectivo) e).getRepresentante())) {
 					for(ElementoColectivo ele : ((Colectivo) e).getElementos()){
 						if(listadoApoyos.contains(ele)==false && ele.getClass().equals(Ciudadano.class)) {
 							listadoApoyos.add(ele);
 							((Ciudadano) ele).anadirAMisProyectosApoyados(this);
 							apoyos+=1;
+							if(apoyos >= Aplicacion.getAplicacion().getApoyosMin()){
+								disponible = true;
+							}
 							fechaUltimoApoyo = LocalDate.now();
 						}
 					}

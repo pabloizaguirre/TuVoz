@@ -13,8 +13,6 @@ abstract class Usuario extends ElementoColectivo{
 
     private static ArrayList<String> listaNombres = new ArrayList<String>();
     
- 
-    /* Falta: el constructor deberia devolver error cuando el nombre proporcionado ya esta en uso */
     public Usuario (String nombre, String contr){
         nombreUsuario = nombre;
         contrasena = contr;
