@@ -51,11 +51,12 @@ public class Proyecto {
 		this.apoyos = 0;
 		this.fechaUltimoApoyo = LocalDate.now();
 		this.creador = creador;
-		apoyarProyecto(creador);
-		/* Falta añadir a mis proyectos creados */
-		
 		this.listadoApoyos = new ArrayList<ElementoColectivo>();
 		this.listadoSuscripciones = new ArrayList<Ciudadano>();
+
+		/**El creador apoya el proyecto */
+		apoyarProyecto(creador);
+		creador.anadirAMisProyectosPropuestos(this);
 		Aplicacion.getAplicacion().anadirProyecto(this);
 	}
 	

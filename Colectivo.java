@@ -123,8 +123,8 @@ public class Colectivo extends ElementoColectivo {
     public Colectivo bucarColectivo(String str){
         for (ElementoColectivo c:Aplicacion.getAplicacion().getListadoElementoColectivos()){
            if(c.getClass().equals(Colectivo.class))     
-                if(c.getTitulo().equals(str)){
-                        return c;
+                if(((Colectivo)c).getTitulo().equals(str)){
+                    return (Colectivo)c;
                     }
             }
         return null;

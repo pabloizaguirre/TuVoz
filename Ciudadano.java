@@ -92,25 +92,17 @@ public class Ciudadano extends Usuario {
 
     
     public static boolean nifEnUso(String str) {
-        for(Ciudadano c :todosLosCiudadanos) {
-            if(c.getNif().contains(str)){
-                return true;
-            }
-        }
+        for(ElementoColectivo c :Aplicacion.getAplicacion().getListadoElementoColectivos())
+            if(c.getClass().equals(Ciudadano.class))
+                if(((Ciudadano)c).getNif().contains(str)){
+                    return true;
+                }
         return false;
     }
 
-    public boolean nombreUsuarioEnUso(String str) {
-        for(Ciudadano c :todosLosCiudadanos) {
-            if(c.getNombreUsuario().contains(str)) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     public Ciudadano registrarUsuario(String contr, String nomUs, String nif) {
-        if(nifEnUso(nif) || nombreUsuarioEnUso(nomUs)){
+        if(nifEnUso(nif) || Usuario.nombreEnUso(nomUs)){
             return null;
         }
         return new Ciudadano(contr,nomUs,nif, false);
@@ -127,7 +119,7 @@ public class Ciudadano extends Usuario {
      * @return void
      */
 
-    public void bloquearUsuario() {
+    public void bloquearCiudadano() {
         /* Falta: comprobar esto */
         if(Aplicacion.usuarioActual.equals(Administrador.class)) {
             this.bloqueado = true;
@@ -145,7 +137,7 @@ public class Ciudadano extends Usuario {
 	 * 
 	 * @return void
      */
-    public void desbloquearUsuario() {
+    public void desbloquearCiudadano() {
         if(Aplicacion.usuarioActual.equals(Administrador.class )) {
             this.bloqueado = false;
         }
@@ -159,11 +151,12 @@ public class Ciudadano extends Usuario {
 	 * @return El ciudadano si existe, null en caso contrario
      */
 
-    public Ciudadano buscarCiudadano(String str){
-        for (Ciudadano c:todosLosCiudadanos){
-            if(c.getNombreUsuario().equals(str)){
-                return c;
-            }
+    public Ciudadano buscarCiudadano(String str) {
+        for(ElementoColectivo c :Aplicacion.getAplicacion().getListadoElementoColectivos()) {
+            if(c.getClass().equals(Ciudadano.class))
+                if(((Ciudadano)c).getNombreUsuario().equals(str)) {
+                    return (Ciudadano)c;
+                }
         }
         return null;
     }
