@@ -132,6 +132,12 @@ public class Ciudadano extends Usuario {
     }
 
 
+     /**
+     * Método para bloquear a un usuario por parte del administrador
+     * 
+     * @return void
+     */
+
     public void bloquearUsuario() {
         /* Falta: comprobar esto */
         if(true /* Aplicacion.usuarioActual.equals(Administrador.class) */) {
@@ -144,18 +150,25 @@ public class Ciudadano extends Usuario {
         return;
     }
 
+     /**
+     * Método para desbloquear a un usuario
+     * 
+	 * 
+	 * @return void
+     */
     public void desbloquearUsuario() {
         if(true /* Aplicacion.usuarioActual.equals(Administrador.class )*/) {
             this.bloqueado = false;
         }
     }
 
-    /* public Ciudadano buscarCiudadano(String str) {
-        if(todosLosCiudadanos.get().contains(str)) {
-            return todosLosCiudadanos.get().contains(str);
-        }
-        return null;
-    } */
+    /**
+     * Método para buscar un ciudadano a través de un String
+     * 
+     * @param str String con el nombre de usuario
+	 * 
+	 * @return El ciudadano si existe, null en caso contrario
+     */
 
     public Ciudadano buscarCiudadano(String str){
         for (Ciudadano c:todosLosCiudadanos){
@@ -242,6 +255,7 @@ public class Ciudadano extends Usuario {
     
 
     /**
+     * Método para solicitar el informe de popularidad
      * 
      * @param p proyecto creado por el usuario del cual se quiere solicitar el informe
      * @return numero de apoyos que tiene el proyecto p
@@ -255,6 +269,7 @@ public class Ciudadano extends Usuario {
     }
 
     /**
+     * Método para solicitar el informe de afinidad
      * 
      * @param c1 Primer colectivo del cual se quiere solicitar este informe.
      * @param c2 Segundo colectivo del cual se quiere solicitar este informe.

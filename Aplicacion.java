@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.*;
 
 /**
  * Clase aplicacion.
@@ -8,16 +9,24 @@ import java.util.*;
  * @author Miguel Escribano
  */
 
-public class Aplicacion {
+public class Aplicacion implements Serializable {
 
+    private static Aplicacion aplicacion;
+    
     private int apoyosMin;
-    private static Usuario usuarioActual;
-    
+    private List<Proyecto> listadoProyectos;
+    private List<ElementoColectivo> listadoElementoColectivos;
 
-    
-    public Aplicacion(int apoyosMin, Usuario usuarioActual){
-        this.apoyosMin = apoyosMin;
-        this.usuarioActual = usuarioActual;
+    private Aplicacion(){
+        this.listadoProyectos = new ArrayList<Proyecto>();
+        this.listadoElementoColectivos = new ArrayList<ElementoColectivo>();
+    }
+
+    public Aplicacion getAplicacion() {
+        if(aplicacion == null) {
+            aplicacion = new Aplicacion();
+        }
+        return aplicacion;
     }
 
     /* Falta: yo quitaria esto */
@@ -38,6 +47,31 @@ public class Aplicacion {
         } else {
             return null;
         }
+    }
+
+
+    public void guardarAplicacion() throws IOException {
+        FileOutputStream fichero = new FileOutputStream("TuVoz.dat");
+        ObjectOutputStream objeto = new ObjectOutputStream(fichero);
+
+        objeto.writeObject(this);
+
+        objeto.close();
+
+        return;
+
+    }
+
+    public Aplicacion cargarAplicacion(String ruta) throws IOException, ClassNotFoundException {
+        FileInputStream fichero = new FileInputStream(ruta);
+        ObjectInputStream objeto = new ObjectInputStream(fichero);
+        Aplicacion aplicacion = null;
+
+        aplicacion = (Aplicacion)objeto.readObject();
+
+        objeto.close();
+
+        return aplicacion;
     }
 
     public static void main(String[] args) {

@@ -10,7 +10,6 @@ import java.util.*;
 
 public class Colectivo extends ElementoColectivo {
 
-    private static List<Colectivo> todosLosColectivos = new ArrayList<Colectivo>();
 
     private String titulo;
     private Ciudadano representante;
@@ -67,9 +66,14 @@ public class Colectivo extends ElementoColectivo {
     public void setProyectos(ArrayList<Proyecto> proyectos) {
         this.proyectos = proyectos;
     }
-
-
-    /* Falta: que compruebe dentro de los colectivos si el usuario es miembro de los subcolectivos */
+        
+    /**
+     * Método para comprobar si un ciudadano pertenece a un colectivo o a los subcolectivos
+     * 
+     * @param u El ciudadano que queremos comprobar
+     * 
+     * @return boolean. true si pertenece, false en caso contrario
+     */
     public boolean esMiembro(Ciudadano u){
         if(elementos.contains(u)) return true;
         for(ElementoColectivo elem:elementos){
@@ -126,13 +130,9 @@ public class Colectivo extends ElementoColectivo {
         return true;
     }
 
-    /* public Colectivo buscarColectivo(String str) {
-        if(todosLosColectivos.get().contains(str)) {
-            return todosLosColectivos.get().contains(str);
-        }
-        return null;
-    } */
 
+
+    //Habria que pasarlo a aplicacion??? Porque el arraylist ahora esta en aplicacion
     public Colectivo bucarColectivo(String str){
         for (Colectivo c:todosLosColectivos){
             if(c.getTitulo().equals(str)){
