@@ -94,7 +94,9 @@ public class Colectivo extends ElementoColectivo {
         miembro.anadirAMisColectivos(this);
 
         //Apoyar los proyectos que apoya este colectivo
-        for(Proyecto p: )
+        for(Proyecto p: getProyectosApoyados()){
+            p.apoyarProyecto(miembro);
+        }
         
         return true;
     }

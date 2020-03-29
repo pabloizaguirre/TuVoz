@@ -55,7 +55,16 @@ public class Aplicacion implements Serializable {
         return this.usuarioActual;
     }
 
-
+     /**
+     * Metodo para registrar a un nuevo ciudadano
+     * 
+     * @param nombre String con el nombre de usuario
+     * @param nif String con el NIF del ciudadano
+     * @param contraseña String con la contraseña del ciudadano
+     * 
+     * @return Objeto de clase Ciudadano en caso favorable, null si se ha producido un error
+     * o alguno de los parámetros no son válidos
+     */
     public static Ciudadano registrarCiudadano(String nombre, String nif, String contraseña) {
         if (!Usuario.nombreEnUso(nombre) && !Ciudadano.nifEnUso(nif)) {
             return new Ciudadano(contraseña, nombre, nif, true);
@@ -64,6 +73,14 @@ public class Aplicacion implements Serializable {
         }
     }
 
+    /**
+     * Metodo para registrar un administrador
+     * 
+     * @param nombre String con el nombre del administrador
+     * @param contraseña String con la contraseña del administrador
+     * 
+     * @return Objeto de clase Administrador en caso favorable, null si se ha producido un error
+     */
     public static Administrador registrarAdministrador(String nombre, String contraseña){
         if(!Usuario.nombreEnUso(nombre)){
             return new Administrador(nombre, contraseña);
@@ -72,7 +89,12 @@ public class Aplicacion implements Serializable {
         }
     }
 
-
+    /**
+     * Metodo para guardar la informacion de la aplicacion en un fichero
+     * 
+     * 
+     * @return void
+     */
     public void guardarAplicacion() {
 		ObjectOutputStream salida = null;
 		FileOutputStream fos = null;
@@ -101,10 +123,17 @@ public class Aplicacion implements Serializable {
 		}
 	}
 
-    public Aplicacoin cargarAplicacion(String ruta) {
+     /**
+     * Metodo para cargar los datos a la aplicación desde un fichero dado
+     * 
+     * @param ruta String con la ruta del archivo
+     * 
+     * @return Objeto de clase Aplicacion
+     */
+    public Aplicacion cargarAplicacion(String ruta) {
 		FileInputStream fis = null;
 		ObjectInputStream entrada = null;
-		Profesor obj = null;
+		Aplicacion obj = null;
 		try {
 			fis = new FileInputStream(ruta);
 			entrada = new ObjectInputStream(fis);
@@ -130,7 +159,15 @@ public class Aplicacion implements Serializable {
 			}
 		}
 		return obj;
-	}
+    }
+    
+     /**
+     * Metodo para añadir un proyecto a la lista de proyectos
+     * 
+     * @param p Proyecto a añadir a la lista
+     *      
+     * @return void
+     */
 
     public void anadirProyecto(Proyecto p) {
         if(listadoProyectos.contains(p)) {
@@ -139,12 +176,28 @@ public class Aplicacion implements Serializable {
         listadoProyectos.add(p);
         return;
     }
+
+    /**
+     * Metodo para eliminar un proyecto de la lista de proyectos
+     * 
+     * @param p Proyecto a eliminar de la lista
+     *      
+     * @return void
+     */
     public void eliminarProyecto(Proyecto p) {
         if(listadoProyectos.contains(p)){
             listadoProyectos.remove(p);
         }
         return;
     }
+
+    /**
+     * Metodo para añadir un objeto ElementoColectivo a la lista de ElementoColectivo
+     * 
+     * @param e ElementoColectivo a añadir a la lista
+     *      
+     * @return void
+     */
     public void anadirElementoColectivo(ElementoColectivo e) {
         if(listadoElementoColectivos.contains(e)) {
             return;

@@ -20,7 +20,6 @@ public class Ciudadano extends Usuario {
     private List<Colectivo> misColectivos = new ArrayList<Colectivo>();
     //lista de colectivos de los que es representante
     private List<Colectivo> colectivosCreados;
-    private List<Proyecto> proyectosApoyados;
     private List<Proyecto> proyectosSuscritos;
     //lista de notificaciones recibidas por este usuario
     private List<Notificacion> notificaciones = new ArrayList<Notificacion>();
@@ -66,14 +65,6 @@ public class Ciudadano extends Usuario {
         this.colectivosCreados = colectivosCreados;
     }
 
-    public List<Proyecto> getProyectosApoyados() {
-        return this.proyectosApoyados;
-    }
-
-    public void setProyectosApoyados(ArrayList<Proyecto> proyectosApoyados) {
-        this.proyectosApoyados = proyectosApoyados;
-    }
-
     public List<Proyecto> getProyectosSuscritos() {
         return this.proyectosSuscritos;
     }
@@ -88,6 +79,35 @@ public class Ciudadano extends Usuario {
 
     public void setNotificaciones(ArrayList<Notificacion> notificaciones) {
         this.notificaciones = notificaciones;
+    }
+
+
+    /**
+     * Esta funcion añade una notificacion a la lista de notificaciones del usuario
+     * @param n notificacion a añadir
+     * @return true si ha sido añadida con exito, false en caso contrario
+     */
+    public boolean anadirNotificacion(Notificacion n){
+        if(notificaciones.contains(n)){
+            return false;
+        } else {
+            notificaciones.add(n);
+            return true;
+        }
+    }
+    
+    /**
+     * Esta funcion elimina una notificacion de la lista de notificaciones del usuario
+     * @param n notificacion a borrar
+     * @return false si la notificacion ya ha sido borrara o true si la eliminacion se ha realizado con exito
+     */
+    public boolean eliminarNotificacion(Notificacion n){
+        if(notificaciones.contains(n)){
+            notificaciones.remove(n);
+            return true;
+        } else {
+            return false;
+        }
     }
     /**
      * Método para comprobar si un NIF pertenece a un ciudadano existente en la aplicacion
@@ -145,9 +165,9 @@ public class Ciudadano extends Usuario {
         /* Falta: comprobar esto */
         if(Aplicacion.getAplicacion().getUsuarioActual().getClass().equals(Administrador.class)){
             this.bloqueado = true;
-            for(Proyecto p : this.proyectosApoyados) {
+            for(Proyecto p : getProyectosApoyados()) {
                 p.eliminarApoyo(this);
-                proyectosApoyados.remove(p);
+                eliminarDeMisProyectosApoyados(p);;
             }
         }
         return;
@@ -197,16 +217,6 @@ public class Ciudadano extends Usuario {
             return false;
         }
         misColectivos.remove(c);
-        
-        return true;
-    }
-
-
-    public boolean anadirAMisProyectosApoyados(Proyecto p){
-        if(proyectosApoyados.contains(p)){
-            return false;
-        }
-        proyectosApoyados.add(p);
         
         return true;
     }

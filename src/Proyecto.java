@@ -140,10 +140,10 @@ public class Proyecto {
 			}
 			
 			listadoApoyos.add(e);
+			e.anadirAMisProyectosApoyados(this);
 
 			//Si se vota como ciudadano
 			if(e.getClass().equals(Ciudadano.class)) {
-				((Ciudadano) e).anadirAMisProyectosApoyados(this);
 				apoyos+=1;
 				if(apoyos >= Aplicacion.getAplicacion().getApoyosMin()){
 					disponible = true;
@@ -163,7 +163,7 @@ public class Proyecto {
 		 * 
 		 * @param c colectivo que indirectamente apoya el proyecto
 		 */
-		public void apoyarProyectoIndirectamente(Colectivo c){
+		private void apoyarProyectoIndirectamente(Colectivo c){
 			for(ElementoColectivo ele : c.getElementos()){
 				if(listadoApoyos.contains(ele)==false) {
 					if(ele.getClass().equals(Colectivo.class)){
