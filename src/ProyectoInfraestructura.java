@@ -1,8 +1,8 @@
+package src;
 import java.util.*;
 /**
  * Subclase proyecto infraestructura.
  * 
- * @author Elena Cano
  * @author Pablo Izaguirre
  * @author Miguel Escribano
  */

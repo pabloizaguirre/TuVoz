@@ -1,3 +1,4 @@
+package src;
 import java.util.*;
 
 /**
@@ -14,6 +15,7 @@ public class Colectivo extends ElementoColectivo {
     private String titulo;
     private Ciudadano representante;
     private List<ElementoColectivo> elementos;
+    private List<Proyecto> proyectosApoyados;
     
     
 
@@ -90,6 +92,9 @@ public class Colectivo extends ElementoColectivo {
         elementos.add(miembro);
         
         miembro.anadirAMisColectivos(this);
+
+        //Apoyar los proyectos que apoya este colectivo
+        for(Proyecto p: )
         
         return true;
     }
@@ -101,6 +106,13 @@ public class Colectivo extends ElementoColectivo {
     public void anadirSubcolectivo(Colectivo c){
         /* Falta: manejar excepciones (el colectivo ya pertenece)*/
         elementos.add(c);
+    }
+
+    public void anadirAProyectosApoyados(Proyecto p){
+        if(proyectosApoyados.contains(p)){
+            return;
+        }
+        proyectosApoyados.add(p);
     }
 
     /**
@@ -120,6 +132,14 @@ public class Colectivo extends ElementoColectivo {
         return true;
     }
 
+
+    /**
+     * Método para buscar un colectivo en la aplicacion
+     * 
+     * @param str String con el nombre que deseamos buscar
+     * 
+     * @return Colectivo c que buscamos, null si no existe
+     */
     public Colectivo bucarColectivo(String str){
         for (ElementoColectivo c:Aplicacion.getAplicacion().getListadoElementoColectivos()){
            if(c.getClass().equals(Colectivo.class))     

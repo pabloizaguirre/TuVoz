@@ -1,3 +1,4 @@
+package src;
 import java.util.*;
 /**
  * Clase notificación.
@@ -13,6 +14,7 @@ public class Notificacion {
     Notificacion (String texto, Ciudadano ciudadano) {
         this.textoNotificacion = texto;
         this.ciudadano = ciudadano;
+        ciudadano.anadirNotificacion(this);
     }
     
 

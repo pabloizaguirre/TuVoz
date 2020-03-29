@@ -1,3 +1,4 @@
+package src;
 /**
  * Enumeracion de los tipos de informe.
  * 

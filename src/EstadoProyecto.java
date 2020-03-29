@@ -1,3 +1,4 @@
+package src;
 /**
  * Enumeracion de los estados de proyecto.
  * 
@@ -7,5 +8,5 @@
  */
 
 public enum EstadoProyecto {
-    noEnviado,pendienteAprobacion,aprobado, rechazado, caducado;
+    pendienteCreacion,noEnviado,pendienteAprobacion,aprobado, rechazado, caducado;
 }

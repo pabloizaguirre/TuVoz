@@ -1,3 +1,4 @@
+package src;
 import java.util.*;
 import java.io.*;
 
@@ -16,6 +17,7 @@ public class Aplicacion implements Serializable {
     private int apoyosMin;
     private List<Proyecto> listadoProyectos;
     private List<ElementoColectivo> listadoElementoColectivos;
+    private Usuario usuarioActual;
 
     private Aplicacion(){
         this.listadoProyectos = new ArrayList<Proyecto>();
@@ -49,6 +51,9 @@ public class Aplicacion implements Serializable {
         this.listadoElementoColectivos = listadoElementoColectivos;
     }
 
+    public Usuario getUsuarioActual(){
+        return this.usuarioActual;
+    }
 
 
     public static Ciudadano registrarCiudadano(String nombre, String nif, String contraseña) {
@@ -68,35 +73,76 @@ public class Aplicacion implements Serializable {
     }
 
 
-    public void guardarAplicacion() throws IOException {
-        FileOutputStream fichero = new FileOutputStream("TuVoz.dat");
-        ObjectOutputStream objeto = new ObjectOutputStream(fichero);
+    public void guardarAplicacion() {
+		ObjectOutputStream salida = null;
+		FileOutputStream fos = null;
+		try {
+			fos = new FileOutputStream("TuVoz.dat");
+			salida = new ObjectOutputStream(fos);
+			salida.writeObject(this);
+		} catch (IOException ex) {
+			System.out.println("Fallo al guardar en el archivo");
+ 
+		} finally {
+			try {
+				if (fos != null) {
+					fos.close();
+				}
+			} catch (IOException ex) {
+				System.out.println("Fallo al guardar en el archivo");
+			}
+			try {
+				if (salida != null) {
+					salida.close();
+				}
+			} catch (IOException ex) {
+				System.out.println("Fallo al guardar en el archivo");
+			}
+		}
+	}
 
-        objeto.writeObject(this);
-
-        objeto.close();
-
-        return;
-
-    }
-
-    public Aplicacion cargarAplicacion(String ruta) throws IOException, ClassNotFoundException {
-        FileInputStream fichero = new FileInputStream(ruta);
-        ObjectInputStream objeto = new ObjectInputStream(fichero);
-        Aplicacion aplicacion = null;
-
-        aplicacion = (Aplicacion)objeto.readObject();
-
-        objeto.close();
-
-        return aplicacion;
-    }
+    public Aplicacoin cargarAplicacion(String ruta) {
+		FileInputStream fis = null;
+		ObjectInputStream entrada = null;
+		Profesor obj = null;
+		try {
+			fis = new FileInputStream(ruta);
+			entrada = new ObjectInputStream(fis);
+			obj = (Aplicacion) entrada.readObject();
+		} catch (IOException ex) {
+			System.out.println("Fallo al cargar desde el archivo");
+		} catch (ClassNotFoundException ex) {
+			System.out.println("Fallo al cargar desde el archivo");
+		} finally {
+			try {
+				if (fis != null) {
+					fis.close();
+				}
+			} catch (IOException ex) {
+				System.out.println("Fallo al cargar desde el archivo");
+			}
+			try {
+				if (entrada != null) {
+					entrada.close();
+				}
+			} catch (IOException ex) {
+				System.out.println("Fallo al cargar desde el archivo");
+			}
+		}
+		return obj;
+	}
 
     public void anadirProyecto(Proyecto p) {
         if(listadoProyectos.contains(p)) {
             return;
         }
         listadoProyectos.add(p);
+        return;
+    }
+    public void eliminarProyecto(Proyecto p) {
+        if(listadoProyectos.contains(p)){
+            listadoProyectos.remove(p);
+        }
         return;
     }
     public void anadirElementoColectivo(ElementoColectivo e) {

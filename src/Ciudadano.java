@@ -1,3 +1,4 @@
+package src;
 import java.util.*;
 
 /**
@@ -31,7 +32,6 @@ public class Ciudadano extends Usuario {
         this.nif = nif;
         this.bloqueado = bloq;
         this.registrado=false;
-        Aplicacion.getAplicacion().anadirElementoColectivo(this);
     }
 
     public String getNif() {
@@ -89,7 +89,12 @@ public class Ciudadano extends Usuario {
     public void setNotificaciones(ArrayList<Notificacion> notificaciones) {
         this.notificaciones = notificaciones;
     }
-
+    /**
+     * Método para comprobar si un NIF pertenece a un ciudadano existente en la aplicacion
+     * 
+     * @param str String con el NIF a comprobar
+     * @return boolean, true si el NIF está usado, false en caso contrario
+     */
     
     public static boolean nifEnUso(String str) {
         for(ElementoColectivo c :Aplicacion.getAplicacion().getListadoElementoColectivos())
@@ -100,16 +105,33 @@ public class Ciudadano extends Usuario {
         return false;
     }
 
+    /**
+     * Método para registrar a un nuevo ciudadano en la aplicación, controlando que
+     * el nombre de usuario y el NIF introducidos no estén ya en uso
+     * 
+     * @param contr String con la contraseña del usuario
+     * @param nomUs String con el nombre de usuario
+     * @param nif String con el NIF del usuario
+     * 
+     * @return boolean, true si el NIF está usado, false en caso contrario
+     */
 
-    public Ciudadano registrarUsuario(String contr, String nomUs, String nif) {
+    public Ciudadano registrarCiudadano(String contr, String nomUs, String nif) {
         if(nifEnUso(nif) || Usuario.nombreEnUso(nomUs)){
             return null;
         }
         return new Ciudadano(contr,nomUs,nif, false);
     }
 
+    /**
+     * Método para aprobar un registro de un usuario por parte del administrador
+     * 
+     * @return void
+     */
     public void aprobarRegistro(){
         this.registrado=true;
+        Aplicacion.getAplicacion().anadirElementoColectivo(this);
+
     }
 
 
@@ -121,7 +143,7 @@ public class Ciudadano extends Usuario {
 
     public void bloquearCiudadano() {
         /* Falta: comprobar esto */
-        if(Aplicacion.usuarioActual.equals(Administrador.class)) {
+        if(Aplicacion.getAplicacion().getUsuarioActual().getClass().equals(Administrador.class)){
             this.bloqueado = true;
             for(Proyecto p : this.proyectosApoyados) {
                 p.eliminarApoyo(this);
@@ -132,13 +154,13 @@ public class Ciudadano extends Usuario {
     }
 
      /**
-     * Método para desbloquear a un usuario
+     * Método para desbloquear a un usuario por parte del administrador 
      * 
 	 * 
 	 * @return void
      */
     public void desbloquearCiudadano() {
-        if(Aplicacion.usuarioActual.equals(Administrador.class )) {
+        if(Aplicacion.getAplicacion().getUsuarioActual().getClass().equals(Administrador.class)) {
             this.bloqueado = false;
         }
     }
@@ -146,7 +168,7 @@ public class Ciudadano extends Usuario {
     /**
      * Método para buscar un ciudadano a través de un String
      * 
-     * @param str String con el nombre de usuario
+     * @parstatic Ciudadano ing con el nombre de usuario
 	 * 
 	 * @return El ciudadano si existe, null en caso contrario
      */
@@ -161,42 +183,6 @@ public class Ciudadano extends Usuario {
         return null;
     }
 
-    /**
-     * Esta funcion añade una notificacion al conjunto de notificaciones de este usuario
-     * @param n notificacion a añadir
-     * @return false si el usuario ya tenia la notificacion, true si se ha añadido con exito
-     */
-    public boolean addNotificacion(Notificacion n){
-        if(notificaciones.contains(n)){
-            return false;
-        } else {
-            notificaciones.add(n);
-            return true;
-        }
-    }
-    
-    /**
-     * Esta funcion elimina una notificacion de la lista de notificaciones del usuario
-     * @param n notificacion a borrar
-     * @return false si la notificacion ya ha sido borrara o true si la eliminacion se ha realizado con exito
-     */
-    public boolean removeNotificacion(Notificacion n){
-        if(notificaciones.contains(n)){
-            notificaciones.remove(n);
-            return true;
-        } else {
-            return false;
-        }
-    }
-    
-    /**
-     * Esta funcion solo debe ser llamada por unirseAColectivo,
-     * no deberiamos llamar a esta funcion cuando queramos unirnos a un colectivo
-     *s
-     * @param c un ciudadano que se quiere unir al colectivo
-     * @return false si el ciudadano ya es miembro de ese colectivo, true si el ciudadano ha sido añadido correctamente 
-     * a la lista de misColectivos.
-     */
     public boolean anadirAMisColectivos(Colectivo c){
         if(misColectivos.contains(c)){
             return false;

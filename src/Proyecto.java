@@ -1,3 +1,4 @@
+package src;
 /* import grants.*; */
 import java.time.LocalDate;
 import java.util.*;
@@ -41,22 +42,29 @@ public class Proyecto {
 		this.id = ultimoIdAsignado;
 		ultimoIdAsignado += 1;
 		
-		this.fechaCreacion = LocalDate.now() ;
+		this.fechaCreacion = FechaSimulada.getHoy();
 		this.descripcion = descripcion;
 		this.presupuestoSolicitado = presupuestoSolicitado;
 		this.tipo = tipo;
-		this.estado = EstadoProyecto.pendienteAprobacion;
+		this.estado = EstadoProyecto.pendienteCreacion;
 		this.disponible = false;
 		this.autorizado = false;
 		this.apoyos = 0;
-		this.fechaUltimoApoyo = LocalDate.now();
+		this.fechaUltimoApoyo = FechaSimulada.getHoy();
 		this.creador = creador;
 		this.listadoApoyos = new ArrayList<ElementoColectivo>();
 		this.listadoSuscripciones = new ArrayList<Ciudadano>();
 
-		/**El creador apoya el proyecto */
+		/**El creador apoya el proyecto y se añade a la lista de sus proyectos creados */
 		apoyarProyecto(creador);
 		creador.anadirAMisProyectosPropuestos(this);
+
+		/* El creador se suscribe al proyecto */
+		if(creador.getClass().equals(Colectivo.class)){
+			suscribirProyecto(((Colectivo) creador).getRepresentante());
+		}
+
+		/**El proyecto se añade a la lista de proyectos de la aplicacion */
 		Aplicacion.getAplicacion().anadirProyecto(this);
 	}
 	
@@ -93,48 +101,95 @@ public class Proyecto {
 		public void setListadoApoyos(ArrayList<ElementoColectivo> listadoApoyos) {this.listadoApoyos = listadoApoyos;}
 		public void setListadoSuscripciones(List<Ciudadano> listadoSuscripciones) {this.listadoSuscripciones = listadoSuscripciones;}
 
-			
-		
-		public boolean apoyarProyecto(ElementoColectivo e) {
+		/**
+		 * Método para cambiar el estado de un proyecto. Se
+		 * El metodo envia una notificacion a cada ciudadano suscrito al proyecto
+		 * 
+		 * @param e EstadoProyecto al que queremos actualizar el proyecto.
+		 * 
+		 * 
+		 * @return void
+		 */	
+		public void cambiarEstado(EstadoProyecto e){
+			estado = e;
+			String s = "El proyecto " + this.titulo + " ha pasado a estado " + e;
 
-			/* Falta: que pasa si el ciudadano ya ha apoyado como colectivo? Se le esta metiendo
-			otra vez de forma individual*/
+			if(e.equals(EstadoProyecto.aprobado)){
+				s+= " con un presupuesto concedido de: " + presupuestoConcedido;
+			}
+
+			if(e.equals(EstadoProyecto.rechazado)){
+				Aplicacion.getAplicacion().eliminarProyecto(this);
+			}
+			
+			for(Ciudadano c:listadoSuscripciones){
+				new Notificacion(s, c);
+			}
+		}
+
+		/**
+		 * Método para apoyar un proyecto 
+		 * 
+		 * @param e ElementoColectivo que va a apoyar el proyecto
+		 * 
+		 * @return boolean true si se ha apoyado con exito, false en caso contrario
+		 */
+		public boolean apoyarProyecto(ElementoColectivo e) {
 			if(listadoApoyos.contains(e)) {
 				return false;
 			}
+			
+			listadoApoyos.add(e);
 
 			//Si se vota como ciudadano
 			if(e.getClass().equals(Ciudadano.class)) {
-				listadoApoyos.add(e);
 				((Ciudadano) e).anadirAMisProyectosApoyados(this);
 				apoyos+=1;
-				/* Me parece que esto se arregla cuando hagamos Aplicacion Singleton */
 				if(apoyos >= Aplicacion.getAplicacion().getApoyosMin()){
 					disponible = true;
 				}
-				fechaUltimoApoyo = LocalDate.now();
+				fechaUltimoApoyo = FechaSimulada.getHoy();
+				return true;
 			}
 
 			//Si se vota como colectivo
-			else if(e.getClass().equals(Colectivo.class)) {
-				listadoApoyos.add(e);
-				if(Aplicacion.usuarioActual.equals(((Colectivo) e).getRepresentante())) {
-					for(ElementoColectivo ele : ((Colectivo) e).getElementos()){
-						if(listadoApoyos.contains(ele)==false && ele.getClass().equals(Ciudadano.class)) {
-							listadoApoyos.add(ele);
-							((Ciudadano) ele).anadirAMisProyectosApoyados(this);
-							apoyos+=1;
-							if(apoyos >= Aplicacion.getAplicacion().getApoyosMin()){
-								disponible = true;
-							}
-							fechaUltimoApoyo = LocalDate.now();
+			apoyarProyectoIndirectamente((Colectivo) e);
+			return true;
+		}
+
+		/**
+		 * Método que permite a los miembros de un colectivo y sus respectivos subcolectivos apoyar un proyecto sin
+		 * que el colectivo pasado como argumento sea incluido en la lista de apoyos
+		 * 
+		 * @param c colectivo que indirectamente apoya el proyecto
+		 */
+		public void apoyarProyectoIndirectamente(Colectivo c){
+			for(ElementoColectivo ele : c.getElementos()){
+				if(listadoApoyos.contains(ele)==false) {
+					if(ele.getClass().equals(Colectivo.class)){
+						apoyarProyectoIndirectamente(c);
+					} else {
+						listadoApoyos.add(ele);
+						((Ciudadano) ele).anadirAMisProyectosApoyados(this);
+						apoyos+=1;
+						if(apoyos >= Aplicacion.getAplicacion().getApoyosMin()){
+							disponible = true;
 						}
+						fechaUltimoApoyo = FechaSimulada.getHoy();
 					}
 				}
 			}
-			return true;
-			}
-		
+		}
+
+
+
+	/**
+     * Método para eliminar el apoyo a un proyecto 
+     * 
+     * @param ciu Ciudadano que elimina su apoyo
+     * 
+     * @return void
+     */
 		public void eliminarApoyo(Ciudadano ciu) {
 			if(listadoApoyos.contains(ciu)) {
 				listadoApoyos.remove(ciu);
@@ -142,6 +197,13 @@ public class Proyecto {
 			}
 		}
 		
+		
+		/**
+		 * Este metodo suscribe a un ciudadano a este proyecto.Llamar a este metodo y no a anadirAMisProyectosSuscritos.
+		 * 
+		 * @param ciu ciudadano suscriptor
+		 * @return
+		 */
 		public boolean suscribirProyecto(Ciudadano ciu) {
 			if(listadoSuscripciones.contains(ciu)) {
 				return false;
@@ -150,8 +212,17 @@ public class Proyecto {
 				return false;
 			}
 			listadoSuscripciones.add(ciu);
+			ciu.anadirAMisProyectosSuscritos(this);
 			
 			return true;
+		}
+
+		public EstadoProyecto consultarEstadoProyecto(){
+			if(estado.equals(EstadoProyecto.noEnviado) && fechaUltimoApoyo.isBefore(FechaSimulada.getHoy().minusDays(30))){
+				cambiarEstado(EstadoProyecto.caducado);
+			}
+
+			return estado;
 		}
 		
 
