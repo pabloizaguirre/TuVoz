@@ -32,7 +32,7 @@ public class Ciudadano extends Usuario implements ElementoColectivo, Serializabl
         this.nif = nif;
         this.bloqueado = false;
         this.registrado = false;
-        Aplicacion.getAplicacion().anadirElementoColectivo(this);
+        //Aplicacion.getAplicacion().anadirElementoColectivo(this);
         new Notificacion("Aprobación de registro pendiente: " +nomUs, Aplicacion.getAplicacion().getAdministrador());
     }
 
@@ -312,7 +312,7 @@ public class Ciudadano extends Usuario implements ElementoColectivo, Serializabl
             for (Proyecto p:c2.getProyectosPropuestos()){
                 proyeC2+=1;
 
-                if(p.getListadoApoyos().contains(c2)){
+                if(p.getListadoApoyos().contains(c1)){
                     proyeC2apoyC1+=1;
                 }
             }

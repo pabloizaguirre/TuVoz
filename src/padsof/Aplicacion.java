@@ -233,7 +233,7 @@ public class Aplicacion implements Serializable {
         //Creamos un proyecto como colectivo
         List<Distrito> d = new ArrayList<Distrito>();
         d.add(Distrito.moncloaAravaca);
-        ProyectoInfraestructura p1 = new ProyectoInfraestructura("Puente", "Puente por encima del rio", 2121234, c1, new Imagen("PlanoPuente.jpg"), d);
+        ProyectoInfraestructura p1 = new ProyectoInfraestructura("Puente", "Puente por encima del rio", 5000, c1, new Imagen("PlanoPuente.jpg"), d);
         System.out.println("\nEl colectivo " + c1 + " ha creado el proyecto " + p1);
         
         //Comprobamos que el proyecto tiene un apoyo, el del representante
@@ -276,12 +276,11 @@ public class Aplicacion implements Serializable {
         FechaSimulada.avanzar(80);
         proxy.setDate(FechaSimulada.getHoy());
         p1.consultar();
-        System.out.println("Presupuesto Concedido"+p1.getPresupuestoConcedido());
+        System.out.println("Presupuesto Concedido: "+p1.getPresupuestoConcedido());
         }catch(Exception ex) {
             System.out.println("Error en la comunicación con el sistema externo");
     }
 }
-
 
 }
 
