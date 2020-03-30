@@ -9,18 +9,10 @@ import java.util.*;
  * @author Miguel Escribano
  */
 
-public abstract class ElementoColectivo{
-    
-    private List<Proyecto> proyectosPropuestos = new ArrayList<Proyecto>();
-    private List<Proyecto> proyectosApoyados = new ArrayList<Proyecto>();
+public interface ElementoColectivo{
+    public List<Proyecto> getProyectosPropuestos();
 
-    public List<Proyecto> getProyectosPropuestos(){
-        return this.proyectosPropuestos;
-    }
-
-    public List<Proyecto> getProyectosApoyados(){
-        return this.proyectosApoyados;
-    }
+    public List<Proyecto> getProyectosApoyados();
 
     /**
      * Método para añadir un proyecto a la lista de proyectos propuestos
@@ -29,26 +21,14 @@ public abstract class ElementoColectivo{
      * 
      * @return void
      */
-    public void anadirAMisProyectosPropuestos(Proyecto p){
-        if(proyectosPropuestos.contains(p)) {
-            return;
-        }
-        proyectosPropuestos.add(p);
-        return;
-    }
+    public void anadirAMisProyectosPropuestos(Proyecto p);
 
     /**
      * Metodo para añadir un proyecto a la lista de proyectos apoyados
      * 
      * @param p Proyecto que deseamos añadir a la lista
      */
-    public void anadirAMisProyectosApoyados(Proyecto p){
-        if(proyectosApoyados.contains(p)){
-            return;
-        }
-        proyectosApoyados.add(p);
-        return;
-    }
+    public void anadirAMisProyectosApoyados(Proyecto p);
 
 
     /**
@@ -56,11 +36,5 @@ public abstract class ElementoColectivo{
      * 
      * @param p Proyecto que deseamos eliminar de la lista
      */
-    public void eliminarDeMisProyectosApoyados(Proyecto p){
-        if(proyectosApoyados.contains(p)){
-            proyectosApoyados.remove(p);
-            return;
-        }
-        return;
-    }
+    public void eliminarDeMisProyectosApoyados(Proyecto p);
 }

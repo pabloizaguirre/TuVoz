@@ -5,14 +5,17 @@ import java.util.*;
  * 
  * @author Pablo Izaguirre
  * @author Miguel Escribano
+ * @author Elena Cano
  */
 
  public class ProyectoInfraestructura extends Proyecto {
     private Imagen imagen;
+    private List<Distrito> distritosAfectados;
 
     public ProyectoInfraestructura(String tit, String desc, double presSolicitado,
-                                    ElementoColectivo creador, Imagen imagen){
+                                    ElementoColectivo creador, Imagen imagen, List<Distrito> distritosAfectados){
         super(tit, desc, presSolicitado, creador, ProjectKind.infraestructura);
         this.imagen = imagen;
+        this.distritosAfectados = distritosAfectados;
     }
  } 

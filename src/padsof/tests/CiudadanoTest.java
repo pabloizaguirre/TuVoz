@@ -58,7 +58,7 @@ public class CiudadanoTest {
         Colectivo colec = new Colectivo("Voluntariado", ciudadano);
 
         //Comprobamos que se anade correctamente el colectivo a la lista de misColectivos
-        assertTrue(c.anadirAMisColectivos(colec)==true);
+        assertTrue(c.anadirAMisColectivos(colec));
 
     }
 
@@ -71,7 +71,7 @@ public class CiudadanoTest {
         anadirAMisColectivos(colec);
 
         //Comprobamos que se elimina correctamente el colectivo de la lista de misColectivos
-        assertTrue(c.eliminarDeMisColectivos(colec)==true);
+        assertTrue(c.eliminarDeMisColectivos(colec));
     }
 
 
@@ -83,7 +83,7 @@ public class CiudadanoTest {
         ProyectoSocial p = new ProyectoSocial("Voluntariado","Este es un proyecto de voluntariado", 5000, ciudadano, "jovenes", 0);
 
         //Comprobamos que se añade correctamente el proyecto de la lista de suscritos
-        assertTrue(c.anadirAMisProyectosSuscritos(p)==true);
+        assertTrue(c.anadirAMisProyectosSuscritos(p));
     }
 
     @Test

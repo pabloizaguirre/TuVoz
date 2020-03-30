@@ -1,5 +1,5 @@
 package padsof;
-import es.uam.eps.sadp.grants.*;
+// import es.uam.eps.sadp.grants.*;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -168,7 +168,7 @@ public class Proyecto {
 			for(ElementoColectivo ele : c.getElementos()){
 				if(listadoApoyos.contains(ele)==false) {
 					if(ele.getClass().equals(Colectivo.class)){
-						apoyarProyectoIndirectamente(c);
+						apoyarProyectoIndirectamente(((Colectivo) ele));
 					} else {
 						listadoApoyos.add(ele);
 						((Ciudadano) ele).anadirAMisProyectosApoyados(this);
@@ -180,6 +180,7 @@ public class Proyecto {
 					}
 				}
 			}
+			return;
 		}
 
 
@@ -241,26 +242,26 @@ public class Proyecto {
 		 * 
 		 *
 		 */
-		void enviarProyecto() throws Exception {
-			GrantRequest req = new SolicitudFinanciacion(this);
-			CCGG proxy = CCGG.getGateway();
-			String id = proxy.submitRequest(req);
-			System.out.println("Valor:" + id);
-			this.idEnvio=id;
-		}
+		// void enviarProyecto() throws Exception {
+		// 	GrantRequest req = new SolicitudFinanciacion(this);
+		// 	CCGG proxy = CCGG.getGateway();
+		// 	String id = proxy.submitRequest(req);
+		// 	System.out.println("Valor:" + id);
+		// 	this.idEnvio=id;
+		// }
 
-		/**
-		 * Método que consulta el estado de un proyecto enviado a financiación
-		 * 
-		 *
-		 */
-		void consultar() throws Exception {
-			CCGG proxy = CCGG.getGateway();
-			presupuestoConcedido = proxy.getAmountGranted(this.idEnvio);
-		} 
+		// /**
+		//  * Método que consulta el estado de un proyecto enviado a financiación
+		//  * 
+		//  *
+		//  */
+		// void consultar() throws Exception {
+		// 	CCGG proxy = CCGG.getGateway();
+		// 	presupuestoConcedido = proxy.getAmountGranted(this.idEnvio);
+		// } 
 
 
-
+		@Override
 		public String toString(){
 			return "" + this.titulo + ", id: " + this.id;
 		}

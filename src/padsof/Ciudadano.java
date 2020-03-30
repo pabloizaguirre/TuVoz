@@ -9,7 +9,7 @@ import java.util.*;
  * @author Miguel Escribano
  */
 
-public class Ciudadano extends Usuario{
+public class Ciudadano extends Usuario implements ElementoColectivo{
 
 
     private String nif;
@@ -19,8 +19,10 @@ public class Ciudadano extends Usuario{
     //lista de colectivos de los que soy miembro
     private List<Colectivo> misColectivos = new ArrayList<Colectivo>();
     //lista de colectivos de los que es representante
-    private List<Colectivo> colectivosCreados;
-    private List<Proyecto> proyectosSuscritos;
+    private List<Colectivo> colectivosCreados = new ArrayList<Colectivo>();
+    private List<Proyecto> proyectosSuscritos = new ArrayList<Proyecto>();
+    private List<Proyecto> proyectosPropuestos = new ArrayList<Proyecto>();
+    private List<Proyecto> proyectosApoyados = new ArrayList<Proyecto>();
 
 
     public Ciudadano(String contr, String nomUs, String nif){
@@ -71,6 +73,56 @@ public class Ciudadano extends Usuario{
         this.proyectosSuscritos = proyectosSuscritos;
     }
 
+    public List<Proyecto> getProyectosPropuestos(){
+        return this.proyectosPropuestos;
+    }
+
+    public List<Proyecto> getProyectosApoyados(){
+        return this.proyectosApoyados;
+    }
+
+    /**
+     * Método para añadir un proyecto a la lista de proyectos propuestos
+     * 
+     * @param p Proyecto que deseamos añadir a la lista
+     * 
+     * @return void
+     */
+    public void anadirAMisProyectosPropuestos(Proyecto p){
+        if(proyectosPropuestos.contains(p)) {
+            return;
+        }
+        proyectosPropuestos.add(p);
+        return;
+    }
+
+    /**
+     * Metodo para añadir un proyecto a la lista de proyectos apoyados
+     * 
+     * @param p Proyecto que deseamos añadir a la lista
+     */
+    public void anadirAMisProyectosApoyados(Proyecto p){
+        if(proyectosApoyados.contains(p)){
+            return;
+        }
+        proyectosApoyados.add(p);
+        return;
+    }
+
+
+    /**
+     * Metodo para eliminar un proyecto de la lista de proyectos apoyados
+     * 
+     * @param p Proyecto que deseamos eliminar de la lista
+     */
+    public void eliminarDeMisProyectosApoyados(Proyecto p){
+        if(proyectosApoyados.contains(p)){
+            proyectosApoyados.remove(p);
+            return;
+        }
+        return;
+    }
+
     /**
      * Método para comprobar si un NIF pertenece a un ciudadano existente en la aplicacion
      *
@@ -98,7 +150,7 @@ public class Ciudadano extends Usuario{
      * @return boolean, true si el NIF está usado, false en caso contrario
      */
 
-    public Ciudadano registrarCiudadano(String contr, String nomUs, String nif) {
+    public static Ciudadano registrarCiudadano(String contr, String nomUs, String nif) {
         if(nifEnUso(nif) || Usuario.nombreEnUso(nomUs)){
             return null;
         }
@@ -271,7 +323,7 @@ public class Ciudadano extends Usuario{
 
 
     public String toString(){
-        return "Ciudadano/a" + getNombreUsuario() + ", nif: " + nif;
+        return getNombreUsuario() + ", nif: " + nif;
     }
 
 }

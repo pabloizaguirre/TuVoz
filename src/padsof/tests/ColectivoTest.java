@@ -29,18 +29,18 @@ public class ColectivoTest {
 
 
 	@Test
-	void testEsMiembro() {
+	public void testEsMiembro() {
 		boolean resultado1 = c1.esMiembro(u1);
 		boolean resultado2 = c1.esMiembro(u2);
 		boolean resultado3 = c2.esMiembro(u2);
 		boolean resultado4 = c2.esMiembro(u1);
 		boolean resultado5 = c1.esMiembro(u3);
 
-		assertTrue(resultado1 == true);
-		assertTrue(resultado2 == true);
-		assertTrue(resultado3 == true);
-		assertFalse(resultado4 == true);
-		assertFalse(resultado5 == true);
+		assertTrue(resultado1);
+		assertTrue(resultado2);
+		assertTrue(resultado3);
+		assertFalse(resultado4);
+		assertFalse(resultado5);
 
 	}
 
@@ -49,14 +49,14 @@ public class ColectivoTest {
 		Ciudadano u4 = new Ciudadano("aaaa", "Bernarda Alba", "0000000N");
 		boolean resultado1 = c1.esMiembro(u4);
 
-		assertTrue(resultado1 == false)
+		assertFalse(resultado1)
 	}
 
 	@Test
 	void testAnadirSubcolectivo() {
 		c1.anadirSubcolectivo(c2);
 
-		assertTrue(c1.getElementos.contains(c2) == true)
+		assertTrue(c1.getElementos.contains(c2));
 	}
 
 	@Test
@@ -64,7 +64,7 @@ public class ColectivoTest {
 		ProyectoSocial p1 = new ProyectoSocial("prueba1","Este es un proyecto de prueba1", 200000, c1, "jovenes1", 0);
 
 		c1.testAnadirAProyectosApoyados(p1);
-		assertTrue(c1.getProyectosApoyados.contains(p1) == true)
+		assertTrue(c1.getProyectosApoyados().contains(p1));
 	}
 
 
@@ -73,13 +73,13 @@ public class ColectivoTest {
 		c1.unirseAColectivo(u1);
 		c1.abandonarColectivo(u1);
 
-		assertTrue(c1.getElementos.contains(u1) == false)
+		assertFalse(c1.getElementos().contains(u1));
 	}
 
 	@Test
 	void testBucarColectivo() {
 
-		assertSame(c1, u2.buscarColectivo("Voluntariado"))
+		assertSame(c1, u2.buscarColectivo("Voluntariado"));
 		
 	}
 

@@ -65,25 +65,6 @@ public class Aplicacion implements Serializable {
         this.administrador = administrador;
     }
 
-
-     /**
-     * Metodo para registrar a un nuevo ciudadano
-     * 
-     * @param nombre String con el nombre de usuario
-     * @param nif String con el NIF del ciudadano
-     * @param contraseña String con la contraseña del ciudadano
-     * 
-     * @return Objeto de clase Ciudadano en caso favorable, null si se ha producido un error
-     * o alguno de los parámetros no son válidos
-     */
-    public static Ciudadano registrarCiudadano(String nombre, String nif, String contraseña) {
-        if (!Usuario.nombreEnUso(nombre) && !Ciudadano.nifEnUso(nif)) {
-            return new Ciudadano(contraseña, nombre, nif);
-        } else {
-            return null;
-        }
-    }
-
     /**
      * Metodo para registrar un administrador
      * 
@@ -229,12 +210,12 @@ public class Aplicacion implements Serializable {
             System.out.println("El nombre PabloElChulo ya está en uso\n");
         }
 
-        Ciudadano u1 = registrarCiudadano("ElenitaCanocas", "123alesconditeingles", "AmoAlCoquito");
+        Ciudadano u1 = Ciudadano.registrarCiudadano("AmoAlCoquito", "ElenitaCanocas", "12312312F");
         if(u1==null){
             System.out.println("Se ha procudido un error al registrar a ElenitaCanocas\n");
 
         }
-        Ciudadano u2 = registrarCiudadano("MiguelCaraPan", "420420420", "AmoAlBrazos");
+        Ciudadano u2 = Ciudadano.registrarCiudadano("AmoAlBrazos", "MiguelCaraPan", "12343212A");
         if(u2==null){
             System.out.println("Se ha procudido un error al registrar a MiguelCaraPan\n");
 
@@ -251,24 +232,36 @@ public class Aplicacion implements Serializable {
 
         //Comprobamos que en c1 está el representate y el subcolectivo
 
-        System.out.println("Elementos del colectivo " + c1 + ":\n");
+        System.out.println("Elementos del colectivo " + c1 + ":");
         for(ElementoColectivo elem: c1.getElementos()){
-            System.out.println("" + elem);
+            System.out.println(">>" + elem);
         }
 
         //Creamos un proyecto como colectivo
-        ProyectoInfraestructura p1 = new ProyectoInfraestructura("Puente", "Puente por encima del rio", 2121234, c1, new Imagen("PlanoPuente.jpg"));
-
+        List<Distrito> d = new ArrayList<Distrito>();
+        d.add(Distrito.moncloaAravaca);
+        ProyectoInfraestructura p1 = new ProyectoInfraestructura("Puente", "Puente por encima del rio", 2121234, c1, new Imagen("PlanoPuente.jpg"), d);
+        System.out.println("\nEl colectivo " + c1 + " ha creado el proyecto " + p1);
+        
         //Comprobamos que el proyecto tiene un apoyo, el del representante
         System.out.println("El proyecto " + p1 + " tiene " + p1.getApoyos() + " apoyos\n");
 
         //Añadimos u2 al subcolectivo c2 y comprobamos si aumenta el numero de apoyos
-        System.out.println("Se une " + u2 + " al colectivo " + c2 + "\n");
+        System.out.println("Se une " + u2 + " al colectivo " + c2);
         p1.apoyarProyecto(u2);
 
         System.out.println("El proyecto " + p1 + " tiene " + p1.getApoyos() + " apoyos\n");
 
-        
+        //Aprobar proyecto
+        p1.cambiarEstado(EstadoProyecto.noEnviado); 
+
+        //Comprobar las notificaciones que ha recibido u1
+        System.out.println(u1 + " ha recibido las siguientes notificaciones:");
+        for(Notificacion n: u1.getNotificaciones()){
+            System.out.println(">>" + n.getTextoNotificacion());
+        }
+
+        //Enviar a financiacion
     }
 
 

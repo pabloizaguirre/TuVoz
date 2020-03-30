@@ -8,7 +8,7 @@ import java.util.*;
  * @author Miguel Escribano
  */
 
-abstract class Usuario extends ElementoColectivo{
+abstract class Usuario{
     private String nombreUsuario;
     private String contrasena;
 
@@ -52,6 +52,11 @@ abstract class Usuario extends ElementoColectivo{
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
+
+    public List<Notificacion> getNotificaciones() {
+        return this.notificaciones;
+    }
+
 
 
     /**

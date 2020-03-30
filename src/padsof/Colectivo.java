@@ -9,14 +9,15 @@ import java.util.*;
  * @author Miguel Escribano
  */
 
-public class Colectivo extends ElementoColectivo {
+public class Colectivo implements ElementoColectivo {
 
 
     private String titulo;
     private Ciudadano representante;
     private List<ElementoColectivo> elementos;
-    private List<Proyecto> proyectosApoyados;
     private Colectivo superColectivo = null;
+    private List<Proyecto> proyectosPropuestos = new ArrayList<Proyecto>();
+    private List<Proyecto> proyectosApoyados = new ArrayList<Proyecto>();
 
 
 
@@ -59,16 +60,62 @@ public class Colectivo extends ElementoColectivo {
         return this.elementos;
     }
 
-    public List<proyectosApoyados> getProyectosapoyados() {
-        return this.proyectosApoyados;
-    }
-
     public void setElementos(ArrayList<ElementoColectivo> elementos) {
         this.elementos = elementos;
     }
 
     private Colectivo getSuperColectivo() {
         return this.superColectivo;
+    }
+
+    public List<Proyecto> getProyectosPropuestos(){
+        return this.proyectosPropuestos;
+    }
+
+    public List<Proyecto> getProyectosApoyados(){
+        return this.proyectosApoyados;
+    }
+
+    /**
+     * Método para añadir un proyecto a la lista de proyectos propuestos
+     * 
+     * @param p Proyecto que deseamos añadir a la lista
+     * 
+     * @return void
+     */
+    public void anadirAMisProyectosPropuestos(Proyecto p){
+        if(proyectosPropuestos.contains(p)) {
+            return;
+        }
+        proyectosPropuestos.add(p);
+        return;
+    }
+
+    /**
+     * Metodo para añadir un proyecto a la lista de proyectos apoyados
+     * 
+     * @param p Proyecto que deseamos añadir a la lista
+     */
+    public void anadirAMisProyectosApoyados(Proyecto p){
+        if(proyectosApoyados.contains(p)){
+            return;
+        }
+        proyectosApoyados.add(p);
+        return;
+    }
+
+
+    /**
+     * Metodo para eliminar un proyecto de la lista de proyectos apoyados
+     * 
+     * @param p Proyecto que deseamos eliminar de la lista
+     */
+    public void eliminarDeMisProyectosApoyados(Proyecto p){
+        if(proyectosApoyados.contains(p)){
+            proyectosApoyados.remove(p);
+            return;
+        }
+        return;
     }
 
     /**
@@ -180,6 +227,11 @@ public class Colectivo extends ElementoColectivo {
                     }
             }
         return null;
+    }
+
+    @Override
+    public String toString(){
+        return titulo;
     }
 
 }

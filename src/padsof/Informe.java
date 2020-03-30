@@ -12,8 +12,4 @@ import java.util.*;
      
     private TipoInforme reporte;
 
-
-    Informe(TipoInforme rep) {
-        reporte=rep;
-    }
  }
