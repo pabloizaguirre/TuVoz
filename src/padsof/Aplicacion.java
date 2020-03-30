@@ -1,6 +1,7 @@
 package padsof;
 import java.util.*;
 import java.io.*;
+import java.io.IOException;
 
 /**
  * Clase aplicacion.
@@ -92,32 +93,21 @@ public class Aplicacion implements Serializable {
      * 
      * @return void
      */
-    public void guardarAplicacion() {
+    public static void guardarAplicacion(Aplicacion aplicacion) {
 		ObjectOutputStream salida = null;
 		FileOutputStream fos = null;
 		try {
 			fos = new FileOutputStream("TuVoz.dat");
 			salida = new ObjectOutputStream(fos);
-			salida.writeObject(this);
+            salida.writeObject(aplicacion);
+            
+            salida.close();
+            fos.close();
 		} catch (IOException ex) {
-			System.out.println("Fallo al guardar en el archivo");
+			ex.printStackTrace();
  
-		} finally {
-			try {
-				if (fos != null) {
-					fos.close();
-				}
-			} catch (IOException ex) {
-				System.out.println("Fallo al guardar en el archivo");
-			}
-			try {
-				if (salida != null) {
-					salida.close();
-				}
-			} catch (IOException ex) {
-				System.out.println("Fallo al guardar en el archivo");
-			}
-		}
+		} 
+		
 	}
 
      /**
@@ -127,7 +117,7 @@ public class Aplicacion implements Serializable {
      * 
      * @return Objeto de clase Aplicacion
      */
-    public Aplicacion cargarAplicacion(String ruta) {
+    public static Aplicacion cargarAplicacion(String ruta) {
 		FileInputStream fis = null;
 		ObjectInputStream entrada = null;
 		Aplicacion obj = null;
@@ -269,6 +259,8 @@ public class Aplicacion implements Serializable {
         }
 
         //Enviar a financiacion
+
+        guardarAplicacion(Aplicacion.getAplicacion());
     }
 
 

@@ -33,8 +33,8 @@ public class ProyectoTest {
         u6 = new Ciudadano("Love", "Sxe", "07803305C");
 		c1 = new Colectivo("Voluntariado", u1);
         c2 = new Colectivo("Apoyo a ancianos", c1);
-        p1 = new ProyectoSocial("Voluntariado","Este es un proyecto de voluntariado", 5000, u3, "jovenes", 0);
-        p2 = new ProyectoInfraestructura("Uranizacion", "Creacion de un nuevo coomplejo", 2700000, u3, foto);
+        p1 = new ProyectoSocial("Voluntariado","Este es un proyecto de voluntariado", 5000, u3, "jovenes", TipoAlcance.internacional);
+        p2 = new ProyectoInfraestructura("Uranizacion", "Creacion de un nuevo coomplejo", 2700000, u3, foto, null);
 	}
 
     
@@ -93,7 +93,7 @@ public class ProyectoTest {
         assertEquals(p1.getApoyos(), 3);
 
         //Rl u1 retira su apoyo al proyecto
-        p1.eliminarapoyo(u1);
+        p1.eliminarApoyo(u1);
 
         //Comprobar que ahora el numero de apoyos es 2
         assertEquals(p1.getApoyos(), 2);
@@ -101,13 +101,29 @@ public class ProyectoTest {
     }
 
     @Test
-    public void testSuscribirProyecto{
+    public void testSuscribirProyecto(){
         //El u1 se suscribe a p1
-        p1.suscrbirproyecto(u1);
+        p1.suscribirProyecto(u1);
 
         //Comprobamos que se añade correctamente a la lista de suscritos
-        assertTrue(u1.getProyectosSuscritos.contains(p1));
-        assertTrue(p1.getListadoSuscripciones.contains(u1));
+        assertTrue(u1.getProyectosSuscritos().contains(p1));
+        assertTrue(p1.getListadoSuscripciones().contains(u1));
+
+    }
+
+    @Test
+    public void testCambiarEstado(){
+        p1.cambiarEstado(EstadoProyecto.noEnviado);
+        assertEquals(p1.getEstadoProyecto(), EstadoProyecto.noEnviado);
+
+        p1.cambiarEstado(EstadoProyecto.rechazado);
+        assertEquals(p1.getEstadoProyecto(), EstadoProyecto.rechazado);
+
+        //Comprobamos que se ha borrado de la lista de proyectos
+        assertFalse(Aplicacion.getAplicacion().getListadoProyectos().contains(p1));
+        
+        p2.cambiarEstado(EstadoProyecto.aprobado);
+        assertEquals(p2.getEstadoProyecto(), EstadoProyecto.aprobado);
 
     }
 

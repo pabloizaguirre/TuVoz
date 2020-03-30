@@ -1,5 +1,6 @@
 package padsof;
 import java.util.*;
+import java.io.*;
 
 /**
  * Clase ElementoColectivo. 
@@ -9,7 +10,7 @@ import java.util.*;
  * @author Miguel Escribano
  */
 
-public interface ElementoColectivo{
+public interface ElementoColectivo {
     public List<Proyecto> getProyectosPropuestos();
 
     public List<Proyecto> getProyectosApoyados();

@@ -13,15 +13,12 @@ public class CiudadanoTest {
     public void TestNifEnUso() {
 
         //Crear los objetos necesarios para la prueba
-       Ciudadano c1 = new Ciudadano("1234", "usuario1",  "76654993F");
-       Ciudadano c2 = new Ciudadano("1664", "usuario2",  "76654993F");
-       Ciudadano c3 = new Ciudadano("1984", "usuario3",  "73398440M");
+        Ciudadano c1 = Ciudadano.registrarCiudadano("8383", "Miguel", "7439837474G");
+      
+        //Comprobamos si los nifs estan en uso
+        assertTrue(Ciudadano.nifEnUso(c1.getNif()));
+        assertFalse(Ciudadano.nifEnUso("545463773J"));
 
-        //Comprobar que los nif de c1 y c2 son iguales
-        assertTrue(Ciudadano.nifEnUso(c1.getNif())==Ciudadano.nifEnUso(c2.getNif()));
-
-        //Comprobar que los nif de c1 y c3 son distintos
-        assertTrue(Ciudadano.nifEnUso(c1.getNif())!=Ciudadano.nifEnUso(c3.getNif()));
     }
 
 
@@ -29,11 +26,14 @@ public class CiudadanoTest {
     @Test
     public void TestBuscarCiudadano() {
         //Crear los objetos necesarios para la prueba
-        Ciudadano c = new Ciudadano("1434", "usr",  "78654999F");
-        Ciudadano caux = new Ciudadano("14774", "usraux",  "78654999F");
+        Ciudadano c = Ciudadano.registrarCiudadano("1434", "123asd",  "1231312A");
+        Ciudadano caux = Ciudadano.registrarCiudadano("14774", "asdadsx",  "12321313D");
 
+        assertFalse(c==null);
+        assertFalse(caux==null);
+    
         //Comprobar que el ciudadano devuelto por la función dado su nombre es igual a c
-        assertSame(c, caux.buscarCiudadano("usr"));
+        assertSame(c, caux.buscarCiudadano("usr"));;
 
     }
 

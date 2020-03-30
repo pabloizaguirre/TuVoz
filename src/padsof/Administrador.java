@@ -1,5 +1,6 @@
 package padsof;
 import java.util.*;
+import java.io.*;
 
 /**
  * Clase Administrador.
@@ -9,7 +10,7 @@ import java.util.*;
  * @author Miguel Escribano
  */
 
-public class Administrador extends Usuario {
+public class Administrador extends Usuario implements Serializable {
     
     public Administrador(String nomUs, String contr){
         super(nomUs, contr);  

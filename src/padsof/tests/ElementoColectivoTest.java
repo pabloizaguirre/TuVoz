@@ -3,7 +3,7 @@ package padsof.tests;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-import padsof.Ciudadano;
+import padsof.*;
 
 import org.junit.Before;
 import java.util.*;
@@ -28,7 +28,7 @@ public class ElementoColectivoTest {
 		u3 = new Ciudadano("SoyUnico", "ChicoUnico", "00101001P");
 		c1 = new Colectivo("Voluntariado", u1);
         c2 = new Colectivo("Apoyo a ancianos", c1);
-        p1 = new ProyectoSocial("Voluntariado","Este es un proyecto de voluntariado", 5000, u3, "jovenes", 0);
+        p1 = new ProyectoSocial("Voluntariado","Este es un proyecto de voluntariado", 5000, u3, "jovenes", TipoAlcance.nacional);
         p2 = new ProyectoInfraestructura("Uranizacion", "Creacion de un nuevo coomplejo", 2700000, u3, foto);
 	}
 
@@ -38,7 +38,7 @@ public class ElementoColectivoTest {
     public TestAnadirAMisProyectosPropuestos{
         u3.anadirAMisProyectospropuestos(p1);
         
-        assertTrue(u3.getProyectosPropuestos.contains(p1));
+        assertTrue(u3.getProyectosPropuestos().contains(p1));
     }
 
     
@@ -46,7 +46,7 @@ public class ElementoColectivoTest {
     public TestAnadirAMisProyectosApoyados{
         u1.anadirAMisProyectosApoyados(p1);
         
-        assertTrue(u1.getProyectosApoyados.contains(p1));
+        assertTrue(u1.getProyectosApoyados().contains(p1));
     }
 
     @Test
@@ -54,6 +54,6 @@ public class ElementoColectivoTest {
         u1.anadirAMisProyectosApoyados(p1);
         u1.eliminarDemisproyectosapoyados(p1);
 
-        assertTrue(u1.getProyectosApoyados.contains(p1));
+        assertTrue(u1.getProyectosApoyados().contains(p1));
     }
 }

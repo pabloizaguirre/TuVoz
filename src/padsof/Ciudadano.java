@@ -30,6 +30,7 @@ public class Ciudadano extends Usuario implements ElementoColectivo{
         this.nif = nif;
         this.bloqueado = false;
         this.registrado = false;
+        Aplicacion.getAplicacion().anadirElementoColectivo(this);
         new Notificacion("Aprobación de registro pendiente: " +nomUs, Aplicacion.getAplicacion().getAdministrador());
     }
 
@@ -133,7 +134,7 @@ public class Ciudadano extends Usuario implements ElementoColectivo{
     public static boolean nifEnUso(String str) {
         for(ElementoColectivo c :Aplicacion.getAplicacion().getListadoElementoColectivos())
             if(c.getClass().equals(Ciudadano.class))
-                if(((Ciudadano)c).getNif().contains(str)){
+                if(((Ciudadano)c).getNif().equals(str)){
                     return true;
                 }
         return false;
@@ -154,6 +155,7 @@ public class Ciudadano extends Usuario implements ElementoColectivo{
         if(nifEnUso(nif) || Usuario.nombreEnUso(nomUs)){
             return null;
         }
+
         return new Ciudadano(contr,nomUs,nif);
     }
 
@@ -176,14 +178,11 @@ public class Ciudadano extends Usuario implements ElementoColectivo{
      */
 
     public void bloquearCiudadano() {
-        /* Falta: comprobar esto */
-        if(Aplicacion.getAplicacion().getUsuarioActual().getClass().equals(Administrador.class)){
-            this.bloqueado = true;
-            for(Proyecto p : getProyectosApoyados()) {
-                p.eliminarApoyo(this);
-                eliminarDeMisProyectosApoyados(p);;
-            }
+        this.bloqueado = true;
+        for(Proyecto p:proyectosApoyados){
+            p.eliminarApoyo(this);
         }
+        proyectosApoyados.clear();
         return;
     }
 
@@ -194,9 +193,7 @@ public class Ciudadano extends Usuario implements ElementoColectivo{
 	 * @return void
      */
     public void desbloquearCiudadano() {
-        if(Aplicacion.getAplicacion().getUsuarioActual().getClass().equals(Administrador.class)) {
-            this.bloqueado = false;
-        }
+        this.bloqueado = false;
     }
 
 
@@ -207,7 +204,7 @@ public class Ciudadano extends Usuario implements ElementoColectivo{
 	 *
 	 * @return El ciudadano si existe, null en caso contrario
      */
-    public Ciudadano buscarCiudadano(String str) {
+    public static Ciudadano buscarCiudadano(String str) {
         for(ElementoColectivo c :Aplicacion.getAplicacion().getListadoElementoColectivos()) {
             if(c.getClass().equals(Ciudadano.class))
                 if(((Ciudadano)c).getNombreUsuario().equals(str)) {

@@ -66,7 +66,7 @@ public class Proyecto {
 
 		/**El proyecto se añade a la lista de proyectos de la aplicacion */
 		Aplicacion.getAplicacion().anadirProyecto(this);
-		new Notificacion("Proyecto pendiente de autorización" + titulo, Aplicacion.getAplicacion().getAdministrador());
+		new Notificacion("Proyecto pendiente de autorización: " + titulo, Aplicacion.getAplicacion().getAdministrador());
 	}
 	
 	
@@ -146,9 +146,6 @@ public class Proyecto {
 			//Si se vota como ciudadano
 			if(e.getClass().equals(Ciudadano.class)) {
 				apoyos+=1;
-				if(apoyos >= Aplicacion.getAplicacion().getApoyosMin()){
-					disponible = true;
-				}
 				fechaUltimoApoyo = FechaSimulada.getHoy();
 				return true;
 			}
