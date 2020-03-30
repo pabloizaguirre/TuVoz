@@ -2,8 +2,8 @@ package padsof;
 import java.util.*;
 
 /**
- * Clase Ciudadano. 
- * 
+ * Clase Ciudadano.
+ *
  * @author Elena Cano
  * @author Pablo Izaguirre
  * @author Miguel Escribano
@@ -21,8 +21,8 @@ public class Ciudadano extends Usuario {
     //lista de colectivos de los que es representante
     private List<Colectivo> colectivosCreados;
     private List<Proyecto> proyectosSuscritos;
-    
-    
+
+
     public Ciudadano(String contr, String nomUs, String nif){
         super(nomUs, contr);
         this.nif = nif;
@@ -81,11 +81,11 @@ public class Ciudadano extends Usuario {
 
     /**
      * Método para comprobar si un NIF pertenece a un ciudadano existente en la aplicacion
-     * 
+     *
      * @param str String con el NIF a comprobar
      * @return boolean, true si el NIF está usado, false en caso contrario
      */
-    
+
     public static boolean nifEnUso(String str) {
         for(ElementoColectivo c :Aplicacion.getAplicacion().getListadoElementoColectivos())
             if(c.getClass().equals(Ciudadano.class))
@@ -98,11 +98,11 @@ public class Ciudadano extends Usuario {
     /**
      * Método para registrar a un nuevo ciudadano en la aplicación, controlando que
      * el nombre de usuario y el NIF introducidos no estén ya en uso
-     * 
+     *
      * @param contr String con la contraseña del usuario
      * @param nomUs String con el nombre de usuario
      * @param nif String con el NIF del usuario
-     * 
+     *
      * @return boolean, true si el NIF está usado, false en caso contrario
      */
 
@@ -115,7 +115,7 @@ public class Ciudadano extends Usuario {
 
     /**
      * Método para aprobar un registro de un usuario por parte del administrador
-     * 
+     *
      * @return void
      */
     public void aprobarRegistro(){
@@ -127,7 +127,7 @@ public class Ciudadano extends Usuario {
 
      /**
      * Método para bloquear a un usuario por parte del administrador
-     * 
+     *
      * @return void
      */
 
@@ -144,9 +144,9 @@ public class Ciudadano extends Usuario {
     }
 
      /**
-     * Método para desbloquear a un usuario por parte del administrador 
-     * 
-	 * 
+     * Método para desbloquear a un usuario por parte del administrador
+     *
+	 *
 	 * @return void
      */
     public void desbloquearCiudadano() {
@@ -155,14 +155,14 @@ public class Ciudadano extends Usuario {
         }
     }
 
+
     /**
      * Método para buscar un ciudadano a través de un String
-     * 
-     * @parstatic Ciudadano ing con el nombre de usuario
-	 * 
+     *
+     * @param Ciudadano ing con el nombre de usuario
+	 *
 	 * @return El ciudadano si existe, null en caso contrario
      */
-
     public Ciudadano buscarCiudadano(String str) {
         for(ElementoColectivo c :Aplicacion.getAplicacion().getListadoElementoColectivos()) {
             if(c.getClass().equals(Ciudadano.class))
@@ -173,38 +173,109 @@ public class Ciudadano extends Usuario {
         return null;
     }
 
+
+        /**
+     * Esta funcion añade una notificacion al conjunto de notificaciones de este usuario
+     * @param n notificacion a añadir
+     * @return false si el usuario ya tenia la notificacion, true si se ha añadido con exito
+     */
+    public boolean anadirNotificacion(Notificacion n){
+        if(notificaciones.contains(n)){
+            return false;
+        } else {
+            notificaciones.add(n);
+            return true;
+        }
+    }
+
+    /**
+     * Esta funcion elimina una notificacion de la lista de notificaciones del usuario
+     * @param n notificacion a borrar
+     * @return false si la notificacion ya ha sido borrara o true si la eliminacion se ha realizado con exito
+     */
+    public boolean eliminarNotificacion(Notificacion n){
+        if(notificaciones.contains(n)){
+            notificaciones.remove(n);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    /**
+     * Método para añadir un colectivo a tu lista
+     *
+     * @param c colectivo que se quiere añadir
+     *
+     * @return true en caso favorable, false si ya estuviera añadido a sus colectivos
+     */
     public boolean anadirAMisColectivos(Colectivo c){
         if(misColectivos.contains(c)){
             return false;
         }
         misColectivos.add(c);
-        
+
         return true;
     }
-    
+
+
+
+    /**
+     * Método para eliminar un colectivo de tu lista
+     *
+     * @param c colectivo que se quiere eliminar
+     *
+     * @return true en caso favorable, false si no estuviera añadido a sus colectivos
+     */
     public boolean eliminarDeMisColectivos(Colectivo c){
         if(!misColectivos.contains(c)){
             return false;
         }
         misColectivos.remove(c);
-        
+
         return true;
     }
-    
+
+
+    /**
+     * Método para añadir un proyecto a la ista de apoyados
+     *
+     * @param p proyecto que se quiere añadir
+     *
+     * @return true en caso favorable, false si ya estuviera añadido
+     */
+    public boolean anadirAMisProyectosApoyados(Proyecto p){
+        if(proyectosApoyados.contains(p)){
+            return false;
+        }
+        proyectosApoyados.add(p);
+
+        return true;
+    }
+
+
+    /**
+     * Método para añadir un proyecto a la ista de suscritos
+     *
+     * @param p proyecto que se quiere añadir
+     *
+     * @return true en caso favorable, false si ya estuviera añadido
+     */
      public boolean anadirAMisProyectosSuscritos(Proyecto p){
         if(proyectosSuscritos.contains(p)){
             return false;
         }
         proyectosSuscritos.add(p);
-        
+
         return true;
     }
 
-    
+
 
     /**
      * Método para solicitar el informe de popularidad
-     * 
+     *
      * @param p proyecto creado por el usuario del cual se quiere solicitar el informe
      * @return numero de apoyos que tiene el proyecto p
      */
@@ -218,11 +289,11 @@ public class Ciudadano extends Usuario {
 
     /**
      * Método para solicitar el informe de afinidad
-     * 
+     *
      * @param c1 Primer colectivo del cual se quiere solicitar este informe.
      * @param c2 Segundo colectivo del cual se quiere solicitar este informe.
      * El usuario debe pertenecer a ambos colectivos.
-     * 
+     *
      * @return double que representa el indice de afinidad entre dos colectivos.
      */
     public double solicitarInformeAfinidad(Colectivo c1, Colectivo c2){
@@ -242,7 +313,7 @@ public class Ciudadano extends Usuario {
             }
             for (Proyecto p:c2.getProyectosPropuestos()){
                 proyeC2+=1;
-                
+
                 if(p.getListadoApoyos().contains(c2)){
                     proyeC2apoyC1+=1;
                 }
@@ -252,7 +323,6 @@ public class Ciudadano extends Usuario {
         else return -1;
     }
 
-    
+
 
 }
-  

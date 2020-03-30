@@ -2,8 +2,8 @@ package padsof;
 import java.util.*;
 
 /**
- * Clase Colectivo. 
- * 
+ * Clase Colectivo.
+ *
  * @author Elena Cano
  * @author Pablo Izaguirre
  * @author Miguel Escribano
@@ -17,8 +17,8 @@ public class Colectivo extends ElementoColectivo {
     private List<ElementoColectivo> elementos;
     private List<Proyecto> proyectosApoyados;
     private Colectivo superColectivo = null;
-    
-    
+
+
 
 
     public Colectivo(String tit, Ciudadano rep){
@@ -67,12 +67,12 @@ public class Colectivo extends ElementoColectivo {
     private Colectivo getSuperColectivo() {
         return this.superColectivo;
     }
-        
+
     /**
      * Método para comprobar si un ciudadano o colectivo pertenece a un colectivo
-     * 
+     *
      * @param u El ciudadano o colectivo que queremos comprobar
-     * 
+     *
      * @return boolean. true si pertenece, false en caso contrario
      */
     public boolean esMiembro(ElementoColectivo u){
@@ -89,7 +89,7 @@ public class Colectivo extends ElementoColectivo {
 
     /**
      * Metodo para encontrar el maximo colectivo que abarca a este, su colectivo raiz
-     * 
+     *
      * @return maximo superColectivo
      */
     private Colectivo ColectivoRaiz(){
@@ -100,7 +100,7 @@ public class Colectivo extends ElementoColectivo {
         }
         return this;
     }
-    
+
     /**
      * Llamar a esta funcion cuando queramos unirnos a un colectivo
      *
@@ -112,7 +112,7 @@ public class Colectivo extends ElementoColectivo {
             return false;
         }
         elementos.add(miembro);
-        
+
         miembro.anadirAMisColectivos(this);
 
         //Apoyar los proyectos que apoya este colectivo y sus superiores
@@ -123,13 +123,13 @@ public class Colectivo extends ElementoColectivo {
             }
             c = c.getSuperColectivo();
         }
-        
+
         return true;
     }
 
     /**
      * añade un subcolectivo a su lista de ElementosColectivo
-     * 
+     *
      * @param c subcolectivo a añadir a este
      */
     public void anadirSubcolectivo(Colectivo c){
@@ -157,26 +157,26 @@ public class Colectivo extends ElementoColectivo {
         elementos.remove(miembro);
 
         miembro.eliminarDeMisColectivos(this);
-        
+
         return true;
     }
 
 
     /**
      * Método para buscar un colectivo en la aplicacion
-     * 
+     *
      * @param str String con el nombre que deseamos buscar
-     * 
+     *
      * @return Colectivo c que buscamos, null si no existe
      */
     public Colectivo bucarColectivo(String str){
         for (ElementoColectivo c:Aplicacion.getAplicacion().getListadoElementoColectivos()){
-           if(c.getClass().equals(Colectivo.class))     
+           if(c.getClass().equals(Colectivo.class))
                 if(((Colectivo)c).getTitulo().equals(str)){
                     return (Colectivo)c;
                     }
             }
         return null;
     }
-    
+
 }
