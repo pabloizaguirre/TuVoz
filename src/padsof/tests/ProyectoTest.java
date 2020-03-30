@@ -9,53 +9,76 @@ import java.util.*;
 
 public class ProyectoTest {
 
+    private Ciudadano u1;
+	private Ciudadano u2;
+    private Ciudadano u3;
+    private Ciudadano u4;
+    private Ciudadano u5;
+    private Ciudadano u6;
+	private Colectivo c1;
+    private Colectivo c2;
+    private ProyectoSocial p1;
+    private ProyectoInfraestructura p2;
+    private Imagen foto;
+
+
+	@Before
+	public void setUp() {
+        foto = new Imagen("Maqueta complejo");
+		u1 = new Ciudadano("NiMalaNiSanta", "Safaera", "666");
+		u2 = new Ciudadano("AquiLlegoTuTiburon", "ConejoMalo", "12312332W");
+        u3 = new Ciudadano("SoyUnico", "ChicoUnico", "00101001P");
+        u4 = new Ciudadano("DivaVirtual", "Omarito", "07801003H");
+        u5 = new Ciudadano("Mercadona", "LaBadgy", "07803303M");
+        u6 = new Ciudadano("Love", "Sxe", "07803305C");
+		c1 = new Colectivo("Voluntariado", u1);
+        c2 = new Colectivo("Apoyo a ancianos", c1);
+        p1 = new ProyectoSocial("Voluntariado","Este es un proyecto de voluntariado", 5000, u3, "jovenes", 0);
+        p2 = new ProyectoInfraestructura("Uranizacion", "Creacion de un nuevo coomplejo", 2700000, u3, foto);
+	}
+
     
     /* Falta: Comprobar que la lista de elementos que apoyan es correcta */
     @Test
     public void testApoyarProyecto(){
-        //Creamos los objetos necesarios para la prueba
-        Ciudadano[] users = new Ciudadano[5];
-        /* Falta: crear los ciudadanos */
 
-        /* Falta: registrar los 3 primeros ciudadanos */
-
-        ProyectoInfraestructura p1 = new ProyectoInfraestructura(/* Argumentos (creado por users[1]) */);
-        
         //Comprobar que los resultados son correctos
-        assertEquals(4f, p1.getApoyos(), 1);
+        assertEquals(p1.getApoyos(), 1);
 
         //Dos personas apoyan el proyecto
-        p1.apoyarProyecto(users[2]);
-        p1.apoyarProyecto(users[3]);
+        p1.apoyarProyecto(u1);
+        p1.apoyarProyecto(u2);
 
         //Comprobar que ahora el numero de apoyos es 3
-        assertEquals(4f, p1.getApoyos(), 3);
+        assertEquals(p1.getApoyos(), 3);
         
         //Una persona que ya lo habia apoyado apoya el proyecto de nuevo
-        p1.apoyarProyecto(users[2]);
+        p1.apoyarProyecto(u1);
 
         //Comprobar que el numero de apoyos sigue siendo 3
-        assertEquals(4f, p1.getApoyos(), 3);
+        assertEquals(p1.getApoyos(), 3);
 
         //Un colectivo apoya este proyecto
-        Colectivo c1 = new Colectivo("c1", users[1]);
-        c1.unirseAColectivo(users[0]);
+        c1.unirseAColectivo(u4);
+        c1.unirseAColectivo(u5);
         p1.apoyarProyecto(c1);
 
         //Comprobamos
-        assertEquals(4f, p1.getApoyos(), 4);
+        assertEquals(p1.getApoyos(), 5);
 
         //un ciudadano bloqueado apoya el proyecto
-        users[4].bloquearCiudadano();
-        p1.apoyarProyecto(users[4]);
+        u5.bloquearCiudadano();
+        p1.apoyarProyecto(u6);
 
         //Comprobamos que no ha aumentado el numero de apoyos
-        assertEquals(4f, p1.getApoyos(), 4);
+        assertEquals(p1.getApoyos(), 5);
 
-        //Creamos un nuevo proyecto pero esta vez como colectivo, es decir, lo apoya un representante
-        ProyectoSocial p2 = new ProyectoSocial(/* Argumentos (repre)*/);
+        //bloqueamos a un ciudadano que lo haba apoyado
+        u1.bloquearCiudadano();
 
-
-        
+        //Comprobamos que se retira el apoyo de ese ciudadano
+        assertEquals(p1.getApoyos(), 4);
     }
+
+
 }

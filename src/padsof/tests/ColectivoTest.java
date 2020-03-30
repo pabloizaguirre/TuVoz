@@ -48,8 +48,14 @@ public class ColectivoTest {
 	void testUnirseAColectivo() {
 		Ciudadano u4 = new Ciudadano("aaaa", "Bernarda Alba", "0000000N");
 		boolean resultado1 = c1.esMiembro(u4);
+		boolean resultado2 = false;
+		for(ElementoColectivo e: c1.getElementos()){
+			
+		}
+		assertFalse(resultado1);
 
-		assertFalse(resultado1)
+		
+
 	}
 
 	@Test

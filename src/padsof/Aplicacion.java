@@ -261,6 +261,12 @@ public class Aplicacion implements Serializable {
             System.out.println(">>" + n.getTextoNotificacion());
         }
 
+        //Comprobar las notificaciones que ha recibido admin
+        System.out.println(admin + " ha recibido las siguientes notificaciones:");
+        for(Notificacion n: admin.getNotificaciones()){
+            System.out.println(">>" + n.getTextoNotificacion());
+        }
+
         //Enviar a financiacion
     }
 
