@@ -38,7 +38,7 @@ public class ProyectoTest {
 	}
 
     
-    /* Falta: Comprobar que la lista de elementos que apoyan es correcta */
+    
     @Test
     public void testApoyarProyecto(){
 
@@ -79,6 +79,38 @@ public class ProyectoTest {
         //Comprobamos que se retira el apoyo de ese ciudadano
         assertEquals(p1.getApoyos(), 4);
     }
+
+    @Test
+    public void testEliminarApoyo(){
+        //Comprobar que los resultados son correctos
+        assertEquals(p1.getApoyos(), 1);
+
+        //Dos personas apoyan el proyecto
+        p1.apoyarProyecto(u1);
+        p1.apoyarProyecto(u2);
+
+        //Comprobar que ahora el numero de apoyos es 3
+        assertEquals(p1.getApoyos(), 3);
+
+        //Rl u1 retira su apoyo al proyecto
+        p1.eliminarapoyo(u1);
+
+        //Comprobar que ahora el numero de apoyos es 2
+        assertEquals(p1.getApoyos(), 2);
+
+    }
+
+    @Test
+    public void testSuscribirProyecto{
+        //El u1 se suscribe a p1
+        p1.suscrbirproyecto(u1);
+
+        //Comprobamos que se añade correctamente a la lista de suscritos
+        assertTrue(u1.getProyectosSuscritos.contains(p1));
+        assertTrue(p1.getListadoSuscripciones.contains(u1));
+
+    }
+
 
 
 }

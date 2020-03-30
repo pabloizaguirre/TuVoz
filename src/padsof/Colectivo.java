@@ -14,7 +14,7 @@ public class Colectivo implements ElementoColectivo {
 
     private String titulo;
     private Ciudadano representante;
-    private List<ElementoColectivo> elementos;
+    private List<ElementoColectivo> elementos = new ArrayList<ElementoColectivo>();
     private Colectivo superColectivo = null;
     private List<Proyecto> proyectosPropuestos = new ArrayList<Proyecto>();
     private List<Proyecto> proyectosApoyados = new ArrayList<Proyecto>();
@@ -25,7 +25,6 @@ public class Colectivo implements ElementoColectivo {
     public Colectivo(String tit, Ciudadano rep){
         titulo = tit;
         representante = rep;
-        elementos = new ArrayList<ElementoColectivo>();
         unirseAColectivo(rep);
         Aplicacion.getAplicacion().anadirElementoColectivo(this);
     }
@@ -35,7 +34,6 @@ public class Colectivo implements ElementoColectivo {
     public Colectivo(String tit, Colectivo colectivoSuperior){
         titulo = tit;
         representante = colectivoSuperior.getRepresentante();
-        elementos = new ArrayList<ElementoColectivo>();
         colectivoSuperior.anadirSubcolectivo(this);
         superColectivo = colectivoSuperior;
     }

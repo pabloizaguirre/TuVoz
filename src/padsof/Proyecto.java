@@ -1,5 +1,5 @@
 package padsof;
-// import es.uam.eps.sadp.grants.*;
+import es.uam.eps.sadp.grants.*;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -185,19 +185,19 @@ public class Proyecto {
 
 
 
-	/**
-     * Método para eliminar el apoyo a un proyecto 
-     * 
-     * @param ciu Ciudadano que elimina su apoyo
-     * 
-     * @return void
-     */
-		public void eliminarApoyo(Ciudadano ciu) {
-			if(listadoApoyos.contains(ciu)) {
-				listadoApoyos.remove(ciu);
-				apoyos-=1;
+		/**
+		 * Método para eliminar el apoyo a un proyecto 
+		 * 
+		 * @param ciu Ciudadano que elimina su apoyo
+		 * 
+		 * @return void
+		 */
+			public void eliminarApoyo(Ciudadano ciu) {
+				if(listadoApoyos.contains(ciu)) {
+					listadoApoyos.remove(ciu);
+					apoyos-=1;
+				}
 			}
-		}
 		
 		
 		/**
@@ -242,23 +242,26 @@ public class Proyecto {
 		 * 
 		 *
 		 */
-		// void enviarProyecto() throws Exception {
-		// 	GrantRequest req = new SolicitudFinanciacion(this);
-		// 	CCGG proxy = CCGG.getGateway();
-		// 	String id = proxy.submitRequest(req);
-		// 	System.out.println("Valor:" + id);
-		// 	this.idEnvio=id;
-		// }
+		void enviarProyecto() throws Exception {
+			GrantRequest req = new SolicitudFinanciacion(this);
+			CCGG proxy = CCGG.getGateway();
+			String id = proxy.submitRequest(req);
+			System.out.println("Valor:" + id);
+			this.idEnvio=id;
+		}
 
-		// /**
-		//  * Método que consulta el estado de un proyecto enviado a financiación
-		//  * 
-		//  *
-		//  */
-		// void consultar() throws Exception {
-		// 	CCGG proxy = CCGG.getGateway();
-		// 	presupuestoConcedido = proxy.getAmountGranted(this.idEnvio);
-		// } 
+
+
+
+		/**
+		 * Método que consulta el estado de un proyecto enviado a financiación
+		 * 
+		 *
+		 */
+		void consultar() throws Exception {
+			CCGG proxy = CCGG.getGateway();
+			presupuestoConcedido = proxy.getAmountGranted(this.idEnvio);
+		} 
 
 
 		@Override
