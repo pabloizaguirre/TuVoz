@@ -1,5 +1,5 @@
-package src;
-/* import grants.*; */
+package padsof;
+import es.uam.eps.sadp.grants.*;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -66,6 +66,7 @@ public class Proyecto {
 
 		/**El proyecto se añade a la lista de proyectos de la aplicacion */
 		Aplicacion.getAplicacion().anadirProyecto(this);
+		new Notificacion("Proyecto pendiente de autorización" + titulo, Aplicacion.getAplicacion().getAdministrador());
 	}
 	
 	
@@ -85,7 +86,6 @@ public class Proyecto {
 		public List<ElementoColectivo> getListadoApoyos() { return listadoApoyos;}
 		public List<Ciudadano> getListadoSuscripciones() { return listadoSuscripciones;}
 		
-		//faltan getters y setters
 		
 		public void setTitulo(String titulo) { this.titulo = titulo; }
 		public void setId(int identificador) { this.id = identificador;}
@@ -135,7 +135,8 @@ public class Proyecto {
 		 * @return boolean true si se ha apoyado con exito, false en caso contrario
 		 */
 		public boolean apoyarProyecto(ElementoColectivo e) {
-			if(listadoApoyos.contains(e)) {
+			if(listadoApoyos.contains(e) || this.estado.equals(EstadoProyecto.caducado)
+				|| this.estado.equals(EstadoProyecto.aprobado)) {
 				return false;
 			}
 			
@@ -217,16 +218,30 @@ public class Proyecto {
 			return true;
 		}
 
+
+		/**
+		 * Este metodo devuelve el estado de un proyecto, además de comprobar si 
+		 * se cumplen los requisitos del estado disponible y caducado
+		 * 
+		 * @param 
+		 * @return EstadoProyecto
+		 */
 		public EstadoProyecto consultarEstadoProyecto(){
 			if(estado.equals(EstadoProyecto.noEnviado) && fechaUltimoApoyo.isBefore(FechaSimulada.getHoy().minusDays(30))){
-				cambiarEstado(EstadoProyecto.caducado);
+				this.cambiarEstado(EstadoProyecto.caducado);
+			} if(apoyos >= Aplicacion.getAplicacion().getApoyosMin()) {
+				this.cambiarEstado(EstadoProyecto.disponible);
 			}
 
 			return estado;
 		}
 		
-
-		/* void enviarProyecto() throws Exception {
+		/**
+		 * Método que envía un proyecto al sistema externo para la financiacion
+		 * 
+		 *
+		 */
+		void enviarProyecto() throws Exception {
 			GrantRequest req = new SolicitudFinanciacion(this);
 			CCGG proxy = CCGG.getGateway();
 			String id = proxy.submitRequest(req);
@@ -234,10 +249,15 @@ public class Proyecto {
 			this.idEnvio=id
 		}
 
+		/**
+		 * Método que consulta el estado de un proyecto enviado a financiación
+		 * 
+		 *
+		 */
 		void consultar() throws Exception {
 			CCGG proxy = CCGG.getGateway();
 			presupuestoConcedido = proxy.getAmountGranted(this.idEnvio);
-		} */
+		} 
 
 
 		// Quedan por hacer metodos

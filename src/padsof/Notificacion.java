@@ -1,4 +1,4 @@
-package src;
+package padsof;
 import java.util.*;
 /**
  * Clase notificación.
@@ -11,19 +11,19 @@ public class Notificacion {
     private Ciudadano ciudadano;
     private String textoNotificacion;
  
-    Notificacion (String texto, Ciudadano ciudadano) {
+    Notificacion (String texto, Usuario usuario) {
         this.textoNotificacion = texto;
-        this.ciudadano = ciudadano;
-        ciudadano.anadirNotificacion(this);
+        this.usuario = usuario;
+        usuario.anadirNotificacion(this);
     }
     
 
-    public Ciudadano getCiudadano() {
-        return this.ciudadano;
+    public Usuario getUsuario()) {
+        return this.usuario;
     }
 
-    public void setCiudadano(Ciudadano ciudadano) {
-        this.ciudadano = ciudadano;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public String getTextoNotificacion() {

@@ -12,7 +12,8 @@ import java.util.*;
 public class Administrador extends Usuario {
     
     public Administrador(String nomUs, String contr){
-        super(nomUs, contr);    
+        super(nomUs, contr);
+        Aplicacion.getAplicacion().setAdministrador(this);    
     }
 
     

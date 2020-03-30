@@ -21,16 +21,14 @@ public class Ciudadano extends Usuario {
     //lista de colectivos de los que es representante
     private List<Colectivo> colectivosCreados;
     private List<Proyecto> proyectosSuscritos;
-    //lista de notificaciones recibidas por este usuario
-    private List<Notificacion> notificaciones = new ArrayList<Notificacion>();
     
-
-
-    public Ciudadano(String contr, String nomUs, String nif, boolean bloq){
+    
+    public Ciudadano(String contr, String nomUs, String nif){
         super(nomUs, contr);
         this.nif = nif;
-        this.bloqueado = bloq;
-        this.registrado=false;
+        this.bloqueado = false;
+        this.registrado = false;
+        new Notificacion("Aprobación de registro pendiente: " +nomUs, Aplicacion.getAplicacion().getAdministrador());
     }
 
     public String getNif() {
@@ -81,34 +79,6 @@ public class Ciudadano extends Usuario {
         this.notificaciones = notificaciones;
     }
 
-
-    /**
-     * Esta funcion añade una notificacion a la lista de notificaciones del usuario
-     * @param n notificacion a añadir
-     * @return true si ha sido añadida con exito, false en caso contrario
-     */
-    public boolean anadirNotificacion(Notificacion n){
-        if(notificaciones.contains(n)){
-            return false;
-        } else {
-            notificaciones.add(n);
-            return true;
-        }
-    }
-    
-    /**
-     * Esta funcion elimina una notificacion de la lista de notificaciones del usuario
-     * @param n notificacion a borrar
-     * @return false si la notificacion ya ha sido borrara o true si la eliminacion se ha realizado con exito
-     */
-    public boolean eliminarNotificacion(Notificacion n){
-        if(notificaciones.contains(n)){
-            notificaciones.remove(n);
-            return true;
-        } else {
-            return false;
-        }
-    }
     /**
      * Método para comprobar si un NIF pertenece a un ciudadano existente en la aplicacion
      * 
@@ -140,7 +110,7 @@ public class Ciudadano extends Usuario {
         if(nifEnUso(nif) || Usuario.nombreEnUso(nomUs)){
             return null;
         }
-        return new Ciudadano(contr,nomUs,nif, false);
+        return new Ciudadano(contr,nomUs,nif);
     }
 
     /**

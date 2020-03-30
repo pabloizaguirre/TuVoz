@@ -1,6 +1,9 @@
-package pruebas;
+package padsof.tests;
 import static org.junit.Assert.*;
 import org.junit.Test;
+
+import padsof.*;
+
 import org.junit.Before;
 import java.util.*;
 

@@ -1,4 +1,4 @@
-package src;
+package padsof;
 /**
  * Enumeracion de los tipos de informe.
  * 

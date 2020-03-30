@@ -1,4 +1,4 @@
-package src;
+package padsof;
 import java.util.*;
 
 /**
@@ -16,6 +16,7 @@ public class Colectivo extends ElementoColectivo {
     private Ciudadano representante;
     private List<ElementoColectivo> elementos;
     private List<Proyecto> proyectosApoyados;
+    private Colectivo superColectivo = null;
     
     
 
@@ -28,12 +29,15 @@ public class Colectivo extends ElementoColectivo {
         Aplicacion.getAplicacion().anadirElementoColectivo(this);
     }
 
+    /* Falta: igual habria que comprobar que el representante indicado es el mismo que el del colec
+    tivo superior */
     public Colectivo(String tit, Ciudadano rep, Colectivo colectivoSuperior){
         titulo = tit;
         representante = rep;
         elementos = new ArrayList<ElementoColectivo>();
         unirseAColectivo(rep);
         colectivoSuperior.anadirSubcolectivo(this);
+        superColectivo = colectivoSuperior;
     }
 
     public String getTitulo() {
@@ -59,6 +63,10 @@ public class Colectivo extends ElementoColectivo {
     public void setElementos(ArrayList<ElementoColectivo> elementos) {
         this.elementos = elementos;
     }
+
+    private Colectivo getSuperColectivo() {
+        return this.superColectivo;
+    }
         
     /**
      * Método para comprobar si un ciudadano o colectivo pertenece a un colectivo
@@ -78,6 +86,20 @@ public class Colectivo extends ElementoColectivo {
         }
         return false;
     }
+
+    /**
+     * Metodo para encontrar el maximo colectivo que abarca a este, su colectivo raiz
+     * 
+     * @return maximo superColectivo
+     */
+    private Colectivo ColectivoRaiz(){
+        Colectivo c = superColectivo;
+
+        while(c!=null){
+            return c.ColectivoRaiz();
+        }
+        return this;
+    }
     
     /**
      * Llamar a esta funcion cuando queramos unirnos a un colectivo
@@ -86,16 +108,20 @@ public class Colectivo extends ElementoColectivo {
      * @return false si hay un error, true si el ciudadano ha sido registrado correctamente
      */
     public boolean unirseAColectivo(Ciudadano miembro){
-        if (esMiembro(miembro)){
+        if(ColectivoRaiz().esMiembro(miembro)){
             return false;
         }
         elementos.add(miembro);
         
         miembro.anadirAMisColectivos(this);
 
-        //Apoyar los proyectos que apoya este colectivo
-        for(Proyecto p: getProyectosApoyados()){
-            p.apoyarProyecto(miembro);
+        //Apoyar los proyectos que apoya este colectivo y sus superiores
+        Colectivo c = this;
+        while(c!=null){
+            for(Proyecto p: getProyectosApoyados()){
+                p.apoyarProyecto(miembro);
+            }
+            c = c.getSuperColectivo();
         }
         
         return true;
@@ -103,6 +129,7 @@ public class Colectivo extends ElementoColectivo {
 
     /**
      * añade un subcolectivo a su lista de ElementosColectivo
+     * 
      * @param c subcolectivo a añadir a este
      */
     public void anadirSubcolectivo(Colectivo c){

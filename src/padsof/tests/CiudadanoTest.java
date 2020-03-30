@@ -1,6 +1,10 @@
-package pruebas;
+package padsof.tests;
+
 import static org.junit.Assert.*;
 import org.junit.Test;
+
+import padsof.Ciudadano;
+
 import org.junit.Before;
 import java.util.*;
 
@@ -9,7 +13,7 @@ public class CiudadanoTest {
     
     //Falta: Comprobar que la lista de elementos que apoyan es correcta 
     @Test
-    public TestNifEnUso {
+    public void TestNifEnUso() {
         
         //Crear los objetos necesarios para la prueba
        Ciudadano c1=new Ciudadano(1234, usuario1,  76654993F, false);

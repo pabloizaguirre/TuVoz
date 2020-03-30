@@ -1,21 +1,24 @@
-/* import es.uam.eps.sadp.grants.*;
+package padsof;
+
+import es.uam.eps.sadp.grants.*; 
 
 public class SolicitudFinanciacion implements GrantRequest {
 	Proyecto p; 
 	SolicitudFinanciacion(Proyecto p) {this.p=p;}
 	public String getExtraData() {
-		return "extraData";
+		//return "extraData";
 	}
 	public String getProjectDescription() {
-		return "descripcion";
+		return p.getDescripcion();
 	}
 	public ProjectKind getProjectKind() {
-		return GrantRequest.ProjectKind.valueOf("Social");
+		//return GrantRequest.ProjectKind.valueOf("Social");
+		
 	}
 	public String getProjectTitle() {
-		return p.titulo;
+		return p.getTitulo();
 	}
 	public double getRequestedAmount() {
-		return 1000;
+		return p.getPresupuestoSolicitado();
 	}
-} */
+} 

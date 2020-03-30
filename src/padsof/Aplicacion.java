@@ -1,4 +1,4 @@
-package src;
+package padsof;
 import java.util.*;
 import java.io.*;
 
@@ -17,6 +17,7 @@ public class Aplicacion implements Serializable {
     private int apoyosMin;
     private List<Proyecto> listadoProyectos;
     private List<ElementoColectivo> listadoElementoColectivos;
+    private Administrador administrador;
     private Usuario usuarioActual;
 
     private Aplicacion(){
@@ -54,6 +55,16 @@ public class Aplicacion implements Serializable {
     public Usuario getUsuarioActual(){
         return this.usuarioActual;
     }
+
+
+    public Administrador getAdministrador() {
+        return this.administrador;
+    }
+
+    public void setAdministrador(Administrador administrador) {
+        this.administrador = administrador;
+    }
+
 
      /**
      * Metodo para registrar a un nuevo ciudadano
