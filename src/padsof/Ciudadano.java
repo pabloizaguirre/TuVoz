@@ -1,5 +1,7 @@
 package padsof;
 import java.util.*;
+import java.io.*;
+
 
 /**
  * Clase Ciudadano.
@@ -9,7 +11,7 @@ import java.util.*;
  * @author Miguel Escribano
  */
 
-public class Ciudadano extends Usuario implements ElementoColectivo{
+public class Ciudadano extends Usuario implements ElementoColectivo, Serializable{
 
 
     private String nif;

@@ -11,7 +11,17 @@ import java.util.*;
 public class CiudadanoTest {
 
 
-    //TESTS COPIADOS Y PEGADOS XQ LOS HABIA HECHO PARA CIUDADANO REVISAR!
+    @Test
+    public void TestNombreEnUso(){
+        //Crear los objetos necesarios para la prueba
+        Ciudadano c1= Ciudadano.registarCiudadano("NiMalaNiSanta", "Safaera", "666");
+
+        //Comprobamos que se devuelve lo esperado
+        assertTrue(Usuario.nobreEnUso("Safaera"));
+        assertFalse(Usuario.nobreEnUso("Sara"));
+
+    }
+
 
     @Test
     public TestAnadirNotificacion{
@@ -19,7 +29,7 @@ public class CiudadanoTest {
         Ciudadano c = new Ciudadano(14004, usr1,  78653499X, false);
         Notificacion n = new Notificacion("Hola", c);
 
-        //Comprobamos que se anade correctamente la notificacion al usuario
+        //Comprobamos que se manda correctamente la notificacion al usuario
         assertTrue(c.anadirNotificacion(n)==true);
     }
 
@@ -30,7 +40,7 @@ public class CiudadanoTest {
         Notificacion n = new Notificacion("Adios", c);
         c.anadirNotificacion(n);
 
-        //Comprobamos que se elimina correctamente la notificacion al usuario
+        //Comprobamos que se elimina correctamente la notificacion
         assertTrue(c.eliminarNotificacion(n)==true);
     }
 

@@ -1,5 +1,8 @@
 package padsof;
 import java.util.*;
+import java.io.*;
+
+
 /**
  * Clase informe.
  * 
@@ -8,7 +11,7 @@ import java.util.*;
  * @author Miguel Escribano
  */
 
- public class Informe {
+ public class Informe implements Serializable{
      
     private TipoInforme reporte;
 

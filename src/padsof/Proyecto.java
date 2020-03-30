@@ -2,6 +2,8 @@ package padsof;
 import es.uam.eps.sadp.grants.*;
 import java.time.LocalDate;
 import java.util.*;
+import java.io.*;
+
 
 
 /**
@@ -12,7 +14,7 @@ import java.util.*;
  * @author Miguel Escribano
  */
 
-public class Proyecto {
+public class Proyecto implements Serializable {
 	private String titulo;
 	private int id;
 	private static int ultimoIdAsignado = 0;
@@ -21,7 +23,6 @@ public class Proyecto {
 	private double presupuestoSolicitado;
 	private double presupuestoConcedido;
 	private EstadoProyecto estado;
-	private boolean disponible;
 	private boolean autorizado;
 	private int apoyos;
 	private LocalDate fechaUltimoApoyo;
@@ -47,7 +48,6 @@ public class Proyecto {
 		this.presupuestoSolicitado = presupuestoSolicitado;
 		this.tipo = tipo;
 		this.estado = EstadoProyecto.pendienteCreacion;
-		this.disponible = false;
 		this.autorizado = false;
 		this.apoyos = 0;
 		this.fechaUltimoApoyo = FechaSimulada.getHoy();
@@ -57,11 +57,12 @@ public class Proyecto {
 
 		/**El creador apoya el proyecto y se añade a la lista de sus proyectos creados */
 		apoyarProyecto(creador);
-		creador.anadirAMisProyectosPropuestos(this);
 
 		/* El creador se suscribe al proyecto */
 		if(creador.getClass().equals(Colectivo.class)){
 			suscribirProyecto(((Colectivo) creador).getRepresentante());
+		} else {
+			suscribirProyecto((Ciudadano) creador);
 		}
 
 		/**El proyecto se añade a la lista de proyectos de la aplicacion */
@@ -78,7 +79,6 @@ public class Proyecto {
 		public String getDescripcion()  { return descripcion; }
 		public double getPresupuestoSolicitado() { return presupuestoSolicitado;}
 		public double getPresupuestoConcedido() { return presupuestoConcedido;}
-		public EstadoProyecto getEstadoProyecto() { return estado;}
 		public boolean getAutorizado() { return autorizado;}
 		public int getApoyos() { return apoyos;}
 		public LocalDate getFechaUltimoApoyo() { return fechaUltimoApoyo;}
@@ -146,6 +146,9 @@ public class Proyecto {
 			//Si se vota como ciudadano
 			if(e.getClass().equals(Ciudadano.class)) {
 				apoyos+=1;
+				if(apoyos >= Aplicacion.getAplicacion().getApoyosMin()){
+					cambiarEstado(EstadoProyecto.disponible);;
+				}
 				fechaUltimoApoyo = FechaSimulada.getHoy();
 				return true;
 			}
@@ -171,7 +174,7 @@ public class Proyecto {
 						((Ciudadano) ele).anadirAMisProyectosApoyados(this);
 						apoyos+=1;
 						if(apoyos >= Aplicacion.getAplicacion().getApoyosMin()){
-							disponible = true;
+							cambiarEstado(EstadoProyecto.disponible);;
 						}
 						fechaUltimoApoyo = FechaSimulada.getHoy();
 					}
@@ -261,7 +264,7 @@ public class Proyecto {
 		} 
 
 
-		@Override
+		
 		public String toString(){
 			return "" + this.titulo + ", id: " + this.id;
 		}

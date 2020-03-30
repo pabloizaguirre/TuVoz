@@ -1,4 +1,6 @@
 package padsof;
+import es.uam.eps.sadp.grants.*;
+
 import java.util.*;
 import java.io.*;
 import java.io.IOException;
@@ -194,8 +196,8 @@ public class Aplicacion implements Serializable {
     }
 
  
-
-    public static void main(String[] args) {
+    /**Metodo main comprobador */
+    public static void main(String[] args) throws Exception {
         Administrador admin;
         if((admin = registrarAdministrador("PabloElChulo", "AmorDeMadre<3")) == null){
             System.out.println("El nombre PabloElChulo ya está en uso\n");
@@ -261,6 +263,16 @@ public class Aplicacion implements Serializable {
         //Enviar a financiacion
 
         guardarAplicacion(Aplicacion.getAplicacion());
+
+        aplicacion.getAplicacion().setApoyosMin(1);
+        p1.apoyarProyecto(u1);
+        CCGG proxy = CCGG.getGateway();
+        proxy.setDate(FechaSimulada.getHoy());
+        p1.enviarProyecto();
+        FechaSimulada.avanzar(30);
+        proxy.setDate(FechaSimulada.getHoy());
+        p1.consultar();
+        System.out.println(p1.getPresupuestoConcedido());
     }
 
 

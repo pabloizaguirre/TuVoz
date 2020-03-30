@@ -1,4 +1,6 @@
 package padsof;
+import java.io.*;
+
 /**
  * Clase Imagen.
  * 
@@ -7,7 +9,7 @@ package padsof;
  * @author Miguel Escribano
  */
 
-public class Imagen{
+public class Imagen implements Serializable{
     private String nombre;
 
     public Imagen(String nombre){

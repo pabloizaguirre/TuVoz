@@ -10,7 +10,7 @@ import java.io.*;
  * @author Miguel Escribano
  */
 
-public interface ElementoColectivo {
+public interface ElementoColectivo extends Serializable{
     public List<Proyecto> getProyectosPropuestos();
 
     public List<Proyecto> getProyectosApoyados();

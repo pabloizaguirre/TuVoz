@@ -1,5 +1,7 @@
 package padsof;
 import java.util.*;
+import java.io.*;
+
 
 /**
  * Clase Colectivo.
@@ -9,7 +11,7 @@ import java.util.*;
  * @author Miguel Escribano
  */
 
-public class Colectivo implements ElementoColectivo {
+public class Colectivo implements ElementoColectivo, Serializable {
 
 
     private String titulo;
@@ -224,7 +226,7 @@ public class Colectivo implements ElementoColectivo {
     public static Colectivo buscarColectivo(String str){
         for (ElementoColectivo c:Aplicacion.getAplicacion().getListadoElementoColectivos()){
            if(c.getClass().equals(Colectivo.class)){
-                if(((Colectivo)c).getTitulo().equals(str)){
+                if((((Colectivo)c).getTitulo()).compareTo(str)==0){
                     return (Colectivo)c;
                 }
             }

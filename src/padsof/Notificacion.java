@@ -1,5 +1,7 @@
 package padsof;
 import java.util.*;
+import java.io.*;
+
 /**
  * Clase notificación.
  * 
@@ -7,7 +9,7 @@ import java.util.*;
  * @author Pablo Izaguirre
  * @author Miguel Escribano
  */
-public class Notificacion {
+public class Notificacion implements Serializable {
     
     private String textoNotificacion;
     private Usuario usuario;

@@ -19,6 +19,7 @@ public class ProyectoTest {
     private Colectivo c2;
     private ProyectoSocial p1;
     private ProyectoInfraestructura p2;
+    private ProyectoSocial p3;
     private Imagen foto;
 
 
@@ -35,6 +36,7 @@ public class ProyectoTest {
         c2 = new Colectivo("Apoyo a ancianos", c1);
         p1 = new ProyectoSocial("Voluntariado","Este es un proyecto de voluntariado", 5000, u3, "jovenes", TipoAlcance.internacional);
         p2 = new ProyectoInfraestructura("Uranizacion", "Creacion de un nuevo coomplejo", 2700000, u3, foto, null);
+        p3 = new ProyectoSocial("Prueba", "AAAAAAAA", 10001232, c1, "guaps", TipoAlcance.nacional);
 	}
 
     
@@ -102,6 +104,14 @@ public class ProyectoTest {
 
     @Test
     public void testSuscribirProyecto(){
+        //Comprobamos que los creadores se han suscrito a sus proyetos
+        assertTrue(u3.getProyectosSuscritos().contains(p1));
+        assertTrue(p1.getListadoSuscripciones().contains(u3));
+
+        //Comprobar que el representante esta suscrito
+        assertTrue(u1.getProyectosSuscritos().contains(p3));
+        assertTrue(p3.getListadoSuscripciones().contains(u1));
+
         //El u1 se suscribe a p1
         p1.suscribirProyecto(u1);
 
@@ -109,22 +119,45 @@ public class ProyectoTest {
         assertTrue(u1.getProyectosSuscritos().contains(p1));
         assertTrue(p1.getListadoSuscripciones().contains(u1));
 
+        //Comprobamos que los usuarios suscritos reciben notificaciones cuando se cambia el estado del proyecto
+        Integer num_notif = (u1.getNotificaciones()).size();
+        p1.cambiarEstado(EstadoProyecto.pendienteAprobacion);
+        assertEquals(num_notif+1, (u1.getNotificaciones()).size());
     }
 
     @Test
     public void testCambiarEstado(){
+    	Aplicacion.getAplicacion().setApoyosMin(10);
+    	
         p1.cambiarEstado(EstadoProyecto.noEnviado);
-        assertEquals(p1.getEstadoProyecto(), EstadoProyecto.noEnviado);
+        assertEquals(p1.consultarEstadoProyecto(), EstadoProyecto.noEnviado);
 
         p1.cambiarEstado(EstadoProyecto.rechazado);
-        assertEquals(p1.getEstadoProyecto(), EstadoProyecto.rechazado);
+        assertEquals(p1.consultarEstadoProyecto(), EstadoProyecto.rechazado);
 
         //Comprobamos que se ha borrado de la lista de proyectos
         assertFalse(Aplicacion.getAplicacion().getListadoProyectos().contains(p1));
         
         p2.cambiarEstado(EstadoProyecto.aprobado);
-        assertEquals(p2.getEstadoProyecto(), EstadoProyecto.aprobado);
+        assertEquals(p2.consultarEstadoProyecto(), EstadoProyecto.aprobado);
 
+    }
+
+    @Test
+    public void testConsultarEstadoProyecto(){
+        //Comprobar que se cambia el estado a caducado si pasan 30 dias
+        FechaSimulada.fijarFecha(1, 1, 2000);
+        EstadoProyecto e = p1.consultarEstadoProyecto();
+        p1.apoyarProyecto(u5);
+        assertEquals(e, p1.consultarEstadoProyecto());
+        
+        p1.cambiarEstado(EstadoProyecto.noEnviado);
+        FechaSimulada.avanzar(29);
+        assertEquals(EstadoProyecto.noEnviado, p1.consultarEstadoProyecto());
+        
+        FechaSimulada.avanzar(2);
+        assertEquals(EstadoProyecto.caducado, p1.consultarEstadoProyecto());
+        
     }
 
 

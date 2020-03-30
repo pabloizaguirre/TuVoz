@@ -1,5 +1,7 @@
 package padsof;
 import java.util.*;
+import java.io.*;
+
 /**
  * Subclase proyecto social.
  * 
