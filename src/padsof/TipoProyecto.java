@@ -1,4 +1,4 @@
 package padsof;
-public enum ProjectKind{
+public enum TipoProyecto{
     social, infraestructura;
 }

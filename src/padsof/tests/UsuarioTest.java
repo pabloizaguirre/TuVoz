@@ -3,45 +3,44 @@ package padsof.tests;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-import padsof.Ciudadano;
+import padsof.*;
 
-import org.junit.Before;
-import java.util.*;
-
-public class CiudadanoTest {
+public class UsuarioTest {
 
 
     @Test
     public void TestNombreEnUso(){
         //Crear los objetos necesarios para la prueba
-        Ciudadano c1= Ciudadano.registarCiudadano("NiMalaNiSanta", "Safaera", "666");
+        Ciudadano.registrarCiudadano("NiMalaNiSanta", "Safaera", "666");
 
         //Comprobamos que se devuelve lo esperado
-        assertTrue(Usuario.nobreEnUso("Safaera"));
-        assertFalse(Usuario.nobreEnUso("Sara"));
+        assertTrue(Ciudadano.nombreEnUso("Safaera"));
+        assertFalse(Ciudadano.nombreEnUso("Sara"));
 
     }
 
 
     @Test
-    public TestAnadirNotificacion{
+    public void TestAnadirNotificacion(){
         //Crear los objetos necesarios para la prueba
-        Ciudadano c = new Ciudadano(14004, usr1,  78653499X, false);
-        Notificacion n = new Notificacion("Hola", c);
-
-        //Comprobamos que se manda correctamente la notificacion al usuario
-        assertTrue(c.anadirNotificacion(n)==true);
+        Ciudadano c = Ciudadano.registrarCiudadano("14004", "usr1",  "78653499X");
+        Notificacion n1 = new Notificacion("Bicho", c);
+     
+       
+        //Comprobamos que la funcion devuelve false pues al crear la notificacion ya se añadio a la notificaciones del usuario
+        assertFalse(c.anadirNotificacion(n1));
+        
     }
 
     @Test
-    public TestEliminarNotificacion{
+    public void TestEliminarNotificacion(){
         //Crear los objetos necesarios para la prueba
-        Ciudadano c = new Ciudadano(14004, usr2,  78636499J, false);
+        Ciudadano c = new Ciudadano("14004", "usr2", "78636499J");
         Notificacion n = new Notificacion("Adios", c);
         c.anadirNotificacion(n);
 
         //Comprobamos que se elimina correctamente la notificacion
-        assertTrue(c.eliminarNotificacion(n)==true);
+        assertTrue(c.eliminarNotificacion(n));
     }
 
 

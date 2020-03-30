@@ -276,13 +276,14 @@ public class Ciudadano extends Usuario implements ElementoColectivo, Serializabl
      * @param p proyecto creado por el usuario del cual se quiere solicitar el informe
      * @return numero de apoyos que tiene el proyecto p
      */
-    public void solicitarInformePopularidad(Proyecto p){
+    public Notificacion solicitarInformePopularidad(Proyecto p){
         String s;
         if (getProyectosPropuestos().contains(p)){
             s = "Informe de popularidad del proyecto " + p + " :\nNúmero de apoyos = " + p.getApoyos();
 
-            new Notificacion(s, this);
+            return new Notificacion(s, this);
         }
+        return null;
     }
 
     /**
@@ -294,7 +295,7 @@ public class Ciudadano extends Usuario implements ElementoColectivo, Serializabl
      *
      * @return double que representa el indice de afinidad entre dos colectivos.
      */
-    public void solicitarInformeAfinidad(Colectivo c1, Colectivo c2){
+    public Notificacion solicitarInformeAfinidad(Colectivo c1, Colectivo c2){
         int proyeC1=0;
         int proyeC2=0;
         int proyeC1apoyC2=0;
@@ -316,8 +317,9 @@ public class Ciudadano extends Usuario implements ElementoColectivo, Serializabl
                 }
             }
             s = "Informe de afinidad de los colectivos " + c1 + " y " + c2 + " :\nÍndice de afinidad: " + (proyeC1apoyC2 + proyeC2apoyC1)/(proyeC1 + proyeC2);
-            new Notificacion(s, this);
+            return new Notificacion(s, this);
         }
+        return null;
     }
 
 

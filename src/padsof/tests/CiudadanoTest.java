@@ -38,12 +38,13 @@ public class CiudadanoTest {
     @Test
     public void TestAnadirAMisColectivos() {
         //Crear los objetos necesarios para la prueba
-        Ciudadano c = new Ciudadano("14004", "usr1",  "78636499J");
-        Colectivo colec = new Colectivo("Voluntariado", c);
+        Ciudadano c1 = new Ciudadano("14004", "usr1",  "78636499J");
+        Ciudadano c2 = new Ciudadano("14664", "usr2",  "78636499J");
+        Colectivo colec = new Colectivo("Voluntariado", c1);
 
         //Comprobamos que se anade correctamente el colectivo a la lista de misColectivos
-        assertTrue(c.anadirAMisColectivos(colec));
-
+        assertTrue(c2.anadirAMisColectivos(colec));
+        
     }
 
     @Test
@@ -77,14 +78,23 @@ public class CiudadanoTest {
         Ciudadano c1 = new Ciudadano("1214", "usu1",  "76651193F");
         Ciudadano c2 = new Ciudadano("1614", "usu2",  "76652293F");
         ProyectoSocial p = new ProyectoSocial("Centros Comerciales","Este es un proyecto que incentiva el consumo en centros comerciales", 200000, c, "jovenes", TipoAlcance.nacional);
-        Notificacion n = new Notificacion("Informe de popularidad del proyecto " + p + " :\nNúmero de apoyos = " + "2", c);
+        Notificacion n = new Notificacion("Informe de popularidad del proyecto " + p + " :\nNúmero de apoyos = " + "3", c);
 
         //Hacemos que dos ciudadanos apoyen al proyecto p
         p.apoyarProyecto(c1);
         p.apoyarProyecto(c2);
 
-        //Comprobamos nos devuleve correctamnet los apoyos del proyecto
-        assertSame(c.solicitarInformePopularidad(p),n);
+        Integer num_notif = (c1.getNotificaciones()).size();
+        //lo solicita alguien que no es el creador y no recibe notificacion
+        c1.solicitarInformePopularidad(p);
+        assertEquals(num_notif, (c1.getNotificaciones()).size());
+
+        num_notif = (c.getNotificaciones()).size();
+        assertTrue(c.getProyectosPropuestos().contains(p));
+        //lo solicita el creador
+        Notificacion informe = c.solicitarInformePopularidad(p);
+        assertEquals(num_notif+1, (c.getNotificaciones()).size()); 
+        assertEquals(informe.getTextoNotificacion(), n.getTextoNotificacion());
     }
 
     @Test
@@ -107,8 +117,13 @@ public class CiudadanoTest {
         p2.apoyarProyecto(c1);
         p1.apoyarProyecto(c2);
 
+        Integer num_notif = (c.getNotificaciones()).size();
+        assertEquals(num_notif, (c.getNotificaciones()).size());
+
         //Comprobamos que se añade correctamente el proyecto de la lista de suscritos
-        assertSame(c.solicitarInformeAfinidad(c1,c2), noti);
+        Notificacion n2 = c.solicitarInformeAfinidad(c1,c2);
+        assertEquals(n2.getTextoNotificacion(), noti.getTextoNotificacion());
+        assertEquals(num_notif+1, (c.getNotificaciones()).size());
     }
 
 }

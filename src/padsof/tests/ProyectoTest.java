@@ -80,6 +80,10 @@ public class ProyectoTest {
 
         //Comprobamos que se retira el apoyo de ese ciudadano
         assertEquals(p1.getApoyos(), 4);
+        
+        //comprobamos que sale en los proyectos propuestos
+        assertTrue(u3.getProyectosPropuestos().contains(p2));
+        assertTrue(c1.getProyectosPropuestos().contains(p3));
     }
 
     @Test

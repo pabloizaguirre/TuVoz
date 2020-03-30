@@ -266,14 +266,21 @@ public class Aplicacion implements Serializable {
 
         aplicacion.getAplicacion().setApoyosMin(1);
         p1.apoyarProyecto(u1);
+
+        System.out.println("Estado del proyecto tras el apoyo: "+p1.consultarEstadoProyecto());
+        
+        try {
         CCGG proxy = CCGG.getGateway();
         proxy.setDate(FechaSimulada.getHoy());
         p1.enviarProyecto();
-        FechaSimulada.avanzar(30);
+        FechaSimulada.avanzar(80);
         proxy.setDate(FechaSimulada.getHoy());
         p1.consultar();
-        System.out.println(p1.getPresupuestoConcedido());
+        System.out.println("Presupuesto Concedido"+p1.getPresupuestoConcedido());
+        }catch(Exception ex) {
+            System.out.println("Error en la comunicación con el sistema externo");
     }
+}
 
 
 }

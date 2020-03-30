@@ -31,8 +31,6 @@ public class Colectivo implements ElementoColectivo, Serializable {
         Aplicacion.getAplicacion().anadirElementoColectivo(this);
     }
 
-    /* Falta: igual habria que comprobar que el representante indicado es el mismo que el del colec
-    tivo superior */
     public Colectivo(String tit, Colectivo colectivoSuperior){
         titulo = tit;
         representante = colectivoSuperior.getRepresentante();

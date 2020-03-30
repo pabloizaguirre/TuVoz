@@ -30,13 +30,13 @@ public class Proyecto implements Serializable {
 	private List<ElementoColectivo> listadoApoyos;
 	private List<Ciudadano> listadoSuscripciones;
 	private String idEnvio;
-	private ProjectKind tipo;
+	private TipoProyecto tipo;
 		
 	
 
 
 	public Proyecto(String titulo,
-					String descripcion, double presupuestoSolicitado, ElementoColectivo creador, ProjectKind tipo) {
+					String descripcion, double presupuestoSolicitado, ElementoColectivo creador, TipoProyecto tipo) {
 		
 		this.titulo = titulo;
 		//El id de cada proyecto será uno mayor que el del último proyecto creado
@@ -65,6 +65,9 @@ public class Proyecto implements Serializable {
 			suscribirProyecto((Ciudadano) creador);
 		}
 
+		/* El creador lo añade a su lista de proyectos propuesto */
+		creador.anadirAMisProyectosPropuestos(this);
+
 		/**El proyecto se añade a la lista de proyectos de la aplicacion */
 		Aplicacion.getAplicacion().anadirProyecto(this);
 		new Notificacion("Proyecto pendiente de autorización: " + titulo, Aplicacion.getAplicacion().getAdministrador());
@@ -85,6 +88,9 @@ public class Proyecto implements Serializable {
 		public ElementoColectivo getCreador() { return creador; }
 		public List<ElementoColectivo> getListadoApoyos() { return listadoApoyos;}
 		public List<Ciudadano> getListadoSuscripciones() { return listadoSuscripciones;}
+		public TipoProyecto getTipo() {return tipo;}
+
+	
 		
 		
 		public void setTitulo(String titulo) { this.titulo = titulo; }
@@ -100,6 +106,8 @@ public class Proyecto implements Serializable {
 		public void setCreador(ElementoColectivo creador) { this.creador = creador;}
 		public void setListadoApoyos(ArrayList<ElementoColectivo> listadoApoyos) {this.listadoApoyos = listadoApoyos;}
 		public void setListadoSuscripciones(List<Ciudadano> listadoSuscripciones) {this.listadoSuscripciones = listadoSuscripciones;}
+		public void setTipo(TipoProyecto tipo) {this.tipo = tipo;}
+	
 
 		/**
 		 * Método para cambiar el estado de un proyecto. Se

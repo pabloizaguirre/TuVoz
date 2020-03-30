@@ -12,7 +12,12 @@ public class SolicitudFinanciacion implements GrantRequest {
 		return p.getDescripcion();
 	}
 	public ProjectKind getProjectKind() {
-		return GrantRequest.ProjectKind;
+		if(p.getTipo().equals(TipoProyecto.social)) {
+			return ProjectKind.Infrastructure;
+		}
+		else {
+			return ProjectKind.Social;
+		}
 		
 	}
 	public String getProjectTitle() {

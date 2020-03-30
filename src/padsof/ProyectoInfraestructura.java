@@ -16,7 +16,7 @@ import java.util.*;
 
     public ProyectoInfraestructura(String tit, String desc, double presSolicitado,
                                     ElementoColectivo creador, Imagen imagen, List<Distrito> distritosAfectados){
-        super(tit, desc, presSolicitado, creador, ProjectKind.infraestructura);
+        super(tit, desc, presSolicitado, creador, TipoProyecto.infraestructura);
         this.imagen = imagen;
         this.distritosAfectados = distritosAfectados;
     }

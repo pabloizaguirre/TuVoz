@@ -21,7 +21,7 @@ public class ColectivoTest {
 		u1 = new Ciudadano("NiMalaNiSanta", "Safaera", "666");
 		u2 = new Ciudadano("AquiLlegoTuTiburon", "ConejoMalo", "12312332W");
 		u3 = new Ciudadano("SoyUnico", "ChicoUnico", "00101001P");
-		c1 = new Colectivo("Voluntariado", u1);
+		c1 = new Colectivo("Atletismo", u1);
 		c2 = new Colectivo("Apoyo a ancianos", c1);
 
 		c2.unirseAColectivo(u2); 
@@ -82,9 +82,8 @@ public class ColectivoTest {
 	}
 
 	@Test
-	void testBucarColectivo() {
-
-		assertEquals(c1, Colectivo.buscarColectivo("Voluntariado"));
+	void testBuscarColectivo() {
+		assertSame(c1, Colectivo.buscarColectivo("Atletismo"));
 		
 	}
 
