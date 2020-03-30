@@ -49,26 +49,7 @@ public class CiudadanoTest {
 
     }
 
-    @Test
-    public TestAnadirNotificacion{
-        //Crear los objetos necesarios para la prueba
-        Ciudadano c = new Ciudadano(14004, usr1,  78653499X, false);
-        Notificacion n = new Notificacion(c, "Hola");
-
-        //Comprobamos que se anade correctamente la notificacion al usuario
-        assertTrue(c.anadirNotificacion(n)==true);
-    }
-
-    @Test
-    public TestEliminarNotificacion{
-        //Crear los objetos necesarios para la prueba
-        Ciudadano c = new Ciudadano(14004, usr2,  78636499J, false);
-        Notificacion n = new Notificacion(c, "Adios");
-        c.anadirNotificacion(n);
-
-        //Comprobamos que se elimina correctamente la notificacion al usuario
-        assertTrue(c.eliminarNotificacion(n)==true);
-    }
+   
 
     @Test
     public TestAnadirAMisColectivos{
@@ -93,16 +74,6 @@ public class CiudadanoTest {
         assertTrue(c.eliminarDeMisColectivos(colec)==true);
     }
 
-    @Test
-    public TestAnadirAMisProyectosApoyados{
-        //Crear los objetos necesarios para la prueba
-        Ciudadano c = new Ciudadano(12234, localHost0, 96456332J, false);
-        Ciudadano ciudadano = new Ciudadano(14009, usrr,  99636499T, false);
-        ProyectoSocial p = new ProyectoSocial("Voluntariado","Este es un proyecto de voluntariado", 5000, ciudadano, "jovenes", 0);
-
-        //Comprobamos que se añade correctamente el proyecto de la lista de suscritos
-        assertTrue(c.anadirAMisProyectosApoyados(p)==true);
-    }
 
     @Test
     public TestAnadirAMisProyectosSuscritos{
@@ -121,14 +92,15 @@ public class CiudadanoTest {
         Ciudadano c = new Ciudadano(12234, localHost, 66359889F, false);
         Ciudadano c1 = new Ciudadano(1214, usu1,  76651193F, false);
         Ciudadano c2 = new Ciudadano(1614, usu2,  76652293F, false);
-        ProyectoSocial p = new ProyectoSocial("Centros Comerciales","Este es un proyecto que incentiva el consumo en centros comerciales", 200000, ciudadano, "jovenes", 0);
+        ProyectoSocial p = new ProyectoSocial("Centros Comerciales","Este es un proyecto que incentiva el consumo en centros comerciales", 200000, c, "jovenes", 0);
+        Notificacion n = new Notificacion(c, "Informe de popularidad del proyecto " + p + " :\nNúmero de apoyos = " + "2");
 
         //Hacemos que dos ciudadanos apoyen al proyecto p
         p.apoyarProyecto(c1);
         p.apoyarProyecto(c2);
 
         //Comprobamos nos devuleve correctamnet los apoyos del proyecto
-        assertEquals(c.solicitarInformePopularidad(p),2);
+        assertSame(c.solicitarInformePopularidad(p),n);
     }
 
     @Test
@@ -141,6 +113,7 @@ public class CiudadanoTest {
         ProyectoSocial p1 = new ProyectoSocial("prueba1","Este es un proyecto de prueba1", 200000, c1, "jovenes1", 0);
         ProyectoSocial p2 = new ProyectoSocial("prueba2","Este es un proyecto de prueba2", 200000, c2, "jovenes2", 0);
         ProyectoSocial p3 = new ProyectoSocial("prueba3","Este es un proyecto de prueba3", 200000, c2, "jovenes3", 0);
+        Notificacion noti = new Notificacion(c, "Informe de afinidad de los colectivos " + c1 + " y " + c2 + " :\nÍndice de afinidad: " + "2/3");
 
         //Añadimos c1 y c2 a la lista de colectivos de c
         c.anadirAMisColectivos(c1);
@@ -151,7 +124,7 @@ public class CiudadanoTest {
         p1.apoyarProyecto(c2);
 
         //Comprobamos que se añade correctamente el proyecto de la lista de suscritos
-        assertEquals(c.solicitarInformeAfinidad(c1,c2), 2/3);
+        assertSame(c.solicitarInformeAfinidad(c1,c2), noti);
     }
 
 }

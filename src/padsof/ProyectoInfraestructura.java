@@ -11,7 +11,7 @@ import java.util.*;
     private Imagen imagen;
 
     public ProyectoInfraestructura(String tit, String desc, double presSolicitado,
-                                    Ciudadano creador, Imagen imagen){
+                                    ElementoColectivo creador, Imagen imagen){
         super(tit, desc, presSolicitado, creador, ProjectKind.infraestructura);
         this.imagen = imagen;
     }

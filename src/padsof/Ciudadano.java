@@ -9,7 +9,7 @@ import java.util.*;
  * @author Miguel Escribano
  */
 
-public class Ciudadano extends Usuario {
+public class Ciudadano extends Usuario{
 
 
     private String nif;
@@ -69,14 +69,6 @@ public class Ciudadano extends Usuario {
 
     public void setProyectosSuscritos(ArrayList<Proyecto> proyectosSuscritos) {
         this.proyectosSuscritos = proyectosSuscritos;
-    }
-
-    public List<Notificacion> getNotificaciones() {
-        return this.notificaciones;
-    }
-
-    public void setNotificaciones(ArrayList<Notificacion> notificaciones) {
-        this.notificaciones = notificaciones;
     }
 
     /**
@@ -174,34 +166,6 @@ public class Ciudadano extends Usuario {
     }
 
 
-        /**
-     * Esta funcion añade una notificacion al conjunto de notificaciones de este usuario
-     * @param n notificacion a añadir
-     * @return false si el usuario ya tenia la notificacion, true si se ha añadido con exito
-     */
-    public boolean anadirNotificacion(Notificacion n){
-        if(notificaciones.contains(n)){
-            return false;
-        } else {
-            notificaciones.add(n);
-            return true;
-        }
-    }
-
-    /**
-     * Esta funcion elimina una notificacion de la lista de notificaciones del usuario
-     * @param n notificacion a borrar
-     * @return false si la notificacion ya ha sido borrara o true si la eliminacion se ha realizado con exito
-     */
-    public boolean eliminarNotificacion(Notificacion n){
-        if(notificaciones.contains(n)){
-            notificaciones.remove(n);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
 
     /**
      * Método para añadir un colectivo a tu lista
@@ -239,23 +203,6 @@ public class Ciudadano extends Usuario {
 
 
     /**
-     * Método para añadir un proyecto a la ista de apoyados
-     *
-     * @param p proyecto que se quiere añadir
-     *
-     * @return true en caso favorable, false si ya estuviera añadido
-     */
-    public boolean anadirAMisProyectosApoyados(Proyecto p){
-        if(proyectosApoyados.contains(p)){
-            return false;
-        }
-        proyectosApoyados.add(p);
-
-        return true;
-    }
-
-
-    /**
      * Método para añadir un proyecto a la ista de suscritos
      *
      * @param p proyecto que se quiere añadir
@@ -272,19 +219,19 @@ public class Ciudadano extends Usuario {
     }
 
 
-
     /**
      * Método para solicitar el informe de popularidad
      *
      * @param p proyecto creado por el usuario del cual se quiere solicitar el informe
      * @return numero de apoyos que tiene el proyecto p
      */
-    public int solicitarInformePopularidad(Proyecto p){
+    public void solicitarInformePopularidad(Proyecto p){
+        String s;
         if (getProyectosPropuestos().contains(p)){
-            return p.getApoyos();
-        }
+            s = "Informe de popularidad del proyecto " + p + " :\nNúmero de apoyos = " + p.getApoyos();
 
-        else{return -1;}
+            new Notificacion(s, this);
+        }
     }
 
     /**
@@ -296,17 +243,16 @@ public class Ciudadano extends Usuario {
      *
      * @return double que representa el indice de afinidad entre dos colectivos.
      */
-    public double solicitarInformeAfinidad(Colectivo c1, Colectivo c2){
+    public void solicitarInformeAfinidad(Colectivo c1, Colectivo c2){
         int proyeC1=0;
         int proyeC2=0;
         int proyeC1apoyC2=0;
         int proyeC2apoyC1=0;
+        String s;
 
         if (misColectivos.contains(c1) && misColectivos.contains(c2)){
             for (Proyecto p:c1.getProyectosPropuestos()){
                 proyeC1+=1;
-                /* Falta: esto esta bien en el caso de que si un colectivo apoya un proyecto
-                no cuenta como que sus subcolectivos tb lo apoyan */
                 if(p.getListadoApoyos().contains(c2)){
                     proyeC1apoyC2+=1;
                 }
@@ -318,11 +264,17 @@ public class Ciudadano extends Usuario {
                     proyeC2apoyC1+=1;
                 }
             }
-            return (proyeC1apoyC2 + proyeC2apoyC1)/(proyeC1 + proyeC2) ;
+            s = "Informe de afinidad de los colectivos " + c1 + " y " + c2 + " :\nÍndice de afinidad: " + (proyeC1apoyC2 + proyeC2apoyC1)/(proyeC1 + proyeC2);
+            new Notificacion(s, this);
         }
-        else return -1;
     }
 
 
+    public String toString(){
+        return "Ciudadano/a" + getNombreUsuario() + ", nif: " + nif;
+    }
 
 }
+
+
+

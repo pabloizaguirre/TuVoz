@@ -8,8 +8,9 @@ import java.util.*;
  * @author Miguel Escribano
  */
 public class Notificacion {
-    private Ciudadano ciudadano;
+    
     private String textoNotificacion;
+    private Usuario usuario;
  
     Notificacion (String texto, Usuario usuario) {
         this.textoNotificacion = texto;
@@ -18,7 +19,7 @@ public class Notificacion {
     }
     
 
-    public Usuario getUsuario()) {
+    public Usuario getUsuario() {
         return this.usuario;
     }
 

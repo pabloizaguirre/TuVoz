@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import padsof.*;
 
-class ColectivoTest {
+public class ColectivoTest {
 	private Ciudadano u1;
 	private Ciudadano u2;
 	private Ciudadano u3;
@@ -21,7 +21,7 @@ class ColectivoTest {
 		u2 = new Ciudadano("AquiLlegoTuTiburon", "ConejoMalo", "12312332W");
 		u3 = new Ciudadano("SoyUnico", "ChicoUnico", "00101001P");
 		c1 = new Colectivo("Voluntariado", u1);
-		c2 = new Colectivo("Apoyo a ancianos", u1, c1);
+		c2 = new Colectivo("Apoyo a ancianos", c1);
 
 		c2.unirseAColectivo(u2);
 
@@ -56,19 +56,30 @@ class ColectivoTest {
 	void testAnadirSubcolectivo() {
 		c1.anadirSubcolectivo(c2);
 
-		assertTrue(elementos.contains(c2) == true)
+		assertTrue(c1.getElementos.contains(c2) == true)
 	}
+
+	@Test
+	void testAnadirAProyectosApoyados{
+		ProyectoSocial p1 = new ProyectoSocial("prueba1","Este es un proyecto de prueba1", 200000, c1, "jovenes1", 0);
+
+		c1.testAnadirAProyectosApoyados(p1);
+		assertTrue(c1.getProyectosApoyados.contains(p1) == true)
+	}
+
 
 	@Test
 	void testAbandonarColectivo() {
 		c1.unirseAColectivo(u1);
 		c1.abandonarColectivo(u1);
 
-		assertTrue(elementos.contains(u1) == false)
+		assertTrue(c1.getElementos.contains(u1) == false)
 	}
 
 	@Test
 	void testBucarColectivo() {
+
+		assertSame(c1, u2.buscarColectivo("Voluntariado"))
 		
 	}
 

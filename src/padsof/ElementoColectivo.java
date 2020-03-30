@@ -50,6 +50,12 @@ public abstract class ElementoColectivo{
         return;
     }
 
+
+    /**
+     * Metodo para eliminar un proyecto de la lista de proyectos apoyados
+     * 
+     * @param p Proyecto que deseamos eliminar de la lista
+     */
     public void eliminarDeMisProyectosApoyados(Proyecto p){
         if(proyectosApoyados.contains(p)){
             proyectosApoyados.remove(p);

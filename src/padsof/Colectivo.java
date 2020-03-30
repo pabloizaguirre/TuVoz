@@ -31,11 +31,10 @@ public class Colectivo extends ElementoColectivo {
 
     /* Falta: igual habria que comprobar que el representante indicado es el mismo que el del colec
     tivo superior */
-    public Colectivo(String tit, Ciudadano rep, Colectivo colectivoSuperior){
+    public Colectivo(String tit, Colectivo colectivoSuperior){
         titulo = tit;
-        representante = rep;
+        representante = colectivoSuperior.getRepresentante();
         elementos = new ArrayList<ElementoColectivo>();
-        unirseAColectivo(rep);
         colectivoSuperior.anadirSubcolectivo(this);
         superColectivo = colectivoSuperior;
     }
@@ -58,6 +57,10 @@ public class Colectivo extends ElementoColectivo {
 
     public List<ElementoColectivo> getElementos() {
         return this.elementos;
+    }
+
+    public List<proyectosApoyados> getProyectosapoyados() {
+        return this.proyectosApoyados;
     }
 
     public void setElementos(ArrayList<ElementoColectivo> elementos) {

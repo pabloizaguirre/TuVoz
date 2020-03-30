@@ -246,7 +246,7 @@ public class Proyecto {
 			CCGG proxy = CCGG.getGateway();
 			String id = proxy.submitRequest(req);
 			System.out.println("Valor:" + id);
-			this.idEnvio=id
+			this.idEnvio=id;
 		}
 
 		/**
@@ -260,7 +260,10 @@ public class Proyecto {
 		} 
 
 
-		// Quedan por hacer metodos
+
+		public String toString(){
+			return "" + this.titulo + ", id: " + this.id;
+		}
 		
 		  
 }
