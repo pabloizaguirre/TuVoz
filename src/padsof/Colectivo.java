@@ -36,6 +36,7 @@ public class Colectivo implements ElementoColectivo {
         representante = colectivoSuperior.getRepresentante();
         colectivoSuperior.anadirSubcolectivo(this);
         superColectivo = colectivoSuperior;
+        Aplicacion.getAplicacion().anadirElementoColectivo(this);
     }
 
     public String getTitulo() {
@@ -181,8 +182,11 @@ public class Colectivo implements ElementoColectivo {
      * @param c subcolectivo a añadir a este
      */
     public void anadirSubcolectivo(Colectivo c){
-        /* Falta: manejar excepciones (el colectivo ya pertenece)*/
+        if(elementos.contains((ElementoColectivo)c)) {
+            return;
+        }
         elementos.add(c);
+        return;
     }
 
     public void anadirAProyectosApoyados(Proyecto p){
@@ -217,13 +221,14 @@ public class Colectivo implements ElementoColectivo {
      *
      * @return Colectivo c que buscamos, null si no existe
      */
-    public Colectivo bucarColectivo(String str){
+    public static Colectivo buscarColectivo(String str){
         for (ElementoColectivo c:Aplicacion.getAplicacion().getListadoElementoColectivos()){
-           if(c.getClass().equals(Colectivo.class))
+           if(c.getClass().equals(Colectivo.class)){
                 if(((Colectivo)c).getTitulo().equals(str)){
                     return (Colectivo)c;
-                    }
+                }
             }
+        }
         return null;
     }
 

@@ -20,9 +20,10 @@ public class Aplicacion implements Serializable {
     private Administrador administrador;
     private Usuario usuarioActual;
 
-    private Aplicacion(){
+    public Aplicacion(){
         this.listadoProyectos = new ArrayList<Proyecto>();
         this.listadoElementoColectivos = new ArrayList<ElementoColectivo>();
+        this.administrador = new Administrador("Admin", "ContrAdmin");
     }
 
     public static Aplicacion getAplicacion() {

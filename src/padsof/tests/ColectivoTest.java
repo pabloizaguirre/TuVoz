@@ -2,7 +2,8 @@ package padsof.tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Before;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import padsof.*;
@@ -15,8 +16,8 @@ public class ColectivoTest {
 	private Colectivo c2;
 
 
-	@Before
-	public void setUp() throws Exception{
+	@BeforeEach
+	public void setUp(){
 		u1 = new Ciudadano("NiMalaNiSanta", "Safaera", "666");
 		u2 = new Ciudadano("AquiLlegoTuTiburon", "ConejoMalo", "12312332W");
 		u3 = new Ciudadano("SoyUnico", "ChicoUnico", "00101001P");
@@ -24,29 +25,12 @@ public class ColectivoTest {
 		c2 = new Colectivo("Apoyo a ancianos", c1);
 
 		c2.unirseAColectivo(u2); 
-
 	}
 
 
 	@Test
 	public void testEsMiembro() {
-		u1 = new Ciudadano("NiMalaNiSanta", "Safaera", "666");
-		u2 = new Ciudadano("AquiLlegoTuTiburon", "ConejoMalo", "12312332W");
-		u3 = new Ciudadano("SoyUnico", "ChicoUnico", "00101001P");
-		c1 = new Colectivo("Voluntariado", u1);
-		c2 = new Colectivo("Apoyo a ancianos", c1);
-
-		c2.unirseAColectivo(u2); 
-		boolean resultado = false;
-		for (ElementoColectivo elem: c1.getElementos()){
-			if (elem.equals(u1)){
-				resultado = true;
-			}
-		}
-
-		assertTrue(true);
-
-		/* boolean resultado1 = c1.esMiembro(u1);
+		boolean resultado1 = c1.esMiembro(u1);
 		boolean resultado2 = c1.esMiembro(u2);
 		boolean resultado3 = c2.esMiembro(u2);
 		boolean resultado4 = c2.esMiembro(u1);
@@ -56,43 +40,42 @@ public class ColectivoTest {
 		assertTrue(resultado2);
 		assertTrue(resultado3);
 		assertFalse(resultado4);
-		assertFalse(resultado5); */
+		assertFalse(resultado5);
 
 	}
 
-	/*@Test
+	@Test
 	void testUnirseAColectivo() {
 		Ciudadano u4 = new Ciudadano("aaaa", "Bernarda Alba", "0000000N");
-		boolean resultado1 = c1.esMiembro(u4);
-		boolean resultado2 = false;
-		for(ElementoColectivo e: c1.getElementos()){
-			
-		}
-		assertFalse(resultado1);
-
+		boolean resultado = c1.esMiembro(u4);
+		assertFalse(resultado);
 		
-
+		c2.unirseAColectivo(u4);
+		
+		resultado = c1.esMiembro(u4);
+		assertTrue(resultado);
 	}
 
 	@Test
 	void testAnadirSubcolectivo() {
 		c1.anadirSubcolectivo(c2);
 
-		assertTrue(c1.getElementos.contains(c2));
+		assertTrue(c1.getElementos().contains(c2));
+		assertTrue(c1.esMiembro(c2));
 	}
 
 	@Test
-	void testAnadirAProyectosApoyados{
-		ProyectoSocial p1 = new ProyectoSocial("prueba1","Este es un proyecto de prueba1", 200000, c1, "jovenes1", 0);
+	void testAnadirAProyectosApoyados() {
+		ProyectoSocial p1 = new ProyectoSocial("prueba1","Este es un proyecto de prueba1", 200000, c1, "jovenes1", TipoAlcance.nacional);
 
-		c1.testAnadirAProyectosApoyados(p1);
+		c1.anadirAProyectosApoyados(p1);
 		assertTrue(c1.getProyectosApoyados().contains(p1));
 	}
 
 
 	@Test
 	void testAbandonarColectivo() {
-		c1.unirseAColectivo(u1);
+		assertTrue(c1.esMiembro(u2));
 		c1.abandonarColectivo(u1);
 
 		assertFalse(c1.getElementos().contains(u1));
@@ -101,8 +84,8 @@ public class ColectivoTest {
 	@Test
 	void testBucarColectivo() {
 
-		assertSame(c1, u2.buscarColectivo("Voluntariado"));
+		assertEquals(c1, Colectivo.buscarColectivo("Voluntariado"));
 		
-	}*/
+	}
 
 }

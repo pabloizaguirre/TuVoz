@@ -12,7 +12,7 @@ public class Notificacion {
     private String textoNotificacion;
     private Usuario usuario;
  
-    Notificacion (String texto, Usuario usuario) {
+    public Notificacion (String texto, Usuario usuario) {
         this.textoNotificacion = texto;
         this.usuario = usuario;
         usuario.anadirNotificacion(this);
