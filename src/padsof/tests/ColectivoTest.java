@@ -81,10 +81,4 @@ public class ColectivoTest {
 		assertFalse(c1.getElementos().contains(u1));
 	}
 
-	@Test
-	void testBuscarColectivo() {
-		assertSame(c1, Colectivo.buscarColectivo("Atletismo"));
-		
-	}
-
 }

@@ -80,7 +80,7 @@ public class Colectivo implements ElementoColectivo, Serializable {
      * 
      * @param p Proyecto que deseamos añadir a la lista
      * 
-     * @return void
+     * 
      */
     public void anadirAMisProyectosPropuestos(Proyecto p){
         if(proyectosPropuestos.contains(p)) {

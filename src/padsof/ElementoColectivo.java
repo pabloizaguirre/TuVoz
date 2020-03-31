@@ -20,7 +20,7 @@ public interface ElementoColectivo extends Serializable{
      * 
      * @param p Proyecto que deseamos añadir a la lista
      * 
-     * @return void
+     * 
      */
     public void anadirAMisProyectosPropuestos(Proyecto p);
 

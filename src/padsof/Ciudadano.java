@@ -89,7 +89,6 @@ public class Ciudadano extends Usuario implements ElementoColectivo, Serializabl
      * 
      * @param p Proyecto que deseamos añadir a la lista
      * 
-     * @return void
      */
     public void anadirAMisProyectosPropuestos(Proyecto p){
         if(proyectosPropuestos.contains(p)) {
@@ -164,7 +163,6 @@ public class Ciudadano extends Usuario implements ElementoColectivo, Serializabl
     /**
      * Método para aprobar un registro de un usuario por parte del administrador
      *
-     * @return void
      */
     public void aprobarRegistro(){
         this.registrado=true;
@@ -176,7 +174,6 @@ public class Ciudadano extends Usuario implements ElementoColectivo, Serializabl
      /**
      * Método para bloquear a un usuario por parte del administrador
      *
-     * @return void
      */
 
     public void bloquearCiudadano() {
@@ -192,7 +189,6 @@ public class Ciudadano extends Usuario implements ElementoColectivo, Serializabl
      * Método para desbloquear a un usuario por parte del administrador
      *
 	 *
-	 * @return void
      */
     public void desbloquearCiudadano() {
         this.bloqueado = false;
@@ -202,7 +198,7 @@ public class Ciudadano extends Usuario implements ElementoColectivo, Serializabl
     /**
      * Método para buscar un ciudadano a través de un String
      *
-     * @param Ciudadano ing con el nombre de usuario
+     * @param str string con el nombre de usuario
 	 *
 	 * @return El ciudadano si existe, null en caso contrario
      */

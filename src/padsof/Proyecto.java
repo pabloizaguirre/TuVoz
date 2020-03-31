@@ -116,7 +116,7 @@ public class Proyecto implements Serializable {
 		 * @param e EstadoProyecto al que queremos actualizar el proyecto.
 		 * 
 		 * 
-		 * @return void
+		 * 
 		 */	
 		public void cambiarEstado(EstadoProyecto e){
 			estado = e;
@@ -198,7 +198,7 @@ public class Proyecto implements Serializable {
 		 * 
 		 * @param ciu Ciudadano que elimina su apoyo
 		 * 
-		 * @return void
+		 * 
 		 */
 			public void eliminarApoyo(Ciudadano ciu) {
 				if(listadoApoyos.contains(ciu)) {
@@ -212,7 +212,8 @@ public class Proyecto implements Serializable {
 		 * Este metodo suscribe a un ciudadano a este proyecto.Llamar a este metodo y no a anadirAMisProyectosSuscritos.
 		 * 
 		 * @param ciu ciudadano suscriptor
-		 * @return
+		 * 
+		 * @return false si ya esta suscrito
 		 */
 		public boolean suscribirProyecto(Ciudadano ciu) {
 			if(listadoSuscripciones.contains(ciu)) {
@@ -232,7 +233,7 @@ public class Proyecto implements Serializable {
 		 * Este metodo devuelve el estado de un proyecto, además de comprobar si 
 		 * se cumplen los requisitos del estado disponible y caducado
 		 * 
-		 * @param 
+		 * 
 		 * @return EstadoProyecto
 		 */
 		public EstadoProyecto consultarEstadoProyecto(){
@@ -251,11 +252,13 @@ public class Proyecto implements Serializable {
 		 *
 		 */
 		void enviarProyecto() throws Exception {
-			GrantRequest req = new SolicitudFinanciacion(this);
-			CCGG proxy = CCGG.getGateway();
-			String id = proxy.submitRequest(req);
-			System.out.println("Valor:" + id);
-			this.idEnvio=id;
+			if(this.consultarEstadoProyecto().equals(EstadoProyecto.disponible)) {
+				GrantRequest req = new SolicitudFinanciacion(this);
+				CCGG proxy = CCGG.getGateway();
+				String id = proxy.submitRequest(req);
+				System.out.println("Valor:" + id);
+				this.idEnvio=id;
+			}
 		}
 
 

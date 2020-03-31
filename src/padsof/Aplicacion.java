@@ -73,7 +73,7 @@ public class Aplicacion implements Serializable {
      * Metodo para registrar un administrador
      * 
      * @param nombre String con el nombre del administrador
-     * @param contraseña String con la contraseña del administrador
+     * @param contrasena String con la contraseña del administrador
      * 
      * @return Objeto de clase Administrador en caso favorable, null si se ha producido un error
      */
@@ -92,8 +92,7 @@ public class Aplicacion implements Serializable {
     /**
      * Metodo para guardar la informacion de la aplicacion en un fichero
      * 
-     * 
-     * @return void
+     * @param aplicacion Aplicacion
      */
     public static void guardarAplicacion(Aplicacion aplicacion) {
 		ObjectOutputStream salida = null;
@@ -115,39 +114,25 @@ public class Aplicacion implements Serializable {
      /**
      * Metodo para cargar los datos a la aplicación desde un fichero dado
      * 
-     * @param ruta String con la ruta del archivo
+     *
      * 
      * @return Objeto de clase Aplicacion
      */
-    public static Aplicacion cargarAplicacion(String ruta) {
-		FileInputStream fis = null;
-		ObjectInputStream entrada = null;
-		Aplicacion obj = null;
-		try {
-			fis = new FileInputStream(ruta);
-			entrada = new ObjectInputStream(fis);
-			obj = (Aplicacion) entrada.readObject();
-		} catch (IOException ex) {
-			System.out.println("Fallo al cargar desde el archivo");
-		} catch (ClassNotFoundException ex) {
-			System.out.println("Fallo al cargar desde el archivo");
-		} finally {
-			try {
-				if (fis != null) {
-					fis.close();
-				}
-			} catch (IOException ex) {
-				System.out.println("Fallo al cargar desde el archivo");
-			}
-			try {
-				if (entrada != null) {
-					entrada.close();
-				}
-			} catch (IOException ex) {
-				System.out.println("Fallo al cargar desde el archivo");
-			}
-		}
-		return obj;
+    public static Aplicacion cargarAplicacion() {
+        Aplicacion obj = null;
+        
+        try{
+            ObjectInputStream entrada = new ObjectInputStream(new FileInputStream("TuVoz.dat"));
+            obj = (Aplicacion)entrada.readObject();
+            entrada.close();
+        }catch(FileNotFoundException ex) {
+            obj = Aplicacion.getAplicacion();
+        }catch(IOException ex) {
+            System.out.println("Error");
+        }catch(ClassNotFoundException ex) {
+            System.out.println("Error");
+        }
+        return obj;
     }
     
      /**
@@ -155,7 +140,6 @@ public class Aplicacion implements Serializable {
      * 
      * @param p Proyecto a añadir a la lista
      *      
-     * @return void
      */
 
     public void anadirProyecto(Proyecto p) {
@@ -171,7 +155,6 @@ public class Aplicacion implements Serializable {
      * 
      * @param p Proyecto a eliminar de la lista
      *      
-     * @return void
      */
     public void eliminarProyecto(Proyecto p) {
         if(listadoProyectos.contains(p)){
@@ -185,7 +168,6 @@ public class Aplicacion implements Serializable {
      * 
      * @param e ElementoColectivo a añadir a la lista
      *      
-     * @return void
      */
     public void anadirElementoColectivo(ElementoColectivo e) {
         if(listadoElementoColectivos.contains(e)) {
@@ -196,7 +178,11 @@ public class Aplicacion implements Serializable {
     }
 
  
-    /**Metodo main comprobador */
+    /**
+     * 
+     * @param args no recibe argumentos
+     * @throws Exception excepcion
+     */
     public static void main(String[] args) throws Exception {
         Administrador admin;
         if((admin = registrarAdministrador("PabloElChulo", "AmorDeMadre<3")) == null){
@@ -260,15 +246,21 @@ public class Aplicacion implements Serializable {
             System.out.println(">>" + n.getTextoNotificacion());
         }
 
-        //Enviar a financiacion
-
+        //Guardar Aplicacion en el archivo TuVoz.dat
         guardarAplicacion(Aplicacion.getAplicacion());
+
+
+
+
 
         aplicacion.getAplicacion().setApoyosMin(1);
         p1.apoyarProyecto(u1);
 
         System.out.println("Estado del proyecto tras el apoyo: "+p1.consultarEstadoProyecto());
         
+        //Enviar a financiacion
+
+
         try {
         CCGG proxy = CCGG.getGateway();
         proxy.setDate(FechaSimulada.getHoy());
@@ -283,4 +275,3 @@ public class Aplicacion implements Serializable {
 }
 
 }
-
