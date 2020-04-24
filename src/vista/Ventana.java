@@ -9,6 +9,9 @@ import controlador.*;
 
 public class Ventana extends JFrame {
 	
+	private BarraSuperior vistaBarraSuperior;
+	private ControlIrAMiPerfil contIrAMiPerfil;
+	
 	private MiPerfil vistaMiPerfil;
 	private ControlIrACrearColectivo contIrACrearColectivo;
 	
@@ -33,6 +36,8 @@ public class Ventana extends JFrame {
 		contentPane = new JPanel();
 		setContentPane(contentPane);
 		contentPane.setLayout(new CardLayout());
+		
+		this.vistaBarraSuperior = BarraSuperior.getBarraSuperior();
 
 		this.vistaMiPerfil = new MiPerfil();
 		contentPane.add(vistaMiPerfil, "miPerfil");
@@ -44,6 +49,8 @@ public class Ventana extends JFrame {
 	public void setControlador(Controlador controlador) {
 		this.contIrACrearColectivo = controlador.getControlIrACrearColectivo();
 		vistaMiPerfil.setControladorAnadirColectivo(contIrACrearColectivo);
+		this.contIrAMiPerfil = controlador.getControlIrAMiPerfil();
+		vistaBarraSuperior.setControladorMiPerfil(contIrAMiPerfil);
 	}
 
 	public MiPerfil getVistaMiPerfil() {
@@ -52,6 +59,10 @@ public class Ventana extends JFrame {
 	
 	public CrearColectivo getVistaCrearColectivo() {
 		return this.vistaCrearColectivo;
+	}
+	
+	public BarraSuperior getVistaBarraSuperior() {
+		return this.vistaBarraSuperior;
 	}
 	
 	public void mostrarPanel(String carta) {

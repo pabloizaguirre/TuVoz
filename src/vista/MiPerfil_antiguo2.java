@@ -7,7 +7,7 @@ import java.awt.event.*;
 import java.io.File;
 
 
-public class MiPerfil_antiguo {
+public class MiPerfil_antiguo2 {
 	protected static ImageIcon createImageIcon(String path, String description) {
 		if (new File(path).exists()) {
 			return new ImageIcon(path, description);

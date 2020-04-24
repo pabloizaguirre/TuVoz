@@ -29,7 +29,7 @@ public class CrearColectivo extends JPanel{
 		
 		JPanel panelPrincipal = new JPanel(new GridLayout(3,1,0,10));
 		
-		panelPrincipal.add(new BarraSuperior());
+		panelPrincipal.add(BarraSuperior.getBarraSuperior());
 		panelPrincipal.add(crearColectivo);
 		panelPrincipal.add(panelBoton);
 		
