@@ -18,7 +18,7 @@ public class InicioRegistro {
 		// crear pantalla 1
 		
 		final JPanel inicio = new JPanel();
-		BorderLayout inicioLayout = new BorderLayout();
+		FlowLayout inicioLayout = new FlowLayout(FlowLayout.RIGHT);
 		inicio.setLayout(inicioLayout);
 		JLabel labelnombre = new JLabel("Nombre o NIF:");
 		JTextField jtfnombre = new JTextField(15);
@@ -33,8 +33,8 @@ public class InicioRegistro {
 		inicio.add(entrar);
 		
 		//añadir constraints del contenedor
-		//cLayout.putConstraint(BorderLayout.WEST, proyectos, 40, BorderLayout.WEST, contenedor);
-		//cLayout.putConstraint(BorderLayout.EAST, proyectos, -40, BorderLayout.EAST, contenedor);
+		cLayout.putConstraint(BorderLayout.WEST, inicio, 40, BorderLayout.WEST, contenedor);
+		cLayout.putConstraint(BorderLayout.EAST, inicio, -40, BorderLayout.EAST, contenedor);
 				
 		// anadir componentes al contenedor
 		contenedor.add(inicio);
@@ -45,7 +45,9 @@ public class InicioRegistro {
 		//Crear pantalla 2
 		
 		final JPanel registrarse = new JPanel();
-		registrarse.setLayout(new BoxLayout(registrarse, BoxLayout.Y_AXIS));
+		SpringLayout regLayout = new SpringLayout();
+		registrarse.setLayout(regLayout);
+		JLabel intro = new JLabel("Crea una cuenta");
 		JLabel labelnifreg = new JLabel("NIF:");
 		JTextField jtfnifreg = new JTextField(15);
 		JLabel labelusuarioreg = new JLabel("Usuario");
@@ -54,6 +56,7 @@ public class InicioRegistro {
 		JTextField jtfpasswordreg = new JTextField(15);
 		JButton buttonregistro = new JButton("Registrarse");
 		
+		registrarse.add(intro);
 		registrarse.add(labelnifreg);
 		registrarse.add(jtfnifreg);
 		registrarse.add(labelusuarioreg);
@@ -62,9 +65,14 @@ public class InicioRegistro {
 		registrarse.add(jtfpasswordreg);
 		registrarse.add(buttonregistro);
 		
+		registrarse.setVisible(true);
+		
+		regLayout.putConstraint(BorderLayout.EAST, intro, -70, BorderLayout.EAST, contenedor);
+		regLayout.putConstraint(BorderLayout.NORTH, intro, 120, BorderLayout.NORTH, contenedor);
+				
 		//añadir constraints del contenedor
-		//cLayout.putConstraint(BorderLayout.WEST, proyectos, 40, BorderLayout.WEST, contenedor);
-		//cLayout.putConstraint(BorderLayout.EAST, proyectos, -40, BorderLayout.EAST, contenedor);
+		cLayout.putConstraint(BorderLayout.EAST, registrarse, -70, BorderLayout.EAST, contenedor);
+		cLayout.putConstraint(BorderLayout.NORTH, registrarse, 120, BorderLayout.NORTH, contenedor);
 				
 		// anadir componentes al contenedor
 		contenedor.add(registrarse);
