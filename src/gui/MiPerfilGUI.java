@@ -33,7 +33,7 @@ public class MiPerfilGUI {
 		
 		final JPanel listaProyectos = new JPanel();
 		listaProyectos.setLayout(new FlowLayout(FlowLayout.LEFT));
-		ImageIcon icon1 = createImageIcon("src/anadir120_fino.png", "IconoAnadir");
+		ImageIcon icon1 = createImageIcon("src/icons/anadir120_fino.png", "IconoAnadir");
 
 		JScrollPane scroll = new JScrollPane(listaProyectos);
 		scroll.setPreferredSize(new Dimension(700, 150));
