@@ -1,28 +1,22 @@
 package vista;
+
 import javax.swing.*;
-import javax.swing.border.Border;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.*;
-import java.io.File;
 
-
-public class MiPerfilGUI {
-	protected static ImageIcon createImageIcon(String path, String description) {
-		if (new File(path).exists()) {
-			return new ImageIcon(path, description);
-		} else {
-			System.err.println("Couldn't find file: " + path);
-			return null;
-		} 
-	}
-
-	public static void main(String[] args) {
-		JFrame ventana = new JFrame("Mi GUI. Ejemplo 2");
-		// obtener contenedor, asignar layout
-		Container contenedor = ventana.getContentPane();
+public class MiPerfil extends JPanel{
+	
+	private JButton botonAnadirProyecto;
+	private JButton botonAnadirColectivo;
+	
+	
+	public MiPerfil() {
 		SpringLayout cLayout = new SpringLayout();
-		contenedor.setLayout(cLayout);
+		setLayout(cLayout);
 		
 		// crear pantalla 1
 		
@@ -33,16 +27,17 @@ public class MiPerfilGUI {
 		
 		final JPanel listaProyectos = new JPanel();
 		listaProyectos.setLayout(new FlowLayout(FlowLayout.LEFT));
-		ImageIcon icon1 = createImageIcon("src/icons/anadir120_fino.png", "IconoAnadir");
+		ImageIcon icon1 = Ventana.createImageIcon("src/icons/anadir120_fino.png", "IconoAnadir");
 
 		JScrollPane scroll = new JScrollPane(listaProyectos);
 		scroll.setPreferredSize(new Dimension(700, 150));
 		scroll.setBorder(null);
 		
-		JButton botonAnadir = new JButton(icon1);
-		botonAnadir.setPreferredSize(new Dimension(120, 120));
+		botonAnadirProyecto = new JButton(icon1);
 		
-		listaProyectos.add(botonAnadir);
+		botonAnadirProyecto.setPreferredSize(new Dimension(120, 120));
+		
+		listaProyectos.add(botonAnadirProyecto);
 		int i = 0;
 		while (i < 15) {
 			String s = "Proyecto " + i;
@@ -59,11 +54,11 @@ public class MiPerfilGUI {
 		proyectos.setPreferredSize(new Dimension(700,200)); 
 		
 		//añadir constraints del contenedor
-		cLayout.putConstraint(BorderLayout.WEST, proyectos, 40, BorderLayout.WEST, contenedor);
-		cLayout.putConstraint(BorderLayout.EAST, proyectos, -40, BorderLayout.EAST, contenedor);
+		cLayout.putConstraint(BorderLayout.WEST, proyectos, 40, BorderLayout.WEST, this);
+		cLayout.putConstraint(BorderLayout.EAST, proyectos, -40, BorderLayout.EAST, this);
 		
 		// a�adir componentes al contenedor
-		contenedor.add(proyectos);
+		add(proyectos);
 		
 		
 		
@@ -80,10 +75,10 @@ public class MiPerfilGUI {
 		scrollC.setPreferredSize(new Dimension(700, 150));
 		scrollC.setBorder(null);
 		
-		JButton botonAnadirColectivos = new JButton(icon1);
-		botonAnadirColectivos.setPreferredSize(new Dimension(120, 120));
+		botonAnadirColectivo = new JButton(icon1);
+		botonAnadirColectivo.setPreferredSize(new Dimension(120, 120));
 		
-		listaColectivos.add(botonAnadirColectivos);
+		listaColectivos.add(botonAnadirColectivo);
 		int j = 0;
 		while (j < 5) {
 			String s = "Colectivo " + j;
@@ -101,21 +96,18 @@ public class MiPerfilGUI {
 		
 		//añadir constraints del contenedor
 		cLayout.putConstraint(BorderLayout.NORTH, colectivos, 20, BorderLayout.SOUTH, proyectos);
-		cLayout.putConstraint(BorderLayout.WEST, colectivos, 40, BorderLayout.WEST, contenedor);
-		cLayout.putConstraint(BorderLayout.EAST, colectivos, -40, BorderLayout.EAST, contenedor);
+		cLayout.putConstraint(BorderLayout.WEST, colectivos, 40, BorderLayout.WEST, this);
+		cLayout.putConstraint(BorderLayout.EAST, colectivos, -40, BorderLayout.EAST, this);
 		
 		// a�adir componentes al contenedor
-		contenedor.add(colectivos);
-		
-		
-		
-		ventana.pack();
-		
-		// mostrar ventana
-		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		ventana.setSize(1000,600);
-		ventana.setLocationRelativeTo(null);
-		ventana.setVisible(true);	
+		add(colectivos);	
 	}
-
+	
+	public void setControladorAnadirProyecto(ActionListener c) {  
+		botonAnadirProyecto.addActionListener(c);
+	}
+	
+	public void setControladorAnadirColectivo(ActionListener c) {  
+		botonAnadirColectivo.addActionListener(c);
+	}
 }

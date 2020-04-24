@@ -1,12 +1,13 @@
 package main;
 
-
+import modelo.*;
+import vista.*;
+import controlador.*;
 
 public class Main {
 	public static void main(String[] args) {
 		Ventana frame = new Ventana();
-		Proyecto modelo = new Proyecto();
-		Controlador controlador = new Controlador(frame, modelo);
+		Controlador controlador = new Controlador(frame);
 		frame.setControlador(controlador);
 		frame.setVisible(true);
 	}
