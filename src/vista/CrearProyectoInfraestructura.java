@@ -1,38 +1,36 @@
 package vista;
 
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
 
-public class CrearProyectoInfraestructura {
-	public static void main (String args[]) {
-		JFrame ventana = new JFrame("Crear proyecto");
-		
-		Container contenedor = ventana.getContentPane();
+public class CrearProyectoInfraestructura extends JFrame {
+	
+	private JLabel labelNuevo;
+	private JLabel labelExaminar;
+	private JButton botonExaminar;
+	private JLabel labelDistritos;
+	private JButton botonCrear;
+	
+	
+	public CrearProyectoInfraestructura() {
 		SpringLayout cLayout = new SpringLayout();
-		contenedor.setLayout(cLayout);
+		setLayout(cLayout);
 		
 		
-		JPanel barra = new BarraSuperior();
-		barra.setLayout(new FlowLayout(FlowLayout.LEFT));
+		labelNuevo = new JLabel("Nuevo proyecto de infraestructura");
 		
-		JLabel labelNuevo = new JLabel("Nuevo proyecto de infraestructura");
-		
-		JLabel labelExaminar = new JLabel("Inserte imagen ilustrativa del proyecto: ");
-		JButton botonExaminar = new JButton("Examinar archivo");
+		labelExaminar = new JLabel("Inserte imagen ilustrativa del proyecto: ");
+		botonExaminar = new JButton("Examinar archivo");
 		
 		
 		JPanel panelExaminar = new JPanel();
 		panelExaminar.add(botonExaminar);
 		
 		
-		
-		JLabel labelDistritos = new JLabel("Seleccione los distritos afectados:");
-		JCheckBox distrito1 = new JCheckBox("Distrito1");
-		JCheckBox distrito2 = new JCheckBox("Distrito2");
-		JCheckBox distrito3 = new JCheckBox("Distrito3");
-		JCheckBox distrito4 = new JCheckBox("Distrito4");
+		labelDistritos = new JLabel("Seleccione los distritos afectados:");
 		JPanel panelBotones = new JPanel();
 		
 		int i =0;
@@ -42,26 +40,33 @@ public class CrearProyectoInfraestructura {
 			panelBotones.add(distrito);
 			i++;
 		}
-		JPanel panelProyecto = new JPanel(new GridLayout(2,2));
+		JPanel panelProyecto = new JPanel(new GridLayout(2,2,2,2));
 		panelProyecto.add(labelExaminar);
 		panelProyecto.add(panelExaminar);
 		panelProyecto.add(labelDistritos);
 		panelProyecto.add(panelBotones);
-		JButton botonCrear = new JButton("Crear");
+		
+		botonCrear = new JButton("Crear");
 
-		JPanel panelCrear = new JPanel(new BorderLayout());
-		
-		panelCrear.add(barra, BorderLayout.NORTH);
-		panelCrear.add(labelNuevo, BorderLayout.WEST);
-		panelCrear.add(panelProyecto, BorderLayout.SOUTH);
 		
 		
-		contenedor.add(panelCrear);
+		cLayout.putConstraint(BorderLayout.NORTH, BarraSuperior.getBarraSuperior(), 0, BorderLayout.NORTH, this);
+		cLayout.putConstraint(BorderLayout.NORTH, labelNuevo, 40, BorderLayout.NORTH, this);
+		cLayout.putConstraint(BorderLayout.NORTH, panelProyecto, 15, BorderLayout.SOUTH, labelNuevo);
+		cLayout.putConstraint(BorderLayout.NORTH, botonCrear, 15, BorderLayout.SOUTH, panelProyecto);
+
+
 		
 		
-		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		ventana.setSize(800,400);
-		ventana.setVisible(true);
+		add(BarraSuperior.getBarraSuperior());
+		add(labelNuevo);
+		add(panelProyecto);
+		add(botonCrear);
+
 	}
+	
+	public void setControladorCrearProyectoInfraestructura(ActionListener c) {  
+		botonCrear.addActionListener(c);
+	}
+	
 }

@@ -7,11 +7,19 @@ public class Controlador {
 	
 	private ControlIrACrearColectivo contIrACrearColectivo;
 	private ControlIrAMiPerfil contIrAMiPerfil;
+	private ControlIrACrearProyecto contrIrACrearProyecto;
+	private ControlIrACrearProyectoSocial contrIrACrearProyectoSocial;
+	private ControlIrACrearProyectoInfraestructura contrIrACrearProyectoInfraestructura;
+
+	
 	private Ventana frame;
 	
 	public Controlador(Ventana frame) {
 		this.frame = frame;
 		this.contIrACrearColectivo = new ControlIrACrearColectivo(frame);
+		this.contrIrACrearProyecto = new ControlIrACrearProyecto(frame);
+		this.contrIrACrearProyectoSocial = new ControlIrACrearProyectoSocial(frame);
+		this.contrIrACrearProyectoInfraestructura = new ControlIrACrearProyectoInfraestructura(frame);
 		this.contIrAMiPerfil = new ControlIrAMiPerfil(frame);
 	}
 
@@ -21,6 +29,18 @@ public class Controlador {
 	
 	public ControlIrAMiPerfil getControlIrAMiPerfil() {
 		return this.contIrAMiPerfil;
+	}
+	
+	public ControlIrACrearProyecto getControlIrACrearProyecto() {
+		return this.contrIrACrearProyecto;
+	} 
+	
+	public ControlIrACrearProyectoSocial getControlIrACrearProyectoSocial() {
+		return this.contrIrACrearProyectoSocial;
+	}
+	
+	public ControlIrACrearProyectoInfraestructura getControlIrACrearProyectoInfraestructura() {
+		return this.contrIrACrearProyectoInfraestructura;
 	}
 
 }

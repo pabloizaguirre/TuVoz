@@ -2,58 +2,83 @@ package vista;
 
 
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
 
-public class CrearProyecto {
-	public static void main (String args[]) {
-		JFrame window = new JFrame("Crear proyecto");
+public class CrearProyecto extends JPanel {
+	
+	private JLabel labelNuevo;
+	private JLabel labelNombre;
+	private JTextField jtfNombre;
+	private JLabel labelDescripcion;
+	private JTextField jtfDescripcion;
+	private JLabel labelPresupuesto;
+	private JTextField jtfPresupuesto;
+	private JLabel labelTipo;
+	private JRadioButton infraestructura;
+	private JRadioButton social;
+	private JButton botonSiguiente;
+	
+	public CrearProyecto() {
 		
-		Container container = window.getContentPane();
-		container.setLayout(new FlowLayout());
+		SpringLayout cLayout = new SpringLayout();
+		setLayout(cLayout);
 		
 		
-		container.add(new BarraSuperior());
-		JLabel labelNuevo = new JLabel("Nuevo proyecto");
+		labelNuevo = new JLabel("Nuevo proyecto");
 		
-		JLabel labelNombre = new JLabel("Nombre del proyecto: ");
-		JTextField jtfNombre = new JTextField(20);
+		JPanel panelNuevoProyecto = new JPanel();
+		panelNuevoProyecto.add(labelNuevo);
+		
+		JPanel panelProyecto = new JPanel(new GridLayout(4,2,2,2));
+		labelNombre = new JLabel("Nombre del proyecto: ");
+		jtfNombre = new JTextField(20);
 		
 		
-		JLabel labelDecripcion = new JLabel("Descripción del proyecto: ");
-		JTextField jtfDescripcion = new JTextField(40);
+		labelDescripcion = new JLabel("Descripción del proyecto: ");
+		jtfDescripcion = new JTextField(40);
 		
-		JLabel labelPresupuesto = new JLabel("Presupuesto a solicitar: ");
-		JTextField jtfPresupuesto = new JTextField(10);
+		labelPresupuesto = new JLabel("Presupuesto a solicitar: ");
+		jtfPresupuesto = new JTextField(10);
 		
-		JLabel labelTipo = new JLabel("Seleccione tipo de proyecto: ");
+		labelTipo = new JLabel("Seleccione tipo de proyecto: ");
 		ButtonGroup grupoBotones = new ButtonGroup();
-		JRadioButton infraestructura = new JRadioButton("Infraestructura");
-		JRadioButton social = new JRadioButton("Social");
+		infraestructura = new JRadioButton("Infraestructura");
+		social = new JRadioButton("Social");
 		grupoBotones.add(social);
 		grupoBotones.add(infraestructura);
-		JButton botonSiguiente = new JButton("Siguiente");
+		
+		JPanel panelTipo = new JPanel();
+		panelTipo.add(social);
+		panelTipo.add(infraestructura);
+		
+		panelProyecto.add(labelNombre);
+		panelProyecto.add(jtfNombre);
+		panelProyecto.add(labelDescripcion);
+		panelProyecto.add(jtfDescripcion);
+		panelProyecto.add(labelPresupuesto);
+		panelProyecto.add(jtfPresupuesto);
+		panelProyecto.add(labelTipo);
+		panelProyecto.add(panelTipo);
 
-	
-		container.add(labelNuevo);
-		container.add(labelNombre);
-		container.add(jtfNombre);
-		container.add(labelDecripcion);
-		container.add(jtfDescripcion);
-		container.add(labelPresupuesto);
-		container.add(jtfPresupuesto);
-		container.add(labelTipo);
-		container.add(infraestructura);
-		container.add(social);
-		container.add(botonSiguiente);
 		
+		botonSiguiente = new JButton("Siguiente");
+			
 		
+		cLayout.putConstraint(BorderLayout.NORTH, BarraSuperior.getBarraSuperior(), 0, BorderLayout.NORTH, this);
+		cLayout.putConstraint(BorderLayout.NORTH, panelNuevoProyecto, 30, BorderLayout.NORTH, this);
+		cLayout.putConstraint(BorderLayout.NORTH, panelProyecto, 8, BorderLayout.SOUTH, panelNuevoProyecto);
+		cLayout.putConstraint(BorderLayout.NORTH, botonSiguiente, 8, BorderLayout.SOUTH, panelProyecto);
 		
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		window.setSize(800,400);
-		window.setVisible(true);
-		
+		this.add(BarraSuperior.getBarraSuperior());
+		this.add(panelNuevoProyecto);
+		this.add(panelProyecto);
+		this.add(botonSiguiente);
 		}
+	
+	public void setControladorCrearProyecto(ActionListener c) {  
+		botonSiguiente.addActionListener(c);
+	}
 }

@@ -1,6 +1,5 @@
 package vista;
 
-import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;

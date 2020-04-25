@@ -18,7 +18,7 @@ public class ControlIrACrearColectivo implements ActionListener {
 	}
 
 	/**
-	 * Cambia la vista a CrearProyecto
+	 * Cambia la vista a CrearColectivo
 	 * 
 	 * @param e action event
 	 */
