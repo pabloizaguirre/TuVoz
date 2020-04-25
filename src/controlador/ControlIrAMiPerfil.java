@@ -18,7 +18,7 @@ public class ControlIrAMiPerfil implements ActionListener {
 	}
 
 	/**
-	 * Cambia la vista a CrearProyecto
+	 * Cambia la vista a mi perfil
 	 * 
 	 * @param e action event
 	 */

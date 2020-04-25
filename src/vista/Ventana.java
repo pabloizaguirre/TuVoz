@@ -11,14 +11,18 @@ public class Ventana extends JFrame {
 	
 	private BarraSuperior vistaBarraSuperior;
 	private ControlIrAMiPerfil contIrAMiPerfil;
+	private ControlIrAHome contrIrAHome;
 	
 	private MiPerfil vistaMiPerfil;
 	private ControlIrACrearColectivo contIrACrearColectivo;
+	
+	private Home vistaHome;
 	
 	private CrearColectivo vistaCrearColectivo;
 	
 	private CrearProyecto vistaCrearProyecto;
 	private ControlIrACrearProyecto contrIrACrearProyecto;
+	private ControlCrearProyecto contrCrearProyecto;
 	
 	private CrearProyectoSocial vistaCrearProyectoSocial;
 	private ControlIrACrearProyectoSocial contrIrACrearProyectoSocial;
@@ -26,7 +30,7 @@ public class Ventana extends JFrame {
 	private CrearProyectoInfraestructura vistaCrearProyectoInfraestructura;
 	private ControlIrACrearProyectoInfraestructura contrIrACrearProyectoInfraestructura;
 	
-	private JPanel contentPane;
+	private JPanel ventana;
 	
 	protected static ImageIcon createImageIcon(String path, String description) {
 		if (new File(path).exists()) {
@@ -42,36 +46,54 @@ public class Ventana extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1000,600);
 		setLocationRelativeTo(null);
-		contentPane = new JPanel();
-		setContentPane(contentPane);
-		contentPane.setLayout(new CardLayout());
+		Container contentPane = getContentPane();
+		contentPane.setLayout(new BorderLayout());
 		
-		this.vistaBarraSuperior = BarraSuperior.getBarraSuperior();
+		ventana = new JPanel();
+		ventana.setLayout(new CardLayout());
+		
+		JScrollPane scroll = new JScrollPane(ventana); 
+		//scroll.setBorder(null);
+		scroll.setPreferredSize(new Dimension(500, 300));
 
+		this.vistaBarraSuperior = new BarraSuperior();
+		contentPane.add(vistaBarraSuperior, BorderLayout.NORTH);
+
+		//contenidos de la ventana:
+
+		this.vistaHome = new Home();
+		ventana.add(vistaHome, "home");
+		
 		this.vistaMiPerfil = new MiPerfil();
-		contentPane.add(vistaMiPerfil, "miPerfil");
+		ventana.add(vistaMiPerfil, "miPerfil");
 		
 		this.vistaCrearColectivo = new CrearColectivo();
-		contentPane.add(vistaCrearColectivo, "crearColectivo");
+		ventana.add(vistaCrearColectivo, "crearColectivo");
 		
 		this.vistaCrearProyecto = new CrearProyecto();
-		contentPane.add(vistaCrearProyecto, "crearProyecto");
+		ventana.add(vistaCrearProyecto, "crearProyecto");
 		
 		this.vistaCrearProyectoSocial = new CrearProyectoSocial();
-		contentPane.add(vistaCrearProyectoSocial, "crearProyectoSocial");
+		ventana.add(vistaCrearProyectoSocial, "crearProyectoSocial");
 		
 		this.vistaCrearProyectoInfraestructura = new CrearProyectoInfraestructura();
-		contentPane.add(vistaCrearProyectoInfraestructura, "crearProyectoInfraestructura");
+		ventana.add(vistaCrearProyectoInfraestructura, "crearProyectoInfraestructura");
+
+		contentPane.add(scroll, BorderLayout.CENTER);
 	}
 
 	public void setControlador(Controlador controlador) {
 		this.contIrACrearColectivo = controlador.getControlIrACrearColectivo();
-		vistaMiPerfil.setControladorAnadirColectivo(contIrACrearColectivo);
 		this.contrIrACrearProyecto = controlador.getControlIrACrearProyecto();
-		vistaMiPerfil.setControladorAnadirProyecto(contrIrACrearProyecto);
+		
+		vistaHome.setControladorAnadirColectivo(contIrACrearColectivo);
+		vistaHome.setControladorAnadirProyecto(contrIrACrearProyecto);
 		
 		this.contIrAMiPerfil = controlador.getControlIrAMiPerfil();
 		vistaBarraSuperior.setControladorMiPerfil(contIrAMiPerfil);
+		
+		this.contrIrAHome = controlador.getControlIrAHome();
+		vistaBarraSuperior.setControladorHome(contrIrAHome);
 		
 		
 		vistaCrearProyecto.setControladorCrearProyecto(contrIrACrearProyecto);
@@ -110,8 +132,8 @@ public class Ventana extends JFrame {
 	}
 	
 	public void mostrarPanel(String carta) {
-		CardLayout l = (CardLayout)contentPane.getLayout();
-		l.show(contentPane, carta);
+		CardLayout l = (CardLayout)ventana.getLayout();
+		l.show(ventana, carta);
 	}
 
 }

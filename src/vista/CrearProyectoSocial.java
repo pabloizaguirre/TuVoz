@@ -57,8 +57,6 @@ public class CrearProyectoSocial extends JPanel {
 
 		JPanel panelPrincipal = new JPanel();
 		
-		
-		panelPrincipal.add(BarraSuperior.getBarraSuperior());
 		panelPrincipal.add(panelCrear);
 		panelPrincipal.add(panelBoton);
 		

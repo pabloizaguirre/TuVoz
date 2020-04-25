@@ -3,8 +3,8 @@ package vista;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
-
 import javax.swing.*;
+import modelo.TipoProyecto;
 
 
 public class CrearProyecto extends JPanel {
@@ -17,8 +17,8 @@ public class CrearProyecto extends JPanel {
 	private JLabel labelPresupuesto;
 	private JTextField jtfPresupuesto;
 	private JLabel labelTipo;
-	private JRadioButton infraestructura;
-	private JRadioButton social;
+	private JRadioButton opcioninfraestructura;
+	private JRadioButton opcionsocial;
 	private JButton botonSiguiente;
 	
 	public CrearProyecto() {
@@ -45,14 +45,14 @@ public class CrearProyecto extends JPanel {
 		
 		labelTipo = new JLabel("Seleccione tipo de proyecto: ");
 		ButtonGroup grupoBotones = new ButtonGroup();
-		infraestructura = new JRadioButton("Infraestructura");
-		social = new JRadioButton("Social");
-		grupoBotones.add(social);
-		grupoBotones.add(infraestructura);
+		opcioninfraestructura = new JRadioButton("Infraestructura");
+		opcionsocial = new JRadioButton("Social");
+		grupoBotones.add(opcionsocial);
+		grupoBotones.add(opcioninfraestructura);
 		
 		JPanel panelTipo = new JPanel();
-		panelTipo.add(social);
-		panelTipo.add(infraestructura);
+		panelTipo.add(opcionsocial);
+		panelTipo.add(opcioninfraestructura);
 		
 		panelProyecto.add(labelNombre);
 		panelProyecto.add(jtfNombre);
@@ -66,13 +66,10 @@ public class CrearProyecto extends JPanel {
 		
 		botonSiguiente = new JButton("Siguiente");
 			
-		
-		cLayout.putConstraint(BorderLayout.NORTH, BarraSuperior.getBarraSuperior(), 0, BorderLayout.NORTH, this);
 		cLayout.putConstraint(BorderLayout.NORTH, panelNuevoProyecto, 30, BorderLayout.NORTH, this);
 		cLayout.putConstraint(BorderLayout.NORTH, panelProyecto, 8, BorderLayout.SOUTH, panelNuevoProyecto);
 		cLayout.putConstraint(BorderLayout.NORTH, botonSiguiente, 8, BorderLayout.SOUTH, panelProyecto);
 		
-		this.add(BarraSuperior.getBarraSuperior());
 		this.add(panelNuevoProyecto);
 		this.add(panelProyecto);
 		this.add(botonSiguiente);
@@ -80,5 +77,26 @@ public class CrearProyecto extends JPanel {
 	
 	public void setControladorCrearProyecto(ActionListener c) {  
 		botonSiguiente.addActionListener(c);
+	}
+
+	public TipoProyecto getTipoProyecto() {
+		if(opcioninfraestructura.isSelected()) {
+			return TipoProyecto.infraestructura;
+		}
+		if(opcionsocial.isSelected()) {
+			return TipoProyecto.social;
+		}
+		return null;
+	}
+
+	public String getNombre() {
+		return jtfNombre.getText();
+	}
+	public String getDescripcion() {
+		return jtfDescripcion.getText();
+	}
+	public double getPresupuesto() {
+		if(jtfPresupuesto.getText().equals("")) return -1.0;
+		return Double.parseDouble(jtfPresupuesto.getText());
 	}
 }

@@ -9,6 +9,7 @@ import vista.*;
 public class ControlIrACrearProyectoInfraestructura implements ActionListener {
 	private CrearProyectoInfraestructura vista;
 	private Ventana frame;
+	//atributo
 	
 	public ControlIrACrearProyectoInfraestructura(Ventana frame) {
 		this.frame = frame;

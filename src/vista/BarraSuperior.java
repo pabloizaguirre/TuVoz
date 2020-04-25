@@ -1,10 +1,9 @@
 package vista;
 
-import java.awt.event.ActionListener;
+import java.awt.*;
+import java.awt.event.*;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 public class BarraSuperior extends JPanel {
 	/**
@@ -12,16 +11,14 @@ public class BarraSuperior extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private static BarraSuperior barraSuperior;
-	
 	private JButton home;
 	private JTextField busquedaTF;
 	private JButton busqueda;
 	private JButton notificaciones;
 	private JButton miPerfil;
 
-	private BarraSuperior() {
-		home = new JButton("Home");
+	public BarraSuperior() {
+		home = new JButton("Inicio");
 		busquedaTF = new JTextField(15);
 		busqueda = new JButton("Busqueda");
 		notificaciones = new JButton("Notificaciones");
@@ -33,15 +30,12 @@ public class BarraSuperior extends JPanel {
 		add(notificaciones);
 		add(miPerfil);
 	}
-	
-	public static BarraSuperior getBarraSuperior() {
-		if(barraSuperior==null) {
-			barraSuperior = new BarraSuperior();
-		}
-		return barraSuperior;
-	}
-	
+
 	public void setControladorMiPerfil(ActionListener c) {  
 		miPerfil.addActionListener(c);
+	}
+	
+	public void setControladorHome(ActionListener c) {
+		home.addActionListener(c);
 	}
 }

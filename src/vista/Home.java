@@ -8,10 +8,13 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.*;
 
-public class MiPerfil extends JPanel{
+public class Home extends JPanel{
+	
+	private JButton botonAnadirProyecto;
+	private JButton botonAnadirColectivo;
 	
 	
-	public MiPerfil() {
+	public Home() {
 		SpringLayout cLayout = new SpringLayout();
 		setLayout(cLayout);
 		
@@ -20,15 +23,21 @@ public class MiPerfil extends JPanel{
 		final JPanel proyectos = new JPanel();
 		BorderLayout proyectosLayout = new BorderLayout();
 		proyectos.setLayout(proyectosLayout);
-		JLabel labelProyectos = new JLabel("  Mis proyectos propuestos: ");
+		JLabel labelProyectos = new JLabel("  Proyectos: ");
 		
 		final JPanel listaProyectos = new JPanel();
 		listaProyectos.setLayout(new FlowLayout(FlowLayout.LEFT));
+		ImageIcon icon1 = Ventana.createImageIcon("src/icons/anadir120_fino.png", "IconoAnadir");
 
 		JScrollPane scroll = new JScrollPane(listaProyectos);
 		scroll.setPreferredSize(new Dimension(700, 150));
 		scroll.setBorder(null);
 		
+		botonAnadirProyecto = new JButton(icon1);
+		
+		botonAnadirProyecto.setPreferredSize(new Dimension(120, 120));
+		
+		listaProyectos.add(botonAnadirProyecto);
 		int i = 0;
 		while (i < 15) {
 			String s = "Proyecto " + i;
@@ -57,7 +66,7 @@ public class MiPerfil extends JPanel{
 		final JPanel colectivos = new JPanel();
 		BorderLayout colectivosLayout = new BorderLayout();
 		colectivos.setLayout(colectivosLayout);
-		JLabel labelColectivos = new JLabel("  Mis colectivos: ");
+		JLabel labelColectivos = new JLabel("  Colectivos: ");
 		
 		final JPanel listaColectivos = new JPanel();
 		listaColectivos.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -66,6 +75,10 @@ public class MiPerfil extends JPanel{
 		scrollC.setPreferredSize(new Dimension(700, 150));
 		scrollC.setBorder(null);
 		
+		botonAnadirColectivo = new JButton(icon1);
+		botonAnadirColectivo.setPreferredSize(new Dimension(120, 120));
+		
+		listaColectivos.add(botonAnadirColectivo);
 		int j = 0;
 		while (j < 5) {
 			String s = "Colectivo " + j;
@@ -88,5 +101,13 @@ public class MiPerfil extends JPanel{
 		
 		// a�adir componentes al contenedor
 		add(colectivos);	
+	}
+	
+	public void setControladorAnadirProyecto(ActionListener c) {  
+		botonAnadirProyecto.addActionListener(c);
+	}
+	
+	public void setControladorAnadirColectivo(ActionListener c) {  
+		botonAnadirColectivo.addActionListener(c);
 	}
 }

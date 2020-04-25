@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 
-public class CrearProyectoInfraestructura extends JFrame {
+public class CrearProyectoInfraestructura extends JPanel {
 	
 	private JLabel labelNuevo;
 	private JLabel labelExaminar;
@@ -48,17 +48,12 @@ public class CrearProyectoInfraestructura extends JFrame {
 		
 		botonCrear = new JButton("Crear");
 
-		
-		
-		cLayout.putConstraint(BorderLayout.NORTH, BarraSuperior.getBarraSuperior(), 0, BorderLayout.NORTH, this);
 		cLayout.putConstraint(BorderLayout.NORTH, labelNuevo, 40, BorderLayout.NORTH, this);
 		cLayout.putConstraint(BorderLayout.NORTH, panelProyecto, 15, BorderLayout.SOUTH, labelNuevo);
 		cLayout.putConstraint(BorderLayout.NORTH, botonCrear, 15, BorderLayout.SOUTH, panelProyecto);
 
 
 		
-		
-		add(BarraSuperior.getBarraSuperior());
 		add(labelNuevo);
 		add(panelProyecto);
 		add(botonCrear);

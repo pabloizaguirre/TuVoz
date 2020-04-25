@@ -26,15 +26,15 @@ public class CrearColectivo extends JPanel{
 		JPanel panelBoton = new JPanel();
 		panelBoton.add(botonCrear,BorderLayout.SOUTH);
 		
-		
-		cLayout.putConstraint(BorderLayout.NORTH, BarraSuperior.getBarraSuperior(), 0, BorderLayout.NORTH, this);
 		cLayout.putConstraint(BorderLayout.NORTH, crearColectivo, 30, BorderLayout.NORTH, this);
 		cLayout.putConstraint(BorderLayout.NORTH, panelBoton, 20, BorderLayout.NORTH, crearColectivo);
 		
 		
-		add(BarraSuperior.getBarraSuperior());
 		add(crearColectivo);
 		add(panelBoton);
+	}
 	
+	public void setControladorBotonCrear(ActionListener c) {  
+		botonCrear.addActionListener(c);
 	}
 }
