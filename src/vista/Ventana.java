@@ -19,6 +19,7 @@ public class Ventana extends JFrame {
 	private Home vistaHome;
 	
 	private CrearColectivo vistaCrearColectivo;
+	private ControlCrearColectivo contrCrearColectivo;
 	
 	private CrearProyecto vistaCrearProyecto;
 	private ControlIrACrearProyecto contrIrACrearProyecto;
@@ -29,6 +30,8 @@ public class Ventana extends JFrame {
 	
 	private CrearProyectoInfraestructura vistaCrearProyectoInfraestructura;
 	private ControlCrearProyectoInfraestructura contrCrearProyectoInfraestructura;
+	
+	
 	
 	private ControlExaminar contrExaminar;
 
@@ -94,11 +97,15 @@ public class Ventana extends JFrame {
 		vistaHome.setControladorAnadirColectivo(contIrACrearColectivo);
 		vistaHome.setControladorAnadirProyecto(contrIrACrearProyecto);
 		
+		
 		this.contIrAMiPerfil = controlador.getControlIrAMiPerfil();
 		vistaBarraSuperior.setControladorMiPerfil(contIrAMiPerfil);
 		
 		this.contrIrAHome = controlador.getControlIrAHome();
 		vistaBarraSuperior.setControladorHome(contrIrAHome);
+		
+		this.contrCrearColectivo = controlador.getControlCrearColectivo();
+		vistaCrearColectivo.setControladorBotonCrear(contrCrearColectivo);
 		
 		this.contrCrearProyecto = controlador.getControlCrearProyecto();
 		vistaCrearProyecto.setControladorCrearProyecto(contrCrearProyecto);

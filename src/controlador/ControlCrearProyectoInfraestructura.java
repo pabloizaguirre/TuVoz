@@ -29,7 +29,7 @@ public class ControlCrearProyectoInfraestructura implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		if(imagen.equals(null)) {
+		if(imagen.equals(null) || vista.getDistritos().contentEquals("")) {
 			JOptionPane.showMessageDialog(vista,
 					"Debe completar todos los apartados.", "Error", JOptionPane.ERROR_MESSAGE);
 			return;

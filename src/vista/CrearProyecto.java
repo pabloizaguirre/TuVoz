@@ -33,17 +33,17 @@ public class CrearProyecto extends JPanel {
 		panelNuevoProyecto.add(labelNuevo);
 		
 		JPanel panelProyecto = new JPanel(new GridLayout(4,2,2,2));
-		labelNombre = new JLabel("Nombre del proyecto: ");
+		labelNombre = new JLabel(" Nombre del proyecto: ");
 		jtfNombre = new JTextField(20);
 		
 		
-		labelDescripcion = new JLabel("Descripción del proyecto: ");
+		labelDescripcion = new JLabel(" Descripción del proyecto: ");
 		jtfDescripcion = new JTextField(40);
 		
-		labelPresupuesto = new JLabel("Presupuesto a solicitar: ");
+		labelPresupuesto = new JLabel(" Presupuesto a solicitar: ");
 		jtfPresupuesto = new JTextField(10);
 		
-		labelTipo = new JLabel("Seleccione tipo de proyecto: ");
+		labelTipo = new JLabel(" Seleccione tipo de proyecto: ");
 		ButtonGroup grupoBotones = new ButtonGroup();
 		opcioninfraestructura = new JRadioButton("Infraestructura");
 		opcionsocial = new JRadioButton("Social");

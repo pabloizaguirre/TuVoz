@@ -28,13 +28,11 @@ public class ControlExaminar implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
         JFileChooser explorador = new JFileChooser();
-        explorador.showOpenDialog(null);
-
-        File archivo = explorador.getSelectedFile();
-
-        String ruta = archivo.getAbsolutePath();
-
-        ControlCrearProyectoInfraestructura.setImagen(Ventana.createImageIcon(ruta, "Imagen del archivo"));
-		
+        int seleccion = explorador.showOpenDialog(null);
+        if(seleccion==JFileChooser.APPROVE_OPTION) {
+        	File archivo = explorador.getSelectedFile();
+        	String ruta = archivo.getAbsolutePath();
+        	ControlCrearProyectoInfraestructura.setImagen(Ventana.createImageIcon(ruta, "Imagen del archivo"));
+        }
 	}
 }

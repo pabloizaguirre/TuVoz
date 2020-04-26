@@ -38,9 +38,9 @@ public class CrearProyectoInfraestructura extends JPanel {
 		
 		int i =0;
 
-		distrito1 = new JCheckBox(Distrito1);
-	 	distrito2 = new JCheckBox(Distrito2);
-		distrito3 = new JCheckBox(Distrito3);
+		distrito1 = new JCheckBox("Distrito1");
+	 	distrito2 = new JCheckBox("Distrito2");
+		distrito3 = new JCheckBox("Distrito3");
 
 		panelBotones.add(distrito1);
 		panelBotones.add(distrito2);

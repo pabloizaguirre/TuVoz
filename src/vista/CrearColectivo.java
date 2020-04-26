@@ -37,4 +37,8 @@ public class CrearColectivo extends JPanel{
 	public void setControladorBotonCrear(ActionListener c) {  
 		botonCrear.addActionListener(c);
 	}
+	
+	public String getNombre() {
+		return jtfNombre.getText();
+	}
 }
