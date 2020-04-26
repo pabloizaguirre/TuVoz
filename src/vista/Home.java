@@ -6,6 +6,7 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.*;
 
 public class Home extends JPanel{
@@ -18,12 +19,20 @@ public class Home extends JPanel{
 		SpringLayout cLayout = new SpringLayout();
 		setLayout(cLayout);
 		
-		// crear pantalla 1
+		//Titulo de la ventana: HOME
+		JLabel titulo = new JLabel("Inicio");
+		titulo.setFont(new Font(titulo.getFont().getName(), Font.PLAIN, titulo.getFont().getSize()+20));
+
+		cLayout.putConstraint(BorderLayout.WEST, titulo, 20, BorderLayout.WEST, this);
+
+		add(titulo);
 		
+		//Panel con los proyectos
 		final JPanel proyectos = new JPanel();
 		BorderLayout proyectosLayout = new BorderLayout();
 		proyectos.setLayout(proyectosLayout);
 		JLabel labelProyectos = new JLabel("  Proyectos: ");
+		labelProyectos.setFont(new Font(labelProyectos.getFont().getName(), Font.PLAIN, labelProyectos.getFont().getSize()+5));
 		
 		final JPanel listaProyectos = new JPanel();
 		listaProyectos.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -54,6 +63,7 @@ public class Home extends JPanel{
 		proyectos.setPreferredSize(new Dimension(700,200)); 
 		
 		//añadir constraints del contenedor
+		cLayout.putConstraint(BorderLayout.NORTH, proyectos, 15, BorderLayout.SOUTH, titulo);
 		cLayout.putConstraint(BorderLayout.WEST, proyectos, 40, BorderLayout.WEST, this);
 		cLayout.putConstraint(BorderLayout.EAST, proyectos, -40, BorderLayout.EAST, this);
 		
@@ -67,6 +77,7 @@ public class Home extends JPanel{
 		BorderLayout colectivosLayout = new BorderLayout();
 		colectivos.setLayout(colectivosLayout);
 		JLabel labelColectivos = new JLabel("  Colectivos: ");
+		labelColectivos.setFont(new Font(labelColectivos.getFont().getName(), Font.PLAIN, labelColectivos.getFont().getSize()+5));
 		
 		final JPanel listaColectivos = new JPanel();
 		listaColectivos.setLayout(new FlowLayout(FlowLayout.LEFT));

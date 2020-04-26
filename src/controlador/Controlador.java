@@ -8,9 +8,11 @@ public class Controlador {
 	private ControlIrACrearColectivo contIrACrearColectivo;
 	private ControlIrAMiPerfil contIrAMiPerfil;
 	private ControlIrACrearProyecto contrIrACrearProyecto;
-	private ControlIrACrearProyectoSocial contrIrACrearProyectoSocial;
-	private ControlIrACrearProyectoInfraestructura contrIrACrearProyectoInfraestructura;
+	private ControlCrearProyecto contrCrearProyecto;
+	private ControlCrearProyectoSocial contrCrearProyectoSocial;
+	private ControlCrearProyectoInfraestructura contrCrearProyectoInfraestructura;
 	private ControlIrAHome contrIrAHome;
+	private ControlExaminar contrExaminar;
 
 	
 	private Ventana frame;
@@ -19,10 +21,12 @@ public class Controlador {
 		this.frame = frame;
 		this.contIrACrearColectivo = new ControlIrACrearColectivo(frame);
 		this.contrIrACrearProyecto = new ControlIrACrearProyecto(frame);
-		this.contrIrACrearProyectoSocial = new ControlIrACrearProyectoSocial(frame);
-		this.contrIrACrearProyectoInfraestructura = new ControlIrACrearProyectoInfraestructura(frame);
+		this.contrCrearProyecto = new ControlCrearProyecto(frame);
+		this.contrCrearProyectoSocial = new ControlCrearProyectoSocial(frame);
+		this.contrCrearProyectoInfraestructura = new ControlCrearProyectoInfraestructura(frame);
 		this.contIrAMiPerfil = new ControlIrAMiPerfil(frame);
 		this.contrIrAHome = new ControlIrAHome(frame);
+		this.contrExaminar = new ControlExaminar(frame);
 	}
 
 	public ControlIrACrearColectivo getControlIrACrearColectivo() {
@@ -41,12 +45,17 @@ public class Controlador {
 		return this.contrIrACrearProyecto;
 	} 
 	
-	public ControlIrACrearProyectoSocial getControlIrACrearProyectoSocial() {
-		return this.contrIrACrearProyectoSocial;
+	public ControlCrearProyecto getControlCrearProyecto() {
+		return this.contrCrearProyecto;
 	}
-	
-	public ControlIrACrearProyectoInfraestructura getControlIrACrearProyectoInfraestructura() {
-		return this.contrIrACrearProyectoInfraestructura;
+	public ControlCrearProyectoSocial getControlCrearProyectoSocial() {
+		return this.contrCrearProyectoSocial;
+	}
+	public ControlCrearProyectoInfraestructura getControlCrearProyectoInfraestructura() {
+		return this.contrCrearProyectoInfraestructura;
+	}
+	public ControlExaminar getControlExaminar() {
+		return this.contrExaminar;
 	}
 
 }

@@ -13,6 +13,9 @@ public class CrearProyectoInfraestructura extends JPanel {
 	private JButton botonExaminar;
 	private JLabel labelDistritos;
 	private JButton botonCrear;
+	JCheckBox distrito1;
+	JCheckBox distrito2;
+	JCheckBox distrito3;
 	
 	
 	public CrearProyectoInfraestructura() {
@@ -34,12 +37,16 @@ public class CrearProyectoInfraestructura extends JPanel {
 		JPanel panelBotones = new JPanel();
 		
 		int i =0;
-		while(i<5) {
-			String s = "Distrito " +i;
-			JCheckBox distrito = new JCheckBox(s);
-			panelBotones.add(distrito);
-			i++;
-		}
+
+		distrito1 = new JCheckBox(Distrito1);
+	 	distrito2 = new JCheckBox(Distrito2);
+		distrito3 = new JCheckBox(Distrito3);
+
+		panelBotones.add(distrito1);
+		panelBotones.add(distrito2);
+		panelBotones.add(distrito3);
+
+		
 		JPanel panelProyecto = new JPanel(new GridLayout(2,2,2,2));
 		panelProyecto.add(labelExaminar);
 		panelProyecto.add(panelExaminar);
@@ -62,6 +69,20 @@ public class CrearProyectoInfraestructura extends JPanel {
 	
 	public void setControladorCrearProyectoInfraestructura(ActionListener c) {  
 		botonCrear.addActionListener(c);
+	}
+
+	public void setControladorExaminar(ActionListener c) {
+		botonExaminar.addActionListener(c);
+	}
+
+	public String getDistritos() {
+		String buf = "";
+		if(distrito1.isSelected()) buf += "Distrito1";
+		if(distrito2.isSelected()) buf += "Distrito2";
+		if(distrito3.isSelected()) buf += "Distrito3";
+
+
+		return buf;
 	}
 	
 }

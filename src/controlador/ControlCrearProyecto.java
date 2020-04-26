@@ -23,10 +23,17 @@ public class ControlCrearProyecto implements ActionListener{
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
+        double presupuesto;
         // validar valores en la vista
+        try {
+            presupuesto = vista.getPresupuesto();
+        } catch (NumberFormatException exception){
+            JOptionPane.showMessageDialog(vista,
+					"Debe introducir un numero en el campo de presupuesto", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+        }
 		
-        if (vista.getNombre().equals("") || vista.getDescripcion().equals("") || vista.getPresupuesto()==-1.0
+        if (vista.getNombre().equals("") || vista.getDescripcion().equals("") || presupuesto==-1.0
             || vista.getTipoProyecto().equals(null)) {
 			JOptionPane.showMessageDialog(vista,
 					"Debe completar todos los apartados.", "Error", JOptionPane.ERROR_MESSAGE);

@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
+import modelo.TipoAlcance;
 
 public class CrearProyectoSocial extends JPanel {
 	
@@ -23,7 +24,7 @@ public class CrearProyectoSocial extends JPanel {
 		JLabel labelGrupoSocial = new JLabel("Grupo social: ");
 		jtfGrupoSocial = new JTextField(20);
 		
-		JLabel labelAmbito = new JLabel("Seleccione ámbito del proyecto:");
+		JLabel labelAlcance = new JLabel("Seleccione ámbito del proyecto:");
 		nacional = new JRadioButton("Nacional");
 		internacional = new JRadioButton("Internacional");
 		ButtonGroup grupoBotones = new ButtonGroup();
@@ -33,7 +34,7 @@ public class CrearProyectoSocial extends JPanel {
 		JPanel panelProyecto = new JPanel(new GridLayout(2,2));
 		panelProyecto.add(labelGrupoSocial);
 		panelProyecto.add(jtfGrupoSocial);
-		panelProyecto.add(labelAmbito);
+		panelProyecto.add(labelAlcance);
 		JPanel panelBotones = new JPanel();
 		panelBotones.add(nacional);
 		panelBotones.add(internacional);
@@ -66,6 +67,21 @@ public class CrearProyectoSocial extends JPanel {
 	
 	public void setControladorCrearProyectoSocial(ActionListener c) {  
 		botonCrear.addActionListener(c);
+	}
+
+	public String getGrupoSocial() {
+		return jtfGrupoSocial.getText();
+	}
+	public TipoAlcance getTipoAlcance() {
+		if(nacional.isSelected()) {
+			return TipoAlcance.nacional;
+		}
+		else if(internacional.isSelected()) {
+			return TipoAlcance.internacional;
+		}
+		else {
+			return null;
+		}
 	}
 	
 }

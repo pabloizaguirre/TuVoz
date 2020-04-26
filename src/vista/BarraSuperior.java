@@ -18,17 +18,27 @@ public class BarraSuperior extends JPanel {
 	private JButton miPerfil;
 
 	public BarraSuperior() {
+		setLayout(new BorderLayout());
+
+		JPanel left = new JPanel();
+
 		home = new JButton("Inicio");
+
+		left.add(home);
+
+		JPanel right = new JPanel();
 		busquedaTF = new JTextField(15);
 		busqueda = new JButton("Busqueda");
 		notificaciones = new JButton("Notificaciones");
 		miPerfil = new JButton("Mi Perfil");
 		
-		add(home);
-		add(busquedaTF);
-		add(busqueda);
-		add(notificaciones);
-		add(miPerfil);
+		right.add(busquedaTF);
+		right.add(busqueda);
+		right.add(notificaciones);
+		right.add(miPerfil);
+		
+		add(left, BorderLayout.WEST);
+		add(right, BorderLayout.EAST);
 	}
 
 	public void setControladorMiPerfil(ActionListener c) {  

@@ -25,14 +25,18 @@ public class Ventana extends JFrame {
 	private ControlCrearProyecto contrCrearProyecto;
 	
 	private CrearProyectoSocial vistaCrearProyectoSocial;
-	private ControlIrACrearProyectoSocial contrIrACrearProyectoSocial;
+	private ControlCrearProyectoSocial contrCrearProyectoSocial;
 	
 	private CrearProyectoInfraestructura vistaCrearProyectoInfraestructura;
-	private ControlIrACrearProyectoInfraestructura contrIrACrearProyectoInfraestructura;
+	private ControlCrearProyectoInfraestructura contrCrearProyectoInfraestructura;
 	
+	private ControlExaminar contrExaminar;
+
+
+
 	private JPanel ventana;
 	
-	protected static ImageIcon createImageIcon(String path, String description) {
+	public static ImageIcon createImageIcon(String path, String description) {
 		if (new File(path).exists()) {
 			return new ImageIcon(path, description);
 		} else {
@@ -44,17 +48,18 @@ public class Ventana extends JFrame {
 	public Ventana() {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(1000,600);
+		setSize(new Dimension(1000,600));
 		setLocationRelativeTo(null);
 		Container contentPane = getContentPane();
 		contentPane.setLayout(new BorderLayout());
 		
 		ventana = new JPanel();
 		ventana.setLayout(new CardLayout());
+		ventana.setPreferredSize(new Dimension(100,400));
 		
-		JScrollPane scroll = new JScrollPane(ventana); 
-		//scroll.setBorder(null);
-		scroll.setPreferredSize(new Dimension(500, 300));
+		JScrollPane scroll = new JScrollPane(ventana, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+												ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER); 
+		scroll.setBorder(null);
 
 		this.vistaBarraSuperior = new BarraSuperior();
 		contentPane.add(vistaBarraSuperior, BorderLayout.NORTH);
@@ -95,16 +100,17 @@ public class Ventana extends JFrame {
 		this.contrIrAHome = controlador.getControlIrAHome();
 		vistaBarraSuperior.setControladorHome(contrIrAHome);
 		
+		this.contrCrearProyecto = controlador.getControlCrearProyecto();
+		vistaCrearProyecto.setControladorCrearProyecto(contrCrearProyecto);
+
+		this.contrCrearProyectoSocial = controlador.getControlCrearProyectoSocial();
+		vistaCrearProyectoSocial.setControladorCrearProyectoSocial(contrCrearProyectoSocial);
+
+		this.contrCrearProyectoInfraestructura = controlador.getControlCrearProyectoInfraestructura();
+		vistaCrearProyectoInfraestructura.setControladorCrearProyectoInfraestructura(contrCrearProyectoInfraestructura);
 		
-		vistaCrearProyecto.setControladorCrearProyecto(contrIrACrearProyecto);
-		
-		this.contrIrACrearProyectoSocial = controlador.getControlIrACrearProyectoSocial();
-		vistaCrearProyectoSocial.setControladorCrearProyectoSocial(contrIrACrearProyectoSocial);
-		
-		this.contrIrACrearProyectoInfraestructura = controlador.getControlIrACrearProyectoInfraestructura();
-		vistaCrearProyectoInfraestructura.setControladorCrearProyectoInfraestructura(contrIrACrearProyectoInfraestructura);
-		
-		
+		this.contrExaminar = controlador.getControlExaminar();
+		vistaCrearProyectoInfraestructura.setControladorExaminar(contrExaminar);
 	}
 
 	public MiPerfil getVistaMiPerfil() {
