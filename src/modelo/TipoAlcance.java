@@ -9,5 +9,5 @@ package modelo;
 
 
 public enum TipoAlcance {
-    nacional, internacional;
+    NACIONAL, INTERNACIONAL;
 }

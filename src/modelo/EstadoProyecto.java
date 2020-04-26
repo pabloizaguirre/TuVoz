@@ -17,5 +17,22 @@ package modelo;
   */
 
 public enum EstadoProyecto {
-    pendienteCreacion,noEnviado,disponible,pendienteAprobacion,aprobado, rechazado, caducado;
+    PENDIENTECREACION,NOENVIADO,DISPONIBLE,PENDIENTEAPROBACION,APROBADO, RECHAZADO, CADUCADO;
+	
+	@Override
+	public String toString() {
+		if (this.equals(PENDIENTECREACION)) {
+			return "pendiente de creacion";
+		} else if (this.equals(NOENVIADO)) {
+			return "no enviado";
+		} else if (this.equals(DISPONIBLE)) {
+			return "disponible";
+		} else if (this.equals(PENDIENTEAPROBACION)) {
+			return "pendiente de aprobacion";
+		} else if (this.equals(APROBADO)) {
+			return "aprobado";
+		} else {
+			return "caducado";
+		}
+	}
 }

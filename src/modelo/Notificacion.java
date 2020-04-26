@@ -17,6 +17,7 @@ public class Notificacion implements Serializable {
     public Notificacion (String texto, Usuario usuario) {
         this.textoNotificacion = texto;
         this.usuario = usuario;
+
         usuario.anadirNotificacion(this);
     }
     

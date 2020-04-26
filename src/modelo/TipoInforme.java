@@ -8,5 +8,5 @@ package modelo;
  */
 
  public enum TipoInforme {
-    afinidad, popularidad;
+    AFINIDAD, POPULARIDAD;
 }

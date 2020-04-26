@@ -79,12 +79,12 @@ public class CrearProyecto extends JPanel {
 		botonSiguiente.addActionListener(c);
 	}
 
-	public TipoProyecto getTipoProyecto() {
+	public String getTipoProyecto() {
 		if(opcioninfraestructura.isSelected()) {
-			return TipoProyecto.infraestructura;
+			return "infraestructura";
 		}
 		if(opcionsocial.isSelected()) {
-			return TipoProyecto.social;
+			return "social";
 		}
 		return null;
 	}

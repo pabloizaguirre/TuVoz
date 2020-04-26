@@ -1,60 +1,100 @@
 package vista;
+
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 
 import javax.swing.*;
 
-public class InicioRegistro {
-	public static void main(String[] args) {
-		JFrame ventana = new JFrame("Inicio/Registro");
-		// obtener contenedor, asignar layout
-		Container contenedor = ventana.getContentPane();
+public class InicioRegistro extends JPanel {
+
+	private JLabel labelnombre;
+	private JTextField jtfnombre;
+	private JLabel labelpassword;
+	private JPasswordField password;
+	private JButton botonEntrar;
+
+	private JLabel labelnifreg;
+	private JTextField jtfnifreg;
+	private JLabel labelusuarioreg;
+	private JTextField jtfusuarioreg;
+	private JLabel labelpasswordreg;
+	private JTextField jtfpasswordreg;
+	private JButton buttonregistro;
+	
+
+	public InicioRegistro() {
 		SpringLayout cLayout = new SpringLayout();
-		contenedor.setLayout(cLayout);
+		this.setLayout(cLayout);
 		
-		
-		// crear pantalla 1
-		
+	
+		//panel de inicio de sesion
 		final JPanel inicio = new JPanel();
 		FlowLayout inicioLayout = new FlowLayout(FlowLayout.RIGHT);
 		inicio.setLayout(inicioLayout);
-		JLabel labelnombre = new JLabel("Nombre o NIF:");
-		JTextField jtfnombre = new JTextField(15);
-		JLabel labelpassword = new JLabel("Contraseña");
-		JPasswordField password = new JPasswordField(10);
-		JButton entrar = new JButton("Entrar");
+		labelnombre = new JLabel("Nombre o NIF:");
+		jtfnombre = new JTextField(15);
+		labelpassword = new JLabel("Contraseña");
+		password = new JPasswordField(10);
+		botonEntrar = new JButton("Entrar");
 		
 		inicio.add(labelnombre);
 		inicio.add(jtfnombre);
 		inicio.add(labelpassword);
 		inicio.add(password);
-		inicio.add(entrar);
+		inicio.add(botonEntrar);
 		
-		//añadir constraints del contenedor
-		cLayout.putConstraint(BorderLayout.WEST, inicio, 40, BorderLayout.WEST, contenedor);
-		cLayout.putConstraint(BorderLayout.EAST, inicio, -40, BorderLayout.EAST, contenedor);
+		cLayout.putConstraint(BorderLayout.WEST, inicio, 40, BorderLayout.WEST, this);
+		cLayout.putConstraint(BorderLayout.EAST, inicio, -40, BorderLayout.EAST, this);
 				
-		// anadir componentes al contenedor
-		contenedor.add(inicio);
+
+		this.add(inicio);
 		
 		
 		
 		
-		//Crear pantalla 2
-		
+		//panel de registro
 		final JPanel registrarse = new JPanel();
 		SpringLayout regLayout = new SpringLayout();
 		registrarse.setLayout(regLayout);
-		JLabel intro = new JLabel("Crea una cuenta");
-		JLabel labelnifreg = new JLabel("NIF:");
-		JTextField jtfnifreg = new JTextField(15);
-		JLabel labelusuarioreg = new JLabel("Usuario");
-		JTextField jtfusuarioreg = new JTextField(15);
-		JLabel labelpasswordreg = new JLabel("Contraseña");
-		JTextField jtfpasswordreg = new JTextField(15);
-		JButton buttonregistro = new JButton("Registrarse");
+		registrarse.setBorder(BorderFactory.createLineBorder(Color.blue));
+		JLabel intro = new JLabel("Crear una cuenta");
+		intro.setFont(new Font(intro.getFont().getName(), Font.PLAIN, intro.getFont().getSize()+15));
+
+		labelnifreg = new JLabel("NIF:");
+		jtfnifreg = new JTextField(15);
+		labelusuarioreg = new JLabel("Usuario");
+		jtfusuarioreg = new JTextField(15);
+		labelpasswordreg = new JLabel("Contraseña");
+		jtfpasswordreg = new JTextField(15);
+		buttonregistro = new JButton("Registrarse");
+
+		registrarse.setVisible(true);
+
+		regLayout.putConstraint(BorderLayout.NORTH, intro, -380, BorderLayout.SOUTH, registrarse);
+		regLayout.putConstraint(BorderLayout.NORTH, labelnifreg, 20, BorderLayout.SOUTH, intro);
+		regLayout.putConstraint(BorderLayout.NORTH, jtfnifreg, 5, BorderLayout.SOUTH, labelnifreg);
+		regLayout.putConstraint(BorderLayout.NORTH, labelusuarioreg, 10, BorderLayout.SOUTH, jtfnifreg);
+		regLayout.putConstraint(BorderLayout.NORTH, jtfusuarioreg, 5, BorderLayout.SOUTH, labelusuarioreg);
+		regLayout.putConstraint(BorderLayout.NORTH, labelpasswordreg, 10, BorderLayout.SOUTH, jtfusuarioreg);
+		regLayout.putConstraint(BorderLayout.NORTH, jtfpasswordreg, 5, BorderLayout.SOUTH, labelpasswordreg); 
+		regLayout.putConstraint(BorderLayout.NORTH, buttonRegistro, 25, BorderLayout.SOUTH, jtfpasswordreg);
+		regLayout.putConstraint(BorderLayout.WEST, intro, 20, BorderLayout.WEST, registrarse);
+		regLayout.putConstraint(BorderLayout.WEST, labelnifreg, 20, BorderLayout.WEST, registrarse);
+		regLayout.putConstraint(BorderLayout.WEST, jtfnifreg, 20, BorderLayout.WEST, registrarse);
+		regLayout.putConstraint(BorderLayout.WEST, labelusuarioreg, 20, BorderLayout.WEST, registrarse);
+		regLayout.putConstraint(BorderLayout.WEST, jtfusuarioreg, 20, BorderLayout.WEST, registrarse);
+		regLayout.putConstraint(BorderLayout.WEST, labelpasswordreg, 20, BorderLayout.WEST, registrarse);
+		regLayout.putConstraint(BorderLayout.WEST, jtfpasswordreg, 20, BorderLayout.WEST, registrarse); 
+		regLayout.putConstraint(BorderLayout.WEST, buttonRegistro, 20, BorderLayout.WEST, registrarse); 
+		
+		cLayout.putConstraint(BorderLayout.EAST, registrarse, -50, BorderLayout.EAST, this);
+		cLayout.putConstraint(BorderLayout.WEST, registrarse, -400, BorderLayout.EAST, this);
+		cLayout.putConstraint(BorderLayout.NORTH, registrarse, 40, BorderLayout.SOUTH, inicio);	
+		cLayout.putConstraint(BorderLayout.SOUTH, registrarse, -100, BorderLayout.SOUTH, this);	
 		
 		registrarse.add(intro);
 		registrarse.add(labelnifreg);
@@ -63,28 +103,33 @@ public class InicioRegistro {
 		registrarse.add(jtfusuarioreg);
 		registrarse.add(labelpasswordreg);
 		registrarse.add(jtfpasswordreg);
-		registrarse.add(buttonregistro);
-		
-		registrarse.setVisible(true);
-		
-		regLayout.putConstraint(BorderLayout.EAST, intro, -70, BorderLayout.EAST, contenedor);
-		regLayout.putConstraint(BorderLayout.NORTH, intro, 120, BorderLayout.NORTH, contenedor);
+		registrarse.add(buttonRegistro); 
 				
-		//añadir constraints del contenedor
-		cLayout.putConstraint(BorderLayout.EAST, registrarse, -70, BorderLayout.EAST, contenedor);
-		cLayout.putConstraint(BorderLayout.NORTH, registrarse, 120, BorderLayout.NORTH, contenedor);
-				
-		// anadir componentes al contenedor
-		contenedor.add(registrarse);
-
-	
-		
-		ventana.pack();
-		
-		// mostrar ventana
-		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		ventana.setSize(1000,600);
-		ventana.setLocationRelativeTo(null);
-		ventana.setVisible(true);	
+		this.add(registrarse);
 	}
+
+	public void setControladorEntrarApp(ActionListener c) {  
+		botonEntrar.addActionListener(c);
+	}
+	
+	public void setControladorRegistrarse(ActionListener c) {  
+		buttonRegistro.addActionListener(c);
+	}
+
+	public String getNombre() {
+		return jtfnombre.getText();
+	}
+	public String getPassword() {
+		return password.getText();
+	}
+	public String getNifReg() {
+		return jtfnifreg.getText();
+	}
+	public String getUsuarioReg() {
+		return jtfusuarioreg.getText();
+	}
+	public String getPasswordReg() {
+		return jtfusuarioreg.getText();
+	}
+
 }

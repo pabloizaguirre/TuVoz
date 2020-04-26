@@ -16,8 +16,16 @@ public class ProyectoSocial extends Proyecto {
     
     public ProyectoSocial(String tit, String desc, double presSolicitado,
                             ElementoColectivo creador, String grupoSocial, TipoAlcance alcance){
-                super(tit, desc, presSolicitado, creador, TipoProyecto.social);
+                super(tit, desc, presSolicitado, creador);
                 this.grupoSocial = grupoSocial;
                 this.alcance = alcance;
+    }
+    
+    public String getGrupoSocial() {
+    	return grupoSocial;
+    }
+    
+    public TipoAlcance getAlcance() {
+    	return alcance;
     }
 }

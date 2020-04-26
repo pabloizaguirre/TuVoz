@@ -37,7 +37,14 @@ public class Aplicacion implements Serializable {
     }
 
     public int getApoyosMin() { return apoyosMin;}
-    public void setApoyosMin(int apoyosMin) {this.apoyosMin = apoyosMin;}
+
+    public void setApoyosMin(int apoyosMin) {
+        this.apoyosMin = apoyosMin;
+        for (Proyecto p : listadoProyectos) {
+            p.consultarEstadoProyecto();
+        }
+        
+    }
 
 
     public List<Proyecto> getListadoProyectos() {
@@ -177,6 +184,23 @@ public class Aplicacion implements Serializable {
         return;
     }
 
+
+      /**
+     * Método para comprobar si un NIF pertenece a un ciudadano existente en la aplicacion
+     *
+     * @param str String con el NIF a comprobar
+     * @return boolean, true si el NIF está usado, false en caso contrario
+     */
+
+    public boolean nifEnUso(String str) {
+        for(ElementoColectivo c : listadoElementoColectivos)
+            if(c.getClass().equals(Ciudadano.class))
+                if(((Ciudadano)c).getNif().equals(str)){
+                    return true;
+                }
+        return false;
+    }
+
  
     /**
      * 
@@ -232,7 +256,7 @@ public class Aplicacion implements Serializable {
         System.out.println("El proyecto " + p1 + " tiene " + p1.getApoyos() + " apoyos\n");
 
         //Aprobar proyecto
-        p1.cambiarEstado(EstadoProyecto.noEnviado); 
+        p1.cambiarEstado(EstadoProyecto.NOENVIADO); 
 
         //Comprobar las notificaciones que ha recibido u1
         System.out.println(u1 + " ha recibido las siguientes notificaciones:");

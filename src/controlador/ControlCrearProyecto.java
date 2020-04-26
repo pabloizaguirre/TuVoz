@@ -39,7 +39,7 @@ public class ControlCrearProyecto implements ActionListener{
 					"Debe completar todos los apartados.", "Error", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-        if (vista.getTipoProyecto().equals(TipoProyecto.social)) {
+        if (vista.getTipoProyecto().equals("social")) {
             frame.mostrarPanel("crearProyectoSocial");
         } else {
             frame.mostrarPanel("crearProyectoInfraestructura");

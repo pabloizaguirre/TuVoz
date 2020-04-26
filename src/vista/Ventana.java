@@ -5,9 +5,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import controlador.*;
+import modelo.*;
 
 
 public class Ventana extends JFrame {
+	
+	//prueba de DetalleProyecto:
+	private DetalleProyecto vistaDetalleProyecto;
+	
 	
 	private BarraSuperior vistaBarraSuperior;
 	private ControlIrAMiPerfil contIrAMiPerfil;
@@ -67,6 +72,18 @@ public class Ventana extends JFrame {
 		this.vistaBarraSuperior = new BarraSuperior();
 		contentPane.add(vistaBarraSuperior, BorderLayout.NORTH);
 
+		
+		
+		//prueba de la pantalla de proyecto
+		String descripcion = "Un proyecto rechulon para chicas malas que son rechulonas y molonas, tambien es importante que tengan alto flow, para pertenecer solo tienes que decir las palabras magicas: Que falta de respeto mami como te atreves a venir sin pantis";
+		Ciudadano creador = new Ciudadano("ponbebe", "Anuel", "72231461P");
+		Proyecto p = new ProyectoSocial("Puente para perras", descripcion, 200000, creador, "Las chicas malas", TipoAlcance.INTERNACIONAL);
+		
+		this.vistaDetalleProyecto = new DetalleProyecto(p);
+		ventana.add(vistaDetalleProyecto, "detalleProyecto");
+		
+		
+		
 		//contenidos de la ventana:
 
 		this.vistaHome = new Home();

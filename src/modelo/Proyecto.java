@@ -30,13 +30,12 @@ public class Proyecto implements Serializable {
 	private List<ElementoColectivo> listadoApoyos;
 	private List<Ciudadano> listadoSuscripciones;
 	private String idEnvio;
-	private TipoProyecto tipo;
 		
 	
 
 
 	public Proyecto(String titulo,
-					String descripcion, double presupuestoSolicitado, ElementoColectivo creador, TipoProyecto tipo) {
+					String descripcion, double presupuestoSolicitado, ElementoColectivo creador) {
 		
 		this.titulo = titulo;
 		//El id de cada proyecto será uno mayor que el del último proyecto creado
@@ -46,8 +45,7 @@ public class Proyecto implements Serializable {
 		this.fechaCreacion = FechaSimulada.getHoy();
 		this.descripcion = descripcion;
 		this.presupuestoSolicitado = presupuestoSolicitado;
-		this.tipo = tipo;
-		this.estado = EstadoProyecto.pendienteCreacion;
+		this.estado = EstadoProyecto.PENDIENTECREACION;
 		this.autorizado = false;
 		this.apoyos = 0;
 		this.fechaUltimoApoyo = FechaSimulada.getHoy();
@@ -88,7 +86,7 @@ public class Proyecto implements Serializable {
 		public ElementoColectivo getCreador() { return creador; }
 		public List<ElementoColectivo> getListadoApoyos() { return listadoApoyos;}
 		public List<Ciudadano> getListadoSuscripciones() { return listadoSuscripciones;}
-		public TipoProyecto getTipo() {return tipo;}
+		public EstadoProyecto getEstado() {return estado;}
 
 	
 		
@@ -106,7 +104,7 @@ public class Proyecto implements Serializable {
 		public void setCreador(ElementoColectivo creador) { this.creador = creador;}
 		public void setListadoApoyos(ArrayList<ElementoColectivo> listadoApoyos) {this.listadoApoyos = listadoApoyos;}
 		public void setListadoSuscripciones(List<Ciudadano> listadoSuscripciones) {this.listadoSuscripciones = listadoSuscripciones;}
-		public void setTipo(TipoProyecto tipo) {this.tipo = tipo;}
+	
 	
 
 		/**
@@ -122,16 +120,16 @@ public class Proyecto implements Serializable {
 			estado = e;
 			String s = "El proyecto " + this.titulo + " ha pasado a estado " + e;
 
-			if(e.equals(EstadoProyecto.aprobado)){
+			if(e.equals(EstadoProyecto.APROBADO)){
 				s+= " con un presupuesto concedido de: " + presupuestoConcedido;
 			}
 
-			if(e.equals(EstadoProyecto.rechazado)){
+			if(e.equals(EstadoProyecto.RECHAZADO)){
 				Aplicacion.getAplicacion().eliminarProyecto(this);
 			}
 			
 			for(Ciudadano c:listadoSuscripciones){
-				new Notificacion(s, c);
+				new NotificacionProyecto(this,c);
 			}
 		}
 
@@ -143,8 +141,8 @@ public class Proyecto implements Serializable {
 		 * @return boolean true si se ha apoyado con exito, false en caso contrario
 		 */
 		public boolean apoyarProyecto(ElementoColectivo e) {
-			if(listadoApoyos.contains(e) || this.estado.equals(EstadoProyecto.caducado)
-				|| this.estado.equals(EstadoProyecto.aprobado)) {
+			if(listadoApoyos.contains(e) || this.estado.equals(EstadoProyecto.CADUCADO)
+				|| this.estado.equals(EstadoProyecto.APROBADO)) {
 				return false;
 			}
 			
@@ -155,7 +153,7 @@ public class Proyecto implements Serializable {
 			if(e.getClass().equals(Ciudadano.class)) {
 				apoyos+=1;
 				if(apoyos >= Aplicacion.getAplicacion().getApoyosMin()){
-					cambiarEstado(EstadoProyecto.disponible);;
+					cambiarEstado(EstadoProyecto.DISPONIBLE);;
 				}
 				fechaUltimoApoyo = FechaSimulada.getHoy();
 				return true;
@@ -182,7 +180,7 @@ public class Proyecto implements Serializable {
 						((Ciudadano) ele).anadirAMisProyectosApoyados(this);
 						apoyos+=1;
 						if(apoyos >= Aplicacion.getAplicacion().getApoyosMin()){
-							cambiarEstado(EstadoProyecto.disponible);;
+							cambiarEstado(EstadoProyecto.DISPONIBLE);;
 						}
 						fechaUltimoApoyo = FechaSimulada.getHoy();
 					}
@@ -219,11 +217,7 @@ public class Proyecto implements Serializable {
 			if(listadoSuscripciones.contains(ciu)) {
 				return false;
 			}
-			if(ciu.getProyectosSuscritos().contains(this)){
-				return false;
-			}
 			listadoSuscripciones.add(ciu);
-			ciu.anadirAMisProyectosSuscritos(this);
 			
 			return true;
 		}
@@ -237,10 +231,10 @@ public class Proyecto implements Serializable {
 		 * @return EstadoProyecto
 		 */
 		public EstadoProyecto consultarEstadoProyecto(){
-			if(estado.equals(EstadoProyecto.noEnviado) && fechaUltimoApoyo.isBefore(FechaSimulada.getHoy().minusDays(30))){
-				this.cambiarEstado(EstadoProyecto.caducado);
+			if(estado.equals(EstadoProyecto.NOENVIADO) && fechaUltimoApoyo.isBefore(FechaSimulada.getHoy().minusDays(30))){
+				this.cambiarEstado(EstadoProyecto.CADUCADO);
 			} if(apoyos >= Aplicacion.getAplicacion().getApoyosMin()) {
-				this.cambiarEstado(EstadoProyecto.disponible);
+				this.cambiarEstado(EstadoProyecto.DISPONIBLE);
 			}
 
 			return estado;
@@ -252,7 +246,7 @@ public class Proyecto implements Serializable {
 		 *
 		 */
 		void enviarProyecto() throws Exception {
-			if(this.consultarEstadoProyecto().equals(EstadoProyecto.disponible)) {
+			if(this.consultarEstadoProyecto().equals(EstadoProyecto.DISPONIBLE)) {
 				GrantRequest req = new SolicitudFinanciacion(this);
 				CCGG proxy = CCGG.getGateway();
 				String id = proxy.submitRequest(req);

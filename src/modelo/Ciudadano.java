@@ -22,7 +22,6 @@ public class Ciudadano extends Usuario implements ElementoColectivo, Serializabl
     private List<Colectivo> misColectivos = new ArrayList<Colectivo>();
     //lista de colectivos de los que es representante
     private List<Colectivo> colectivosCreados = new ArrayList<Colectivo>();
-    private List<Proyecto> proyectosSuscritos = new ArrayList<Proyecto>();
     private List<Proyecto> proyectosPropuestos = new ArrayList<Proyecto>();
     private List<Proyecto> proyectosApoyados = new ArrayList<Proyecto>();
 
@@ -33,7 +32,7 @@ public class Ciudadano extends Usuario implements ElementoColectivo, Serializabl
         this.bloqueado = false;
         this.registrado = false;
         //Aplicacion.getAplicacion().anadirElementoColectivo(this);
-        new Notificacion("Aprobación de registro pendiente: " +nomUs, Aplicacion.getAplicacion().getAdministrador());
+        new NotificacionCiudadano(this);
     }
 
     public String getNif() {
@@ -68,13 +67,6 @@ public class Ciudadano extends Usuario implements ElementoColectivo, Serializabl
         this.colectivosCreados = colectivosCreados;
     }
 
-    public List<Proyecto> getProyectosSuscritos() {
-        return this.proyectosSuscritos;
-    }
-
-    public void setProyectosSuscritos(ArrayList<Proyecto> proyectosSuscritos) {
-        this.proyectosSuscritos = proyectosSuscritos;
-    }
 
     public List<Proyecto> getProyectosPropuestos(){
         return this.proyectosPropuestos;
@@ -125,21 +117,7 @@ public class Ciudadano extends Usuario implements ElementoColectivo, Serializabl
         return;
     }
 
-    /**
-     * Método para comprobar si un NIF pertenece a un ciudadano existente en la aplicacion
-     *
-     * @param str String con el NIF a comprobar
-     * @return boolean, true si el NIF está usado, false en caso contrario
-     */
 
-    public static boolean nifEnUso(String str) {
-        for(ElementoColectivo c :Aplicacion.getAplicacion().getListadoElementoColectivos())
-            if(c.getClass().equals(Ciudadano.class))
-                if(((Ciudadano)c).getNif().equals(str)){
-                    return true;
-                }
-        return false;
-    }
 
     /**
      * Método para registrar a un nuevo ciudadano en la aplicación, controlando que
@@ -153,7 +131,7 @@ public class Ciudadano extends Usuario implements ElementoColectivo, Serializabl
      */
 
     public static Ciudadano registrarCiudadano(String contr, String nomUs, String nif) {
-        if(nifEnUso(nif) || Usuario.nombreEnUso(nomUs)){
+        if(Aplicacion.getAplicacion().nifEnUso(nif) || Usuario.nombreEnUso(nomUs)){
             return null;
         }
 
@@ -247,24 +225,6 @@ public class Ciudadano extends Usuario implements ElementoColectivo, Serializabl
 
         return true;
     }
-
-
-    /**
-     * Método para añadir un proyecto a la ista de suscritos
-     *
-     * @param p proyecto que se quiere añadir
-     *
-     * @return true en caso favorable, false si ya estuviera añadido
-     */
-     public boolean anadirAMisProyectosSuscritos(Proyecto p){
-        if(proyectosSuscritos.contains(p)){
-            return false;
-        }
-        proyectosSuscritos.add(p);
-
-        return true;
-    }
-
 
     /**
      * Método para solicitar el informe de popularidad
