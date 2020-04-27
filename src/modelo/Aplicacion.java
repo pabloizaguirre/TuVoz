@@ -248,7 +248,7 @@ public class Aplicacion implements Serializable {
         //Creamos un proyecto como colectivo
         List<Distrito> d = new ArrayList<Distrito>();
         d.add(Distrito.MONCLOAARAVACA);
-        ProyectoInfraestructura p1 = new ProyectoInfraestructura("Puente", "Puente por encima del rio", 5000, c1, new Imagen("PlanoPuente.jpg"), d);
+        ProyectoInfraestructura p1 = new ProyectoInfraestructura("Puente", "Puente por encima del rio", 5000, c1, new Imagen("planopuente.jpg","PlanoPuente"), d);
         System.out.println("\nEl colectivo " + c1 + " ha creado el proyecto " + p1);
         
         //Comprobamos que el proyecto tiene un apoyo, el del representante

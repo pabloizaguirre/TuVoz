@@ -4,7 +4,6 @@ package vista;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-import modelo.TipoProyecto;
 
 
 public class CrearProyecto extends JPanel {

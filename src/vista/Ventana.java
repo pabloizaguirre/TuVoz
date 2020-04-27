@@ -4,6 +4,9 @@ package vista;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 import controlador.*;
 import modelo.*;
 
@@ -83,8 +86,12 @@ public class Ventana extends JFrame {
 		String descripcion = "Un proyecto rechulon para chicas malas que son rechulonas y molonas, tambien es importante que tengan alto flow, para pertenecer solo tienes que decir las palabras magicas: Que falta de respeto mami como te atreves a venir sin pantis";
 		Ciudadano creador = new Ciudadano("ponbebe", "Anuel", "72231461P");
 		Proyecto p = new ProyectoSocial("Puente para perras", descripcion, 200000, creador, "Las chicas malas", TipoAlcance.INTERNACIONAL);
+		List<Distrito> d = new ArrayList<Distrito>();
+	    d.add(Distrito.MONCLOAARAVACA);
+	    d.add(Distrito.MORATALAZ);
+		Proyecto pInfraestructura = new ProyectoInfraestructura("Puente para conejas", descripcion, 10, creador, new Imagen("/Users/casa/Desktop/IMG_0377_Facetune_27-03-2019-12-36-33.jpeg", "postu"), d);
 		
-		this.vistaDetalleProyecto = new DetalleProyecto(p);
+		this.vistaDetalleProyecto = new DetalleProyecto(pInfraestructura);
 		ventana.add(vistaDetalleProyecto, "detalleProyecto");
 		
 		

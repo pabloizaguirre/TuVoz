@@ -11,12 +11,18 @@ import java.io.*;
 
 public class Imagen implements Serializable{
     private String nombre;
+    private String path;
 
-    public Imagen(String nombre){
+    public Imagen(String path, String nombre){
         this.nombre = nombre;
+        this.path = path;
     }
 
     public String getNombre() {
         return this.nombre;
+    }
+    
+    public String getPath() {
+    	return path;
     }
 }

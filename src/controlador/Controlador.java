@@ -16,6 +16,7 @@ public class Controlador {
 	private ControlExaminar contrExaminar;
 	private ControlIniciarSesion contrIniciarSesion;
 	private ControlRegistrar contrRegistrar;
+	private ControlApoyar contrApoyar;
 
 	
 	private Ventana frame;
@@ -33,6 +34,7 @@ public class Controlador {
 		this.contrExaminar = new ControlExaminar(frame);
 		this.contrIniciarSesion = new ControlIniciarSesion(frame);
 		this.contrRegistrar = new ControlRegistrar(frame);
+		//this.contrApoyar = new ControlApoyar(frame)
 	}
 
 	public ControlIrACrearColectivo getControlIrACrearColectivo() {

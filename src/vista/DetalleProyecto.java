@@ -1,7 +1,11 @@
 package vista;
 
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import modelo.*;
@@ -12,11 +16,21 @@ public class DetalleProyecto extends JPanel{
 	private JButton enviarAFinanciacion;
 	private JButton suscribirse;
 	private JButton apoyar;
+	private Proyecto proy;
 
 	public DetalleProyecto(Proyecto proyecto) {
+		proy = proyecto;
 		setLayout(new BorderLayout());
 		
 		Integer tipo = 0;
+		Usuario usuarioActual = Aplicacion.getAplicacion().getUsuarioActual();
+		
+		//panel de la derecha con la foto si tiene
+		JPanel right = new JPanel();
+		SpringLayout rLayout = new SpringLayout();
+		right.setLayout(rLayout);	
+		right.setPreferredSize(new Dimension(300,300));
+		
 		
 		//panel de la izquierda con los detalles del proyecto
 		JPanel left = new JPanel();
@@ -26,9 +40,6 @@ public class DetalleProyecto extends JPanel{
 		JLabel titulo = new JLabel(proyecto.getTitulo());
 		titulo.setFont(new Font(titulo.getFont().getName(), Font.PLAIN, titulo.getFont().getSize()+20));
 		
-		JPanel detalles = new JPanel();
-		detalles.setLayout(new BoxLayout(detalles, BoxLayout.PAGE_AXIS));
-		
 		JLabel labelTipo;
 		if(proyecto instanceof ProyectoSocial) {
 			tipo = 1;
@@ -37,6 +48,35 @@ public class DetalleProyecto extends JPanel{
 			labelTipo = new JLabel("Proyecto de infraestructura");
 		}
 		labelTipo.setFont(new Font(labelTipo.getFont().getName(), Font.PLAIN, labelTipo.getFont().getSize()+2));
+		
+		JPanel botones = new JPanel();
+		
+		solicitarInforme = new JButton("Solicitar informe de popularidad");
+		enviarAFinanciacion = new JButton("Enviar a financiacion");
+		suscribirse = new JButton("Suscribirse");
+		
+		if(!proyecto.getListadoApoyos().contains(usuarioActual)) {
+			apoyar = new JButton("Apoyar");
+		} else {
+			apoyar = new JButton("Apoyado");
+			apoyar.setEnabled(false);
+		}
+		if(proyecto.getListadoSuscripciones().contains(usuarioActual)) {
+			suscribirse = new JButton("Suscribirse");
+		} else {
+			suscribirse = new JButton("Suscrito");
+			suscribirse.setEnabled(false);
+		}
+		botones.add(apoyar);
+		botones.add(suscribirse);
+		if(proyecto.getCreador().equals(usuarioActual)) {
+			botones.add(solicitarInforme);
+			botones.add(enviarAFinanciacion);
+		}
+		
+		
+		JPanel detalles = new JPanel();
+		detalles.setLayout(new BoxLayout(detalles, BoxLayout.PAGE_AXIS));
 		
 		JLabel presupuestoSolicitado = new JLabel("Presupesto solicitado: " + proyecto.getPresupuestoSolicitado() + "€");
 		
@@ -60,7 +100,10 @@ public class DetalleProyecto extends JPanel{
 		lLayout.putConstraint(BorderLayout.NORTH, labelTipo, 0, BorderLayout.SOUTH, titulo);
 		lLayout.putConstraint(BorderLayout.WEST, labelTipo, 22, BorderLayout.WEST, left);
 		
-		lLayout.putConstraint(BorderLayout.NORTH, detalles, 20, BorderLayout.SOUTH, labelTipo);
+		lLayout.putConstraint(BorderLayout.NORTH, botones, 5, BorderLayout.SOUTH, labelTipo);
+		lLayout.putConstraint(BorderLayout.WEST, botones, 20, BorderLayout.WEST, left);
+		
+		lLayout.putConstraint(BorderLayout.NORTH, detalles, 15, BorderLayout.SOUTH, botones);
 		lLayout.putConstraint(BorderLayout.WEST, detalles, 22, BorderLayout.WEST, left);
 		lLayout.putConstraint(BorderLayout.EAST, detalles, 0, BorderLayout.EAST, left);
 		
@@ -87,6 +130,13 @@ public class DetalleProyecto extends JPanel{
 			distritos.setAlignmentX(LEFT_ALIGNMENT);
 			left.add(Box.createRigidArea(new Dimension(0, 5)));
 			detalles.add(distritos);
+			
+			ImageIcon imagenProyecto = Ventana.createImageIcon(((ProyectoInfraestructura)proyecto).getImagen().getPath(), ((ProyectoInfraestructura)proyecto).getImagen().getNombre());
+			JLabel labelImagen = new JLabel(imagenProyecto);
+			rLayout.putConstraint(BorderLayout.WEST, labelImagen, 20, BorderLayout.WEST, right);
+			rLayout.putConstraint(BorderLayout.EAST, labelImagen, -20, BorderLayout.EAST, right);
+			rLayout.putConstraint(BorderLayout.SOUTH, labelImagen, 0, BorderLayout.SOUTH, right);
+			right.add(labelImagen);
 		} else {
 			JLabel grupoSocial = new JLabel("Grupo social: " + ((ProyectoSocial) proyecto).getGrupoSocial());
 			JLabel alcance = new JLabel("Alcance: " + ((ProyectoSocial) proyecto).getAlcance());
@@ -102,51 +152,37 @@ public class DetalleProyecto extends JPanel{
 		
 		left.add(titulo);
 		left.add(labelTipo);
+		left.add(botones);
 		left.add(detalles);
-		
-		//panel de la derecha con los botones
-		JPanel right = new JPanel();
-		right.setLayout(new BoxLayout(right, BoxLayout.PAGE_AXIS));
-		/*SpringLayout rLayout = new SpringLayout();
-		right.setLayout(rLayout);*/
-		right.setPreferredSize(new Dimension(300, 100));
-		
-		solicitarInforme = new JButton("Solicitar informe de popularidad");
-		enviarAFinanciacion = new JButton("Enviar a financiacion");
-		suscribirse = new JButton("Suscribirse");
-		apoyar = new JButton("Apoyar");
-		
-		/*rLayout.putConstraint(BorderLayout.NORTH, apoyar, 0, BorderLayout.SOUTH, titulo);
-		rLayout.putConstraint(BorderLayout.EAST, apoyar, -20, BorderLayout.EAST, right);
-		
-		rLayout.putConstraint(BorderLayout.NORTH, suscribirse, 5, BorderLayout.SOUTH, apoyar);
-		rLayout.putConstraint(BorderLayout.EAST, suscribirse, -20, BorderLayout.EAST, right);
-		
-		rLayout.putConstraint(BorderLayout.NORTH, solicitarInforme, 5, BorderLayout.SOUTH, suscribirse);
-		rLayout.putConstraint(BorderLayout.EAST, solicitarInforme, -20, BorderLayout.EAST, right);
-		
-		rLayout.putConstraint(BorderLayout.NORTH, enviarAFinanciacion, 5, BorderLayout.SOUTH, solicitarInforme);
-		rLayout.putConstraint(BorderLayout.EAST, enviarAFinanciacion, -20, BorderLayout.EAST, right);
-		*/
-		
-		apoyar.setAlignmentX(RIGHT_ALIGNMENT);
-		suscribirse.setAlignmentX(RIGHT_ALIGNMENT);
-		solicitarInforme.setAlignmentX(RIGHT_ALIGNMENT);
-		enviarAFinanciacion.setAlignmentX(RIGHT_ALIGNMENT);
-		
-		right.add(Box.createRigidArea(new Dimension(0, 30)));
-		right.add(apoyar);
-		right.add(Box.createRigidArea(new Dimension(0, 5)));
-		right.add(suscribirse);
-		right.add(Box.createRigidArea(new Dimension(0, 5)));
-		right.add(solicitarInforme);
-		right.add(Box.createRigidArea(new Dimension(0, 5)));
-		right.add(enviarAFinanciacion);
-		
 		
 		
 		add(right, BorderLayout.EAST);
 		add(left, BorderLayout.CENTER);
 		
 	}
+	
+	public Proyecto getProyecto() {
+		return proy;
+	}
+	
+	public JButton getApoyar() {
+		return apoyar;
+	}
+	
+	public void setControladorApoyar(ActionListener c) {  
+		apoyar.addActionListener(c);
+	}
+	
+	public void setControladorSuscribirse(ActionListener c) {  
+		suscribirse.addActionListener(c);
+	}
+	
+	public void setControladorEnviarAFinanciacion(ActionListener c) {  
+		enviarAFinanciacion.addActionListener(c);
+	}
+	
+	public void setControladorSolicitarInforme(ActionListener c) {  
+		solicitarInforme.addActionListener(c);
+	}
+	
 }
