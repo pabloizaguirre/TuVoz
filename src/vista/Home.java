@@ -17,8 +17,10 @@ public class Home extends JPanel{
 	private JButton botonAnadirProyecto;
 	private JButton botonAnadirColectivo;
 	
-	private JPanel listaProyectos2;
-	private HashMap<Proyecto,JButton> botonesProyectos;
+	private JPanel listaProyectos2 = new JPanel();
+	private HashMap<Proyecto,JButton> botonesProyectos = new HashMap<Proyecto,JButton>();
+	
+	private static ImageIcon icon1 = Ventana.createImageIcon("src/icons/anadir120_fino.png", "IconoAnadir");
 	
 	
 	public Home() {
@@ -40,19 +42,17 @@ public class Home extends JPanel{
 		JLabel labelProyectos = new JLabel("  Proyectos: ");
 		labelProyectos.setFont(new Font(labelProyectos.getFont().getName(), Font.PLAIN, labelProyectos.getFont().getSize()+5));
 		
-		final JPanel listaProyectos = new JPanel();
-		listaProyectos.setLayout(new FlowLayout(FlowLayout.LEFT));
-		ImageIcon icon1 = Ventana.createImageIcon("src/icons/anadir120_fino.png", "IconoAnadir");
-
-		JScrollPane scroll = new JScrollPane(listaProyectos);
+		listaProyectos2.setLayout(new FlowLayout(FlowLayout.LEFT));
+		
+		
+		JScrollPane scroll = new JScrollPane(listaProyectos2);
 		scroll.setPreferredSize(new Dimension(700, 150));
 		scroll.setBorder(null);
 		
-		botonAnadirProyecto = new JButton(icon1);
+		JButton boton;
 		
-		botonAnadirProyecto.setPreferredSize(new Dimension(120, 120));
-		
-		listaProyectos.add(botonAnadirProyecto);
+		setListaProyectos();
+		/*
 		int i = 0;
 		while (i < 15) {
 			String s = "Proyecto " + i;
@@ -62,7 +62,7 @@ public class Home extends JPanel{
 			
 			listaProyectos.add(boton); 
 		}
-		listaProyectos.setVisible(true); 
+		listaProyectos.setVisible(true); */
 		
 		proyectos.add(labelProyectos, BorderLayout.WEST);
 		proyectos.add(scroll, BorderLayout.SOUTH);
@@ -100,7 +100,7 @@ public class Home extends JPanel{
 		while (j < 5) {
 			String s = "Colectivo " + j;
 			j++;
-			JButton boton = new JButton(s); 
+			boton = new JButton(s); 
 			boton.setPreferredSize(new Dimension(120, 120));
 			
 			listaColectivos.add(boton); 
@@ -121,8 +121,12 @@ public class Home extends JPanel{
 	}
 	
 	public void setListaProyectos() {
-		listaProyectos2 = new JPanel();
 		listaProyectos2.setLayout(new FlowLayout(FlowLayout.LEFT));
+		
+		botonAnadirProyecto = new JButton(icon1);
+		botonAnadirProyecto.setPreferredSize(new Dimension(120, 120));
+		listaProyectos2.add(botonAnadirProyecto);
+		
 		JButton boton;
 		for(Proyecto p:Aplicacion.getAplicacion().getListadoProyectos()) {
 			boton = new JButton(p.getTitulo());

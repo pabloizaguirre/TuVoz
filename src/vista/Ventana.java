@@ -92,6 +92,9 @@ public class Ventana extends JFrame {
 	    d.add(Distrito.MORATALAZ);
 		Proyecto pInfraestructura = new ProyectoInfraestructura("Puente para conejas", descripcion, 10, creador, new Imagen("/Users/casa/Desktop/IMG_0377_Facetune_27-03-2019-12-36-33.jpeg", "postu"), d);
 		
+		this.vistaHome = new Home();
+		ventana.add(vistaHome, "home");
+		
 		this.vistaDetalleProyecto = new DetalleProyecto(p);
 		ventana.add(vistaDetalleProyecto, "detalleProyecto");
 		
@@ -103,8 +106,7 @@ public class Ventana extends JFrame {
 		this.vistaInicioRegistro = new InicioRegistro();
 		ventana.add(vistaInicioRegistro, "inicioRegistro");
 
-		this.vistaHome = new Home();
-		ventana.add(vistaHome, "home");
+		
 		
 		this.vistaHomeAdmin = new HomeAdmin();
 		ventana.add(vistaHomeAdmin, "homeAdmin");
