@@ -30,7 +30,15 @@ public class InicioRegistro extends JPanel {
 	public InicioRegistro() {
 		SpringLayout cLayout = new SpringLayout();
 		this.setLayout(cLayout);
+		ImageIcon icon1 = Ventana.createImageIcon("src/icons/logo.jpneg", "Logo");
+		JLabel logo = new JLabel(icon1);
 		
+		
+		this.add(logo);
+		cLayout.putConstraint(BorderLayout.EAST, logo, -400, BorderLayout.EAST, this);
+		cLayout.putConstraint(BorderLayout.WEST, logo, -50, BorderLayout.WEST, this);
+		cLayout.putConstraint(BorderLayout.NORTH, logo, 50, BorderLayout.NORTH, this);	
+		cLayout.putConstraint(BorderLayout.SOUTH, logo, -100, BorderLayout.SOUTH, this);	
 	
 		//panel de inicio de sesion
 		final JPanel inicio = new JPanel();
@@ -53,8 +61,7 @@ public class InicioRegistro extends JPanel {
 				
 
 		this.add(inicio);
-		
-		
+	
 		
 		
 		//panel de registro
@@ -75,7 +82,7 @@ public class InicioRegistro extends JPanel {
 
 		registrarse.setVisible(true);
 
-		regLayout.putConstraint(BorderLayout.NORTH, intro, -350, BorderLayout.SOUTH, registrarse);
+		regLayout.putConstraint(BorderLayout.NORTH, intro, 20, BorderLayout.NORTH, registrarse);
 		regLayout.putConstraint(BorderLayout.NORTH, labelnifreg, 20, BorderLayout.SOUTH, intro);
 		regLayout.putConstraint(BorderLayout.NORTH, jtfnifreg, 5, BorderLayout.SOUTH, labelnifreg);
 		regLayout.putConstraint(BorderLayout.NORTH, labelusuarioreg, 10, BorderLayout.SOUTH, jtfnifreg);
