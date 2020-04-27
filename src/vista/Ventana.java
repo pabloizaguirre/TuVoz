@@ -22,6 +22,7 @@ public class Ventana extends JFrame {
 	private ControlIrACrearColectivo contIrACrearColectivo;
 	
 	private Home vistaHome;
+	private HomeAdmin vistaHomeAdmin;
 	
 	private CrearColectivo vistaCrearColectivo;
 	private ControlCrearColectivo contrCrearColectivo;
@@ -39,6 +40,10 @@ public class Ventana extends JFrame {
 	
 	
 	private ControlExaminar contrExaminar;
+	
+	private InicioRegistro vistaInicioRegistro;
+	private ControlRegistrar contrRegistrar;
+	private ControlIniciarSesion contrIniciarSesion;
 
 
 
@@ -73,7 +78,7 @@ public class Ventana extends JFrame {
 		contentPane.add(vistaBarraSuperior, BorderLayout.NORTH);
 
 		
-		
+		/*
 		//prueba de la pantalla de proyecto
 		String descripcion = "Un proyecto rechulon para chicas malas que son rechulonas y molonas, tambien es importante que tengan alto flow, para pertenecer solo tienes que decir las palabras magicas: Que falta de respeto mami como te atreves a venir sin pantis";
 		Ciudadano creador = new Ciudadano("ponbebe", "Anuel", "72231461P");
@@ -82,12 +87,19 @@ public class Ventana extends JFrame {
 		this.vistaDetalleProyecto = new DetalleProyecto(p);
 		ventana.add(vistaDetalleProyecto, "detalleProyecto");
 		
-		
+		*/
 		
 		//contenidos de la ventana:
+		
+		
+		this.vistaInicioRegistro = new InicioRegistro();
+		ventana.add(vistaInicioRegistro, "inicioRegistro");
 
 		this.vistaHome = new Home();
 		ventana.add(vistaHome, "home");
+		
+		this.vistaHomeAdmin = new HomeAdmin();
+		ventana.add(vistaHomeAdmin, "homeAdmin");
 		
 		this.vistaMiPerfil = new MiPerfil();
 		ventana.add(vistaMiPerfil, "miPerfil");
@@ -103,6 +115,8 @@ public class Ventana extends JFrame {
 		
 		this.vistaCrearProyectoInfraestructura = new CrearProyectoInfraestructura();
 		ventana.add(vistaCrearProyectoInfraestructura, "crearProyectoInfraestructura");
+		
+	
 
 		contentPane.add(scroll, BorderLayout.CENTER);
 	}
@@ -135,6 +149,12 @@ public class Ventana extends JFrame {
 		
 		this.contrExaminar = controlador.getControlExaminar();
 		vistaCrearProyectoInfraestructura.setControladorExaminar(contrExaminar);
+		
+		this.contrIniciarSesion = controlador.getControlIniciarSesion();
+		vistaInicioRegistro.setControlIniciarSesion(contrIniciarSesion);
+		
+		this.contrRegistrar = controlador.getControlRegistrar();
+		vistaInicioRegistro.setControlRegistrar(contrRegistrar);
 	}
 
 	public MiPerfil getVistaMiPerfil() {
@@ -155,6 +175,11 @@ public class Ventana extends JFrame {
 	
 	public CrearProyectoInfraestructura getVistaCrearProyectoInfraestructura() {
 		return this.vistaCrearProyectoInfraestructura;
+	}
+	
+	
+	public InicioRegistro getVistaInicioRegistro() {
+		return this.vistaInicioRegistro;
 	}
 	
 	public BarraSuperior getVistaBarraSuperior() {

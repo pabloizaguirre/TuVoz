@@ -28,6 +28,8 @@ public class ControlCrearColectivo implements ActionListener {
 					"Debe proporcionar un nombre para el nuevo colectivo.", "Error", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
+		
+		new Colectivo(vista.getNombre(), (Ciudadano)Aplicacion.getAplicacion().getUsuarioActual());
 	
 		JOptionPane.showMessageDialog(vista,
 					"Colectivo creado con éxito", "Proyecto creado", JOptionPane.INFORMATION_MESSAGE);

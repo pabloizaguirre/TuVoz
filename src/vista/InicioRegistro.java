@@ -6,6 +6,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
@@ -22,8 +23,8 @@ public class InicioRegistro extends JPanel {
 	private JLabel labelusuarioreg;
 	private JTextField jtfusuarioreg;
 	private JLabel labelpasswordreg;
-	private JTextField jtfpasswordreg;
-	private JButton buttonregistro;
+	private JPasswordField passwordreg;
+	private JButton botonRegistro;
 	
 
 	public InicioRegistro() {
@@ -69,27 +70,27 @@ public class InicioRegistro extends JPanel {
 		labelusuarioreg = new JLabel("Usuario");
 		jtfusuarioreg = new JTextField(15);
 		labelpasswordreg = new JLabel("Contraseña");
-		jtfpasswordreg = new JTextField(15);
-		buttonregistro = new JButton("Registrarse");
+		passwordreg = new JPasswordField(15);
+		botonRegistro = new JButton("Registrarse");
 
 		registrarse.setVisible(true);
 
-		regLayout.putConstraint(BorderLayout.NORTH, intro, -380, BorderLayout.SOUTH, registrarse);
+		regLayout.putConstraint(BorderLayout.NORTH, intro, -350, BorderLayout.SOUTH, registrarse);
 		regLayout.putConstraint(BorderLayout.NORTH, labelnifreg, 20, BorderLayout.SOUTH, intro);
 		regLayout.putConstraint(BorderLayout.NORTH, jtfnifreg, 5, BorderLayout.SOUTH, labelnifreg);
 		regLayout.putConstraint(BorderLayout.NORTH, labelusuarioreg, 10, BorderLayout.SOUTH, jtfnifreg);
 		regLayout.putConstraint(BorderLayout.NORTH, jtfusuarioreg, 5, BorderLayout.SOUTH, labelusuarioreg);
 		regLayout.putConstraint(BorderLayout.NORTH, labelpasswordreg, 10, BorderLayout.SOUTH, jtfusuarioreg);
-		regLayout.putConstraint(BorderLayout.NORTH, jtfpasswordreg, 5, BorderLayout.SOUTH, labelpasswordreg); 
-		regLayout.putConstraint(BorderLayout.NORTH, buttonRegistro, 25, BorderLayout.SOUTH, jtfpasswordreg);
+		regLayout.putConstraint(BorderLayout.NORTH, passwordreg, 5, BorderLayout.SOUTH, labelpasswordreg); 
+		regLayout.putConstraint(BorderLayout.NORTH, botonRegistro, 25, BorderLayout.SOUTH, passwordreg);
 		regLayout.putConstraint(BorderLayout.WEST, intro, 20, BorderLayout.WEST, registrarse);
 		regLayout.putConstraint(BorderLayout.WEST, labelnifreg, 20, BorderLayout.WEST, registrarse);
 		regLayout.putConstraint(BorderLayout.WEST, jtfnifreg, 20, BorderLayout.WEST, registrarse);
 		regLayout.putConstraint(BorderLayout.WEST, labelusuarioreg, 20, BorderLayout.WEST, registrarse);
 		regLayout.putConstraint(BorderLayout.WEST, jtfusuarioreg, 20, BorderLayout.WEST, registrarse);
 		regLayout.putConstraint(BorderLayout.WEST, labelpasswordreg, 20, BorderLayout.WEST, registrarse);
-		regLayout.putConstraint(BorderLayout.WEST, jtfpasswordreg, 20, BorderLayout.WEST, registrarse); 
-		regLayout.putConstraint(BorderLayout.WEST, buttonRegistro, 20, BorderLayout.WEST, registrarse); 
+		regLayout.putConstraint(BorderLayout.WEST, passwordreg, 20, BorderLayout.WEST, registrarse); 
+		regLayout.putConstraint(BorderLayout.WEST, botonRegistro, 20, BorderLayout.WEST, registrarse); 
 		
 		cLayout.putConstraint(BorderLayout.EAST, registrarse, -50, BorderLayout.EAST, this);
 		cLayout.putConstraint(BorderLayout.WEST, registrarse, -400, BorderLayout.EAST, this);
@@ -102,25 +103,26 @@ public class InicioRegistro extends JPanel {
 		registrarse.add(labelusuarioreg);
 		registrarse.add(jtfusuarioreg);
 		registrarse.add(labelpasswordreg);
-		registrarse.add(jtfpasswordreg);
-		registrarse.add(buttonRegistro); 
+		registrarse.add(passwordreg);
+		registrarse.add(botonRegistro); 
 				
 		this.add(registrarse);
 	}
 
-	public void setControladorEntrarApp(ActionListener c) {  
+	public void setControlIniciarSesion(ActionListener c) {  
 		botonEntrar.addActionListener(c);
 	}
 	
-	public void setControladorRegistrarse(ActionListener c) {  
-		buttonRegistro.addActionListener(c);
+	public void setControlRegistrar(ActionListener c) {  
+		botonRegistro.addActionListener(c);
 	}
 
 	public String getNombre() {
 		return jtfnombre.getText();
 	}
 	public String getPassword() {
-		return password.getText();
+		return String.valueOf(password.getPassword());
+
 	}
 	public String getNifReg() {
 		return jtfnifreg.getText();
@@ -129,7 +131,7 @@ public class InicioRegistro extends JPanel {
 		return jtfusuarioreg.getText();
 	}
 	public String getPasswordReg() {
-		return jtfusuarioreg.getText();
+		return String.valueOf(passwordreg.getPassword());
 	}
 
 }

@@ -1,10 +1,12 @@
 package vista;
 
 import java.awt.*;
+
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.*;
-
+import modelo.Distrito;
 
 public class CrearProyectoInfraestructura extends JPanel {
 	
@@ -75,14 +77,13 @@ public class CrearProyectoInfraestructura extends JPanel {
 		botonExaminar.addActionListener(c);
 	}
 
-	public String getDistritos() {
-		String buf = "";
-		if(distrito1.isSelected()) buf += "Distrito1";
-		if(distrito2.isSelected()) buf += "Distrito2";
-		if(distrito3.isSelected()) buf += "Distrito3";
-
-
-		return buf;
+	public ArrayList<Distrito> getDistritos() {
+		ArrayList<Distrito> distritos = new ArrayList<Distrito>();
+		
+		if(distrito1.isSelected()) distritos.add(Distrito.CENTRO);
+		if(distrito2.isSelected()) distritos.add(Distrito.CHAMARTIN);
+		if(distrito3.isSelected()) distritos.add(Distrito.RETIRO);
+		return distritos;
 	}
 	
 }

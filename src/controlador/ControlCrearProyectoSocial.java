@@ -31,6 +31,10 @@ public class ControlCrearProyectoSocial implements ActionListener {
 					"Debe completar todos los apartados.", "Error", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
+		CrearProyecto v = frame.getVistaCrearProyecto();
+		
+		//new ProyectoSocial(v.getNombre(),v.getDescripcion(),v.getPresupuesto(),
+				//()Aplicacion.getAplicacion().getUsuarioActual(), vista.getGrupoSocial(),vista.getTipoAlcance());
 
 		JOptionPane.showMessageDialog(vista,
 					"Proyecto creado y enviado a supervisión por parte de la Administración de Tu Voz.", "Proyecto creado", JOptionPane.INFORMATION_MESSAGE);

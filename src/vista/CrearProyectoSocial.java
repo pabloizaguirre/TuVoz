@@ -74,10 +74,10 @@ public class CrearProyectoSocial extends JPanel {
 	}
 	public TipoAlcance getTipoAlcance() {
 		if(nacional.isSelected()) {
-			return TipoAlcance.nacional;
+			return TipoAlcance.NACIONAL;
 		}
 		else if(internacional.isSelected()) {
-			return TipoAlcance.internacional;
+			return TipoAlcance.INTERNACIONAL;
 		}
 		else {
 			return null;

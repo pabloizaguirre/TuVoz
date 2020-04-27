@@ -26,7 +26,8 @@ public class Aplicacion implements Serializable {
     public Aplicacion(){
         this.listadoProyectos = new ArrayList<Proyecto>();
         this.listadoElementoColectivos = new ArrayList<ElementoColectivo>();
-        this.administrador = new Administrador("Admin", "ContrAdmin");
+        this.administrador = new Administrador("Admin", "123");
+       
     }
 
     public static Aplicacion getAplicacion() {
@@ -61,6 +62,10 @@ public class Aplicacion implements Serializable {
 
     public void setListadoElementoColectivos(List<ElementoColectivo> listadoElementoColectivos) {
         this.listadoElementoColectivos = listadoElementoColectivos;
+    }
+    
+    public void setUsuarioActual(Usuario usuarioActual) {
+    	this.usuarioActual = usuarioActual;
     }
 
     public Usuario getUsuarioActual(){
@@ -242,7 +247,7 @@ public class Aplicacion implements Serializable {
 
         //Creamos un proyecto como colectivo
         List<Distrito> d = new ArrayList<Distrito>();
-        d.add(Distrito.moncloaAravaca);
+        d.add(Distrito.MONCLOAARAVACA);
         ProyectoInfraestructura p1 = new ProyectoInfraestructura("Puente", "Puente por encima del rio", 5000, c1, new Imagen("PlanoPuente.jpg"), d);
         System.out.println("\nEl colectivo " + c1 + " ha creado el proyecto " + p1);
         

@@ -183,7 +183,7 @@ public class Ciudadano extends Usuario implements ElementoColectivo, Serializabl
     public static Ciudadano buscarCiudadano(String str) {
         for(ElementoColectivo c :Aplicacion.getAplicacion().getListadoElementoColectivos()) {
             if(c.getClass().equals(Ciudadano.class))
-                if(((Ciudadano)c).getNombreUsuario().equals(str)) {
+                if(((Ciudadano)c).getNombreUsuario().equals(str) || ((Ciudadano)c).getNif().equals(str)) {
                     return (Ciudadano)c;
                 }
         }
@@ -237,7 +237,7 @@ public class Ciudadano extends Usuario implements ElementoColectivo, Serializabl
         if (getProyectosPropuestos().contains(p)){
             s = "Informe de popularidad del proyecto " + p + " :\nNúmero de apoyos = " + p.getApoyos();
 
-            return new Notificacion(s, this);
+            //return new Notificacion(s, this);
         }
         return null;
     }
@@ -273,7 +273,7 @@ public class Ciudadano extends Usuario implements ElementoColectivo, Serializabl
                 }
             }
             s = "Informe de afinidad de los colectivos " + c1 + " y " + c2 + " :\nÍndice de afinidad: " + (proyeC1apoyC2 + proyeC2apoyC1)/(proyeC1 + proyeC2);
-            return new Notificacion(s, this);
+            //return new Notificacion(s, this);
         }
         return null;
     }

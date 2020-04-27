@@ -9,7 +9,7 @@ import java.io.*;
  * @author Pablo Izaguirre
  * @author Miguel Escribano
  */
-public class Notificacion implements Serializable {
+public abstract class Notificacion implements Serializable {
     
     private String textoNotificacion;
     private Usuario usuario;

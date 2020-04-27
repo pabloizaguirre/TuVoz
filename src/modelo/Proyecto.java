@@ -68,7 +68,7 @@ public class Proyecto implements Serializable {
 
 		/**El proyecto se añade a la lista de proyectos de la aplicacion */
 		Aplicacion.getAplicacion().anadirProyecto(this);
-		new Notificacion("Proyecto pendiente de autorización: " + titulo, Aplicacion.getAplicacion().getAdministrador());
+		new NotificacionProyectoNuevo(this, Aplicacion.getAplicacion().getAdministrador());
 	}
 	
 	
@@ -129,7 +129,7 @@ public class Proyecto implements Serializable {
 			}
 			
 			for(Ciudadano c:listadoSuscripciones){
-				new NotificacionProyecto(this,c);
+				new NotificacionProyectoEstado(this,c);
 			}
 		}
 

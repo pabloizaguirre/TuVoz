@@ -14,8 +14,8 @@ public class Controlador {
 	private ControlCrearProyectoInfraestructura contrCrearProyectoInfraestructura;
 	private ControlIrAHome contrIrAHome;
 	private ControlExaminar contrExaminar;
-	private ControlEntrarApp contrEntarApp;
-	private ControlRegistrarse contrRegistrarse;
+	private ControlIniciarSesion contrIniciarSesion;
+	private ControlRegistrar contrRegistrar;
 
 	
 	private Ventana frame;
@@ -31,8 +31,8 @@ public class Controlador {
 		this.contIrAMiPerfil = new ControlIrAMiPerfil(frame);
 		this.contrIrAHome = new ControlIrAHome(frame);
 		this.contrExaminar = new ControlExaminar(frame);
-		this.contrEntarApp = new ControlEntrarApp(frame);
-		this.contrRegistrarse = new ControlRegistrarse(frame);
+		this.contrIniciarSesion = new ControlIniciarSesion(frame);
+		this.contrRegistrar = new ControlRegistrar(frame);
 	}
 
 	public ControlIrACrearColectivo getControlIrACrearColectivo() {
@@ -66,11 +66,11 @@ public class Controlador {
 	public ControlExaminar getControlExaminar() {
 		return this.contrExaminar;
 	}
-	public ControlEntrarApp getControlEntrarApp() {
-		return this.contrEntrarApp;
+	public ControlIniciarSesion getControlIniciarSesion() {
+		return this.contrIniciarSesion;
 	}
-	public ControlRegistrarse getControlRegistrarse() {
-		return this.contrEntrarApp;
+	public ControlRegistrar getControlRegistrar() {
+		return this.contrRegistrar;
 	}
 
 }

@@ -8,7 +8,7 @@ package modelo;
  */
 
 public enum Distrito {
-   arganzuela,barajas,carabanchel,centro,chamartin,chamberi,ciudadLineal,
-   fuencarralElPardo,hortaleza,latina,moncloaAravaca,moratalaz,puenteVallecas,
-   retiro,salamanca,sanBlasCanillejas,tetuan,usera,vicalvaro,villaVallecas,villaverde; 
+   ARGANZUELA,BARAJAS,CARABANCHEL,CENTRO,CHAMARTIN,CHAMBERI,CIUDADLINEAL,
+   FUENCARRALELPARDO,HORTALEZA,LATINA,MONCLOAARAVACA,MORATALAZ,PUENTEVALLECAS,
+   RETIRO,SALAMANCA,SANBLASCANILLEJAS,TETUAN,USERA,VICALVARO,VILLAVALLECAS,VILLAVERDE; 
 }

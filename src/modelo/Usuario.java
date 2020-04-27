@@ -8,7 +8,7 @@ import java.util.*;
  * @author Miguel Escribano
  */
 
-abstract class Usuario{
+public abstract class Usuario{
     private String nombreUsuario;
     private String contrasena;
 
