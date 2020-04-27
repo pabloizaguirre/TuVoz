@@ -117,12 +117,6 @@ public class Proyecto implements Serializable {
 		 * 
 		 */	
 		public void cambiarEstado(EstadoProyecto e){
-			estado = e;
-			String s = "El proyecto " + this.titulo + " ha pasado a estado " + e;
-
-			if(e.equals(EstadoProyecto.APROBADO)){
-				s+= " con un presupuesto concedido de: " + presupuestoConcedido;
-			}
 
 			if(e.equals(EstadoProyecto.RECHAZADO)){
 				Aplicacion.getAplicacion().eliminarProyecto(this);

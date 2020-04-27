@@ -2,16 +2,15 @@ package controlador;
 
 import java.awt.event.*;
 
-import vista.MiPerfil;
-import vista.Ventana;
+import vista.*;
 
 public class ControlIrAHome implements ActionListener {
-	private MiPerfil vista;
+	private Home vista;
 	private Ventana frame;
 	
 	public ControlIrAHome(Ventana frame) {
 		this.frame = frame;
-		this.vista = frame.getVistaMiPerfil();
+		this.vista = frame.getVistaHome();
 	}
 
 	/**
@@ -21,7 +20,7 @@ public class ControlIrAHome implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+		frame.actualizarHome();
 		// mostrar nueva vista
 		frame.mostrarPanel("home");
 		

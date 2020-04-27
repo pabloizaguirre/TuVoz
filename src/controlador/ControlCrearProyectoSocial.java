@@ -33,8 +33,18 @@ public class ControlCrearProyectoSocial implements ActionListener {
 		}
 		CrearProyecto v = frame.getVistaCrearProyecto();
 		
-		//new ProyectoSocial(v.getNombre(),v.getDescripcion(),v.getPresupuesto(),
-				//()Aplicacion.getAplicacion().getUsuarioActual(), vista.getGrupoSocial(),vista.getTipoAlcance());
+		/*if(vista.getColectivos().equals("No")) {
+			new ProyectoInfraestructura(v.getNombre(),v.getDescripcion(),v.getPresupuesto(),
+				(Ciudadano)Aplicacion.getAplicacion().getUsuarioActual(), imagen,vista.getDistritos());
+		} else {
+			Colectivo col = Colectivo.buscarColectivo(vista.getColectivos());
+			
+			new ProyectoInfraestructura(v.getNombre(),v.getDescripcion(),v.getPresupuesto(),
+				col, imagen,vista.getDistritos());
+		}
+		
+		*/
+
 
 		JOptionPane.showMessageDialog(vista,
 					"Proyecto creado y enviado a supervisión por parte de la Administración de Tu Voz.", "Proyecto creado", JOptionPane.INFORMATION_MESSAGE);

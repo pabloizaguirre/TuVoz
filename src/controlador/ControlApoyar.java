@@ -13,9 +13,9 @@ public class ControlApoyar implements ActionListener {
 	private DetalleProyecto vista;
 	private Ventana frame;
 	
-	public ControlApoyar(Ventana frame) {
+	public ControlApoyar(Ventana frame, DetalleProyecto vista) {
 		this.frame = frame;
-		this.vista = frame.getVistaDetalleProyecto();
+		this.vista = vista;
 	}
 	/**
 	 * Hace que el usuario que esta utilizando la aplicacion apoye un proyecto
@@ -24,7 +24,7 @@ public class ControlApoyar implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		Usuario usuarioActual = Aplicacion.getAplicacion().getUsuarioActual();
-		//vista.getProyecto().apoyarProyecto((ElementoColectivo) Aplicacion.getAplicacion().getUsuarioActual());
+		vista.getProyecto().apoyarProyecto((ElementoColectivo) Aplicacion.getAplicacion().getUsuarioActual());
 		JButton apoyar = vista.getApoyar();
 		apoyar.setText("Apoyado");
 		apoyar.setEnabled(false);

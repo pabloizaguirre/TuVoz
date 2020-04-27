@@ -168,6 +168,8 @@ public class Ventana extends JFrame {
 		
 		this.contrApoyar = controlador.getControlApoyar();
 		vistaDetalleProyecto.setControladorApoyar(contrApoyar);
+		
+		actualizarHome();
 	}
 	
 	public DetalleProyecto getVistaDetalleProyecto() {
@@ -176,6 +178,9 @@ public class Ventana extends JFrame {
 
 	public MiPerfil getVistaMiPerfil() {
 		return this.vistaMiPerfil;
+	}
+	public Home getVistaHome() {
+		return this.vistaHome;
 	}
 	
 	public CrearColectivo getVistaCrearColectivo() {
@@ -208,11 +213,19 @@ public class Ventana extends JFrame {
 		l.show(ventana, carta);
 	}
 
-	public void anadirVentana(JFrame vista, String name) {
+	public void anadirVentana(JPanel vista, String name) {
 		ventana.add(vista, name);
-		CardLayout l = (CardLayout)ventana.getLayout();
+	}
+	
+	public void actualizarHome() {
+		vistaHome.setListaProyectos();
 		
-		l.show(ventana, name);
+		//actualizar controladores
+		ControlIrAProyecto contr;
+		for(Proyecto p:Aplicacion.getAplicacion().getListadoProyectos()) {
+			contr = new ControlIrAProyecto(this, p);
+			vistaHome.setControladorBotonProyecto(contr, p);
+		}
 	}
 }
 

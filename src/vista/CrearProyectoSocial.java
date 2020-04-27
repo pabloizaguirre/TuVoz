@@ -11,6 +11,8 @@ public class CrearProyectoSocial extends JPanel {
 	private JTextField jtfGrupoSocial;
 	private JRadioButton nacional;
 	private JRadioButton internacional;
+	private JLabel labelColectivos;
+	private JComboBox comboColectivos;
 	private JButton botonCrear;
 	
 	public CrearProyectoSocial() {
@@ -47,6 +49,18 @@ public class CrearProyectoSocial extends JPanel {
 		panelCrear.add(panelProyecto, BorderLayout.SOUTH);
 		
 		
+		String[] nombreColectivos;
+		nombreColectivos.add("No");
+		
+		Object[] listadoColectivos =((Ciudadano)Aplicacion.getAplicacion().getUsuarioActual()).getColectivosCreados().toArray();
+
+		for(Colectivo c : (Colectivo[])listadoColectivos) {
+			nombreColectivos.add(c.getTitulo());
+		}
+
+		labelColectivos = new JLabel("Selecciona de la lista para crear proyecto de colectivo");
+		comboColectivos = new JComboBox(nombreColectivos);
+
 		
 		JPanel panelBoton = new JPanel(new BorderLayout());
 		botonCrear = new JButton("Crear");
@@ -59,6 +73,8 @@ public class CrearProyectoSocial extends JPanel {
 		JPanel panelPrincipal = new JPanel();
 		
 		panelPrincipal.add(panelCrear);
+		panelPrincipal.add(labelColectivos);
+		panelPrincipal.add(comboColectivos);
 		panelPrincipal.add(panelBoton);
 		
 		add(panelPrincipal);
@@ -82,6 +98,10 @@ public class CrearProyectoSocial extends JPanel {
 		else {
 			return null;
 		}
+	}
+
+	public String getColectivos() {
+		return (String)comboColectivos.getSelectedItem();
 	}
 	
 }

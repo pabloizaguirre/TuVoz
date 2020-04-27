@@ -17,7 +17,7 @@ public class Home extends JPanel{
 	private JButton botonAnadirProyecto;
 	private JButton botonAnadirColectivo;
 	
-	private JPanel listaProyectos2 = new JPanel();
+	private JPanel listaProyectos2;
 	private HashMap<Proyecto,JButton> botonesProyectos = new HashMap<Proyecto,JButton>();
 	
 	private static ImageIcon icon1 = Ventana.createImageIcon("src/icons/anadir120_fino.png", "IconoAnadir");
@@ -42,6 +42,8 @@ public class Home extends JPanel{
 		JLabel labelProyectos = new JLabel("  Proyectos: ");
 		labelProyectos.setFont(new Font(labelProyectos.getFont().getName(), Font.PLAIN, labelProyectos.getFont().getSize()+5));
 		
+		setListaProyectos();
+		
 		listaProyectos2.setLayout(new FlowLayout(FlowLayout.LEFT));
 		
 		
@@ -51,7 +53,7 @@ public class Home extends JPanel{
 		
 		JButton boton;
 		
-		setListaProyectos();
+		
 		/*
 		int i = 0;
 		while (i < 15) {
@@ -121,6 +123,7 @@ public class Home extends JPanel{
 	}
 	
 	public void setListaProyectos() {
+		listaProyectos2 = new JPanel();
 		listaProyectos2.setLayout(new FlowLayout(FlowLayout.LEFT));
 		
 		botonAnadirProyecto = new JButton(icon1);

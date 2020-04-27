@@ -1,5 +1,7 @@
 package controlador;
 
+import java.util.List;
+
 import modelo.*;
 import vista.*;
 
@@ -18,6 +20,7 @@ public class Controlador {
 	private ControlRegistrar contrRegistrar;
 	private ControlApoyar contrApoyar;
 
+	private List<ControlIrAProyecto> contrIrAProyectos;
 	
 	private Ventana frame;
 	
@@ -34,7 +37,7 @@ public class Controlador {
 		this.contrExaminar = new ControlExaminar(frame);
 		this.contrIniciarSesion = new ControlIniciarSesion(frame);
 		this.contrRegistrar = new ControlRegistrar(frame);
-		this.contrApoyar = new ControlApoyar(frame);
+		this.contrApoyar = new ControlApoyar(frame, null);
 	}
 	
 	public ControlApoyar getControlApoyar() {
