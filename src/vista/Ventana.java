@@ -80,7 +80,8 @@ public class Ventana extends JFrame {
 
 		this.vistaBarraSuperior = new BarraSuperior();
 		contentPane.add(vistaBarraSuperior, BorderLayout.NORTH);
-
+		this.vistaInicioRegistro = new InicioRegistro();
+		ventana.add(vistaInicioRegistro, "inicioRegistro");
 		
 		
 		//prueba de la pantalla de proyecto
@@ -101,10 +102,6 @@ public class Ventana extends JFrame {
 		
 		
 		//contenidos de la ventana:
-		
-		
-		this.vistaInicioRegistro = new InicioRegistro();
-		ventana.add(vistaInicioRegistro, "inicioRegistro");
 
 		
 		
