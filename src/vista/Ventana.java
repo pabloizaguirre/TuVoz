@@ -78,7 +78,7 @@ public class Ventana extends JFrame {
 		contentPane.add(vistaBarraSuperior, BorderLayout.NORTH);
 
 		
-		/*
+		
 		//prueba de la pantalla de proyecto
 		String descripcion = "Un proyecto rechulon para chicas malas que son rechulonas y molonas, tambien es importante que tengan alto flow, para pertenecer solo tienes que decir las palabras magicas: Que falta de respeto mami como te atreves a venir sin pantis";
 		Ciudadano creador = new Ciudadano("ponbebe", "Anuel", "72231461P");
@@ -87,7 +87,7 @@ public class Ventana extends JFrame {
 		this.vistaDetalleProyecto = new DetalleProyecto(p);
 		ventana.add(vistaDetalleProyecto, "detalleProyecto");
 		
-		*/
+		
 		
 		//contenidos de la ventana:
 		

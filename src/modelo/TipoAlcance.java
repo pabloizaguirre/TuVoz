@@ -10,4 +10,13 @@ package modelo;
 
 public enum TipoAlcance {
     NACIONAL, INTERNACIONAL;
+	
+	@Override
+	public String toString() {
+		if(this.equals(NACIONAL)) {
+			return "nacional";
+		} else {
+			return "internacional";
+		}
+	}
 }
