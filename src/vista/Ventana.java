@@ -15,6 +15,7 @@ public class Ventana extends JFrame {
 	
 	//prueba de DetalleProyecto:
 	private DetalleProyecto vistaDetalleProyecto;
+	private ControlApoyar contrApoyar;
 	
 	
 	private BarraSuperior vistaBarraSuperior;
@@ -85,13 +86,13 @@ public class Ventana extends JFrame {
 		//prueba de la pantalla de proyecto
 		String descripcion = "Un proyecto rechulon para chicas malas que son rechulonas y molonas, tambien es importante que tengan alto flow, para pertenecer solo tienes que decir las palabras magicas: Que falta de respeto mami como te atreves a venir sin pantis";
 		Ciudadano creador = new Ciudadano("ponbebe", "Anuel", "72231461P");
-		Proyecto p = new ProyectoSocial("Puente para perras", descripcion, 200000, creador, "Las chicas malas", TipoAlcance.INTERNACIONAL);
+		ProyectoSocial p = new ProyectoSocial("Puente para perras", descripcion, 200000, creador, "Las chicas malas", TipoAlcance.INTERNACIONAL);
 		List<Distrito> d = new ArrayList<Distrito>();
 	    d.add(Distrito.MONCLOAARAVACA);
 	    d.add(Distrito.MORATALAZ);
 		Proyecto pInfraestructura = new ProyectoInfraestructura("Puente para conejas", descripcion, 10, creador, new Imagen("/Users/casa/Desktop/IMG_0377_Facetune_27-03-2019-12-36-33.jpeg", "postu"), d);
 		
-		this.vistaDetalleProyecto = new DetalleProyecto(pInfraestructura);
+		this.vistaDetalleProyecto = new DetalleProyecto(p);
 		ventana.add(vistaDetalleProyecto, "detalleProyecto");
 		
 		
@@ -162,6 +163,13 @@ public class Ventana extends JFrame {
 		
 		this.contrRegistrar = controlador.getControlRegistrar();
 		vistaInicioRegistro.setControlRegistrar(contrRegistrar);
+		
+		this.contrApoyar = controlador.getControlApoyar();
+		vistaDetalleProyecto.setControladorApoyar(contrApoyar);
+	}
+	
+	public DetalleProyecto getVistaDetalleProyecto() {
+		return this.vistaDetalleProyecto;
 	}
 
 	public MiPerfil getVistaMiPerfil() {
@@ -198,5 +206,11 @@ public class Ventana extends JFrame {
 		l.show(ventana, carta);
 	}
 
+	public void anadirVentana(JFrame vista, String name) {
+		ventana.add(vista, name);
+		CardLayout l = (CardLayout)ventana.getLayout();
+		
+		l.show(ventana, name);
+	}
 }
 

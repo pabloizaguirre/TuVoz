@@ -29,7 +29,6 @@ public class DetalleProyecto extends JPanel{
 		JPanel right = new JPanel();
 		SpringLayout rLayout = new SpringLayout();
 		right.setLayout(rLayout);	
-		right.setPreferredSize(new Dimension(300,300));
 		
 		
 		//panel de la izquierda con los detalles del proyecto
@@ -61,7 +60,7 @@ public class DetalleProyecto extends JPanel{
 			apoyar = new JButton("Apoyado");
 			apoyar.setEnabled(false);
 		}
-		if(proyecto.getListadoSuscripciones().contains(usuarioActual)) {
+		if(!proyecto.getListadoSuscripciones().contains(usuarioActual)) {
 			suscribirse = new JButton("Suscribirse");
 		} else {
 			suscribirse = new JButton("Suscrito");
@@ -71,7 +70,9 @@ public class DetalleProyecto extends JPanel{
 		botones.add(suscribirse);
 		if(proyecto.getCreador().equals(usuarioActual)) {
 			botones.add(solicitarInforme);
-			botones.add(enviarAFinanciacion);
+			if(proyecto.getEstado().equals(EstadoProyecto.DISPONIBLE)) {
+				botones.add(enviarAFinanciacion);
+			}
 		}
 		
 		
@@ -105,7 +106,7 @@ public class DetalleProyecto extends JPanel{
 		
 		lLayout.putConstraint(BorderLayout.NORTH, detalles, 15, BorderLayout.SOUTH, botones);
 		lLayout.putConstraint(BorderLayout.WEST, detalles, 22, BorderLayout.WEST, left);
-		lLayout.putConstraint(BorderLayout.EAST, detalles, 0, BorderLayout.EAST, left);
+		lLayout.putConstraint(BorderLayout.EAST, detalles, -22, BorderLayout.EAST, left);
 		
 		
 		presupuestoSolicitado.setAlignmentX(LEFT_ALIGNMENT);
@@ -120,6 +121,7 @@ public class DetalleProyecto extends JPanel{
 		
 		
 		if(tipo==0) {
+			right.setPreferredSize(new Dimension(300,300));
 			String s = "Distritos afectados: ";
 			for (Distrito d:((ProyectoInfraestructura)proyecto).getDistritosAfectados()) {
 				s += d + ", ";

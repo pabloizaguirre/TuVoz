@@ -2,17 +2,23 @@ package vista;
 
 import javax.swing.*;
 
+import modelo.*;
+
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.*;
+import java.util.*;
 
 public class Home extends JPanel{
 	
 	private JButton botonAnadirProyecto;
 	private JButton botonAnadirColectivo;
+	
+	private JPanel listaProyectos2;
+	private HashMap<Proyecto,JButton> botonesProyectos;
 	
 	
 	public Home() {
@@ -112,6 +118,24 @@ public class Home extends JPanel{
 		
 		// a�adir componentes al contenedor
 		add(colectivos);	
+	}
+	
+	public void setListaProyectos() {
+		listaProyectos2 = new JPanel();
+		listaProyectos2.setLayout(new FlowLayout(FlowLayout.LEFT));
+		JButton boton;
+		for(Proyecto p:Aplicacion.getAplicacion().getListadoProyectos()) {
+			boton = new JButton(p.getTitulo());
+			boton.setPreferredSize(new Dimension(120, 120));
+			botonesProyectos.put(p, boton);
+			listaProyectos2.add(boton); 
+		}
+	}
+	
+	public void setControladorBotonProyecto(ActionListener c, Proyecto p) {
+		if(botonesProyectos.containsKey(p)) {
+			botonesProyectos.get(p).addActionListener(c);
+		}
 	}
 	
 	public void setControladorAnadirProyecto(ActionListener c) {  
