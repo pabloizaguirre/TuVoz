@@ -190,8 +190,25 @@ public class Ciudadano extends Usuario implements ElementoColectivo, Serializabl
         return null;
     }
 
+    /**
+     * Método para añadir un colectivo a tu lista de creados
+     *
+     * @param c colectivo que se quiere añadir
+     *
+     * @return true en caso favorable, false si ya estuviera añadido a sus colectivos
+     */
+    public boolean anadirAMisColectivosCreados(Colectivo c){
+        if(colectivosCreados.contains(c)){
+            return false;
+        }
+        colectivosCreados.add(c);
 
+        return true;
+    }
 
+    
+    
+    
     /**
      * Método para añadir un colectivo a tu lista
      *

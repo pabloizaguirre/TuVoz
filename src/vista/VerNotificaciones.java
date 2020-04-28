@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 
 import javax.swing.*;
 
+import modelo.Notificacion;
+
 public class VerNotificaciones extends JPanel{
 	
 	private JLabel noticiulabel;
@@ -21,6 +23,6 @@ public class VerNotificaciones extends JPanel{
 			final JPanel noticiup = new JPanel();
 			BoxLayout layoutNoticiup = new BoxLayout(noticiup, BoxLayout.Y_AXIS);
 			noticiup.setLayout(layoutNoticiup);
-			noticiulabel = new JLabel(texto);
+			noticiulabel = new JLabel(texto.getTextoNotificacion());
 		}
 }

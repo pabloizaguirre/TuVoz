@@ -15,7 +15,7 @@ public class CrearProyectoInfraestructura extends JPanel {
 	private JButton botonExaminar;
 	private JLabel labelDistritos;
 	private JLabel labelColectivos;
-	private JComboBox comboColectivos;
+	private JComboBox<String> comboColectivos;
 	private JButton botonCrear;
 	JCheckBox distrito1;
 	JCheckBox distrito2;
@@ -46,21 +46,23 @@ public class CrearProyectoInfraestructura extends JPanel {
 	 	distrito2 = new JCheckBox("Distrito2");
 		distrito3 = new JCheckBox("Distrito3");
 
-		String[] nombreColectivos;
-		nombreColectivos.add("No");
-		
-		Object[] listadoColectivos =((Ciudadano)Aplicacion.getAplicacion().getUsuarioActual()).getColectivosCreados().toArray();
-
-		for(Colectivo c : (Colectivo[])listadoColectivos) {
-			nombreColectivos.add(c.getTitulo());
-		}
-
-		labelColectivos = new JLabel("Selecciona de la lista para crear proyecto de colectivo");
-		comboColectivos = new JComboBox(nombreColectivos);
 
 		panelBotones.add(distrito1);
 		panelBotones.add(distrito2);
 		panelBotones.add(distrito3);
+		
+		
+		labelColectivos = new JLabel("Selecciona de la lista para crear proyecto de colectivo");
+		comboColectivos = new JComboBox<String>();
+		
+		comboColectivos.addItem("No");
+		try {
+		for(Colectivo c : ((Ciudadano)Aplicacion.getAplicacion().getUsuarioActual()).getColectivosCreados()) {
+			comboColectivos.addItem(c.getTitulo());
+			}
+		}catch(NullPointerException ex) {
+			
+		}
 
 		
 		JPanel panelProyecto = new JPanel(new GridLayout(3,2,2,2));

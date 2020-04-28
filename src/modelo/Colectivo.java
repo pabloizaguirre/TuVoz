@@ -29,6 +29,7 @@ public class Colectivo implements ElementoColectivo, Serializable {
         representante = rep;
         unirseAColectivo(rep);
         Aplicacion.getAplicacion().anadirElementoColectivo(this);
+        rep.anadirAMisColectivosCreados(this);
     }
 
     public Colectivo(String tit, Colectivo colectivoSuperior){

@@ -1,6 +1,8 @@
 package modelo;
 import java.util.*;
 
+import javax.swing.ImageIcon;
+
 
 /**
  * Subclase proyecto infraestructura.

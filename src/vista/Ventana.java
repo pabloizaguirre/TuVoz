@@ -93,6 +93,16 @@ public class Ventana extends JFrame {
 	    d.add(Distrito.MORATALAZ);
 		Proyecto pInfraestructura = new ProyectoInfraestructura("Puente para conejas", descripcion, 10, creador, new Imagen("/Users/casa/Desktop/IMG_0377_Facetune_27-03-2019-12-36-33.jpeg", "postu"), d);
 		
+		creador.aprobarRegistro();
+		
+		//No consigo que se muestre el colectivo en la pestaña para seleccionar colectivos al crear
+		//un proyecto
+		
+		Colectivo colectivo = new Colectivo("Coquito CF", creador);
+		
+		creador.anadirAMisColectivosCreados(colectivo);
+
+		
 		this.vistaHome = new Home();
 		ventana.add(vistaHome, "home");
 		

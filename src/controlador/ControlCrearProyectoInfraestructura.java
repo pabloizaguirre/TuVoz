@@ -11,14 +11,14 @@ import vista.*;
 public class ControlCrearProyectoInfraestructura implements ActionListener {
 	private CrearProyectoInfraestructura vista;
 	private Ventana frame;
-	private static ImageIcon imagen;
+	private static Imagen imagen;
 	
 	public ControlCrearProyectoInfraestructura(Ventana frame) {
 		this.frame = frame;
 		this.vista = frame.getVistaCrearProyectoInfraestructura();
 	}
 
-	public static void setImagen(ImageIcon i) {
+	public static void setImagen(Imagen i) {
 		imagen = i;
 
 	}
@@ -41,7 +41,7 @@ public class ControlCrearProyectoInfraestructura implements ActionListener {
 		CrearProyecto v = frame.getVistaCrearProyecto();
 		 
 		
-		/*if(vista.getColectivos().equals("No")) {
+		if(vista.getColectivos().equals("No")) {
 			new ProyectoInfraestructura(v.getNombre(),v.getDescripcion(),v.getPresupuesto(),
 				(Ciudadano)Aplicacion.getAplicacion().getUsuarioActual(), imagen,vista.getDistritos());
 		} else {
@@ -51,7 +51,7 @@ public class ControlCrearProyectoInfraestructura implements ActionListener {
 				col, imagen,vista.getDistritos());
 		}
 		
-		*/
+		
 		JOptionPane.showMessageDialog(vista,
 					"Proyecto creado y enviado a supervisión por parte de la Administración de Tu Voz.", "Proyecto creado", JOptionPane.INFORMATION_MESSAGE);
 			

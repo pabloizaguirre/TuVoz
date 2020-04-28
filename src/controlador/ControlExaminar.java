@@ -12,7 +12,7 @@ public class ControlExaminar implements ActionListener {
 	
 	private CrearProyectoInfraestructura vista;
     private Ventana frame;
-    private ImageIcon imagen;
+    private Imagen imagen;
 	
 	
 	public ControlExaminar(Ventana frame) {
@@ -32,7 +32,7 @@ public class ControlExaminar implements ActionListener {
         if(seleccion==JFileChooser.APPROVE_OPTION) {
         	File archivo = explorador.getSelectedFile();
         	String ruta = archivo.getAbsolutePath();
-        	ControlCrearProyectoInfraestructura.setImagen(Ventana.createImageIcon(ruta, "Imagen del archivo"));
+        	ControlCrearProyectoInfraestructura.setImagen(new Imagen(ruta, "Imagen del proyecto"));
         }
 	}
 }

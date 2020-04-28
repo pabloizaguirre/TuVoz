@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
-import modelo.TipoAlcance;
+import modelo.*;
 
 public class CrearProyectoSocial extends JPanel {
 	
@@ -12,7 +12,7 @@ public class CrearProyectoSocial extends JPanel {
 	private JRadioButton nacional;
 	private JRadioButton internacional;
 	private JLabel labelColectivos;
-	private JComboBox comboColectivos;
+	private JComboBox<String> comboColectivos;
 	private JButton botonCrear;
 	
 	public CrearProyectoSocial() {
@@ -49,18 +49,21 @@ public class CrearProyectoSocial extends JPanel {
 		panelCrear.add(panelProyecto, BorderLayout.SOUTH);
 		
 		
-		String[] nombreColectivos;
-		nombreColectivos.add("No");
-		
-		Object[] listadoColectivos =((Ciudadano)Aplicacion.getAplicacion().getUsuarioActual()).getColectivosCreados().toArray();
-
-		for(Colectivo c : (Colectivo[])listadoColectivos) {
-			nombreColectivos.add(c.getTitulo());
-		}
-
 		labelColectivos = new JLabel("Selecciona de la lista para crear proyecto de colectivo");
-		comboColectivos = new JComboBox(nombreColectivos);
-
+		comboColectivos = new JComboBox<String>();
+		
+		comboColectivos.addItem("No");
+		try {
+		for(Colectivo c : ((Ciudadano)Aplicacion.getAplicacion().getUsuarioActual()).getColectivosCreados()) {
+			comboColectivos.addItem(c.getTitulo());
+			}
+		}catch(NullPointerException ex) {
+			
+		}
+		
+		JPanel panelColectivos = new JPanel();
+		panelColectivos.add(labelColectivos);
+		panelColectivos.add(comboColectivos);
 		
 		JPanel panelBoton = new JPanel(new BorderLayout());
 		botonCrear = new JButton("Crear");
@@ -73,8 +76,7 @@ public class CrearProyectoSocial extends JPanel {
 		JPanel panelPrincipal = new JPanel();
 		
 		panelPrincipal.add(panelCrear);
-		panelPrincipal.add(labelColectivos);
-		panelPrincipal.add(comboColectivos);
+		panelPrincipal.add(panelColectivos);
 		panelPrincipal.add(panelBoton);
 		
 		add(panelPrincipal);
