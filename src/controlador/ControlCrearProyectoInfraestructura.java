@@ -2,6 +2,7 @@ package controlador;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -11,16 +12,11 @@ import vista.*;
 public class ControlCrearProyectoInfraestructura implements ActionListener {
 	private CrearProyectoInfraestructura vista;
 	private Ventana frame;
-	private static Imagen imagen;
+	private String ruta = "Unknown";
 	
 	public ControlCrearProyectoInfraestructura(Ventana frame) {
 		this.frame = frame;
 		this.vista = frame.getVistaCrearProyectoInfraestructura();
-	}
-
-	public static void setImagen(Imagen i) {
-		imagen = i;
-
 	}
 
 	
@@ -31,8 +27,9 @@ public class ControlCrearProyectoInfraestructura implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
-		if(imagen.equals(null) || vista.getDistritos().equals("")) {
+		if(e.getActionCommand().equals("crear")) {
+			
+		if(this.ruta.equals("Unknown") || vista.getDistritos().size()==0) {
 			JOptionPane.showMessageDialog(vista,
 					"Debe completar todos los apartados.", "Error", JOptionPane.ERROR_MESSAGE);
 			return;
@@ -43,12 +40,12 @@ public class ControlCrearProyectoInfraestructura implements ActionListener {
 		
 		if(vista.getColectivos().equals("No")) {
 			new ProyectoInfraestructura(v.getNombre(),v.getDescripcion(),v.getPresupuesto(),
-				(Ciudadano)Aplicacion.getAplicacion().getUsuarioActual(), imagen,vista.getDistritos());
+				(Ciudadano)Aplicacion.getAplicacion().getUsuarioActual(), new Imagen(ruta, "Imagen"),vista.getDistritos());
 		} else {
 			Colectivo col = Colectivo.buscarColectivo(vista.getColectivos());
 			
 			new ProyectoInfraestructura(v.getNombre(),v.getDescripcion(),v.getPresupuesto(),
-				col, imagen,vista.getDistritos());
+				col, new Imagen(ruta, "imagen"),vista.getDistritos());
 		}
 		
 		
@@ -59,5 +56,14 @@ public class ControlCrearProyectoInfraestructura implements ActionListener {
 		// mostrar nueva vista
 		frame.mostrarPanel("home");
 		
+		} else if(e.getActionCommand().equals("examinar")) {
+			JFileChooser explorador = new JFileChooser();
+	        int seleccion = explorador.showOpenDialog(null);
+	        if(seleccion==JFileChooser.APPROVE_OPTION) {
+	        	File archivo = explorador.getSelectedFile();
+	        	this.ruta = archivo.getAbsolutePath();
+	        	
+		}
+		}
 	}
 }

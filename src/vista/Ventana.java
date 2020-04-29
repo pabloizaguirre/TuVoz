@@ -43,7 +43,6 @@ public class Ventana extends JFrame {
 	
 	
 	
-	private ControlExaminar contrExaminar;
 	
 	private InicioRegistro vistaInicioRegistro;
 	private ControlInicio contrInicio;
@@ -163,8 +162,7 @@ public class Ventana extends JFrame {
 		this.contrCrearProyectoInfraestructura = controlador.getControlCrearProyectoInfraestructura();
 		vistaCrearProyectoInfraestructura.setControladorCrearProyectoInfraestructura(contrCrearProyectoInfraestructura);
 		
-		this.contrExaminar = controlador.getControlExaminar();
-		vistaCrearProyectoInfraestructura.setControladorExaminar(contrExaminar);
+		
 		
 		this.contrInicio = controlador.getControlInicio();
 		vistaInicioRegistro.setControlInicio(contrInicio);

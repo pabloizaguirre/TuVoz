@@ -15,7 +15,6 @@ public class Controlador {
 	private ControlCrearProyectoSocial contrCrearProyectoSocial;
 	private ControlCrearProyectoInfraestructura contrCrearProyectoInfraestructura;
 	private ControlIrAHome contrIrAHome;
-	private ControlExaminar contrExaminar;
 	private ControlInicio contrInicio;
 	private ControlApoyar contrApoyar;
 
@@ -33,7 +32,6 @@ public class Controlador {
 		this.contrCrearProyectoInfraestructura = new ControlCrearProyectoInfraestructura(frame);
 		this.contIrAMiPerfil = new ControlIrAMiPerfil(frame);
 		this.contrIrAHome = new ControlIrAHome(frame);
-		this.contrExaminar = new ControlExaminar(frame);
 		this.contrInicio = new ControlInicio(frame);
 		this.contrApoyar = new ControlApoyar(frame, null);
 	}
@@ -69,9 +67,6 @@ public class Controlador {
 	}
 	public ControlCrearProyectoInfraestructura getControlCrearProyectoInfraestructura() {
 		return this.contrCrearProyectoInfraestructura;
-	}
-	public ControlExaminar getControlExaminar() {
-		return this.contrExaminar;
 	}
 	public ControlInicio getControlInicio() {
 		return this.contrInicio;

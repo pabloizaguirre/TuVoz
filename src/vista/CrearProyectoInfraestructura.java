@@ -31,16 +31,18 @@ public class CrearProyectoInfraestructura extends JPanel {
 		
 		labelExaminar = new JLabel("Inserte imagen ilustrativa del proyecto: ");
 		botonExaminar = new JButton("Examinar archivo");
+		botonExaminar.setActionCommand("examinar");
 		
 		
 		JPanel panelExaminar = new JPanel();
 		panelExaminar.add(botonExaminar);
 		
 		
+		
 		labelDistritos = new JLabel("Seleccione los distritos afectados:");
 		JPanel panelBotones = new JPanel();
 		
-		int i =0;
+
 
 		distrito1 = new JCheckBox("Distrito1");
 	 	distrito2 = new JCheckBox("Distrito2");
@@ -74,6 +76,7 @@ public class CrearProyectoInfraestructura extends JPanel {
 		panelProyecto.add(comboColectivos);
 		
 		botonCrear = new JButton("Crear");
+		botonCrear.setActionCommand("crear");
 
 		cLayout.putConstraint(BorderLayout.NORTH, labelNuevo, 40, BorderLayout.NORTH, this);
 		cLayout.putConstraint(BorderLayout.NORTH, panelProyecto, 15, BorderLayout.SOUTH, labelNuevo);
@@ -89,11 +92,9 @@ public class CrearProyectoInfraestructura extends JPanel {
 	
 	public void setControladorCrearProyectoInfraestructura(ActionListener c) {  
 		botonCrear.addActionListener(c);
-	}
-
-	public void setControladorExaminar(ActionListener c) {
 		botonExaminar.addActionListener(c);
 	}
+
 
 	public ArrayList<Distrito> getDistritos() {
 		ArrayList<Distrito> distritos = new ArrayList<Distrito>();
