@@ -46,8 +46,7 @@ public class Ventana extends JFrame {
 	private ControlExaminar contrExaminar;
 	
 	private InicioRegistro vistaInicioRegistro;
-	private ControlRegistrar contrRegistrar;
-	private ControlIniciarSesion contrIniciarSesion;
+	private ControlInicio contrInicio;
 
 
 
@@ -167,16 +166,14 @@ public class Ventana extends JFrame {
 		this.contrExaminar = controlador.getControlExaminar();
 		vistaCrearProyectoInfraestructura.setControladorExaminar(contrExaminar);
 		
-		this.contrIniciarSesion = controlador.getControlIniciarSesion();
-		vistaInicioRegistro.setControlIniciarSesion(contrIniciarSesion);
+		this.contrInicio = controlador.getControlInicio();
+		vistaInicioRegistro.setControlInicio(contrInicio);
 		
-		this.contrRegistrar = controlador.getControlRegistrar();
-		vistaInicioRegistro.setControlRegistrar(contrRegistrar);
-		
+	
 		this.contrApoyar = controlador.getControlApoyar();
 		vistaDetalleProyecto.setControladorApoyar(contrApoyar);
 		
-		actualizarHome();
+		/*actualizarHome();*/
 	}
 	
 	public DetalleProyecto getVistaDetalleProyecto() {
@@ -224,7 +221,7 @@ public class Ventana extends JFrame {
 		ventana.add(vista, name);
 	}
 	
-	public void actualizarHome() {
+	/*public void actualizarHome() {
 		vistaHome.setListaProyectos();
 		
 		//actualizar controladores
@@ -233,6 +230,6 @@ public class Ventana extends JFrame {
 			contr = new ControlIrAProyecto(this, p);
 			vistaHome.setControladorBotonProyecto(contr, p);
 		}
-	}
+	}*/
 }
 
