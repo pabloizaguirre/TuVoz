@@ -2,8 +2,6 @@ package vista;
 
 import javax.swing.*;
 
-import modelo.*;
-
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -17,8 +15,7 @@ public class Home extends JPanel{
 	private JButton botonAnadirProyecto;
 	private JButton botonAnadirColectivo;
 	
-	private JPanel listaProyectos2;
-	private HashMap<Proyecto,JButton> botonesProyectos = new HashMap<Proyecto,JButton>();
+	private JPanel listaProyectos;
 	
 	private static ImageIcon icon1 = Ventana.createImageIcon("src/icons/anadir120_fino.png", "IconoAnadir");
 	
@@ -42,12 +39,14 @@ public class Home extends JPanel{
 		JLabel labelProyectos = new JLabel("  Proyectos: ");
 		labelProyectos.setFont(new Font(labelProyectos.getFont().getName(), Font.PLAIN, labelProyectos.getFont().getSize()+5));
 		
-		setListaProyectos();
+		listaProyectos = new JPanel();
+		listaProyectos.setLayout(new FlowLayout(FlowLayout.LEFT));
+		botonAnadirProyecto = new JButton(icon1);
+		botonAnadirProyecto.setPreferredSize(new Dimension(120, 120));
+		listaProyectos.add(botonAnadirProyecto);
 		
-		listaProyectos2.setLayout(new FlowLayout(FlowLayout.LEFT));
 		
-		
-		JScrollPane scroll = new JScrollPane(listaProyectos2);
+		JScrollPane scroll = new JScrollPane(listaProyectos);
 		scroll.setPreferredSize(new Dimension(700, 150));
 		scroll.setBorder(null);
 		
@@ -122,27 +121,16 @@ public class Home extends JPanel{
 		add(colectivos);	
 	}
 	
-	public void setListaProyectos() {
-		listaProyectos2 = new JPanel();
-		listaProyectos2.setLayout(new FlowLayout(FlowLayout.LEFT));
-		
-		botonAnadirProyecto = new JButton(icon1);
-		botonAnadirProyecto.setPreferredSize(new Dimension(120, 120));
-		listaProyectos2.add(botonAnadirProyecto);
-		
-		JButton boton;
-		for(Proyecto p:Aplicacion.getAplicacion().getListadoProyectos()) {
-			boton = new JButton(p.getTitulo());
-			boton.setPreferredSize(new Dimension(120, 120));
-			botonesProyectos.put(p, boton);
-			listaProyectos2.add(boton); 
-		}
-	}
 	
-	public void setControladorBotonProyecto(ActionListener c, Proyecto p) {
-		if(botonesProyectos.containsKey(p)) {
-			botonesProyectos.get(p).addActionListener(c);
+	public void setListaProyectos(List<String> pList) {
+		JButton boton;
+		for (String p:pList) {
+			boton = new JButton(p);
+			boton.setPreferredSize(new Dimension(120, 120));
+			boton.setActionCommand("botonProyecto");
+			listaProyectos.add(boton); 
 		}
+		
 	}
 	
 	public void setControladorAnadirProyecto(ActionListener c) {  
