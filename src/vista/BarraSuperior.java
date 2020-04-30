@@ -56,6 +56,7 @@ public class BarraSuperior extends JPanel {
 		cerrarSesion.addActionListener(c);
 		home.addActionListener(c);
 		busqueda.addActionListener(c);
+		notificaciones.addActionListener(c);
 	}
 	public String getBusqueda() {
 		return busquedaTF.getText();

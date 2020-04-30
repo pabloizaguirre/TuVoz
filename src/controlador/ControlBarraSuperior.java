@@ -36,8 +36,10 @@ public class ControlBarraSuperior implements ActionListener{
 		}else if(e.getActionCommand().equals("miPerfil")) {
 
 			frame.mostrarPanel("miPerfil");
+			
 		}else if(e.getActionCommand().equals("notificaciones")) {
 			frame.mostrarPanel("notificaciones");
+			
 		}else if(e.getActionCommand().equals("busqueda")) {
 			if(Proyecto.buscarProyecto(vista.getBusqueda())!=null) {
 				Proyecto proyecto = Proyecto.buscarProyecto(vista.getBusqueda());
