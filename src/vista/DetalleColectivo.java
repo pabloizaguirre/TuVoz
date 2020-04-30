@@ -12,6 +12,7 @@ import modelo.Aplicacion;
 import modelo.Ciudadano;
 import modelo.Colectivo;
 import modelo.Proyecto;
+import modelo.Usuario;
 
 public class DetalleColectivo extends JPanel {
 	
@@ -116,17 +117,22 @@ public class DetalleColectivo extends JPanel {
 	
 	
 	
-	public void setUnirme(Ciudadano ciudadano) {
-		boolean esMiembro = getColectivo().esMiembro(ciudadano);
+	public void setUnirme() {
+		Usuario usuario = Aplicacion.getAplicacion().getUsuarioActual();
+		if(usuario.getClass().equals(Ciudadano.class)) {
+			boolean esMiembro = getColectivo().esMiembro((Ciudadano)usuario);
 
-		if(esMiembro) {
+			if(esMiembro) {
 			botonUnirme = new JButton("Ya eres miembro");
 			botonUnirme.setEnabled(false);
+			} else {
+			botonUnirme= new JButton("Unirme al colectivo");
+			}
 		} else {
-			botonUnirme= new JButton("Unirme");
+			return;
 		}
-		botonUnirme.setActionCommand("unirme");
-		panelBotonUnirme.add(botonUnirme);
+			botonUnirme.setActionCommand("unirme");
+			panelBotonUnirme.add(botonUnirme);
 	}
 	
 	public Colectivo getColectivo() {
