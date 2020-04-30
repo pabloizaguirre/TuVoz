@@ -8,7 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import modelo.*;
-
+import vista.DetalleProyecto;
 import vista.Home;
 import vista.Ventana;
 
@@ -26,7 +26,13 @@ public class ControlHome implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
 		if(proyectos.containsKey(source)) {
-			JOptionPane.showMessageDialog(vista, proyectos.get(source).getTitulo());
+			Proyecto p = proyectos.get(source);
+			DetalleProyecto vistaProyecto = new DetalleProyecto();
+			ControlDetalleProyecto c = new ControlDetalleProyecto(frame, vistaProyecto, p);
+			c.setVistaDetalleProyecto();
+			
+			frame.anadirVentana(vistaProyecto, "" + p.getId());
+			frame.mostrarPanel("" + p.getId());
 		}
 		
 		

@@ -1,6 +1,8 @@
 package controlador;
 
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.*;
 
@@ -23,11 +25,11 @@ public class ControlDetalleProyecto implements ActionListener{
 		Usuario usuarioActual = Aplicacion.getAplicacion().getUsuarioActual();
 		Object source = e.getSource();
 		if(e.getActionCommand().contentEquals("apoyar")) {
-			vista.getProyecto().apoyarProyecto((ElementoColectivo) usuarioActual);
+			proyecto.apoyarProyecto((ElementoColectivo) usuarioActual);
 			((JButton) source).setText("Apoyado");
 			((JButton) source).setEnabled(false);
 		} else if(e.getActionCommand().contentEquals("suscribirse")) {
-			vista.getProyecto().suscribirProyecto((Ciudadano) usuarioActual);
+			proyecto.suscribirProyecto((Ciudadano) usuarioActual);
 			((JButton) source).setText("Suscrito");
 			((JButton) source).setEnabled(false);
 		} else if(e.getActionCommand().contentEquals("solicitarInforme")) {
@@ -35,7 +37,7 @@ public class ControlDetalleProyecto implements ActionListener{
 					"Queda implementar bien solicitar informe", "Pulsado solicitar informe", JOptionPane.DEFAULT_OPTION);
 		} else if(e.getActionCommand().contentEquals("enviarAFinanciacion")) {
 			try {
-				vista.getProyecto().enviarProyecto();
+				proyecto.enviarProyecto();
 				JOptionPane.showMessageDialog(vista,
 						"Queda controlar bien las excepciones", "Pulsado enviar Proyecto", JOptionPane.DEFAULT_OPTION);
 			} catch (Exception e1) {
@@ -45,6 +47,7 @@ public class ControlDetalleProyecto implements ActionListener{
 	}
 	
 	public void setVistaDetalleProyecto() {
+		EstadoProyecto estado = proyecto.getEstado();
 		vista.setTitulo(proyecto.getTitulo());
 		Usuario usuario = Aplicacion.getAplicacion().getUsuarioActual();
 		if(proyecto instanceof ProyectoSocial) {
@@ -57,10 +60,29 @@ public class ControlDetalleProyecto implements ActionListener{
 			vista.setSuscribirse(proyecto.getListadoSuscripciones().contains(usuario));
 			if(proyecto.getCreador().equals(usuario)) {
 				vista.setSolicitarInforme();
-				if(proyecto.getEstado().equals(EstadoProyecto.DISPONIBLE)) {
+				if(estado.equals(EstadoProyecto.DISPONIBLE)) {
 					vista.setEnviarAFinanciacion();
 				}
 			}
+		}
+		vista.setPresupuestoSolicitado(proyecto.getPresupuestoSolicitado());
+		
+		if(estado.equals(EstadoProyecto.APROBADO)) {
+			vista.setLabelEstado("Estado: " + estado + ", con presupuesto concedido de " + proyecto.getPresupuestoConcedido() + "€");
+		} else {
+			vista.setLabelEstado("Estado: " + estado);
+		}
+		
+		vista.setDescripcion(proyecto.getDescripcion());
+		
+		if(proyecto instanceof ProyectoSocial) {
+			vista.setDetallesOpcionalesSocial(((ProyectoSocial) proyecto).getGrupoSocial(), ((ProyectoSocial) proyecto).getAlcance().toString());
+		} else {
+			List<String> listaDistritos = new ArrayList<String>();
+			for(Distrito d:((ProyectoInfraestructura) proyecto).getDistritosAfectados()) {
+				listaDistritos.add(d.toString());
+			}
+			vista.setDetallesOpcionalesInfraestructura(listaDistritos, ((ProyectoInfraestructura) proyecto).getImagen().getPath());
 		}
 	}
 

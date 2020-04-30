@@ -4,12 +4,13 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import controlador.ControlDetalleProyecto;
-import modelo.*;
 
 public class DetalleProyecto extends JPanel{
 	
@@ -17,20 +18,20 @@ public class DetalleProyecto extends JPanel{
 	private JButton enviarAFinanciacion;
 	private JButton suscribirse;
 	private JButton apoyar = new JButton("");
-	private Proyecto proy;
-	private JLabel titulo = new JLabel("");
+	private JTextArea titulo = new JTextArea();
 	private JLabel labelTipo = new JLabel("");
 	private JPanel botones;
+	private JLabel presupuestoSolicitado = new JLabel("");
+	private JLabel labelEstado = new JLabel("");
+	private JTextArea descripcion = new JTextArea();
+	private JPanel detalles;
+	private JPanel right;
 
-	public DetalleProyecto(Proyecto proyecto) {
-		proy = proyecto;
+	public DetalleProyecto() {
 		setLayout(new BorderLayout());
 		
-		Integer tipo = 0;
-		Usuario usuarioActual = Aplicacion.getAplicacion().getUsuarioActual();
-		
 		//panel de la derecha con la foto si tiene
-		JPanel right = new JPanel();
+		right = new JPanel();
 		SpringLayout rLayout = new SpringLayout();
 		right.setLayout(rLayout);	
 		
@@ -39,37 +40,20 @@ public class DetalleProyecto extends JPanel{
 		SpringLayout lLayout = new SpringLayout();
 		left.setLayout(lLayout);
 		
-		
+		titulo.setEditable(false);
+		titulo.setLineWrap(true);
+		titulo.setBackground(null);
 		titulo.setFont(new Font(titulo.getFont().getName(), Font.PLAIN, titulo.getFont().getSize()+20));
 		
 		labelTipo.setFont(new Font(labelTipo.getFont().getName(), Font.PLAIN, labelTipo.getFont().getSize()+2));
 		
 		botones = new JPanel();
 		
-		
-		
-		
-		JPanel detalles = new JPanel();
+		detalles = new JPanel();
 		detalles.setLayout(new BoxLayout(detalles, BoxLayout.PAGE_AXIS));
 		
-		JLabel presupuestoSolicitado = new JLabel("Presupesto solicitado: " + proyecto.getPresupuestoSolicitado() + "€");
-		
-		EstadoProyecto estado = proyecto.getEstado();
-		JLabel labelEstado;
-		if(estado.equals(EstadoProyecto.APROBADO)) {
-			labelEstado = new JLabel("Estado: " + estado + ", con presupuesto concedido de " + proyecto.getPresupuestoConcedido() + "€");
-		} else {
-			labelEstado = new JLabel("Estado: " + estado);
-		}
-		
-		//JLabel descripcion = new JLabel("Descripcion: " + proyecto.getDescripcion());
-		JTextArea descripcion = new JTextArea();
-		descripcion.append("Descripcion: " + proyecto.getDescripcion());
-		descripcion.setEditable(false);
-		descripcion.setLineWrap(true);
-		descripcion.setBackground(null);
-		
 		lLayout.putConstraint(BorderLayout.WEST, titulo, 20, BorderLayout.WEST, left);
+		lLayout.putConstraint(BorderLayout.EAST, titulo, -20, BorderLayout.EAST, left);
 		
 		lLayout.putConstraint(BorderLayout.NORTH, labelTipo, 0, BorderLayout.SOUTH, titulo);
 		lLayout.putConstraint(BorderLayout.WEST, labelTipo, 22, BorderLayout.WEST, left);
@@ -86,6 +70,10 @@ public class DetalleProyecto extends JPanel{
 		labelEstado.setAlignmentX(LEFT_ALIGNMENT);
 		descripcion.setAlignmentX(LEFT_ALIGNMENT);
 		
+		this.descripcion.setEditable(false);
+		this.descripcion.setLineWrap(true);
+		this.descripcion.setBackground(null);
+		
 		detalles.add(descripcion);
 		detalles.add(Box.createRigidArea(new Dimension(0, 5)));
 		detalles.add(presupuestoSolicitado);
@@ -93,46 +81,6 @@ public class DetalleProyecto extends JPanel{
 		detalles.add(labelEstado);
 		
 		
-		
-		
-		tipo = 1;
-		
-		
-		
-		
-		
-		
-		if(tipo==0) {
-			right.setPreferredSize(new Dimension(300,300));
-			String s = "Distritos afectados: ";
-			for (Distrito d:((ProyectoInfraestructura)proyecto).getDistritosAfectados()) {
-				s += d + ", ";
-			}
-			//para quitar la ultima coma
-			s = s.substring(0, s.length()-2);
-			JLabel distritos = new JLabel(s);
-			distritos.setAlignmentX(LEFT_ALIGNMENT);
-			left.add(Box.createRigidArea(new Dimension(0, 5)));
-			detalles.add(distritos);
-			
-			ImageIcon imagenProyecto = Ventana.createImageIcon(((ProyectoInfraestructura)proyecto).getImagen().getPath(), ((ProyectoInfraestructura)proyecto).getImagen().getNombre());
-			JLabel labelImagen = new JLabel(imagenProyecto);
-			rLayout.putConstraint(BorderLayout.WEST, labelImagen, 20, BorderLayout.WEST, right);
-			rLayout.putConstraint(BorderLayout.EAST, labelImagen, -20, BorderLayout.EAST, right);
-			rLayout.putConstraint(BorderLayout.SOUTH, labelImagen, 0, BorderLayout.SOUTH, right);
-			right.add(labelImagen);
-		} else {
-			JLabel grupoSocial = new JLabel("Grupo social: " + ((ProyectoSocial) proyecto).getGrupoSocial());
-			JLabel alcance = new JLabel("Alcance: " + ((ProyectoSocial) proyecto).getAlcance());
-			
-			grupoSocial.setAlignmentX(LEFT_ALIGNMENT);
-			alcance.setAlignmentX(LEFT_ALIGNMENT);
-			
-			detalles.add(Box.createRigidArea(new Dimension(0, 5)));
-			detalles.add(grupoSocial);
-			detalles.add(Box.createRigidArea(new Dimension(0, 5)));
-			detalles.add(alcance);
-		}
 		
 		left.add(titulo);
 		left.add(labelTipo);
@@ -145,6 +93,7 @@ public class DetalleProyecto extends JPanel{
 		
 	}
 	
+	/*
 	public static void main(String[] args) {
 		JFrame ventana = new JFrame("Mi GUI. Ejemplo 2");
 		// obtener contenedor, asignar layout
@@ -152,15 +101,18 @@ public class DetalleProyecto extends JPanel{
 		Ciudadano c = Ciudadano.registrarCiudadano("MalaSanta", "BeckyG", "7334234P");
 		Ciudadano c2 = Ciudadano.registrarCiudadano("brazos", "ConejoMalo", "1231213I");
 		
-		Aplicacion.getAplicacion().setUsuarioActual(c);
+		Aplicacion.getAplicacion().setUsuarioActual(c2);
 		
 		String desc = "Donde estan las gatas ninina palante nananinina palante... no soy ni mala ni santa ninino una como yo a ti te hace falta, calladita pero a veces soy mala empiezo y no kiero parar no soy ni mala ni santa.";
 		Proyecto p = new ProyectoSocial("ONG para ayudar a victimas de belleza despampanante", desc, 123123123, c,"Pablo", TipoAlcance.INTERNACIONAL);
-		
-		DetalleProyecto panel = new DetalleProyecto(p);
+		List<Distrito> d = new ArrayList<Distrito>();
+	    d.add(Distrito.MONCLOAARAVACA);
+	    d.add(Distrito.MORATALAZ);
+		Proyecto pI = new ProyectoInfraestructura("Infraestructura", desc, 2001211.123123, c2, new Imagen("/Users/casa/Desktop/IMG_0377_Facetune_27-03-2019-12-36-33.jpeg", "postu"), d);
+		DetalleProyecto panel = new DetalleProyecto(pI);
 		contenedor.add(panel);
 		
-		ControlDetalleProyecto contr = new ControlDetalleProyecto(ventana, panel, p);
+		ControlDetalleProyecto contr = new ControlDetalleProyecto(ventana, panel, pI);
 		contr.setVistaDetalleProyecto();
 		
 		
@@ -172,10 +124,10 @@ public class DetalleProyecto extends JPanel{
 		ventana.setSize(1000,600);
 		ventana.setLocationRelativeTo(null);
 		ventana.setVisible(true);	
-	}
+	}*/
 	
 	public void setTitulo(String titulo) {
-		this.titulo.setText(titulo);
+		this.titulo.append(titulo);
 	}
 	
 	public void setLabelTipo(String tipo) {
@@ -234,9 +186,73 @@ public class DetalleProyecto extends JPanel{
 		botones.add(enviarAFinanciacion);
 	}
 	
+	/**
+	 * Establede el presupuesto solicitado
+	 * 
+	 * @param presupuesto
+	 */
+	public void setPresupuestoSolicitado(Double presupuesto) {
+		presupuestoSolicitado.setText("Presupesto solicitado: " + presupuesto + "€");
+	}
 	
-	public Proyecto getProyecto() {
-		return proy;
+	/**
+	 * Establece el estado del proyecto
+	 * @param estado String con lo que se desea meter en a etiqueta labelEstado
+	 */
+	public void setLabelEstado(String estado) {
+		labelEstado.setText(estado);
+	}
+	
+	/**
+	 * Establece la descripcion del proyecto
+	 * @param descripcion
+	 */
+	public void setDescripcion(String descripcion) {
+		this.descripcion.append("Descripcion: "+ descripcion);
+	}
+	
+	/**
+	 * Establece los jlabels opcionales en caso de que el proyecto sea de tipo social
+	 * @param grupo
+	 * @param sAlcance
+	 */
+	public void setDetallesOpcionalesSocial(String grupo, String sAlcance) {
+		JLabel grupoSocial = new JLabel("Grupo social: " + grupo);
+		JLabel alcance = new JLabel("Alcance: " + sAlcance);
+		
+		grupoSocial.setAlignmentX(LEFT_ALIGNMENT);
+		alcance.setAlignmentX(LEFT_ALIGNMENT);
+		
+		detalles.add(Box.createRigidArea(new Dimension(0, 5)));
+		detalles.add(grupoSocial);
+		detalles.add(Box.createRigidArea(new Dimension(0, 5)));
+		detalles.add(alcance);
+	}
+	
+	/**
+	 * Establece los jlabels y la imagen opcionales en caso de que el proyecto sea de tipo Infraestructura
+	 * @param listaDistritos
+	 * @param path. Path de la imagen
+	 */
+	public void setDetallesOpcionalesInfraestructura(List<String> listaDistritos, String path) {
+		right.setPreferredSize(new Dimension(300,300));
+		String s = "Distritos afectados: ";
+		for (String d:listaDistritos) {
+			s += d + ", ";
+		}
+		//para quitar la ultima coma
+		s = s.substring(0, s.length()-2);
+		JLabel distritos = new JLabel(s);
+		distritos.setAlignmentX(LEFT_ALIGNMENT);
+		detalles.add(Box.createRigidArea(new Dimension(0, 5)));
+		detalles.add(distritos);
+		
+		ImageIcon imagenProyecto = Ventana.createImageIcon(path, "ImagenProyecto");
+		JLabel labelImagen = new JLabel(imagenProyecto);
+		((SpringLayout) right.getLayout()).putConstraint(BorderLayout.WEST, labelImagen, 20, BorderLayout.WEST, right);
+		((SpringLayout) right.getLayout()).putConstraint(BorderLayout.EAST, labelImagen, -20, BorderLayout.EAST, right);
+		((SpringLayout) right.getLayout()).putConstraint(BorderLayout.SOUTH, labelImagen, 0, BorderLayout.SOUTH, right);
+		right.add(labelImagen);
 	}
 	
 	public JButton getApoyar() {
