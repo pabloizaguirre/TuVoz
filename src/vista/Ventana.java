@@ -100,6 +100,9 @@ public class Ventana extends JFrame {
 		
 		creador.aprobarRegistro();
 		
+		Ciudadano punkizius = new Ciudadano ("badg" , "Punkizius", "123456789A");
+		punkizius.aprobarRegistro();
+		
 		//No consigo que se muestre el colectivo en la pestaña para seleccionar colectivos al crear
 		//un proyecto
 		

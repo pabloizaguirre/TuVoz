@@ -46,7 +46,13 @@ public class ControlBarraSuperior implements ActionListener{
 				frame.anadirVentana(vista, proyecto.toString());
 				frame.mostrarPanel(proyecto.toString());
 			}
-			//Falta el de buscar colectivo
+			else if(Colectivo.buscarColectivo(vista.getBusqueda())!=null) {
+				Colectivo colectivo = Colectivo.buscarColectivo(vista.getBusqueda());
+				DetalleColectivo vista = new DetalleColectivo(colectivo);
+				vista.setUnirme((Ciudadano) Aplicacion.getAplicacion().getUsuarioActual());
+				frame.anadirVentana(vista, colectivo.toString());
+				frame.mostrarPanel(colectivo.toString());
+			}
 		}
 		return;
 	}
