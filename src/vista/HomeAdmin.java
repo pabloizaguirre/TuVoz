@@ -11,7 +11,7 @@ import java.awt.event.*;
 
 public class HomeAdmin extends JPanel{
 	
-	
+	private JButton botonApoyoProyecto;
 	
 	public HomeAdmin() {
 		SpringLayout cLayout = new SpringLayout();
@@ -55,12 +55,19 @@ public class HomeAdmin extends JPanel{
 		proyectos.add(scroll, BorderLayout.SOUTH);
 		proyectos.setPreferredSize(new Dimension(700,200)); 
 		
+		botonApoyoProyecto = new JButton("Gestionar minimo de apoyos");
+		botonApoyoProyecto.setActionCommand("apoyoProyecto");
+		
 		//añadir constraints del contenedor
 		cLayout.putConstraint(BorderLayout.NORTH, proyectos, 15, BorderLayout.SOUTH, titulo);
 		cLayout.putConstraint(BorderLayout.WEST, proyectos, 40, BorderLayout.WEST, this);
 		cLayout.putConstraint(BorderLayout.EAST, proyectos, -40, BorderLayout.EAST, this);
+		cLayout.putConstraint(BorderLayout.WEST, botonApoyoProyecto, 40, BorderLayout.WEST, this);
+		cLayout.putConstraint(BorderLayout.NORTH,botonApoyoProyecto, 10, BorderLayout.SOUTH, proyectos);
+
 		
 		// a�adir componentes al contenedor
+		add(botonApoyoProyecto);
 		add(proyectos);
 		
 		
@@ -96,12 +103,16 @@ public class HomeAdmin extends JPanel{
 		ciudadanos.setPreferredSize(new Dimension(700,200)); 
 		
 		//añadir constraints del contenedor
-		cLayout.putConstraint(BorderLayout.NORTH, ciudadanos, 20, BorderLayout.SOUTH, proyectos);
+		cLayout.putConstraint(BorderLayout.NORTH, ciudadanos, 40, BorderLayout.SOUTH, proyectos);
 		cLayout.putConstraint(BorderLayout.WEST, ciudadanos, 40, BorderLayout.WEST, this);
 		cLayout.putConstraint(BorderLayout.EAST, ciudadanos, -40, BorderLayout.EAST, this);
 		
 		// a�adir componentes al contenedor
 		add(ciudadanos);	
+	}
+	
+	public void setControlHomeAdmin(ActionListener c) {  
+		botonApoyoProyecto.addActionListener(c);
 	}
 	
 }

@@ -22,7 +22,7 @@ public class ControlIrAProyecto implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		DetalleProyecto vista = new DetalleProyecto(proyecto);
-		vista.setControladorApoyar(new ControlApoyar(frame, vista));
+		//vista.setControladorApoyar(new ControlApoyar(frame, vista));
 		frame.anadirVentana(vista, proyecto.toString());
 		frame.mostrarPanel(proyecto.toString());
 	}

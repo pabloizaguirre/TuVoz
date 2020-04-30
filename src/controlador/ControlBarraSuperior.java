@@ -24,16 +24,25 @@ public class ControlBarraSuperior implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("home")) {
-			frame.mostrarPanel("home");
-		} else if(e.getActionCommand().equals("miPerfil")) {
+			if(Aplicacion.getAplicacion().getUsuarioActual().getClass().equals(Ciudadano.class)) {
+				frame.mostrarPanel("home");
+			}else if(Aplicacion.getAplicacion().getUsuarioActual().getClass().equals(Administrador.class)) {
+				frame.mostrarPanel("homeAdmin");
+			}
+		}else if(e.getActionCommand().equals("cerrarSesion")){
+			Aplicacion.guardarAplicacion();
+			Aplicacion.getAplicacion().setUsuarioActual(null);
+			frame.mostrarPanel("inicioRegistro");
+		}else if(e.getActionCommand().equals("miPerfil")) {
+
 			frame.mostrarPanel("miPerfil");
-		} else if(e.getActionCommand().equals("notificaciones")) {
+		}else if(e.getActionCommand().equals("notificaciones")) {
 			frame.mostrarPanel("notificaciones");
 		}else if(e.getActionCommand().equals("busqueda")) {
 			if(Proyecto.buscarProyecto(vista.getBusqueda())!=null) {
 				Proyecto proyecto = Proyecto.buscarProyecto(vista.getBusqueda());
 				DetalleProyecto vista = new DetalleProyecto(proyecto);
-				vista.setControladorApoyar(new ControlApoyar(frame, vista));
+				//vista.setControladorApoyar(new ControlApoyar(frame, vista));
 				frame.anadirVentana(vista, proyecto.toString());
 				frame.mostrarPanel(proyecto.toString());
 			}

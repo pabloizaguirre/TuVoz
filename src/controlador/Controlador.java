@@ -17,6 +17,8 @@ public class Controlador {
 	private ControlInicio contrInicio;
 	private ControlApoyar contrApoyar;
 	private ControlHome contrHome;
+	private ControlHomeAdmin contrHomeAdmin;
+	private ControlApoyoMinimoProyecto contrApoyoMinimoProyecto;
 
 	private List<ControlIrAProyecto> contrIrAProyectos;
 	
@@ -33,9 +35,11 @@ public class Controlador {
 		this.contrBarraSuperior= new ControlBarraSuperior(frame);
 		this.contrInicio = new ControlInicio(frame);
 		this.contrApoyar = new ControlApoyar(frame, null);
+		this.contrApoyoMinimoProyecto = new ControlApoyoMinimoProyecto(frame);
 		
 		// Establecer Home:
 		this.contrHome = new ControlHome(frame);
+		this.contrHomeAdmin = new ControlHomeAdmin(frame);
 	}
 	
 	public ControlApoyar getControlApoyar() {
@@ -72,6 +76,12 @@ public class Controlador {
 	}
 	public ControlHome getControlHome() {
 		return this.contrHome;
+	}
+	public ControlHomeAdmin getControlHomeAdmin() {
+		return this.contrHomeAdmin;
+	}
+	public ControlApoyoMinimoProyecto getControlApoyoMinimoProyecto() {
+		return this.contrApoyoMinimoProyecto;
 	}
 
 }

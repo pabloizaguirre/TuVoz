@@ -27,7 +27,7 @@ public class Aplicacion implements Serializable {
         this.listadoProyectos = new ArrayList<Proyecto>();
         this.listadoElementoColectivos = new ArrayList<ElementoColectivo>();
         this.administrador = new Administrador("Admin", "123");
-       
+        this.apoyosMin = 10;
     }
 
     public static Aplicacion getAplicacion() {
@@ -106,13 +106,13 @@ public class Aplicacion implements Serializable {
      * 
      * @param aplicacion Aplicacion
      */
-    public static void guardarAplicacion(Aplicacion aplicacion) {
+    public static void guardarAplicacion() {
 		ObjectOutputStream salida = null;
 		FileOutputStream fos = null;
 		try {
-			fos = new FileOutputStream("TuVoz.dat");
+			fos = new FileOutputStream("data/data.dat");
 			salida = new ObjectOutputStream(fos);
-            salida.writeObject(aplicacion);
+            salida.writeObject(Aplicacion.getAplicacion());
             
             salida.close();
             fos.close();
@@ -130,17 +130,18 @@ public class Aplicacion implements Serializable {
      * 
      * @return Objeto de clase Aplicacion
      */
-    public static Aplicacion cargarAplicacion() {
+    public Aplicacion cargarAplicacion() {
         Aplicacion obj = null;
         
         try{
-            ObjectInputStream entrada = new ObjectInputStream(new FileInputStream("TuVoz.dat"));
+            ObjectInputStream entrada = new ObjectInputStream(new FileInputStream("data/data.dat"));
             obj = (Aplicacion)entrada.readObject();
             entrada.close();
+            
         }catch(FileNotFoundException ex) {
             obj = Aplicacion.getAplicacion();
         }catch(IOException ex) {
-            System.out.println("Error");
+            System.out.println("Error IO");
         }catch(ClassNotFoundException ex) {
             System.out.println("Error");
         }
@@ -276,7 +277,7 @@ public class Aplicacion implements Serializable {
         }
 
         //Guardar Aplicacion en el archivo TuVoz.dat
-        guardarAplicacion(Aplicacion.getAplicacion());
+        guardarAplicacion();
 
 
 

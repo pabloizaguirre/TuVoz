@@ -25,8 +25,13 @@ public class Ventana extends JFrame {
 	private ControlIrACrearColectivo contIrACrearColectivo;
 	
 	private Home vistaHome;
-	private HomeAdmin vistaHomeAdmin;
 	private ControlHome contrHome;
+
+	private HomeAdmin vistaHomeAdmin;
+	private ControlHomeAdmin contrHomeAdmin;
+	
+	private ApoyoMinimoProyecto vistaApoyoMinimoProyecto;
+	private ControlApoyoMinimoProyecto contrApoyoMinimoProyecto;
 	
 	private CrearColectivo vistaCrearColectivo;
 	private ControlCrearColectivo contrCrearColectivo;
@@ -81,6 +86,8 @@ public class Ventana extends JFrame {
 		this.vistaInicioRegistro = new InicioRegistro();
 		ventana.add(vistaInicioRegistro, "inicioRegistro");
 		
+		//Aplicacion.getAplicacion().cargarAplicacion();
+		
 		
 		//prueba de la pantalla de proyecto
 		String descripcion = "Un proyecto rechulon para chicas malas que son rechulonas y molonas, tambien es importante que tengan alto flow, para pertenecer solo tienes que decir las palabras magicas: Que falta de respeto mami como te atreves a venir sin pantis";
@@ -104,8 +111,8 @@ public class Ventana extends JFrame {
 		this.vistaHome = new Home();
 		ventana.add(vistaHome, "home");
 		
-		this.vistaDetalleProyecto = new DetalleProyecto(p);
-		ventana.add(vistaDetalleProyecto, "detalleProyecto");
+		//this.vistaDetalleProyecto = new DetalleProyecto(p);
+		//ventana.add(vistaDetalleProyecto, "detalleProyecto");
 		
 		
 		
@@ -130,6 +137,9 @@ public class Ventana extends JFrame {
 		
 		this.vistaCrearProyectoInfraestructura = new CrearProyectoInfraestructura();
 		ventana.add(vistaCrearProyectoInfraestructura, "crearProyectoInfraestructura");
+		
+		this.vistaApoyoMinimoProyecto = new ApoyoMinimoProyecto();
+		ventana.add(vistaApoyoMinimoProyecto, "apoyoMinimoProyecto");
 		
 	
 
@@ -160,18 +170,22 @@ public class Ventana extends JFrame {
 		this.contrCrearProyectoInfraestructura = controlador.getControlCrearProyectoInfraestructura();
 		vistaCrearProyectoInfraestructura.setControladorCrearProyectoInfraestructura(contrCrearProyectoInfraestructura);
 		
-		
+		this.contrApoyoMinimoProyecto = controlador.getControlApoyoMinimoProyecto();
+		vistaApoyoMinimoProyecto.setControlApoyoProyecto(contrApoyoMinimoProyecto);
 		
 		this.contrInicio = controlador.getControlInicio();
 		vistaInicioRegistro.setControlInicio(contrInicio);
 		
 	
-		this.contrApoyar = controlador.getControlApoyar();
-		vistaDetalleProyecto.setControlador(contrApoyar);
+		//this.contrApoyar = controlador.getControlApoyar();
+		//vistaDetalleProyecto.setControlador(contrApoyar);
 		
 		// Establecer controlador Home
 		this.contrHome = controlador.getControlHome();
 		contrHome.setBotonesProyectos();
+		
+		this.contrHomeAdmin = controlador.getControlHomeAdmin();
+		vistaHomeAdmin.setControlHomeAdmin(contrHomeAdmin);
 	}
 	
 	public DetalleProyecto getVistaDetalleProyecto() {
@@ -183,6 +197,9 @@ public class Ventana extends JFrame {
 	}
 	public Home getVistaHome() {
 		return this.vistaHome;
+	}
+	public HomeAdmin getVistaHomeAdmin() {
+		return this.vistaHomeAdmin;
 	}
 	
 	public CrearColectivo getVistaCrearColectivo() {
@@ -208,6 +225,10 @@ public class Ventana extends JFrame {
 	
 	public BarraSuperior getVistaBarraSuperior() {
 		return this.vistaBarraSuperior;
+	}
+	
+	public ApoyoMinimoProyecto getVistaApoyoMinimoProyecto() {
+		return this.vistaApoyoMinimoProyecto;
 	}
 	
 	public void mostrarPanel(String carta) {
