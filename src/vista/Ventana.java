@@ -47,6 +47,9 @@ public class Ventana extends JFrame {
 	private CrearProyectoInfraestructura vistaCrearProyectoInfraestructura;
 	private ControlCrearProyectoInfraestructura contrCrearProyectoInfraestructura;
 	
+	private VerNotificaciones vistaNotificaciones;
+	private ControlNotificaciones contrNoti;
+	
 	private HashMap<Integer, ControlDetalleProyecto> proyectos = new HashMap<Integer, ControlDetalleProyecto>();
 	
 	
@@ -143,6 +146,9 @@ public class Ventana extends JFrame {
 		this.vistaCrearProyectoInfraestructura = new CrearProyectoInfraestructura();
 		ventana.add(vistaCrearProyectoInfraestructura, "crearProyectoInfraestructura");
 		
+		this.vistaNotificaciones = new VerNotificaciones();
+		ventana.add(vistaNotificaciones, "notificaciones");
+		
 		this.vistaApoyoMinimoProyecto = new ApoyoMinimoProyecto();
 		ventana.add(vistaApoyoMinimoProyecto, "apoyoMinimoProyecto");
 		
@@ -180,6 +186,9 @@ public class Ventana extends JFrame {
 		
 		this.contrInicio = controlador.getControlInicio();
 		vistaInicioRegistro.setControlInicio(contrInicio);
+		
+		this.contrNoti = controlador.getControlNotificaciones();
+		vistaNotificaciones.setControlNotificaciones(contrNoti);
 		
 	
 		//this.contrApoyar = controlador.getControlApoyar();
@@ -226,7 +235,9 @@ public class Ventana extends JFrame {
 	public InicioRegistro getVistaInicioRegistro() {
 		return this.vistaInicioRegistro;
 	}
-	
+	public VerNotificaciones getVistaNotificaciones(){
+		return this.vistaNotificaciones;
+	}
 	public BarraSuperior getVistaBarraSuperior() {
 		return this.vistaBarraSuperior;
 	}

@@ -1,6 +1,8 @@
 package vista;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
@@ -8,10 +10,10 @@ import modelo.Notificacion;
 
 public class VerNotificaciones extends JPanel{
 	
-	private JLabel mensaje = new JLabel("");
-	private JButton IrProyecto;
-	private JButton AprobarRegistro;
-	private JButton AprobarProyecto;
+	private JButton IrProyecto = new JButton("a");
+	private JButton AprobarRegistro = new JButton("b");
+	private JButton AprobarProyecto = new JButton("c");
+	private JTextArea mensaje = new JTextArea();
 	
 	public VerNotificaciones(){
 		BoxLayout notiLayout = new BoxLayout(this, BoxLayout.Y_AXIS);
@@ -22,37 +24,64 @@ public class VerNotificaciones extends JPanel{
 		
     }
     
-	public JPanel NotificacionCiudadanoProyecto() {
+	public void NotificacionCiudadanoProyecto(String texto) {
 		final JPanel notiCiudadano = new JPanel();
 		BoxLayout layoutNoticiu = new BoxLayout(notiCiudadano, BoxLayout.Y_AXIS);
 		notiCiudadano.setLayout(layoutNoticiu);
+		
+		mensaje.setEditable(false);
+		mensaje.setLineWrap(true);
+		mensaje.setBackground(null);
+		mensaje.setFont(new Font(mensaje.getFont().getName(), Font.PLAIN, mensaje.getFont().getSize()+20));
+		
 		this.add(mensaje);
 		IrProyecto = new JButton("Ir al proyecto");
 		IrProyecto.setActionCommand("botonIrProyecto");
-		return notiCiudadano;
+		notiCiudadano.setVisible(true);
+		this.add(notiCiudadano);
 		}
 	
-	public JPanel NotificacionAprobarRegistro() {
+	public void NotificacionAprobarRegistro(String texto) {
 		final JPanel notiRegistro = new JPanel();
 		BoxLayout layoutNotireg = new BoxLayout(notiRegistro, BoxLayout.Y_AXIS);
 		notiRegistro.setLayout(layoutNotireg);
+		
+		mensaje.setEditable(false);
+		mensaje.setLineWrap(true);
+		mensaje.setBackground(null);
+		mensaje.setFont(new Font(mensaje.getFont().getName(), Font.PLAIN, mensaje.getFont().getSize()+20));
+		
 		this.add(mensaje);
 		AprobarRegistro = new JButton("Aprobar registro");
 		AprobarRegistro.setActionCommand("botonAprobarRegistro");
-		return notiRegistro;
+		notiRegistro.setVisible(true);
+		this.add(notiRegistro);
 	}
 	
-	public JPanel NotificacionAprobarProyecto() {
+	public void NotificacionAprobarProyecto(String texto) {
 		final JPanel notiProye = new JPanel();
 		BoxLayout layoutNotiproye = new BoxLayout(notiProye, BoxLayout.Y_AXIS);
 		notiProye.setLayout(layoutNotiproye);
+
+		mensaje.setEditable(false);
+		mensaje.setLineWrap(true);
+		mensaje.setBackground(null);
+		mensaje.setFont(new Font(mensaje.getFont().getName(), Font.PLAIN, mensaje.getFont().getSize()+20));
+		
 		this.add(mensaje);
 		AprobarProyecto = new JButton("Aprobar proyecto");
 		AprobarProyecto.setActionCommand("botonAprobarProyecto");
-		return notiProye;
+		notiProye.setVisible(true);
+		this.add(notiProye);
 	}
 	
-	public void setMensaje(String texto) {
-		mensaje.setText(texto);
+	public void setMensje(String texto) {
+		this.mensaje.append(texto);
+	}
+	
+	public void setControlNotificaciones(ActionListener c) {  
+		IrProyecto.addActionListener(c);
+		AprobarRegistro.addActionListener(c);
+		AprobarProyecto.addActionListener(c);
 	}
 }
