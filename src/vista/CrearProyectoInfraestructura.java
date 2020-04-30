@@ -4,6 +4,7 @@ import java.awt.*;
 
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.*;
 import modelo.*;
@@ -15,7 +16,7 @@ public class CrearProyectoInfraestructura extends JPanel {
 	private JButton botonExaminar;
 	private JLabel labelDistritos;
 	private JLabel labelColectivos;
-	private JComboBox<String> comboColectivos;
+	private static JComboBox<String> comboColectivos;
 	private JButton botonCrear;
 	JCheckBox distrito1;
 	JCheckBox distrito2;
@@ -54,18 +55,11 @@ public class CrearProyectoInfraestructura extends JPanel {
 		panelBotones.add(distrito3);
 		
 		
-		labelColectivos = new JLabel("Selecciona de la lista para crear proyecto de colectivo");
+		labelColectivos = new JLabel("Selecciona para crear proyecto de colectivo");
 		comboColectivos = new JComboBox<String>();
 		
 		comboColectivos.addItem("No");
-		try {
-		for(Colectivo c : ((Ciudadano)Aplicacion.getAplicacion().getUsuarioActual()).getColectivosCreados()) {
-			comboColectivos.addItem(c.getTitulo());
-			}
-		}catch(NullPointerException ex) {
-			
-		}
-
+	
 		
 		JPanel panelProyecto = new JPanel(new GridLayout(3,2,2,2));
 		panelProyecto.add(labelExaminar);
@@ -107,6 +101,12 @@ public class CrearProyectoInfraestructura extends JPanel {
 
 	public String getColectivos() {
 		return (String)comboColectivos.getSelectedItem();
+	}
+	
+	public static void addColectivos(List<Colectivo> list) {
+		for(Colectivo c : list) {
+			comboColectivos.addItem(c.getTitulo());
+		}
 	}
 	
 }
