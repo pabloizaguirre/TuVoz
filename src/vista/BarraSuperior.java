@@ -23,14 +23,19 @@ public class BarraSuperior extends JPanel {
 		JPanel left = new JPanel();
 
 		home = new JButton("Inicio");
+		
+		home.setActionCommand("home");
 
 		left.add(home);
 
 		JPanel right = new JPanel();
 		busquedaTF = new JTextField(15);
 		busqueda = new JButton("Busqueda");
+		busqueda.setActionCommand("busqueda");
 		notificaciones = new JButton("Notificaciones");
+		notificaciones.setActionCommand("notificaciones");
 		miPerfil = new JButton("Mi Perfil");
+		miPerfil.setActionCommand("miPerfil");
 		
 		right.add(busquedaTF);
 		right.add(busqueda);
@@ -41,11 +46,12 @@ public class BarraSuperior extends JPanel {
 		add(right, BorderLayout.EAST);
 	}
 
-	public void setControladorMiPerfil(ActionListener c) {  
+	public void setControlador(ActionListener c) {  
 		miPerfil.addActionListener(c);
-	}
-	
-	public void setControladorHome(ActionListener c) {
 		home.addActionListener(c);
+		busqueda.addActionListener(c);
+	}
+	public String getBusqueda() {
+		return busquedaTF.getText();
 	}
 }

@@ -9,12 +9,11 @@ public class Controlador {
 	
 	private ControlIrACrearColectivo contIrACrearColectivo;
 	private ControlCrearColectivo contrCrearColectivo;
-	private ControlIrAMiPerfil contIrAMiPerfil;
+	private ControlBarraSuperior contrBarraSuperior;
 	private ControlIrACrearProyecto contrIrACrearProyecto;
 	private ControlCrearProyecto contrCrearProyecto;
 	private ControlCrearProyectoSocial contrCrearProyectoSocial;
 	private ControlCrearProyectoInfraestructura contrCrearProyectoInfraestructura;
-	private ControlIrAHome contrIrAHome;
 	private ControlInicio contrInicio;
 	private ControlApoyar contrApoyar;
 
@@ -30,8 +29,7 @@ public class Controlador {
 		this.contrCrearProyecto = new ControlCrearProyecto(frame);
 		this.contrCrearProyectoSocial = new ControlCrearProyectoSocial(frame);
 		this.contrCrearProyectoInfraestructura = new ControlCrearProyectoInfraestructura(frame);
-		this.contIrAMiPerfil = new ControlIrAMiPerfil(frame);
-		this.contrIrAHome = new ControlIrAHome(frame);
+		this.contrBarraSuperior= new ControlBarraSuperior(frame);
 		this.contrInicio = new ControlInicio(frame);
 		this.contrApoyar = new ControlApoyar(frame, null);
 	}
@@ -47,13 +45,10 @@ public class Controlador {
 		return this.contrCrearColectivo;
 	}
 	
-	public ControlIrAMiPerfil getControlIrAMiPerfil() {
-		return this.contIrAMiPerfil;
+	public ControlBarraSuperior getControlBarraSuperior() {
+		return this.contrBarraSuperior;
 	}
 	
-	public ControlIrAHome getControlIrAHome() {
-		return this.contrIrAHome;
-	}
 	
 	public ControlIrACrearProyecto getControlIrACrearProyecto() {
 		return this.contrIrACrearProyecto;
