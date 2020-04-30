@@ -8,6 +8,7 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+import controlador.ControlDetalleProyecto;
 import modelo.*;
 
 public class DetalleProyecto extends JPanel{
@@ -15,8 +16,11 @@ public class DetalleProyecto extends JPanel{
 	private JButton solicitarInforme;
 	private JButton enviarAFinanciacion;
 	private JButton suscribirse;
-	private JButton apoyar;
+	private JButton apoyar = new JButton("");
 	private Proyecto proy;
+	private JLabel titulo = new JLabel("");
+	private JLabel labelTipo = new JLabel("");
+	private JPanel botones;
 
 	public DetalleProyecto(Proyecto proyecto) {
 		proy = proyecto;
@@ -30,50 +34,19 @@ public class DetalleProyecto extends JPanel{
 		SpringLayout rLayout = new SpringLayout();
 		right.setLayout(rLayout);	
 		
-		
 		//panel de la izquierda con los detalles del proyecto
 		JPanel left = new JPanel();
 		SpringLayout lLayout = new SpringLayout();
 		left.setLayout(lLayout);
 		
-		JLabel titulo = new JLabel(proyecto.getTitulo());
+		
 		titulo.setFont(new Font(titulo.getFont().getName(), Font.PLAIN, titulo.getFont().getSize()+20));
 		
-		JLabel labelTipo;
-		if(proyecto instanceof ProyectoSocial) {
-			tipo = 1;
-			labelTipo = new JLabel("Proyecto social");
-		} else {
-			labelTipo = new JLabel("Proyecto de infraestructura");
-		}
 		labelTipo.setFont(new Font(labelTipo.getFont().getName(), Font.PLAIN, labelTipo.getFont().getSize()+2));
 		
-		JPanel botones = new JPanel();
+		botones = new JPanel();
 		
-		solicitarInforme = new JButton("Solicitar informe de popularidad");
-		enviarAFinanciacion = new JButton("Enviar a financiacion");
-		suscribirse = new JButton("Suscribirse");
 		
-		if(!proyecto.getListadoApoyos().contains(usuarioActual)) {
-			apoyar = new JButton("Apoyar");
-		} else {
-			apoyar = new JButton("Apoyado");
-			apoyar.setEnabled(false);
-		}
-		if(!proyecto.getListadoSuscripciones().contains(usuarioActual)) {
-			suscribirse = new JButton("Suscribirse");
-		} else {
-			suscribirse = new JButton("Suscrito");
-			suscribirse.setEnabled(false);
-		}
-		botones.add(apoyar);
-		botones.add(suscribirse);
-		if(proyecto.getCreador().equals(usuarioActual)) {
-			botones.add(solicitarInforme);
-			if(proyecto.getEstado().equals(EstadoProyecto.DISPONIBLE)) {
-				botones.add(enviarAFinanciacion);
-			}
-		}
 		
 		
 		JPanel detalles = new JPanel();
@@ -120,6 +93,15 @@ public class DetalleProyecto extends JPanel{
 		detalles.add(labelEstado);
 		
 		
+		
+		
+		tipo = 1;
+		
+		
+		
+		
+		
+		
 		if(tipo==0) {
 			right.setPreferredSize(new Dimension(300,300));
 			String s = "Distritos afectados: ";
@@ -163,6 +145,96 @@ public class DetalleProyecto extends JPanel{
 		
 	}
 	
+	public static void main(String[] args) {
+		JFrame ventana = new JFrame("Mi GUI. Ejemplo 2");
+		// obtener contenedor, asignar layout
+		Container contenedor = ventana.getContentPane();
+		Ciudadano c = Ciudadano.registrarCiudadano("MalaSanta", "BeckyG", "7334234P");
+		Ciudadano c2 = Ciudadano.registrarCiudadano("brazos", "ConejoMalo", "1231213I");
+		
+		Aplicacion.getAplicacion().setUsuarioActual(c);
+		
+		String desc = "Donde estan las gatas ninina palante nananinina palante... no soy ni mala ni santa ninino una como yo a ti te hace falta, calladita pero a veces soy mala empiezo y no kiero parar no soy ni mala ni santa.";
+		Proyecto p = new ProyectoSocial("ONG para ayudar a victimas de belleza despampanante", desc, 123123123, c,"Pablo", TipoAlcance.INTERNACIONAL);
+		
+		DetalleProyecto panel = new DetalleProyecto(p);
+		contenedor.add(panel);
+		
+		ControlDetalleProyecto contr = new ControlDetalleProyecto(ventana, panel, p);
+		contr.setVistaDetalleProyecto();
+		
+		
+		
+		panel.setControlador(contr);
+		
+		// mostrar ventana
+		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		ventana.setSize(1000,600);
+		ventana.setLocationRelativeTo(null);
+		ventana.setVisible(true);	
+	}
+	
+	public void setTitulo(String titulo) {
+		this.titulo.setText(titulo);
+	}
+	
+	public void setLabelTipo(String tipo) {
+		this.labelTipo.setText(tipo);
+	}
+	
+	/**
+	 * Establece el boton de apoyar. Si el usuario actual apoya este proyecto apoyado tiene que ser true
+	 * 
+	 * @param apoyado. indica si el boton debe aparecer como pulsado (true) o no (false)
+	 */
+	public void setApoyar(Boolean apoyado) {
+		apoyar = new JButton();
+		apoyar.setActionCommand("apoyar");
+		if(!apoyado) {
+			apoyar.setText("Apoyar");
+		} else {
+			apoyar.setText("Apoyado");
+			apoyar.setEnabled(false);
+		}
+		botones.add(apoyar);
+		
+	}
+	
+	/**
+	 * Establece el boton suscribirse. Si el usuario actual esta suscrito suscrito tiene que ser true
+	 * 
+	 * @param suscrito. indica si el boton debe aparecer como pulsado (true) o no
+	 */
+	public void setSuscribirse(Boolean suscrito) {
+		if(suscrito) {
+			suscribirse = new JButton("Suscrito");
+			suscribirse.setEnabled(false);
+		} else {
+			suscribirse = new JButton("Suscribirse");
+		}
+		suscribirse.setActionCommand("suscribirse");
+		botones.add(suscribirse);
+	}
+	
+	/**
+	 * Establece el boton de solicitar informe
+	 */
+	public void setSolicitarInforme() {
+		solicitarInforme = new JButton("Solicitar informe de popularidad");
+		solicitarInforme.setActionCommand("solicitarInforme");
+		botones.add(solicitarInforme);
+	}
+	
+	/**
+	 * Establece el boton de enviar a financiacion
+	 */
+	public void setEnviarAFinanciacion() {
+		enviarAFinanciacion = new JButton("Enviar a financiacion");
+		enviarAFinanciacion.setActionCommand("enviarAFinanciacion");
+		botones.add(enviarAFinanciacion);
+	}
+	
+	
 	public Proyecto getProyecto() {
 		return proy;
 	}
@@ -171,20 +243,18 @@ public class DetalleProyecto extends JPanel{
 		return apoyar;
 	}
 	
-	public void setControladorApoyar(ActionListener c) {  
-		apoyar.addActionListener(c);
+	public void setControlador(ActionListener c) {
+		if(apoyar!=null) {
+			apoyar.addActionListener(c);
+		}
+		if(suscribirse!=null) {
+			suscribirse.addActionListener(c);
+		}
+		if(enviarAFinanciacion!=null) {
+			enviarAFinanciacion.addActionListener(c);
+		}
+		if(solicitarInforme!=null) {
+			solicitarInforme.addActionListener(c);
+		}
 	}
-	
-	public void setControladorSuscribirse(ActionListener c) {  
-		suscribirse.addActionListener(c);
-	}
-	
-	public void setControladorEnviarAFinanciacion(ActionListener c) {  
-		enviarAFinanciacion.addActionListener(c);
-	}
-	
-	public void setControladorSolicitarInforme(ActionListener c) {  
-		solicitarInforme.addActionListener(c);
-	}
-	
 }

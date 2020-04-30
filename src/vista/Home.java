@@ -121,16 +121,9 @@ public class Home extends JPanel{
 		add(colectivos);	
 	}
 	
-	
-	public void setListaProyectos(List<String> pList) {
-		JButton boton;
-		for (String p:pList) {
-			boton = new JButton(p);
-			boton.setPreferredSize(new Dimension(120, 120));
-			boton.setActionCommand("botonProyecto");
-			listaProyectos.add(boton); 
-		}
-		
+	public void addBotonProyecto(JButton boton) {
+		boton.setPreferredSize(new Dimension(120, 120));
+		listaProyectos.add(boton);
 	}
 	
 	public void setControladorAnadirProyecto(ActionListener c) {  

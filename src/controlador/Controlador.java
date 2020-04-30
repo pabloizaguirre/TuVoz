@@ -19,6 +19,7 @@ public class Controlador {
 	private ControlIniciarSesion contrIniciarSesion;
 	private ControlRegistrar contrRegistrar;
 	private ControlApoyar contrApoyar;
+	private ControlHome contrHome;
 
 	private List<ControlIrAProyecto> contrIrAProyectos;
 	
@@ -38,6 +39,9 @@ public class Controlador {
 		this.contrIniciarSesion = new ControlIniciarSesion(frame);
 		this.contrRegistrar = new ControlRegistrar(frame);
 		this.contrApoyar = new ControlApoyar(frame, null);
+		
+		// Establecer Home:
+		this.contrHome = new ControlHome(frame);
 	}
 	
 	public ControlApoyar getControlApoyar() {
@@ -80,6 +84,9 @@ public class Controlador {
 	}
 	public ControlRegistrar getControlRegistrar() {
 		return this.contrRegistrar;
+	}
+	public ControlHome getControlHome() {
+		return this.contrHome;
 	}
 
 }

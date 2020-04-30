@@ -27,6 +27,7 @@ public class Ventana extends JFrame {
 	
 	private Home vistaHome;
 	private HomeAdmin vistaHomeAdmin;
+	private ControlHome contrHome;
 	
 	private CrearColectivo vistaCrearColectivo;
 	private ControlCrearColectivo contrCrearColectivo;
@@ -174,9 +175,11 @@ public class Ventana extends JFrame {
 		vistaInicioRegistro.setControlRegistrar(contrRegistrar);
 		
 		this.contrApoyar = controlador.getControlApoyar();
-		vistaDetalleProyecto.setControladorApoyar(contrApoyar);
+		vistaDetalleProyecto.setControlador(contrApoyar);
 		
-		actualizarHome();
+		// Establecer controlador Home
+		this.contrHome = controlador.getControlHome();
+		contrHome.setBotonesProyectos();
 	}
 	
 	public DetalleProyecto getVistaDetalleProyecto() {
@@ -222,17 +225,6 @@ public class Ventana extends JFrame {
 
 	public void anadirVentana(JPanel vista, String name) {
 		ventana.add(vista, name);
-	}
-	
-	public void actualizarHome() {
-		vistaHome.setListaProyectos();
-		
-		//actualizar controladores
-		ControlIrAProyecto contr;
-		for(Proyecto p:Aplicacion.getAplicacion().getListadoProyectos()) {
-			contr = new ControlIrAProyecto(this, p);
-			vistaHome.setControladorBotonProyecto(contr, p);
-		}
 	}
 }
 

@@ -20,9 +20,7 @@ public class ControlIrAHome implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		frame.actualizarHome();
 		// mostrar nueva vista
 		frame.mostrarPanel("home");
-		
 	}
 }

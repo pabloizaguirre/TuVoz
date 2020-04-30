@@ -24,12 +24,29 @@ public class ControlHome implements ActionListener{
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand()=="botonProyecto") {
-			String s
-			JOptionPane.showMessageDialog(vista,
-					"Yendo al proyecto: ", "Error en el registro", JOptionPane.ERROR_MESSAGE);
+		Object source = e.getSource();
+		if(proyectos.containsKey(source)) {
+			JOptionPane.showMessageDialog(vista, proyectos.get(source).getTitulo());
 		}
 		
+		
+	}
+	
+	public void setBotonesProyectos() {
+		JButton botonProyecto;
+		for(Proyecto p:Aplicacion.getAplicacion().getListadoProyectos()) {
+			botonProyecto = new JButton(p.getTitulo());
+			botonProyecto.addActionListener(this);
+			vista.addBotonProyecto(botonProyecto);
+			proyectos.put(botonProyecto, p);
+		}
+	}
+	
+	public void addBotonProyecto(Proyecto p) {
+		JButton botonProyecto = new JButton(p.getTitulo());
+		botonProyecto.addActionListener(this);
+		vista.addBotonProyecto(botonProyecto);
+		proyectos.put(botonProyecto, p);
 	}
 
 }

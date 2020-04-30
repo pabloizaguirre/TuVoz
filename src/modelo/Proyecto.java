@@ -239,7 +239,7 @@ public class Proyecto implements Serializable {
 		 * 
 		 *
 		 */
-		void enviarProyecto() throws Exception {
+		public void enviarProyecto() throws Exception {
 			if(this.consultarEstadoProyecto().equals(EstadoProyecto.DISPONIBLE)) {
 				GrantRequest req = new SolicitudFinanciacion(this);
 				CCGG proxy = CCGG.getGateway();
