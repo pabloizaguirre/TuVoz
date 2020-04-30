@@ -88,7 +88,6 @@ public class ControlDetalleProyecto implements ActionListener{
 	}
 	
 	public void resetVista() {
-		System.out.println("Reseteando vista");
 		EstadoProyecto estado = proyecto.getEstado();
 		Usuario usuario = Aplicacion.getAplicacion().getUsuarioActual();
 		if(estado.equals(EstadoProyecto.APROBADO)) {

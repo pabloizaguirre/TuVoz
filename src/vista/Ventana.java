@@ -187,7 +187,6 @@ public class Ventana extends JFrame {
 		
 		// Establecer controlador Home
 		this.contrHome = controlador.getControlHome();
-		contrHome.setBotonesProyectos();
 		
 		this.contrHomeAdmin = controlador.getControlHomeAdmin();
 		vistaHomeAdmin.setControlHomeAdmin(contrHomeAdmin);

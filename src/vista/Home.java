@@ -16,6 +16,7 @@ public class Home extends JPanel{
 	private JButton botonAnadirColectivo;
 	
 	private JPanel listaProyectos;
+	private JPanel listaColectivos;
 	
 	private static ImageIcon icon1 = Ventana.createImageIcon("src/icons/anadir120_fino.png", "IconoAnadir");
 	
@@ -52,19 +53,6 @@ public class Home extends JPanel{
 		
 		JButton boton;
 		
-		
-		/*
-		int i = 0;
-		while (i < 15) {
-			String s = "Proyecto " + i;
-			i++;
-			JButton boton = new JButton(s); 
-			boton.setPreferredSize(new Dimension(120, 120));
-			
-			listaProyectos.add(boton); 
-		}
-		listaProyectos.setVisible(true); */
-		
 		proyectos.add(labelProyectos, BorderLayout.WEST);
 		proyectos.add(scroll, BorderLayout.SOUTH);
 		proyectos.setPreferredSize(new Dimension(700,200)); 
@@ -86,27 +74,15 @@ public class Home extends JPanel{
 		JLabel labelColectivos = new JLabel("  Colectivos: ");
 		labelColectivos.setFont(new Font(labelColectivos.getFont().getName(), Font.PLAIN, labelColectivos.getFont().getSize()+5));
 		
-		final JPanel listaColectivos = new JPanel();
+		listaColectivos = new JPanel();
 		listaColectivos.setLayout(new FlowLayout(FlowLayout.LEFT));
-
+		botonAnadirColectivo = new JButton(icon1);
+		botonAnadirColectivo.setPreferredSize(new Dimension(120, 120));
+		listaColectivos.add(botonAnadirColectivo);
+		
 		JScrollPane scrollC = new JScrollPane(listaColectivos);
 		scrollC.setPreferredSize(new Dimension(700, 150));
 		scrollC.setBorder(null);
-		
-		botonAnadirColectivo = new JButton(icon1);
-		botonAnadirColectivo.setPreferredSize(new Dimension(120, 120));
-		
-		listaColectivos.add(botonAnadirColectivo);
-		int j = 0;
-		while (j < 5) {
-			String s = "Colectivo " + j;
-			j++;
-			boton = new JButton(s); 
-			boton.setPreferredSize(new Dimension(120, 120));
-			
-			listaColectivos.add(boton); 
-		}
-		listaColectivos.setVisible(true); 
 		
 		colectivos.add(labelColectivos, BorderLayout.WEST);
 		colectivos.add(scrollC, BorderLayout.SOUTH);
@@ -124,6 +100,11 @@ public class Home extends JPanel{
 	public void addBotonProyecto(JButton boton) {
 		boton.setPreferredSize(new Dimension(120, 120));
 		listaProyectos.add(boton);
+	}
+	
+	public void addBotonColectivo(JButton boton) {
+		boton.setPreferredSize(new Dimension(120, 120));
+		listaColectivos.add(boton);
 	}
 	
 	public void setControladorAnadirProyecto(ActionListener c) {  

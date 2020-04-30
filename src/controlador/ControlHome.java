@@ -17,10 +17,12 @@ public class ControlHome implements ActionListener{
 	private Ventana frame;
 	
 	private HashMap<JButton, Proyecto> proyectos = new HashMap<JButton, Proyecto>();
+	private HashMap<JButton, Colectivo> colectivos = new HashMap<JButton, Colectivo>();
 	
 	public ControlHome(Ventana frame) {
 		this.frame = frame;
 		this.vista = frame.getVistaHome();
+		setVista();
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -46,6 +48,11 @@ public class ControlHome implements ActionListener{
 		
 	}
 	
+	public void setVista() {
+		setBotonesProyectos();
+		setBotonesColectivos();
+	}
+	
 	public void setBotonesProyectos() {
 		JButton botonProyecto;
 		for(Proyecto p:Aplicacion.getAplicacion().getListadoProyectos()) {
@@ -61,6 +68,26 @@ public class ControlHome implements ActionListener{
 		botonProyecto.addActionListener(this);
 		vista.addBotonProyecto(botonProyecto);
 		proyectos.put(botonProyecto, p);
+	}
+	
+	
+	public void setBotonesColectivos() {
+		JButton botonColectivo;
+		for(ElementoColectivo c:Aplicacion.getAplicacion().getListadoElementoColectivos()) {
+			if(c instanceof Colectivo) {
+				botonColectivo = new JButton(((Colectivo) c).getTitulo());
+				botonColectivo.addActionListener(this);
+				vista.addBotonColectivo(botonColectivo);
+				colectivos.put(botonColectivo, ((Colectivo) c));
+			}
+		}
+	}
+	
+	public void addBotonColectivo(Colectivo c) {
+		JButton botonColectivo = new JButton(c.getTitulo());
+		botonColectivo.addActionListener(this);
+		vista.addBotonProyecto(botonColectivo);
+		colectivos.put(botonColectivo, c);
 	}
 
 }
