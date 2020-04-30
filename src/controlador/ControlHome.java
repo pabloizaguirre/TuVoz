@@ -27,11 +27,19 @@ public class ControlHome implements ActionListener{
 		Object source = e.getSource();
 		if(proyectos.containsKey(source)) {
 			Proyecto p = proyectos.get(source);
-			DetalleProyecto vistaProyecto = new DetalleProyecto();
-			ControlDetalleProyecto c = new ControlDetalleProyecto(frame, vistaProyecto, p);
-			c.setVistaDetalleProyecto();
 			
-			frame.anadirVentana(vistaProyecto, "" + p.getId());
+			if(frame.getProyectos().containsKey(p.getId())) {
+				ControlDetalleProyecto contr = frame.getProyectos().get(p.getId());
+				contr.resetVista();
+			} else {
+				DetalleProyecto vistaProyecto = new DetalleProyecto();
+				ControlDetalleProyecto c = new ControlDetalleProyecto(frame, vistaProyecto, p);
+				c.setVistaDetalleProyecto();
+				frame.getProyectos().put(p.getId(), c);
+				
+				frame.anadirVentana(vistaProyecto, "" + p.getId());
+			}
+			
 			frame.mostrarPanel("" + p.getId());
 		}
 		

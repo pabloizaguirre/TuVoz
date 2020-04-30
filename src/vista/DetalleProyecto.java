@@ -259,6 +259,23 @@ public class DetalleProyecto extends JPanel{
 		return apoyar;
 	}
 	
+	public void resetButtonPanel() {
+		botones.removeAll();
+		
+		if(apoyar!=null) {
+			apoyar.setEnabled(true);
+		}
+		if(suscribirse!=null) {
+			suscribirse.setEnabled(true);
+		}
+		if(enviarAFinanciacion!=null) {
+			enviarAFinanciacion.setEnabled(true);
+		}
+		if(solicitarInforme!=null) {
+			solicitarInforme.setEnabled(true);
+		}
+	}
+	
 	public void setControlador(ActionListener c) {
 		if(apoyar!=null) {
 			apoyar.addActionListener(c);

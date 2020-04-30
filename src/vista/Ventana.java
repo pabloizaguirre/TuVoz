@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import controlador.*;
@@ -46,7 +47,7 @@ public class Ventana extends JFrame {
 	private CrearProyectoInfraestructura vistaCrearProyectoInfraestructura;
 	private ControlCrearProyectoInfraestructura contrCrearProyectoInfraestructura;
 	
-	
+	private HashMap<Integer, ControlDetalleProyecto> proyectos = new HashMap<Integer, ControlDetalleProyecto>();
 	
 	
 	
@@ -233,6 +234,10 @@ public class Ventana extends JFrame {
 	
 	public ApoyoMinimoProyecto getVistaApoyoMinimoProyecto() {
 		return this.vistaApoyoMinimoProyecto;
+	}
+	
+	public HashMap<Integer, ControlDetalleProyecto> getProyectos(){
+		return this.proyectos;
 	}
 	
 	public void mostrarPanel(String carta) {

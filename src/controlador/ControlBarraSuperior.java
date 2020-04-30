@@ -41,11 +41,19 @@ public class ControlBarraSuperior implements ActionListener{
 		}else if(e.getActionCommand().equals("busqueda")) {
 			if(Proyecto.buscarProyecto(vista.getBusqueda())!=null) {
 				Proyecto proyecto = Proyecto.buscarProyecto(vista.getBusqueda());
-				DetalleProyecto vistaProyecto = new DetalleProyecto();
-				ControlDetalleProyecto c = new ControlDetalleProyecto(frame, vistaProyecto, proyecto);
-				c.setVistaDetalleProyecto();
 				
-				frame.anadirVentana(vistaProyecto, "" + proyecto.getId());
+				if(frame.getProyectos().containsKey(proyecto.getId())) {
+					ControlDetalleProyecto contr = frame.getProyectos().get(proyecto.getId());
+					contr.resetVista();
+				} else {
+					DetalleProyecto vistaProyecto = new DetalleProyecto();
+					ControlDetalleProyecto c = new ControlDetalleProyecto(frame, vistaProyecto, proyecto);
+					c.setVistaDetalleProyecto();
+					frame.getProyectos().put(proyecto.getId(), c);
+					
+					frame.anadirVentana(vistaProyecto, "" + proyecto.getId());
+				}
+				
 				frame.mostrarPanel("" + proyecto.getId());
 			}
 			else if(Colectivo.buscarColectivo(vista.getBusqueda())!=null) {

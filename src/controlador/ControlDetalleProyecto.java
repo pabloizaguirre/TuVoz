@@ -84,6 +84,32 @@ public class ControlDetalleProyecto implements ActionListener{
 			}
 			vista.setDetallesOpcionalesInfraestructura(listaDistritos, ((ProyectoInfraestructura) proyecto).getImagen().getPath());
 		}
+		vista.setControlador(this);
+	}
+	
+	public void resetVista() {
+		System.out.println("Reseteando vista");
+		EstadoProyecto estado = proyecto.getEstado();
+		Usuario usuario = Aplicacion.getAplicacion().getUsuarioActual();
+		if(estado.equals(EstadoProyecto.APROBADO)) {
+			vista.setLabelEstado("Estado: " + estado + ", con presupuesto concedido de " + proyecto.getPresupuestoConcedido() + "€");
+		} else {
+			vista.setLabelEstado("Estado: " + estado);
+		}
+		
+		vista.resetButtonPanel();
+		
+		if(!(usuario instanceof Administrador)) {
+			vista.setApoyar(proyecto.getListadoApoyos().contains(usuario));
+			vista.setSuscribirse(proyecto.getListadoSuscripciones().contains(usuario));
+			if(proyecto.getCreador().equals(usuario)) {
+				vista.setSolicitarInforme();
+				if(estado.equals(EstadoProyecto.DISPONIBLE)) {
+					vista.setEnviarAFinanciacion();
+				}
+			}
+		}
+		vista.setControlador(this);
 	}
 
 }

@@ -21,10 +21,25 @@ public class ControlIrAProyecto implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		DetalleProyecto vista = new DetalleProyecto(proyecto);
-		//vista.setControladorApoyar(new ControlApoyar(frame, vista));
-		frame.anadirVentana(vista, proyecto.toString());
-		frame.mostrarPanel(proyecto.toString());
+		Object source = e.getSource();
+		if(proyectos.containsKey(source)) {
+			Proyecto p = proyectos.get(source);
+			
+			if(frame.getProyectos().containsKey(p.getId())) {
+				ControlDetalleProyecto contr = frame.getProyectos().get(p.getId());
+				contr.resetVista();
+			} else {
+				DetalleProyecto vistaProyecto = new DetalleProyecto();
+				ControlDetalleProyecto c = new ControlDetalleProyecto(frame, vistaProyecto, p);
+				c.setVistaDetalleProyecto();
+				frame.getProyectos().put(p.getId(), c);
+				
+				frame.anadirVentana(vistaProyecto, "" + p.getId());
+			}
+			
+			
+			frame.mostrarPanel("" + p.getId());
+		}
 	}
 
 	
