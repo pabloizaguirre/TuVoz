@@ -4,6 +4,7 @@ import java.awt.*;
 
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.*;
 import modelo.*;
@@ -15,7 +16,7 @@ public class CrearProyectoInfraestructura extends JPanel {
 	private JButton botonExaminar;
 	private JLabel labelDistritos;
 	private JLabel labelColectivos;
-	private JComboBox<String> comboColectivos;
+	private static JComboBox<String> comboColectivos;
 	private JButton botonCrear;
 	JCheckBox distrito1;
 	JCheckBox distrito2;
@@ -31,16 +32,18 @@ public class CrearProyectoInfraestructura extends JPanel {
 		
 		labelExaminar = new JLabel("Inserte imagen ilustrativa del proyecto: ");
 		botonExaminar = new JButton("Examinar archivo");
+		botonExaminar.setActionCommand("examinar");
 		
 		
 		JPanel panelExaminar = new JPanel();
 		panelExaminar.add(botonExaminar);
 		
 		
+		
 		labelDistritos = new JLabel("Seleccione los distritos afectados:");
 		JPanel panelBotones = new JPanel();
 		
-		int i =0;
+
 
 		distrito1 = new JCheckBox("Distrito1");
 	 	distrito2 = new JCheckBox("Distrito2");
@@ -52,18 +55,11 @@ public class CrearProyectoInfraestructura extends JPanel {
 		panelBotones.add(distrito3);
 		
 		
-		labelColectivos = new JLabel("Selecciona de la lista para crear proyecto de colectivo");
+		labelColectivos = new JLabel("Selecciona para crear proyecto de colectivo");
 		comboColectivos = new JComboBox<String>();
 		
 		comboColectivos.addItem("No");
-		try {
-		for(Colectivo c : ((Ciudadano)Aplicacion.getAplicacion().getUsuarioActual()).getColectivosCreados()) {
-			comboColectivos.addItem(c.getTitulo());
-			}
-		}catch(NullPointerException ex) {
-			
-		}
-
+	
 		
 		JPanel panelProyecto = new JPanel(new GridLayout(3,2,2,2));
 		panelProyecto.add(labelExaminar);
@@ -74,6 +70,7 @@ public class CrearProyectoInfraestructura extends JPanel {
 		panelProyecto.add(comboColectivos);
 		
 		botonCrear = new JButton("Crear");
+		botonCrear.setActionCommand("crear");
 
 		cLayout.putConstraint(BorderLayout.NORTH, labelNuevo, 40, BorderLayout.NORTH, this);
 		cLayout.putConstraint(BorderLayout.NORTH, panelProyecto, 15, BorderLayout.SOUTH, labelNuevo);
@@ -89,11 +86,9 @@ public class CrearProyectoInfraestructura extends JPanel {
 	
 	public void setControladorCrearProyectoInfraestructura(ActionListener c) {  
 		botonCrear.addActionListener(c);
-	}
-
-	public void setControladorExaminar(ActionListener c) {
 		botonExaminar.addActionListener(c);
 	}
+
 
 	public ArrayList<Distrito> getDistritos() {
 		ArrayList<Distrito> distritos = new ArrayList<Distrito>();
@@ -106,6 +101,12 @@ public class CrearProyectoInfraestructura extends JPanel {
 
 	public String getColectivos() {
 		return (String)comboColectivos.getSelectedItem();
+	}
+	
+	public static void addColectivos(List<Colectivo> list) {
+		for(Colectivo c : list) {
+			comboColectivos.addItem(c.getTitulo());
+		}
 	}
 	
 }

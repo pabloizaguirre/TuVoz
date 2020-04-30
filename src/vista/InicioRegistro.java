@@ -26,6 +26,7 @@ public class InicioRegistro extends JPanel {
 	private JPasswordField passwordreg;
 	private JButton botonRegistro;
 	
+	
 
 	public InicioRegistro() {
 		SpringLayout cLayout = new SpringLayout();
@@ -49,6 +50,7 @@ public class InicioRegistro extends JPanel {
 		labelpassword = new JLabel("Contraseña");
 		password = new JPasswordField(10);
 		botonEntrar = new JButton("Entrar");
+		botonEntrar.setActionCommand("botonIniciarSesion");
 		
 		inicio.add(labelnombre);
 		inicio.add(jtfnombre);
@@ -79,6 +81,7 @@ public class InicioRegistro extends JPanel {
 		labelpasswordreg = new JLabel("Contraseña");
 		passwordreg = new JPasswordField(15);
 		botonRegistro = new JButton("Registrarse");
+		botonRegistro.setActionCommand("botonRegistrarse");
 
 		registrarse.setVisible(true);
 
@@ -116,13 +119,11 @@ public class InicioRegistro extends JPanel {
 		this.add(registrarse);
 	}
 
-	public void setControlIniciarSesion(ActionListener c) {  
+	public void setControlInicio(ActionListener c) {  
 		botonEntrar.addActionListener(c);
-	}
-	
-	public void setControlRegistrar(ActionListener c) {  
 		botonRegistro.addActionListener(c);
 	}
+	
 
 	public String getNombre() {
 		return jtfnombre.getText();

@@ -2,6 +2,8 @@ package vista;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.*;
 import modelo.*;
@@ -12,7 +14,7 @@ public class CrearProyectoSocial extends JPanel {
 	private JRadioButton nacional;
 	private JRadioButton internacional;
 	private JLabel labelColectivos;
-	private JComboBox<String> comboColectivos;
+	private static JComboBox<String> comboColectivos;
 	private JButton botonCrear;
 	
 	public CrearProyectoSocial() {
@@ -49,17 +51,11 @@ public class CrearProyectoSocial extends JPanel {
 		panelCrear.add(panelProyecto, BorderLayout.SOUTH);
 		
 		
-		labelColectivos = new JLabel("Selecciona de la lista para crear proyecto de colectivo");
+		labelColectivos = new JLabel("Selecciona para crear proyecto de colectivo");
 		comboColectivos = new JComboBox<String>();
 		
 		comboColectivos.addItem("No");
-		try {
-		for(Colectivo c : ((Ciudadano)Aplicacion.getAplicacion().getUsuarioActual()).getColectivosCreados()) {
-			comboColectivos.addItem(c.getTitulo());
-			}
-		}catch(NullPointerException ex) {
-			
-		}
+		
 		
 		JPanel panelColectivos = new JPanel();
 		panelColectivos.add(labelColectivos);
@@ -104,6 +100,12 @@ public class CrearProyectoSocial extends JPanel {
 
 	public String getColectivos() {
 		return (String)comboColectivos.getSelectedItem();
+	}
+	
+	public static void addColectivos(List<Colectivo> list) {
+		for(Colectivo c : list) {
+			comboColectivos.addItem(c.getTitulo());
+		}
 	}
 	
 }

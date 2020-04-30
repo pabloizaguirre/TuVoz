@@ -19,8 +19,7 @@ public class Ventana extends JFrame {
 	
 	
 	private BarraSuperior vistaBarraSuperior;
-	private ControlIrAMiPerfil contIrAMiPerfil;
-	private ControlIrAHome contrIrAHome;
+	private ControlBarraSuperior contrBarraSuperior;
 	
 	private MiPerfil vistaMiPerfil;
 	private ControlIrACrearColectivo contIrACrearColectivo;
@@ -44,11 +43,9 @@ public class Ventana extends JFrame {
 	
 	
 	
-	private ControlExaminar contrExaminar;
 	
 	private InicioRegistro vistaInicioRegistro;
-	private ControlRegistrar contrRegistrar;
-	private ControlIniciarSesion contrIniciarSesion;
+	private ControlInicio contrInicio;
 
 
 
@@ -88,7 +85,7 @@ public class Ventana extends JFrame {
 		//prueba de la pantalla de proyecto
 		String descripcion = "Un proyecto rechulon para chicas malas que son rechulonas y molonas, tambien es importante que tengan alto flow, para pertenecer solo tienes que decir las palabras magicas: Que falta de respeto mami como te atreves a venir sin pantis";
 		Ciudadano creador = new Ciudadano("ponbebe", "Anuel", "72231461P");
-		ProyectoSocial p = new ProyectoSocial("Puente para perras", descripcion, 200000, creador, "Las chicas malas", TipoAlcance.INTERNACIONAL);
+		ProyectoSocial p = new ProyectoSocial("Puente", descripcion, 200000, creador, "Las chicas malas", TipoAlcance.INTERNACIONAL);
 		List<Distrito> d = new ArrayList<Distrito>();
 	    d.add(Distrito.MONCLOAARAVACA);
 	    d.add(Distrito.MORATALAZ);
@@ -147,11 +144,9 @@ public class Ventana extends JFrame {
 		vistaHome.setControladorAnadirProyecto(contrIrACrearProyecto);
 		
 		
-		this.contIrAMiPerfil = controlador.getControlIrAMiPerfil();
-		vistaBarraSuperior.setControladorMiPerfil(contIrAMiPerfil);
-		
-		this.contrIrAHome = controlador.getControlIrAHome();
-		vistaBarraSuperior.setControladorHome(contrIrAHome);
+		this.contrBarraSuperior = controlador.getControlBarraSuperior();
+		vistaBarraSuperior.setControlador(contrBarraSuperior);
+	
 		
 		this.contrCrearColectivo = controlador.getControlCrearColectivo();
 		vistaCrearColectivo.setControladorBotonCrear(contrCrearColectivo);
@@ -165,15 +160,12 @@ public class Ventana extends JFrame {
 		this.contrCrearProyectoInfraestructura = controlador.getControlCrearProyectoInfraestructura();
 		vistaCrearProyectoInfraestructura.setControladorCrearProyectoInfraestructura(contrCrearProyectoInfraestructura);
 		
-		this.contrExaminar = controlador.getControlExaminar();
-		vistaCrearProyectoInfraestructura.setControladorExaminar(contrExaminar);
 		
-		this.contrIniciarSesion = controlador.getControlIniciarSesion();
-		vistaInicioRegistro.setControlIniciarSesion(contrIniciarSesion);
 		
-		this.contrRegistrar = controlador.getControlRegistrar();
-		vistaInicioRegistro.setControlRegistrar(contrRegistrar);
+		this.contrInicio = controlador.getControlInicio();
+		vistaInicioRegistro.setControlInicio(contrInicio);
 		
+	
 		this.contrApoyar = controlador.getControlApoyar();
 		vistaDetalleProyecto.setControlador(contrApoyar);
 		

@@ -40,8 +40,10 @@ public class ControlCrearProyecto implements ActionListener{
 			return;
 		}
         if (vista.getTipoProyecto().equals("social")) {
+        	CrearProyectoSocial.addColectivos(((Ciudadano)Aplicacion.getAplicacion().getUsuarioActual()).getColectivosCreados());
             frame.mostrarPanel("crearProyectoSocial");
         } else {
+        	CrearProyectoInfraestructura.addColectivos(((Ciudadano)Aplicacion.getAplicacion().getUsuarioActual()).getColectivosCreados());
             frame.mostrarPanel("crearProyectoInfraestructura");
         }
 		

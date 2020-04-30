@@ -9,15 +9,12 @@ public class Controlador {
 	
 	private ControlIrACrearColectivo contIrACrearColectivo;
 	private ControlCrearColectivo contrCrearColectivo;
-	private ControlIrAMiPerfil contIrAMiPerfil;
+	private ControlBarraSuperior contrBarraSuperior;
 	private ControlIrACrearProyecto contrIrACrearProyecto;
 	private ControlCrearProyecto contrCrearProyecto;
 	private ControlCrearProyectoSocial contrCrearProyectoSocial;
 	private ControlCrearProyectoInfraestructura contrCrearProyectoInfraestructura;
-	private ControlIrAHome contrIrAHome;
-	private ControlExaminar contrExaminar;
-	private ControlIniciarSesion contrIniciarSesion;
-	private ControlRegistrar contrRegistrar;
+	private ControlInicio contrInicio;
 	private ControlApoyar contrApoyar;
 	private ControlHome contrHome;
 
@@ -33,11 +30,8 @@ public class Controlador {
 		this.contrCrearProyecto = new ControlCrearProyecto(frame);
 		this.contrCrearProyectoSocial = new ControlCrearProyectoSocial(frame);
 		this.contrCrearProyectoInfraestructura = new ControlCrearProyectoInfraestructura(frame);
-		this.contIrAMiPerfil = new ControlIrAMiPerfil(frame);
-		this.contrIrAHome = new ControlIrAHome(frame);
-		this.contrExaminar = new ControlExaminar(frame);
-		this.contrIniciarSesion = new ControlIniciarSesion(frame);
-		this.contrRegistrar = new ControlRegistrar(frame);
+		this.contrBarraSuperior= new ControlBarraSuperior(frame);
+		this.contrInicio = new ControlInicio(frame);
 		this.contrApoyar = new ControlApoyar(frame, null);
 		
 		// Establecer Home:
@@ -55,13 +49,10 @@ public class Controlador {
 		return this.contrCrearColectivo;
 	}
 	
-	public ControlIrAMiPerfil getControlIrAMiPerfil() {
-		return this.contIrAMiPerfil;
+	public ControlBarraSuperior getControlBarraSuperior() {
+		return this.contrBarraSuperior;
 	}
 	
-	public ControlIrAHome getControlIrAHome() {
-		return this.contrIrAHome;
-	}
 	
 	public ControlIrACrearProyecto getControlIrACrearProyecto() {
 		return this.contrIrACrearProyecto;
@@ -76,14 +67,8 @@ public class Controlador {
 	public ControlCrearProyectoInfraestructura getControlCrearProyectoInfraestructura() {
 		return this.contrCrearProyectoInfraestructura;
 	}
-	public ControlExaminar getControlExaminar() {
-		return this.contrExaminar;
-	}
-	public ControlIniciarSesion getControlIniciarSesion() {
-		return this.contrIniciarSesion;
-	}
-	public ControlRegistrar getControlRegistrar() {
-		return this.contrRegistrar;
+	public ControlInicio getControlInicio() {
+		return this.contrInicio;
 	}
 	public ControlHome getControlHome() {
 		return this.contrHome;

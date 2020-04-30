@@ -262,6 +262,21 @@ public class Proyecto implements Serializable {
 			presupuestoConcedido = proxy.getAmountGranted(this.idEnvio);
 		} 
 
+		/**
+		 * Este metodo permite buscar un proyecto entre los disponibles
+		 * 
+		 * @param s String del titulo del proyecto
+		 * 
+		 * @return Proyecto requerido, null si no existe
+		 */
+		
+		public static Proyecto buscarProyecto(String s) {
+			for(Proyecto p : Aplicacion.getAplicacion().getListadoProyectos()) {
+				if(p.getTitulo().equals(s)) {
+					return p;
+				}
+			}return null;
+		}
 
 		
 		public String toString(){
