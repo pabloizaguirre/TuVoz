@@ -136,7 +136,9 @@ public class DetalleColectivo extends JPanel {
 		if(botonUnirme!=null) {
 			botonUnirme.addActionListener(c);
 		}
-		
+	}
+	public JButton getBotonUnirme() {
+		return botonUnirme;
 	}
 }
 

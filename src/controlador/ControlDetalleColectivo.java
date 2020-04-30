@@ -3,7 +3,9 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import modelo.Aplicacion;
 import modelo.Ciudadano;
@@ -25,11 +27,14 @@ public class ControlDetalleColectivo implements ActionListener{
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand().equals("unirse")) {
+		if(e.getActionCommand().equals("unirme")) {
 			colectivo.unirseAColectivo((Ciudadano) Aplicacion.getAplicacion().getUsuarioActual());
 			((Ciudadano) Aplicacion.getAplicacion().getUsuarioActual()).anadirAMisColectivos(colectivo);
+			vista.getBotonUnirme().setEnabled(false);
+			JOptionPane.showMessageDialog(vista,
+					"Te has unido a " +colectivo.getTitulo(), "Unirme a colectivo", JOptionPane.INFORMATION_MESSAGE);
 		}else {
-			return;
+			
 		}
 	}	
 }

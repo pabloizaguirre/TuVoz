@@ -49,6 +49,7 @@ public class Ventana extends JFrame {
 	
 	
 	
+	
 	private InicioRegistro vistaInicioRegistro;
 	private ControlInicio contrInicio;
 
