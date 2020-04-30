@@ -61,7 +61,8 @@ public class ControlBarraSuperior implements ActionListener{
 			else if(Colectivo.buscarColectivo(vista.getBusqueda())!=null) {
 				Colectivo colectivo = Colectivo.buscarColectivo(vista.getBusqueda());
 				DetalleColectivo vista = new DetalleColectivo(colectivo);
-				vista.setUnirme((Ciudadano) Aplicacion.getAplicacion().getUsuarioActual());
+				
+				vista.setUnirme();
 				vista.setControlador(new ControlDetalleColectivo(frame, vista, colectivo));
 				frame.anadirVentana(vista, colectivo.toString());
 				frame.mostrarPanel(colectivo.toString());
