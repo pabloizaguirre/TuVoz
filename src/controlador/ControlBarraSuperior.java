@@ -23,24 +23,26 @@ public class ControlBarraSuperior implements ActionListener{
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand().equals("home")) {
+		String source = e.getActionCommand();
+		if(source.equals("home")) {
 			if(Aplicacion.getAplicacion().getUsuarioActual().getClass().equals(Ciudadano.class)) {
 				frame.mostrarPanel("home");
 			}else if(Aplicacion.getAplicacion().getUsuarioActual().getClass().equals(Administrador.class)) {
 				frame.mostrarPanel("homeAdmin");
 			}
-		}else if(e.getActionCommand().equals("cerrarSesion")){
+		}else if(source.equals("cerrarSesion")){
 			Aplicacion.guardarAplicacion();
 			Aplicacion.getAplicacion().setUsuarioActual(null);
+			frame.getVistaBarraSuperior().setVisible(false);
 			frame.mostrarPanel("inicioRegistro");
-		}else if(e.getActionCommand().equals("miPerfil")) {
+		}else if(source.equals("miPerfil")) {
 
 			frame.mostrarPanel("miPerfil");
 			
-		}else if(e.getActionCommand().equals("notificaciones")) {
+		}else if(source.equals("notificaciones")) {
 			frame.mostrarPanel("notificaciones");
 			
-		}else if(e.getActionCommand().equals("busqueda")) {
+		}else if(source.equals("busqueda") || source.equals("busquedaTF")) {
 			if(Proyecto.buscarProyecto(vista.getBusqueda())!=null) {
 				Proyecto proyecto = Proyecto.buscarProyecto(vista.getBusqueda());
 				

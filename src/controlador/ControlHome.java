@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import modelo.*;
+import vista.DetalleColectivo;
 import vista.DetalleProyecto;
 import vista.Home;
 import vista.Ventana;
@@ -43,6 +44,21 @@ public class ControlHome implements ActionListener{
 			}
 			
 			frame.mostrarPanel("" + p.getId());
+		} else if (colectivos.containsKey(source)) {
+			Colectivo c = colectivos.get(source);
+			
+			if(frame.getColectivos().containsKey(c.getTitulo())) {
+				ControlDetalleColectivo contr = frame.getColectivos().get(c.getTitulo());
+				//contr.resetVista
+			} else {
+				DetalleColectivo vistaColectivo = new DetalleColectivo(c);
+				ControlDetalleColectivo contr = new ControlDetalleColectivo(frame, vistaColectivo, c);
+				//contr.setVistaDetalleColectivo();
+				frame.getColectivos().put(c.getTitulo(), contr);
+				
+				frame.anadirVentana(vistaColectivo, c.getTitulo());
+			}
+			frame.mostrarPanel("" + c.getTitulo());
 		}
 		
 		

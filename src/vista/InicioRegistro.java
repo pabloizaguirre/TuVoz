@@ -1,11 +1,6 @@
 package vista;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
@@ -31,7 +26,11 @@ public class InicioRegistro extends JPanel {
 	public InicioRegistro() {
 		SpringLayout cLayout = new SpringLayout();
 		this.setLayout(cLayout);
-		ImageIcon icon1 = Ventana.createImageIcon("src/icons/logo.jpneg", "Logo");
+		ImageIcon icon1 = Ventana.createImageIcon("src/icons/logoTuVoz.png", "Logo");
+		Image logoImage = icon1.getImage();
+		logoImage = logoImage.getScaledInstance(512, 384, Image.SCALE_SMOOTH);
+		icon1.setImage(logoImage);
+		
 		JLabel logo = new JLabel(icon1);
 		
 		
@@ -70,7 +69,7 @@ public class InicioRegistro extends JPanel {
 		final JPanel registrarse = new JPanel();
 		SpringLayout regLayout = new SpringLayout();
 		registrarse.setLayout(regLayout);
-		registrarse.setBorder(BorderFactory.createLineBorder(Color.blue));
+		registrarse.setBorder(null);
 		JLabel intro = new JLabel("Crear una cuenta");
 		intro.setFont(new Font(intro.getFont().getName(), Font.PLAIN, intro.getFont().getSize()+15));
 

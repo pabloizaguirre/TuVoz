@@ -35,6 +35,7 @@ public class BarraSuperior extends JPanel {
 
 		JPanel right = new JPanel();
 		busquedaTF = new JTextField(15);
+		busquedaTF.setActionCommand("busquedaTF");
 		busqueda = new JButton("Busqueda");
 		busqueda.setActionCommand("busqueda");
 		notificaciones = new JButton("Notificaciones");
@@ -55,6 +56,7 @@ public class BarraSuperior extends JPanel {
 		miPerfil.addActionListener(c);
 		cerrarSesion.addActionListener(c);
 		home.addActionListener(c);
+		busquedaTF.addActionListener(c);
 		busqueda.addActionListener(c);
 		notificaciones.addActionListener(c);
 	}

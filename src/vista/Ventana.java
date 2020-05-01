@@ -51,6 +51,7 @@ public class Ventana extends JFrame {
 	private ControlNotificaciones contrNoti;
 	
 	private HashMap<Integer, ControlDetalleProyecto> proyectos = new HashMap<Integer, ControlDetalleProyecto>();
+	private HashMap<String, ControlDetalleColectivo> colectivos = new HashMap<String, ControlDetalleColectivo>();
 	
 	
 	
@@ -88,6 +89,8 @@ public class Ventana extends JFrame {
 
 		this.vistaBarraSuperior = new BarraSuperior();
 		contentPane.add(vistaBarraSuperior, BorderLayout.NORTH);
+		vistaBarraSuperior.setVisible(false);
+		
 		this.vistaInicioRegistro = new InicioRegistro();
 		ventana.add(vistaInicioRegistro, "inicioRegistro");
 		
@@ -115,6 +118,8 @@ public class Ventana extends JFrame {
 		
 		creador.anadirAMisColectivosCreados(colectivo);
 
+		
+		
 		
 		this.vistaHome = new Home();
 		ventana.add(vistaHome, "home");
@@ -248,6 +253,10 @@ public class Ventana extends JFrame {
 	
 	public HashMap<Integer, ControlDetalleProyecto> getProyectos(){
 		return this.proyectos;
+	}
+	
+	public HashMap<String, ControlDetalleColectivo> getColectivos(){
+		return this.colectivos;
 	}
 	
 	public void mostrarPanel(String carta) {

@@ -39,8 +39,9 @@ public class ControlInicio implements ActionListener {
 	        		Aplicacion.getAplicacion().getAdministrador().getContrasena().equals(vista.getPassword())) {
 	        	Aplicacion.getAplicacion().setUsuarioActual(Aplicacion.getAplicacion().getAdministrador());
 	        	
-	        	JOptionPane.showMessageDialog(vista,
-						"Bienvenido, Administrador", "Bienvenido a Tu Voz", JOptionPane.INFORMATION_MESSAGE);
+	        	/*JOptionPane.showMessageDialog(vista,
+						"Bienvenido, Administrador", "Bienvenido a Tu Voz", JOptionPane.INFORMATION_MESSAGE);*/
+	        	frame.getVistaBarraSuperior().setVisible(true);
 	        	frame.mostrarPanel("homeAdmin");
 	        } 
 	        /*Comprobamos si las credenciales introducidas corresponden a un ciudadano registrado*/
@@ -49,8 +50,9 @@ public class ControlInicio implements ActionListener {
 	        	if(ciu !=null && ciu.getContrasena().equals(vista.getPassword())) {
 	        		Aplicacion.getAplicacion().setUsuarioActual((Usuario)ciu);
 	        	
-	        		JOptionPane.showMessageDialog(vista,
-						"Bienvenido, "+vista.getNombre(), "Bienvenido a Tu Voz", JOptionPane.INFORMATION_MESSAGE);
+	        		/*JOptionPane.showMessageDialog(vista,
+						"Bienvenido, "+vista.getNombre(), "Bienvenido a Tu Voz", JOptionPane.INFORMATION_MESSAGE);*/
+	        		frame.getVistaBarraSuperior().setVisible(true);
 	        		frame.mostrarPanel("home");
 	        	}
 	        	else {
