@@ -13,6 +13,9 @@ public class MiPerfil extends JPanel{
 	
 	private JButton cerrarSesion;
 	
+	private JPanel listaProyectos;
+	private JPanel listaColectivos;
+	
 	
 	public MiPerfil() {
 		SpringLayout cLayout = new SpringLayout();

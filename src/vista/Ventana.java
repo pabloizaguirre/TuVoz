@@ -59,6 +59,7 @@ public class Ventana extends JFrame {
 
 
 	private String ultimaVista;
+	private String vistaActual;
 	private JPanel ventana;
 	
 	public static ImageIcon createImageIcon(String path, String description) {
@@ -98,25 +99,30 @@ public class Ventana extends JFrame {
 		
 		
 		//prueba de la pantalla de proyecto
-		String descripcion = "Un proyecto rechulon para chicas malas que son rechulonas y molonas, tambien es importante que tengan alto flow, para pertenecer solo tienes que decir las palabras magicas: Que falta de respeto mami como te atreves a venir sin pantis";
 		Ciudadano creador = new Ciudadano("ponbebe", "Anuel", "72231461P");
+		creador.aprobarRegistro();
+		Ciudadano punkizius = new Ciudadano ("badg" , "Punkizius", "123456789A");
+		punkizius.aprobarRegistro();
+		
+		/*
+		String descripcion = "Un proyecto rechulon para chicas malas que son rechulonas y molonas, tambien es importante que tengan alto flow, para pertenecer solo tienes que decir las palabras magicas: Que falta de respeto mami como te atreves a venir sin pantis";
+		
 		ProyectoSocial p = new ProyectoSocial("Puente", descripcion, 200000, creador, "Las chicas malas", TipoAlcance.INTERNACIONAL);
 		List<Distrito> d = new ArrayList<Distrito>();
 	    d.add(Distrito.MONCLOAARAVACA);
 	    d.add(Distrito.MORATALAZ);
 		Proyecto pInfraestructura = new ProyectoInfraestructura("Puente para conejas", descripcion, 10, creador, new Imagen("/Users/casa/Downloads/guinea-pig-bridge-1.jpg", "postu"), d);
 		
-		creador.aprobarRegistro();
 		
-		Ciudadano punkizius = new Ciudadano ("badg" , "Punkizius", "123456789A");
-		punkizius.aprobarRegistro();
+		
+		
 		
 		//No consigo que se muestre el colectivo en la pestaña para seleccionar colectivos al crear
 		//un proyecto
 		
 		Colectivo colectivo = new Colectivo("Coquito CF", creador);
 		
-		creador.anadirAMisColectivosCreados(colectivo);
+		creador.anadirAMisColectivosCreados(colectivo);*/
 
 		
 		
@@ -126,7 +132,6 @@ public class Ventana extends JFrame {
 		
 		//this.vistaDetalleProyecto = new DetalleProyecto(p);
 		//ventana.add(vistaDetalleProyecto, "detalleProyecto");
-		
 		
 		
 		//contenidos de la ventana:
@@ -250,6 +255,10 @@ public class Ventana extends JFrame {
 		return this.vistaApoyoMinimoProyecto;
 	}
 	
+	public ControlHome getControlHome() {
+		return this.contrHome;
+	}
+	
 	public HashMap<Integer, ControlDetalleProyecto> getProyectos(){
 		return this.proyectos;
 	}
@@ -264,7 +273,8 @@ public class Ventana extends JFrame {
 	
 	public void mostrarPanel(String carta) {
 		CardLayout l = (CardLayout)ventana.getLayout();
-		ultimaVista = carta;
+		ultimaVista = vistaActual;
+		vistaActual = carta;
 		l.show(ventana, carta);
 	}
 	

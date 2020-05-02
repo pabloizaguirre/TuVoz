@@ -116,7 +116,7 @@ public class ControlHome implements ActionListener{
 	public void addBotonColectivo(Colectivo c) {
 		JButton botonColectivo = new JButton(c.getTitulo());
 		botonColectivo.addActionListener(this);
-		vista.addBotonProyecto(botonColectivo);
+		vista.addBotonColectivo(botonColectivo);
 		colectivos.put(botonColectivo, c);
 	}
 

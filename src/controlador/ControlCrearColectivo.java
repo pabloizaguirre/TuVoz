@@ -29,6 +29,7 @@ public class ControlCrearColectivo implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		Colectivo c;
 		if(vista.getNombre().contentEquals("")) {
 			JOptionPane.showMessageDialog(vista,
 					"Debe proporcionar un nombre para el nuevo colectivo.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -38,17 +39,17 @@ public class ControlCrearColectivo implements ActionListener {
 		if(Colectivo.buscarColectivo(vista.getNombre())!=null) {
 			JOptionPane.showMessageDialog(vista,
 					"Ya existe un colectivo con ese titulo", "Error", JOptionPane.ERROR_MESSAGE);
-		}
-		else if (vista.getColectivos().equals("No")) {
-			new Colectivo(vista.getNombre(), (Ciudadano)Aplicacion.getAplicacion().getUsuarioActual());
+			return;
+		} else if (vista.getColectivos().equals("No")) {
+			c = new Colectivo(vista.getNombre(), (Ciudadano)Aplicacion.getAplicacion().getUsuarioActual());
 			vista.limpiarJtf();
 		} else {
-			new Colectivo(vista.getNombre(), Colectivo.buscarColectivo(vista.getColectivos()));
+			c = new Colectivo(vista.getNombre(), Colectivo.buscarColectivo(vista.getColectivos()));
 			vista.limpiarJtf();
 		}
 		
 		// mostrar nueva vista
-		frame.resetHome();
+		frame.getControlHome().addBotonColectivo(c);
 		frame.mostrarPanel("home");
 	}
 }

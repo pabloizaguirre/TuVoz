@@ -28,9 +28,7 @@ public class Home extends JPanel{
 		//Titulo de la ventana: HOME
 		JLabel titulo = new JLabel("Inicio");
 		titulo.setFont(new Font(titulo.getFont().getName(), Font.PLAIN, titulo.getFont().getSize()+20));
-
 		cLayout.putConstraint(BorderLayout.WEST, titulo, 20, BorderLayout.WEST, this);
-
 		add(titulo);
 		
 		//Panel con los proyectos

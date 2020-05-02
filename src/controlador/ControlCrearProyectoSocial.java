@@ -37,6 +37,7 @@ public class ControlCrearProyectoSocial implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		ProyectoSocial p;
 
 		if(vista.getGrupoSocial().equals("") || vista.getTipoAlcance().equals(null)) {
 			JOptionPane.showMessageDialog(vista,
@@ -46,25 +47,24 @@ public class ControlCrearProyectoSocial implements ActionListener {
 		CrearProyecto v = frame.getVistaCrearProyecto();
 		
 		if(vista.getColectivos().equals("No")) {
-			new ProyectoSocial(v.getNombre(),v.getDescripcion(),v.getPresupuesto(),
+			p = new ProyectoSocial(v.getNombre(),v.getDescripcion(),v.getPresupuesto(),
 					(Ciudadano)Aplicacion.getAplicacion().getUsuarioActual(), vista.getGrupoSocial(),vista.getTipoAlcance());
 			vista.limpiarJtf();
 			v.limpiarJtf();
 		} else {
 			Colectivo col = Colectivo.buscarColectivo(vista.getColectivos());
 			
-			new ProyectoSocial(v.getNombre(),v.getDescripcion(),v.getPresupuesto(),
+			p = new ProyectoSocial(v.getNombre(),v.getDescripcion(),v.getPresupuesto(),
 				col, vista.getGrupoSocial(),vista.getTipoAlcance());
 			vista.limpiarJtf();
 			v.limpiarJtf();
 		}
 
 		JOptionPane.showMessageDialog(vista,
-					"Proyecto creado y enviado a supervisión por parte de la Administración de Tu Voz.", "Proyecto creado", JOptionPane.INFORMATION_MESSAGE);
-			
+					"Proyecto creado y enviado a supervisión por parte de la Administración de Tu Voz.", "Proyecto creado", JOptionPane.INFORMATION_MESSAGE);	
 		
 		// mostrar nueva vista
-		frame.resetHome();
+		frame.getControlHome().addBotonProyecto(p);;
 
 		frame.mostrarPanel("home");
 		
