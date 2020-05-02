@@ -12,11 +12,13 @@ public class ControlInicio implements ActionListener {
 	
 	private InicioRegistro vista;
     private Ventana frame;
+    private Controlador controlador;
 	
 	
-	public ControlInicio(Ventana frame) {
+	public ControlInicio(Ventana frame, Controlador contr) {
 		this.frame = frame;
 		this.vista = frame.getVistaInicioRegistro();
+		this.controlador = contr;
 	}
 	
 	/**
@@ -41,6 +43,7 @@ public class ControlInicio implements ActionListener {
 	        	
 	        	/*JOptionPane.showMessageDialog(vista,
 						"Bienvenido, Administrador", "Bienvenido a Tu Voz", JOptionPane.INFORMATION_MESSAGE);*/
+	        	controlador.getControlNotificaciones().setVista();
 	        	frame.getVistaBarraSuperior().setVisible(true);
 	        	frame.mostrarPanel("homeAdmin");
 	        } 
@@ -52,6 +55,7 @@ public class ControlInicio implements ActionListener {
 	        	
 	        		/*JOptionPane.showMessageDialog(vista,
 						"Bienvenido, "+vista.getNombre(), "Bienvenido a Tu Voz", JOptionPane.INFORMATION_MESSAGE);*/
+	        		controlador.getControlNotificaciones().setVista();
 	        		frame.getVistaBarraSuperior().setVisible(true);
 	        		frame.mostrarPanel("home");
 	        	}
