@@ -33,9 +33,11 @@ public class ControlCrearColectivo implements ActionListener {
 			JOptionPane.showMessageDialog(vista,
 					"Ya existe un colectivo con ese titulo", "Error", JOptionPane.ERROR_MESSAGE);
 		}
-		else {
+		else if (vista.getColectivos().equals("")) {
 		new Colectivo(vista.getNombre(), (Ciudadano)Aplicacion.getAplicacion().getUsuarioActual());
-		}	
+		} else {
+			new Colectivo(vista.getNombre(), Colectivo.buscarColectivo(vista.getColectivos()));
+		}
 		
 		// mostrar nueva vista
 		frame.resetHome();
