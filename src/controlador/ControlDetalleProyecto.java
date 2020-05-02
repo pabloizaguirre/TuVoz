@@ -67,7 +67,7 @@ public class ControlDetalleProyecto implements ActionListener{
 		}
 		vista.setPresupuestoSolicitado(proyecto.getPresupuestoSolicitado());
 		
-		if(estado.equals(EstadoProyecto.APROBADO)) {
+		if(estado.equals(EstadoProyecto.FINANCIADO)) {
 			vista.setLabelEstado("Estado: " + estado + ", con presupuesto concedido de " + proyecto.getPresupuestoConcedido() + "€");
 		} else {
 			vista.setLabelEstado("Estado: " + estado);
@@ -90,7 +90,7 @@ public class ControlDetalleProyecto implements ActionListener{
 	public void resetVista() {
 		EstadoProyecto estado = proyecto.getEstado();
 		Usuario usuario = Aplicacion.getAplicacion().getUsuarioActual();
-		if(estado.equals(EstadoProyecto.APROBADO)) {
+		if(estado.equals(EstadoProyecto.FINANCIADO)) {
 			vista.setLabelEstado("Estado: " + estado + ", con presupuesto concedido de " + proyecto.getPresupuestoConcedido() + "€");
 		} else {
 			vista.setLabelEstado("Estado: " + estado);

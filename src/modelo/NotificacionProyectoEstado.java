@@ -15,6 +15,11 @@ public class NotificacionProyectoEstado extends Notificacion {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Proyecto proyecto;
+	
+	public NotificacionProyectoEstado(Proyecto p, Usuario usuario, String mensaje) {
+		super("El proyecto " + p.getTitulo() + " ha sido rechazado debido a: " + mensaje, usuario);
+		proyecto = p;
+	}
 
     public NotificacionProyectoEstado(Proyecto p, Usuario usuario) {
         super("El proyecto " + p.getTitulo() + " ha cambiado a estado: " + p.getEstado().toString(),usuario);

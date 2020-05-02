@@ -17,20 +17,22 @@ package modelo;
   */
 
 public enum EstadoProyecto {
-    PENDIENTECREACION,NOENVIADO,DISPONIBLE,PENDIENTEAPROBACION,APROBADO, RECHAZADO, CADUCADO;
+    PENDIENTECREACION,NOENVIADO,DISPONIBLE,PENDIENTEFINANCIACION,FINANCIADO,RECHAZADO,CADUCADO;
 	
 	@Override
 	public String toString() {
 		if (this.equals(PENDIENTECREACION)) {
-			return "pendiente de creacion";
+			return "pendiente de ser aprobado por el administrador";
 		} else if (this.equals(NOENVIADO)) {
-			return "no enviado";
+			return "en proceso de obtener el numero suficiente de apoyos";
 		} else if (this.equals(DISPONIBLE)) {
-			return "disponible";
-		} else if (this.equals(PENDIENTEAPROBACION)) {
-			return "pendiente de aprobacion";
-		} else if (this.equals(APROBADO)) {
-			return "aprobado";
+			return "listo para enviar a financiación";
+		} else if (this.equals(PENDIENTEFINANCIACION)) {
+			return "pendiente de ser financiado";
+		} else if (this.equals(FINANCIADO)) {
+			return "financiado";
+		} else if (this.equals(RECHAZADO)) {
+			return "rechazado";
 		} else {
 			return "caducado";
 		}
