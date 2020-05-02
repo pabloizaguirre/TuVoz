@@ -8,6 +8,14 @@ import javax.swing.JOptionPane;
 import modelo.*;
 import vista.*;
 
+
+/**
+ * Clase ControlApoyoMinimoProyecto.
+ * 
+ * @author Elena Cano
+ * @author Pablo Izaguirre
+ * @author Miguel Escribano
+ */
 public class ControlBarraSuperior implements ActionListener{
 	private BarraSuperior vista;
 	private Ventana frame;
@@ -19,7 +27,7 @@ public class ControlBarraSuperior implements ActionListener{
 	}
 	
 	/**
-	 * 
+	 * Método para gestionar los eventos que pueden producirse en la barra superior
 	 * 
 	 * @param e action event
 	 */

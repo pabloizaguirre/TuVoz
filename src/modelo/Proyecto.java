@@ -17,7 +17,6 @@ import java.io.*;
 public class Proyecto implements Serializable {
 	private String titulo;
 	private int id;
-	private static int ultimoIdAsignado = 0;
 	private LocalDate fechaCreacion;
 	private String descripcion;
 	private double presupuestoSolicitado;
@@ -41,8 +40,8 @@ public class Proyecto implements Serializable {
 		
 		this.titulo = titulo;
 		//El id de cada proyecto será uno mayor que el del último proyecto creado
-		this.id = ultimoIdAsignado;
-		ultimoIdAsignado += 1;
+		this.id = Aplicacion.getAplicacion().getUltimoIdAsignado();
+		Aplicacion.getAplicacion().setUltimoIdAsignado(this.id + 1);
 		
 		this.fechaCreacion = FechaSimulada.getHoy();
 		this.descripcion = descripcion;

@@ -7,6 +7,13 @@ import javax.swing.*;
 import modelo.*;
 import vista.*;
 
+/**
+ * Clase ControlCrearProyecto.
+ * 
+ * @author Elena Cano
+ * @author Pablo Izaguirre
+ * @author Miguel Escribano
+ */
 public class ControlCrearProyecto implements ActionListener{
     private CrearProyecto vista;
     private Ventana frame;
@@ -17,7 +24,8 @@ public class ControlCrearProyecto implements ActionListener{
     }
 
     /**
-	 * Cambia la vista a CrearProyecto
+	 * Método para gestionar los eventos que se pueden producir en la vista de creación
+	 * de un nuevo proyecto
 	 * 
 	 * @param e action event
 	 */

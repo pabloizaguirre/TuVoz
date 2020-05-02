@@ -6,6 +6,16 @@ import javax.swing.*;
 import modelo.*;
 import vista.*;
 
+
+/**
+ * Clase ControlCrearProyectoSocial.
+ * 
+ * @author Elena Cano
+ * @author Pablo Izaguirre
+ * @author Miguel Escribano
+ */
+
+
 public class ControlCrearProyectoSocial implements ActionListener {
 	
 	private CrearProyectoSocial vista;
@@ -19,7 +29,9 @@ public class ControlCrearProyectoSocial implements ActionListener {
 	}
 	
 	/**
-	 * Cambia la vista a CrearProyectoSocial
+	 * Método para gestionar los eventos que se pueden producir en la vista de creación de 
+	 * proyecto social. Se crea proyecto de forma individual o de forma colectiva
+	 * según la entrada del ComboBox de la vista
 	 * 
 	 * @param e action event
 	 */

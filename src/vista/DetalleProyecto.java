@@ -236,7 +236,7 @@ public class DetalleProyecto extends JPanel{
 	 */
 	public void setDetallesOpcionalesInfraestructura(List<String> listaDistritos, String path) {
 		Integer width = 300;
-		right.setPreferredSize(new Dimension(width+40,10));
+		
 		String s = "Distritos afectados: ";
 		for (String d:listaDistritos) {
 			s += d + ", ";
@@ -250,14 +250,18 @@ public class DetalleProyecto extends JPanel{
 		
 		ImageIcon iconoImagenProyecto = Ventana.createImageIcon(path, "ImagenProyecto");
 		
-		Image imagenProyecto = iconoImagenProyecto.getImage();
-		Integer height = (Integer) imagenProyecto.getHeight(null)*width/imagenProyecto.getWidth(null);
-		imagenProyecto = imagenProyecto.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-		iconoImagenProyecto.setImage(imagenProyecto);
-		
-		JLabel labelImagen = new JLabel(iconoImagenProyecto);
-		
-		right.add(labelImagen);
+		if(iconoImagenProyecto != null) {
+			right.setPreferredSize(new Dimension(width+40,10));
+			
+			Image imagenProyecto = iconoImagenProyecto.getImage();
+			Integer height = (Integer) imagenProyecto.getHeight(null)*width/imagenProyecto.getWidth(null);
+			imagenProyecto = imagenProyecto.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+			iconoImagenProyecto.setImage(imagenProyecto);
+			
+			JLabel labelImagen = new JLabel(iconoImagenProyecto);
+			
+			right.add(labelImagen);
+		}
 	}
 	
 	public JButton getApoyar() {

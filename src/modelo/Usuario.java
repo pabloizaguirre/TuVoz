@@ -1,4 +1,5 @@
 package modelo;
+import java.io.Serializable;
 import java.util.*;
 /**
  * Clase usuario.
@@ -8,7 +9,7 @@ import java.util.*;
  * @author Miguel Escribano
  */
 
-public abstract class Usuario{
+public abstract class Usuario implements Serializable{
     private String nombreUsuario;
     private String contrasena;
 
@@ -40,8 +41,12 @@ public abstract class Usuario{
         
     }
 
-    public ArrayList<String> getListaNombres() { 
+    public static ArrayList<String> getListaNombres() { 
         return listaNombres; 
+    }
+    
+    public static void setListaNombres(ArrayList<String> l) {
+    	listaNombres = l;
     }
 
 

@@ -11,7 +11,9 @@ import java.io.*;
  */
 
 public class Administrador extends Usuario implements Serializable {
-    
+    public Administrador() {
+    	super("Admin", "123");
+    }
     public Administrador(String nomUs, String contr){
         super(nomUs, contr);  
     }

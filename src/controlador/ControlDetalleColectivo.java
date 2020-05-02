@@ -15,7 +15,13 @@ import modelo.Proyecto;
 import modelo.Usuario;
 import vista.DetalleColectivo;
 import vista.DetalleProyecto;
-
+/**
+ * Clase ControlDetalleColectivo.
+ * 
+ * @author Elena Cano
+ * @author Pablo Izaguirre
+ * @author Miguel Escribano
+ */
 public class ControlDetalleColectivo implements ActionListener{
 	
 	private JFrame frame;
@@ -27,6 +33,11 @@ public class ControlDetalleColectivo implements ActionListener{
 		this.vista = vista;
 		this.colectivo = c;
 	}
+	/**
+	 * Método para gestionar los eventos que se pueden producir en la vista de detalle de un colectivo
+	 * 
+	 * @param e action event
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("unirme")) {
@@ -40,6 +51,13 @@ public class ControlDetalleColectivo implements ActionListener{
 		}
 	}
 	
+	/**
+	 * Método encargado de gestionar los botones de la vista, según si el usuario actual pertece
+	 * o no al colectivo, o sea su representante
+	 * 
+	 * 
+	 */
+	
 	public void setVistaDetalleColectivo() {
 		vista.setTitulo(colectivo.getTitulo());
 		Usuario usuario = Aplicacion.getAplicacion().getUsuarioActual();
@@ -49,6 +67,12 @@ public class ControlDetalleColectivo implements ActionListener{
 		}
 		vista.setControlador(this);
 	}
+	
+	/**
+	 * Método para actualizar la vista de detalle de un colectivo
+	 * 
+	 * @param e action event
+	 */
 	
 	public void resetVista() {
 		Usuario usuario = Aplicacion.getAplicacion().getUsuarioActual();

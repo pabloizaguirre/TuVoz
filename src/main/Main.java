@@ -20,7 +20,7 @@ public class Main {
 		} catch (Exception e){
 			System.out.println("error2");
 		}
-		
+		Aplicacion.cargarAplicacion();
 		Ventana frame = new Ventana();
 		Controlador controlador = new Controlador(frame);
 		frame.setControlador(controlador);

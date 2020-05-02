@@ -12,7 +12,13 @@ import vista.DetalleColectivo;
 import vista.DetalleProyecto;
 import vista.Home;
 import vista.Ventana;
-
+/**
+ * Clase ControlHome.
+ * 
+ * @author Elena Cano
+ * @author Pablo Izaguirre
+ * @author Miguel Escribano
+ */
 public class ControlHome implements ActionListener{
 	private Home vista;
 	private Ventana frame;
@@ -25,6 +31,13 @@ public class ControlHome implements ActionListener{
 		this.vista = frame.getVistaHome();
 		setVista();
 	}
+	
+	/**
+	 * Método encargado de gestionar los botones de la vista, según si el usuario actual pertece
+	 * o no al colectivo, o sea su representante
+	 * 
+	 * 
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();

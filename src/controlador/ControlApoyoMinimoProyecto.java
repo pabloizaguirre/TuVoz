@@ -7,6 +7,13 @@ import javax.swing.JOptionPane;
 import modelo.Aplicacion;
 import vista.*;
 
+/**
+ * Clase ControlApoyoMinimoProyecto.
+ * 
+ * @author Elena Cano
+ * @author Pablo Izaguirre
+ * @author Miguel Escribano
+ */
 public class ControlApoyoMinimoProyecto implements ActionListener{
 private ApoyoMinimoProyecto vista;
 	private Ventana frame;
@@ -18,7 +25,7 @@ private ApoyoMinimoProyecto vista;
 	}
 	
 	/**
-	 * 
+	 * Método para gestionar los eventos acontecidos en la vista de gestión del número de apoyos mínimos
 	 * 
 	 * @param e action event
 	 */
