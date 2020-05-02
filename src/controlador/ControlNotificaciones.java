@@ -20,7 +20,7 @@ public class ControlNotificaciones implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("IrProyecto")) {
-			Proyecto p = NotificacionProyectoEstado.getProyecto();
+			/*Proyecto p = NotificacionProyectoEstado.getProyecto();*/
 		}
 		else if (e.getActionCommand().equals("AprobarRegistro")) {
 			
@@ -29,5 +29,21 @@ public class ControlNotificaciones implements ActionListener {
 			
 		}
 		
+	}
+	
+	public void setVista() {
+		for(Notificacion n:Aplicacion.getAplicacion().getUsuarioActual().getNotificaciones()) {
+			String texto = n.getTextoNotificacion();
+			
+			if (n instanceof NotificacionCiudadano) {
+				vista.addNotificacionAprobarRegistro(texto);
+			}
+			else if (n instanceof NotificacionProyectoNuevo) {
+				vista.addNotificacionAprobarProyecto(texto);
+			}
+			else if (n instanceof NotificacionProyectoEstado) {
+				vista.addNotificacionCiudadanoProyecto(texto);
+			}
+		}
 	}
 }
