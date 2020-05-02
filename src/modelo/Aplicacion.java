@@ -17,17 +17,21 @@ public class Aplicacion implements Serializable {
 
     private static Aplicacion aplicacion;
     
+    private ArrayList<String> listaNombres = new ArrayList<String>();
     private int apoyosMin;
+    private int ultimoIdAsignado;
     private List<Proyecto> listadoProyectos;
     private List<ElementoColectivo> listadoElementoColectivos;
     private Administrador administrador;
     private Usuario usuarioActual;
+    
 
     public Aplicacion(){
         this.listadoProyectos = new ArrayList<Proyecto>();
         this.listadoElementoColectivos = new ArrayList<ElementoColectivo>();
         this.administrador = new Administrador("Admin", "123");
         this.apoyosMin = 10;
+        this.ultimoIdAsignado = 0;
     }
 
     public static Aplicacion getAplicacion() {
@@ -35,6 +39,22 @@ public class Aplicacion implements Serializable {
             aplicacion = new Aplicacion();
         }
         return aplicacion;
+    }
+    
+    public ArrayList<String> getListaNombres(){
+    	return listaNombres;
+    }
+    
+    public void setListaNombres(ArrayList<String> l) {
+    	this.listaNombres = l;
+    }
+    
+    public int getUltimoIdAsignado() {
+    	return this.ultimoIdAsignado;
+    }
+    
+    public void setUltimoIdAsignado(int id) {
+    	this.ultimoIdAsignado = id;
     }
 
     public int getApoyosMin() { return apoyosMin;}
@@ -110,6 +130,7 @@ public class Aplicacion implements Serializable {
 		ObjectOutputStream salida = null;
 		FileOutputStream fos = null;
 		try {
+			aplicacion.setListaNombres(Usuario.getListaNombres());
 			fos = new FileOutputStream("data/data.dat");
 			salida = new ObjectOutputStream(fos);
             salida.writeObject(Aplicacion.getAplicacion());
@@ -130,20 +151,24 @@ public class Aplicacion implements Serializable {
      * 
      * @return Objeto de clase Aplicacion
      */
-    public Aplicacion cargarAplicacion() {
+    public static Aplicacion cargarAplicacion() {
         Aplicacion obj = null;
         
-        try{
+        try {
             ObjectInputStream entrada = new ObjectInputStream(new FileInputStream("data/data.dat"));
             obj = (Aplicacion)entrada.readObject();
             entrada.close();
-            
-        }catch(FileNotFoundException ex) {
+            aplicacion = obj;
+            Usuario.setListaNombres(aplicacion.getListaNombres());
+        } catch(InvalidClassException ex) {
+        	obj = Aplicacion.getAplicacion();
+        	ex.printStackTrace();
+        } catch(FileNotFoundException ex) {
             obj = Aplicacion.getAplicacion();
-        }catch(IOException ex) {
-            System.out.println("Error IO");
-        }catch(ClassNotFoundException ex) {
-            System.out.println("Error");
+        } catch(IOException ex) {
+            ex.printStackTrace();
+        } catch(ClassNotFoundException ex) {
+            ex.printStackTrace();
         }
         return obj;
     }
