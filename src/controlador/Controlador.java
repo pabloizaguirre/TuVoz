@@ -5,6 +5,16 @@ import java.util.List;
 import modelo.*;
 import vista.*;
 
+
+/**
+ * Clase Controlador.
+ * 
+ * @author Elena Cano
+ * @author Pablo Izaguirre
+ * @author Miguel Escribano
+ */
+
+
 public class Controlador {
 	
 	private ControlIrACrearColectivo contIrACrearColectivo;
@@ -15,7 +25,6 @@ public class Controlador {
 	private ControlCrearProyectoSocial contrCrearProyectoSocial;
 	private ControlCrearProyectoInfraestructura contrCrearProyectoInfraestructura;
 	private ControlInicio contrInicio;
-	private ControlApoyar contrApoyar;
 	private ControlHome contrHome;
 	private ControlHomeAdmin contrHomeAdmin;
 	private ControlApoyoMinimoProyecto contrApoyoMinimoProyecto;
@@ -36,7 +45,6 @@ public class Controlador {
 		this.contrCrearProyectoInfraestructura = new ControlCrearProyectoInfraestructura(frame);
 		this.contrBarraSuperior= new ControlBarraSuperior(frame);
 		this.contrInicio = new ControlInicio(frame, this);
-		this.contrApoyar = new ControlApoyar(frame, null);
 		this.contrApoyoMinimoProyecto = new ControlApoyoMinimoProyecto(frame);
 		this.contrNoti = new ControlNotificaciones(frame);
 		this.contrHome = new ControlHome(frame);
@@ -44,9 +52,7 @@ public class Controlador {
 		this.contrMiPerfil = new ControlMiPerfil(frame);
 	}
 	
-	public ControlApoyar getControlApoyar() {
-		return this.contrApoyar;
-	}
+	
 
 	public ControlIrACrearColectivo getControlIrACrearColectivo() {
 		return this.contIrACrearColectivo;

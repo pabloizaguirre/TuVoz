@@ -16,7 +16,6 @@ public class Ventana extends JFrame {
 	
 	//prueba de DetalleProyecto:
 	private DetalleProyecto vistaDetalleProyecto;
-	private ControlApoyar contrApoyar;
 	
 	
 	private BarraSuperior vistaBarraSuperior;
