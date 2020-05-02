@@ -19,6 +19,7 @@ public class CrearProyecto extends JPanel {
 	private JRadioButton opcioninfraestructura;
 	private JRadioButton opcionsocial;
 	private JButton botonSiguiente;
+	private ButtonGroup grupoBotones;
 	
 	public CrearProyecto() {
 		
@@ -43,7 +44,7 @@ public class CrearProyecto extends JPanel {
 		jtfPresupuesto = new JTextField(10);
 		
 		labelTipo = new JLabel(" Seleccione tipo de proyecto: ");
-		ButtonGroup grupoBotones = new ButtonGroup();
+		grupoBotones = new ButtonGroup();
 		opcioninfraestructura = new JRadioButton("Infraestructura");
 		opcionsocial = new JRadioButton("Social");
 		grupoBotones.add(opcionsocial);
@@ -98,4 +99,13 @@ public class CrearProyecto extends JPanel {
 		if(jtfPresupuesto.getText().equals("")) return -1.0;
 		return Double.parseDouble(jtfPresupuesto.getText());
 	}
+	
+	public void limpiarJtf() {
+		jtfNombre.setText("");
+		jtfDescripcion.setText("");
+		jtfPresupuesto.setText("");
+		grupoBotones.clearSelection();
+		
+	}
+
 }

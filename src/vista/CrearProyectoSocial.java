@@ -13,6 +13,7 @@ public class CrearProyectoSocial extends JPanel {
 	private JTextField jtfGrupoSocial;
 	private JRadioButton nacional;
 	private JRadioButton internacional;
+	private ButtonGroup grupoBotones;
 	private JLabel labelColectivos;
 	private static JComboBox<String> comboColectivos;
 	private JButton botonCrear;
@@ -31,7 +32,7 @@ public class CrearProyectoSocial extends JPanel {
 		JLabel labelAlcance = new JLabel("Seleccione ámbito del proyecto:");
 		nacional = new JRadioButton("Nacional");
 		internacional = new JRadioButton("Internacional");
-		ButtonGroup grupoBotones = new ButtonGroup();
+		grupoBotones = new ButtonGroup();
 		grupoBotones.add(nacional);
 		grupoBotones.add(internacional);
 		
@@ -104,9 +105,18 @@ public class CrearProyectoSocial extends JPanel {
 	}
 	
 	public static void addColectivos(List<Colectivo> list) {
+		comboColectivos.removeAllItems();
+		comboColectivos.addItem("No");
 		for(Colectivo c : list) {
 			comboColectivos.addItem(c.getTitulo());
 		}
+	}
+	
+	public void limpiarJtf() {
+		jtfGrupoSocial.setText("");
+		comboColectivos.setSelectedIndex(0);
+		grupoBotones.clearSelection();
+		
 	}
 	
 }

@@ -36,11 +36,15 @@ public class ControlCrearProyectoSocial implements ActionListener {
 		if(vista.getColectivos().equals("No")) {
 			new ProyectoSocial(v.getNombre(),v.getDescripcion(),v.getPresupuesto(),
 					(Ciudadano)Aplicacion.getAplicacion().getUsuarioActual(), vista.getGrupoSocial(),vista.getTipoAlcance());
+			vista.limpiarJtf();
+			v.limpiarJtf();
 		} else {
 			Colectivo col = Colectivo.buscarColectivo(vista.getColectivos());
 			
 			new ProyectoSocial(v.getNombre(),v.getDescripcion(),v.getPresupuesto(),
 				col, vista.getGrupoSocial(),vista.getTipoAlcance());
+			vista.limpiarJtf();
+			v.limpiarJtf();
 		}
 
 		JOptionPane.showMessageDialog(vista,

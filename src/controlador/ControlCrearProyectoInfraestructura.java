@@ -41,11 +41,15 @@ public class ControlCrearProyectoInfraestructura implements ActionListener {
 		if(vista.getColectivos().equals("No")) {
 			new ProyectoInfraestructura(v.getNombre(),v.getDescripcion(),v.getPresupuesto(),
 				(Ciudadano)Aplicacion.getAplicacion().getUsuarioActual(), new Imagen(ruta, "Imagen"),vista.getDistritos());
+			vista.limpiar();
+			v.limpiarJtf();
 		} else {
 			Colectivo col = Colectivo.buscarColectivo(vista.getColectivos());
 			
 			new ProyectoInfraestructura(v.getNombre(),v.getDescripcion(),v.getPresupuesto(),
 				col, new Imagen(ruta, "imagen"),vista.getDistritos());
+			vista.limpiar();
+			v.limpiarJtf();
 		}
 		
 		

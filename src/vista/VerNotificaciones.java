@@ -25,19 +25,19 @@ public class VerNotificaciones extends JPanel{
 	public VerNotificaciones(){
 		BoxLayout notiLayout = new BoxLayout(this, BoxLayout.PAGE_AXIS);
 		this.setLayout(notiLayout);
+		
 		JLabel intro = new JLabel ("Notificaciones");
 		intro.setFont(new Font(intro.getFont().getName(), Font.PLAIN, intro.getFont().getSize()+20));
-		
+		intro.setAlignmentX(LEFT_ALIGNMENT);
 		this.add(intro);
 		this.add(Box.createRigidArea(new Dimension(0, 40)));
-		
+		this.add(Box.createHorizontalStrut(40));
 		
     }
     
 	public void addNotificacionCiudadanoProyecto(String texto) {
 		final JPanel notiCiudadano = new JPanel();
 		BoxLayout layoutNoticiu = new BoxLayout(notiCiudadano, BoxLayout.PAGE_AXIS);
-		/*notiCiudadano.setAlignmentX(LEFT_ALIGNMENT);*/
 		notiCiudadano.setLayout(layoutNoticiu);
 		
 		
@@ -46,15 +46,16 @@ public class VerNotificaciones extends JPanel{
 		mensaje.setEditable(false);
 		mensaje.setLineWrap(true);
 		mensaje.setBackground(null);
-		/*mensaje.setAlignmentX(LEFT_ALIGNMENT);*/
+		mensaje.setAlignmentX(LEFT_ALIGNMENT);
 		notiCiudadano.add(mensaje);
 		
 		IrProyecto = new JButton("Ir al proyecto");
 		IrProyecto.setActionCommand("botonIrProyecto");
-		/*IrProyecto.setAlignmentX(LEFT_ALIGNMENT);*/
+		IrProyecto.setAlignmentX(LEFT_ALIGNMENT);
 		notiCiudadano.add(IrProyecto);
 		
-		notiCiudadano.add(Box.createRigidArea(new Dimension(0, 20)));
+		notiCiudadano.setAlignmentX(LEFT_ALIGNMENT);
+		notiCiudadano.add(Box.createRigidArea(new Dimension(0, 20)));	
 		
 		notiCiudadano.setVisible(true);
 		this.add(notiCiudadano);
@@ -70,7 +71,7 @@ public class VerNotificaciones extends JPanel{
 		mensaje.setEditable(false);
 		mensaje.setLineWrap(true);
 		mensaje.setBackground(null);
-		/*mensaje.setAlignmentX(LEFT_ALIGNMENT);*/
+		mensaje.setAlignmentX(LEFT_ALIGNMENT);
 		notiRegistro.add(mensaje);
 		
 		final JPanel botonesnotiRegistro = new JPanel();
@@ -92,8 +93,10 @@ public class VerNotificaciones extends JPanel{
 		/*RechazarRegistro.setAlignmentX(Component.LEFT_ALIGNMENT);*/
 		botonesnotiRegistro.add(RechazarRegistro);
 		
+		botonesnotiRegistro.setAlignmentX(Component.LEFT_ALIGNMENT);
 		notiRegistro.add(botonesnotiRegistro);
 		
+		notiRegistro.setAlignmentX(Component.LEFT_ALIGNMENT);
 		notiRegistro.add(Box.createRigidArea(new Dimension(0, 20)));
 		
 		notiRegistro.setVisible(true);
@@ -110,7 +113,7 @@ public class VerNotificaciones extends JPanel{
 		mensaje.setEditable(false);
 		mensaje.setLineWrap(true);
 		mensaje.setBackground(null);
-		/*mensaje.setAlignmentX(LEFT_ALIGNMENT);*/
+		mensaje.setAlignmentX(Component.LEFT_ALIGNMENT);
 		notiProye.add(mensaje);
 		
 		final JPanel botonesnotiProye = new JPanel();
@@ -119,26 +122,61 @@ public class VerNotificaciones extends JPanel{
 		
 		VerProyecto = new JButton("Ver proyecto");
 		VerProyecto.setActionCommand("botonVerProyecto");
-		/*VerProyecto.setAlignmentX(LEFT_ALIGNMENT);*/
+		/*VerProyecto.setAlignmentX(Component.LEFT_ALIGNMENT);*/
 		botonesnotiProye.add(VerProyecto);
 		
 		AprobarProyecto = new JButton("Aprobar proyecto");
 		AprobarProyecto.setActionCommand("botonAprobarProyecto");
-		/*AprobarProyecto.setAlignmentX(LEFT_ALIGNMENT);*/
+		/*AprobarProyecto.setAlignmentX(Component.LEFT_ALIGNMENT);*/
 		botonesnotiProye.add(AprobarProyecto);
 		
 		RechazarProyecto = new JButton("Rechazar proyecto");
 		RechazarProyecto.setActionCommand("botonRechazarProyecto");
-		/*RechazarProyecto.setAlignmentX(LEFT_ALIGNMENT);*/
+		/*RechazarProyecto.setAlignmentX(Component.LEFT_ALIGNMENT);*/
 		botonesnotiProye.add(RechazarProyecto);
 		
+		botonesnotiProye.setAlignmentX(Component.LEFT_ALIGNMENT);
 		notiProye.add(botonesnotiProye);
 		
+		notiProye.setAlignmentX(Component.LEFT_ALIGNMENT);
 		notiProye.add(Box.createRigidArea(new Dimension(0, 20)));
 		
 		notiProye.setVisible(true);
 		this.add(notiProye);
+		
+		
 	}
+	
+	
+	
+	public JButton getIrProyecto() {
+		return IrProyecto;
+	}
+	
+	
+	public JButton getVerRegistro() {
+		return VerRegistro;
+	}
+	public JButton getAprobarRegistro() {
+		return AprobarRegistro;
+	}
+	public JButton getRechazarRegistro() {
+		return RechazarRegistro;
+	}
+	
+	
+	public JButton getVerProyecto() {
+		return VerProyecto;
+	}
+	public JButton getAprobarProyecto() {
+		return AprobarProyecto;
+	}
+	public JButton getRechazarProyecto() {
+		return RechazarProyecto;
+	}
+	
+	
+	
 	
 
 	
