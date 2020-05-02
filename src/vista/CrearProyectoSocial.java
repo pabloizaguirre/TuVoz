@@ -19,7 +19,7 @@ public class CrearProyectoSocial extends JPanel {
 	
 	public CrearProyectoSocial() {
 		
-			
+		
 		SpringLayout cLayout = new SpringLayout();
 		setLayout(cLayout);
 		
@@ -65,17 +65,18 @@ public class CrearProyectoSocial extends JPanel {
 		botonCrear = new JButton("Crear");
 		panelBoton.add(botonCrear, BorderLayout.SOUTH);
 		
-		cLayout.putConstraint(BorderLayout.WEST, panelCrear, 40, BorderLayout.WEST, this);
-		cLayout.putConstraint(BorderLayout.SOUTH, panelBoton, 40, BorderLayout.SOUTH, this);
-
-
-		JPanel panelPrincipal = new JPanel();
+		cLayout.putConstraint(SpringLayout.WEST, panelCrear, 40, SpringLayout.WEST, this);
+		cLayout.putConstraint(SpringLayout.NORTH, panelCrear, 40, SpringLayout.NORTH, this);
+		cLayout.putConstraint(SpringLayout.NORTH, panelColectivos, 10, SpringLayout.SOUTH, panelCrear);
+		cLayout.putConstraint(SpringLayout.WEST, panelColectivos, 37, SpringLayout.WEST, this);
+		cLayout.putConstraint(SpringLayout.WEST, panelBoton, 40, SpringLayout.WEST, this);
+		cLayout.putConstraint(SpringLayout.NORTH, panelBoton, 10, SpringLayout.SOUTH, panelColectivos);
 		
-		panelPrincipal.add(panelCrear);
-		panelPrincipal.add(panelColectivos);
-		panelPrincipal.add(panelBoton);
+		add(panelCrear);
+		add(panelColectivos);
+		add(panelBoton);
 		
-		add(panelPrincipal);
+		
 		
 	}
 	
