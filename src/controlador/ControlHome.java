@@ -49,11 +49,11 @@ public class ControlHome implements ActionListener{
 			
 			if(frame.getColectivos().containsKey(c.getTitulo())) {
 				ControlDetalleColectivo contr = frame.getColectivos().get(c.getTitulo());
-				//contr.resetVista
+				contr.resetVista();
 			} else {
-				DetalleColectivo vistaColectivo = new DetalleColectivo(c);
+				DetalleColectivo vistaColectivo = new DetalleColectivo();
 				ControlDetalleColectivo contr = new ControlDetalleColectivo(frame, vistaColectivo, c);
-				//contr.setVistaDetalleColectivo();
+				contr.setVistaDetalleColectivo();
 				frame.getColectivos().put(c.getTitulo(), contr);
 				
 				frame.anadirVentana(vistaColectivo, c.getTitulo());
@@ -65,6 +65,7 @@ public class ControlHome implements ActionListener{
 	}
 	
 	public void setVista() {
+		vista.resetBotones();
 		setBotonesProyectos();
 		setBotonesColectivos();
 	}

@@ -26,6 +26,7 @@ public class ControlIrACrearColectivo implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		
 		// mostrar nueva vista
+		CrearColectivo.addColectivos(((Ciudadano)Aplicacion.getAplicacion().getUsuarioActual()).getColectivosCreados());
 		frame.mostrarPanel("crearColectivo");
 		
 	}

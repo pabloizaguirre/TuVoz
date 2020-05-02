@@ -7,10 +7,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import modelo.Administrador;
 import modelo.Aplicacion;
 import modelo.Ciudadano;
 import modelo.Colectivo;
 import modelo.Proyecto;
+import modelo.Usuario;
 import vista.DetalleColectivo;
 import vista.DetalleProyecto;
 
@@ -36,5 +38,29 @@ public class ControlDetalleColectivo implements ActionListener{
 		}else {
 			
 		}
-	}	
+	}
+	
+	public void setVistaDetalleColectivo() {
+		vista.setTitulo(colectivo.getTitulo());
+		Usuario usuario = Aplicacion.getAplicacion().getUsuarioActual();
+		
+		if(!(usuario instanceof Administrador)) {
+			vista.setUnirme(colectivo.getElementos().contains(usuario));
+		}
+		vista.setControlador(this);
+	}
+	
+	public void resetVista() {
+		Usuario usuario = Aplicacion.getAplicacion().getUsuarioActual();
+		
+		vista.resetButtonPanel();
+		
+		if(!(usuario instanceof Administrador)) {
+			vista.setUnirme(colectivo.getElementos().contains(usuario));
+		}
+		
+		vista.setControlador(this);
+		
+
+	}
 }

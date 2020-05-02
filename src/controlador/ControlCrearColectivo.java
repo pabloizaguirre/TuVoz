@@ -29,13 +29,18 @@ public class ControlCrearColectivo implements ActionListener {
 			return;
 		}
 		
+		if(Colectivo.buscarColectivo(vista.getNombre())!=null) {
+			JOptionPane.showMessageDialog(vista,
+					"Ya existe un colectivo con ese titulo", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+		else if (vista.getColectivos().equals("")) {
 		new Colectivo(vista.getNombre(), (Ciudadano)Aplicacion.getAplicacion().getUsuarioActual());
-	
-		JOptionPane.showMessageDialog(vista,
-					"Colectivo creado con éxito", "Proyecto creado", JOptionPane.INFORMATION_MESSAGE);
-			
+		} else {
+			new Colectivo(vista.getNombre(), Colectivo.buscarColectivo(vista.getColectivos()));
+		}
 		
 		// mostrar nueva vista
+		frame.resetHome();
 		frame.mostrarPanel("home");
 	}
 }

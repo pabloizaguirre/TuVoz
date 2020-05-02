@@ -28,6 +28,7 @@ public class ControlBarraSuperior implements ActionListener{
 		String source = e.getActionCommand();
 		if(source.equals("home")) {
 			if(Aplicacion.getAplicacion().getUsuarioActual().getClass().equals(Ciudadano.class)) {
+				frame.resetHome();
 				frame.mostrarPanel("home");
 			}else if(Aplicacion.getAplicacion().getUsuarioActual().getClass().equals(Administrador.class)) {
 				frame.mostrarPanel("homeAdmin");
@@ -65,12 +66,19 @@ public class ControlBarraSuperior implements ActionListener{
 			}
 			else if(Colectivo.buscarColectivo(vista.getBusqueda())!=null) {
 				Colectivo colectivo = Colectivo.buscarColectivo(vista.getBusqueda());
-				DetalleColectivo vista = new DetalleColectivo(colectivo);
+				if(frame.getColectivos().containsKey(colectivo.getTitulo())) {
+					ControlDetalleColectivo contr = frame.getColectivos().get(colectivo.getTitulo());
+					contr.resetVista();	
+				} else {
+					DetalleColectivo vistaColectivo = new DetalleColectivo();
+					ControlDetalleColectivo c = new ControlDetalleColectivo(frame, vistaColectivo, colectivo);
+					c.setVistaDetalleColectivo();
+					frame.getColectivos().put(colectivo.getTitulo(),c);
+					frame.anadirVentana(vistaColectivo, "" + colectivo.getTitulo());
+				}
 				
-				vista.setUnirme();
-				vista.setControlador(new ControlDetalleColectivo(frame, vista, colectivo));
-				frame.anadirVentana(vista, colectivo.toString());
-				frame.mostrarPanel(colectivo.toString());
+				frame.mostrarPanel(""+colectivo.getTitulo());
+
 			}
 		}
 		return;

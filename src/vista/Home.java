@@ -114,4 +114,16 @@ public class Home extends JPanel{
 	public void setControladorAnadirColectivo(ActionListener c) {  
 		botonAnadirColectivo.addActionListener(c);
 	}
+	
+	public void resetBotones() {
+		listaProyectos.removeAll();
+		botonAnadirProyecto = new JButton(icon1);
+		botonAnadirProyecto.setPreferredSize(new Dimension(120, 120));
+		listaProyectos.add(botonAnadirProyecto);
+		
+		listaColectivos.removeAll();
+		botonAnadirColectivo = new JButton(icon1);
+		botonAnadirColectivo.setPreferredSize(new Dimension(120, 120));
+		listaColectivos.add(botonAnadirColectivo);
+	}
 }

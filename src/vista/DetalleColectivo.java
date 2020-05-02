@@ -16,16 +16,14 @@ import modelo.Usuario;
 
 public class DetalleColectivo extends JPanel {
 	
-	private Colectivo col;
+	
 	private JLabel titulo = new JLabel("");
 	private JButton botonUnirme;
 	JPanel panelBotonUnirme;
 	
-	public DetalleColectivo(Colectivo colectivo) {
+	public DetalleColectivo() {
 		SpringLayout cLayout = new SpringLayout();
-		col = colectivo;
 		
-		this.titulo.setText(colectivo.getTitulo());
 		
 		titulo.setFont(new Font(titulo.getFont().getName(), Font.PLAIN, titulo.getFont().getSize()+20));
 		
@@ -117,27 +115,18 @@ public class DetalleColectivo extends JPanel {
 	
 	
 	
-	public void setUnirme() {
-		Usuario usuario = Aplicacion.getAplicacion().getUsuarioActual();
-		if(usuario.getClass().equals(Ciudadano.class)) {
-			boolean esMiembro = getColectivo().esMiembro((Ciudadano)usuario);
-
+	public void setUnirme(boolean esMiembro) {
 			if(esMiembro) {
 			botonUnirme = new JButton("Ya eres miembro");
 			botonUnirme.setEnabled(false);
 			} else {
 			botonUnirme= new JButton("Unirme al colectivo");
 			}
-		} else {
-			return;
-		}
 			botonUnirme.setActionCommand("unirme");
 			panelBotonUnirme.add(botonUnirme);
 	}
 	
-	public Colectivo getColectivo() {
-		return this.col;
-	}
+	
 	public void setControlador(ActionListener c) {
 		if(botonUnirme!=null) {
 			botonUnirme.addActionListener(c);
@@ -145,6 +134,14 @@ public class DetalleColectivo extends JPanel {
 	}
 	public JButton getBotonUnirme() {
 		return botonUnirme;
+	}
+	
+	public void resetButtonPanel() {
+		panelBotonUnirme.removeAll();
+		
+		if(botonUnirme!=null) {
+			botonUnirme.setEnabled(true);
+		}
 	}
 }
 

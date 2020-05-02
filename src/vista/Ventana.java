@@ -277,5 +277,11 @@ public class Ventana extends JFrame {
 	public void anadirVentana(JPanel vista, String name) {
 		ventana.add(vista, name);
 	}
+	
+	public void resetHome() {
+		contrHome.setVista();
+		vistaHome.setControladorAnadirColectivo(contIrACrearColectivo);
+		vistaHome.setControladorAnadirProyecto(contrIrACrearProyecto);
+	}
 }
 

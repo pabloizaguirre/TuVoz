@@ -54,6 +54,7 @@ public class ControlCrearProyectoInfraestructura implements ActionListener {
 			
 		
 		// mostrar nueva vista
+		frame.resetHome();
 		frame.mostrarPanel("home");
 		
 		} else if(e.getActionCommand().equals("examinar")) {
