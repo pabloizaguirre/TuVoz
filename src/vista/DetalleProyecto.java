@@ -33,7 +33,7 @@ public class DetalleProyecto extends JPanel{
 		//panel de la derecha con la foto si tiene
 		right = new JPanel();
 		SpringLayout rLayout = new SpringLayout();
-		right.setLayout(rLayout);	
+		right.setLayout(new FlowLayout());	
 		
 		//panel de la izquierda con los detalles del proyecto
 		JPanel left = new JPanel();
@@ -235,7 +235,8 @@ public class DetalleProyecto extends JPanel{
 	 * @param path. Path de la imagen
 	 */
 	public void setDetallesOpcionalesInfraestructura(List<String> listaDistritos, String path) {
-		right.setPreferredSize(new Dimension(300,300));
+		Integer width = 300;
+		right.setPreferredSize(new Dimension(width+40,10));
 		String s = "Distritos afectados: ";
 		for (String d:listaDistritos) {
 			s += d + ", ";
@@ -247,11 +248,15 @@ public class DetalleProyecto extends JPanel{
 		detalles.add(Box.createRigidArea(new Dimension(0, 5)));
 		detalles.add(distritos);
 		
-		ImageIcon imagenProyecto = Ventana.createImageIcon(path, "ImagenProyecto");
-		JLabel labelImagen = new JLabel(imagenProyecto);
-		((SpringLayout) right.getLayout()).putConstraint(BorderLayout.WEST, labelImagen, 20, BorderLayout.WEST, right);
-		((SpringLayout) right.getLayout()).putConstraint(BorderLayout.EAST, labelImagen, -20, BorderLayout.EAST, right);
-		((SpringLayout) right.getLayout()).putConstraint(BorderLayout.SOUTH, labelImagen, 0, BorderLayout.SOUTH, right);
+		ImageIcon iconoImagenProyecto = Ventana.createImageIcon(path, "ImagenProyecto");
+		
+		Image imagenProyecto = iconoImagenProyecto.getImage();
+		Integer height = (Integer) imagenProyecto.getHeight(null)*width/imagenProyecto.getWidth(null);
+		imagenProyecto = imagenProyecto.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+		iconoImagenProyecto.setImage(imagenProyecto);
+		
+		JLabel labelImagen = new JLabel(iconoImagenProyecto);
+		
 		right.add(labelImagen);
 	}
 	

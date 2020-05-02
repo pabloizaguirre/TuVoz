@@ -20,6 +20,7 @@ public class Controlador {
 	private ControlHomeAdmin contrHomeAdmin;
 	private ControlApoyoMinimoProyecto contrApoyoMinimoProyecto;
 	private ControlNotificaciones contrNoti;
+	private ControlMiPerfil contrMiPerfil;
 
 	private List<ControlIrAProyecto> contrIrAProyectos;
 	
@@ -38,10 +39,9 @@ public class Controlador {
 		this.contrApoyar = new ControlApoyar(frame, null);
 		this.contrApoyoMinimoProyecto = new ControlApoyoMinimoProyecto(frame);
 		this.contrNoti = new ControlNotificaciones(frame);
-		
-		// Establecer Home:
 		this.contrHome = new ControlHome(frame);
 		this.contrHomeAdmin = new ControlHomeAdmin(frame);
+		this.contrMiPerfil = new ControlMiPerfil(frame);
 	}
 	
 	public ControlApoyar getControlApoyar() {

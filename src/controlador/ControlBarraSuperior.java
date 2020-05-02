@@ -3,6 +3,8 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
+
 import modelo.*;
 import vista.*;
 
@@ -30,11 +32,12 @@ public class ControlBarraSuperior implements ActionListener{
 			}else if(Aplicacion.getAplicacion().getUsuarioActual().getClass().equals(Administrador.class)) {
 				frame.mostrarPanel("homeAdmin");
 			}
-		}else if(source.equals("cerrarSesion")){
-			Aplicacion.guardarAplicacion();
-			Aplicacion.getAplicacion().setUsuarioActual(null);
-			frame.getVistaBarraSuperior().setVisible(false);
-			frame.mostrarPanel("inicioRegistro");
+		}else if(source.equals("atras")) {
+			String ultimaVista = frame.getUltimaVista();
+			if(ultimaVista.equals("inicioRegistro")) {
+				return;
+			}
+			frame.mostrarPanel(ultimaVista);
 		}else if(source.equals("miPerfil")) {
 
 			frame.mostrarPanel("miPerfil");
