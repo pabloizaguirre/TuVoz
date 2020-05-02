@@ -13,13 +13,14 @@ public class CrearProyectoSocial extends JPanel {
 	private JTextField jtfGrupoSocial;
 	private JRadioButton nacional;
 	private JRadioButton internacional;
+	private ButtonGroup grupoBotones;
 	private JLabel labelColectivos;
 	private static JComboBox<String> comboColectivos;
 	private JButton botonCrear;
 	
 	public CrearProyectoSocial() {
 		
-			
+		
 		SpringLayout cLayout = new SpringLayout();
 		setLayout(cLayout);
 		
@@ -31,7 +32,7 @@ public class CrearProyectoSocial extends JPanel {
 		JLabel labelAlcance = new JLabel("Seleccione ámbito del proyecto:");
 		nacional = new JRadioButton("Nacional");
 		internacional = new JRadioButton("Internacional");
-		ButtonGroup grupoBotones = new ButtonGroup();
+		grupoBotones = new ButtonGroup();
 		grupoBotones.add(nacional);
 		grupoBotones.add(internacional);
 		
@@ -65,17 +66,18 @@ public class CrearProyectoSocial extends JPanel {
 		botonCrear = new JButton("Crear");
 		panelBoton.add(botonCrear, BorderLayout.SOUTH);
 		
-		cLayout.putConstraint(BorderLayout.WEST, panelCrear, 40, BorderLayout.WEST, this);
-		cLayout.putConstraint(BorderLayout.SOUTH, panelBoton, 40, BorderLayout.SOUTH, this);
-
-
-		JPanel panelPrincipal = new JPanel();
+		cLayout.putConstraint(SpringLayout.WEST, panelCrear, 40, SpringLayout.WEST, this);
+		cLayout.putConstraint(SpringLayout.NORTH, panelCrear, 40, SpringLayout.NORTH, this);
+		cLayout.putConstraint(SpringLayout.NORTH, panelColectivos, 10, SpringLayout.SOUTH, panelCrear);
+		cLayout.putConstraint(SpringLayout.WEST, panelColectivos, 37, SpringLayout.WEST, this);
+		cLayout.putConstraint(SpringLayout.WEST, panelBoton, 40, SpringLayout.WEST, this);
+		cLayout.putConstraint(SpringLayout.NORTH, panelBoton, 10, SpringLayout.SOUTH, panelColectivos);
 		
-		panelPrincipal.add(panelCrear);
-		panelPrincipal.add(panelColectivos);
-		panelPrincipal.add(panelBoton);
+		add(panelCrear);
+		add(panelColectivos);
+		add(panelBoton);
 		
-		add(panelPrincipal);
+		
 		
 	}
 	
@@ -103,9 +105,18 @@ public class CrearProyectoSocial extends JPanel {
 	}
 	
 	public static void addColectivos(List<Colectivo> list) {
+		comboColectivos.removeAllItems();
+		comboColectivos.addItem("No");
 		for(Colectivo c : list) {
 			comboColectivos.addItem(c.getTitulo());
 		}
+	}
+	
+	public void limpiarJtf() {
+		jtfGrupoSocial.setText("");
+		comboColectivos.setSelectedIndex(0);
+		grupoBotones.clearSelection();
+		
 	}
 	
 }

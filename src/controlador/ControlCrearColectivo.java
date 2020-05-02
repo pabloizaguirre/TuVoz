@@ -5,7 +5,13 @@ import java.awt.event.*;
 import javax.swing.*;
 import modelo.*;
 import vista.*;
-
+/**
+ * Clase ControlCrearColectivo.
+ * 
+ * @author Elena Cano
+ * @author Pablo Izaguirre
+ * @author Miguel Escribano
+ */
 public class ControlCrearColectivo implements ActionListener {
 	private CrearColectivo vista;
 	private Ventana frame;
@@ -17,7 +23,7 @@ public class ControlCrearColectivo implements ActionListener {
 	}
 	
 	/**
-	 * 
+	 * Método para gestionar los eventos que se pueden producir en la vista de creacion de colectivo
 	 * 
 	 * @param e action event
 	 */
@@ -33,10 +39,12 @@ public class ControlCrearColectivo implements ActionListener {
 			JOptionPane.showMessageDialog(vista,
 					"Ya existe un colectivo con ese titulo", "Error", JOptionPane.ERROR_MESSAGE);
 		}
-		else if (vista.getColectivos().equals("")) {
-		new Colectivo(vista.getNombre(), (Ciudadano)Aplicacion.getAplicacion().getUsuarioActual());
+		else if (vista.getColectivos().equals("No")) {
+			new Colectivo(vista.getNombre(), (Ciudadano)Aplicacion.getAplicacion().getUsuarioActual());
+			vista.limpiarJtf();
 		} else {
 			new Colectivo(vista.getNombre(), Colectivo.buscarColectivo(vista.getColectivos()));
+			vista.limpiarJtf();
 		}
 		
 		// mostrar nueva vista

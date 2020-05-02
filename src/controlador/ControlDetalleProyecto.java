@@ -8,7 +8,13 @@ import javax.swing.*;
 
 import modelo.*;
 import vista.DetalleProyecto;
-
+/**
+ * Clase ControlDetalleColectivo.
+ * 
+ * @author Elena Cano
+ * @author Pablo Izaguirre
+ * @author Miguel Escribano
+ */
 public class ControlDetalleProyecto implements ActionListener{
 	
 	private JFrame frame;
@@ -20,6 +26,13 @@ public class ControlDetalleProyecto implements ActionListener{
 		this.vista = vista;
 		this.proyecto = p;
 	}
+	
+	/**
+	 * Método para gestionar los eventos que se pueden producir en la vista de detalle de un 
+	 * proyecto: Apoyar proyecto, suscribirse, solicitar informes o enviar a financiación
+	 * 
+	 * @param e action event
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Usuario usuarioActual = Aplicacion.getAplicacion().getUsuarioActual();
@@ -45,7 +58,12 @@ public class ControlDetalleProyecto implements ActionListener{
 			}
 		}
 	}
-	
+	/**
+	 * Método encargado de gestionar los elementos de la vista de detalle de un proyecto: el estado,
+	 * titulo, presupuesto, botones, etc
+	 * 
+	 * 
+	 */
 	public void setVistaDetalleProyecto() {
 		EstadoProyecto estado = proyecto.getEstado();
 		vista.setTitulo(proyecto.getTitulo());
@@ -87,6 +105,11 @@ public class ControlDetalleProyecto implements ActionListener{
 		vista.setControlador(this);
 	}
 	
+	/**
+	 * Método encargado de actualizar la vista de detalle de un proyecto
+	 * 
+	 * 
+	 */
 	public void resetVista() {
 		EstadoProyecto estado = proyecto.getEstado();
 		Usuario usuario = Aplicacion.getAplicacion().getUsuarioActual();

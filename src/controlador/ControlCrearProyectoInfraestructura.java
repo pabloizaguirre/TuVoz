@@ -9,6 +9,13 @@ import javax.swing.*;
 import modelo.*;
 import vista.*;
 
+/**
+ * Clase ControlCrearProyectoInfraestructura.
+ * 
+ * @author Elena Cano
+ * @author Pablo Izaguirre
+ * @author Miguel Escribano
+ */
 public class ControlCrearProyectoInfraestructura implements ActionListener {
 	private CrearProyectoInfraestructura vista;
 	private Ventana frame;
@@ -21,7 +28,9 @@ public class ControlCrearProyectoInfraestructura implements ActionListener {
 
 	
 	/**
-	 * Cambia la vista a CrearProyectoInfraestructura
+	 * Método para gestionar los eventos que se pueden producir en la vista de creación de 
+	 * proyecto de infraestructura. Se crea proyecto de forma individual o de forma colectiva
+	 * según la entrada del ComboBox de la vista
 	 * 
 	 * @param e action event
 	 */
@@ -41,11 +50,15 @@ public class ControlCrearProyectoInfraestructura implements ActionListener {
 		if(vista.getColectivos().equals("No")) {
 			new ProyectoInfraestructura(v.getNombre(),v.getDescripcion(),v.getPresupuesto(),
 				(Ciudadano)Aplicacion.getAplicacion().getUsuarioActual(), new Imagen(ruta, "Imagen"),vista.getDistritos());
+			vista.limpiar();
+			v.limpiarJtf();
 		} else {
 			Colectivo col = Colectivo.buscarColectivo(vista.getColectivos());
 			
 			new ProyectoInfraestructura(v.getNombre(),v.getDescripcion(),v.getPresupuesto(),
 				col, new Imagen(ruta, "imagen"),vista.getDistritos());
+			vista.limpiar();
+			v.limpiarJtf();
 		}
 		
 		

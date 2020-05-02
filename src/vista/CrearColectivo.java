@@ -55,6 +55,9 @@ public class CrearColectivo extends JPanel{
 		return jtfNombre.getText();
 	}
 	public static void addColectivos(List<Colectivo> list) {
+		comboColectivos.removeAllItems();
+		comboColectivos.addItem("No");
+		
 		for(Colectivo c : list) {
 			comboColectivos.addItem(c.getTitulo());
 		}
@@ -62,4 +65,9 @@ public class CrearColectivo extends JPanel{
 	public String getColectivos() {
 		return (String)comboColectivos.getSelectedItem();
 	}
+	public void limpiarJtf() {
+		jtfNombre.setText("");
+		comboColectivos.setSelectedIndex(0);
+	}
+
 }

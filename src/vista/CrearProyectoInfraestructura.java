@@ -72,9 +72,12 @@ public class CrearProyectoInfraestructura extends JPanel {
 		botonCrear = new JButton("Crear");
 		botonCrear.setActionCommand("crear");
 
-		cLayout.putConstraint(BorderLayout.NORTH, labelNuevo, 40, BorderLayout.NORTH, this);
-		cLayout.putConstraint(BorderLayout.NORTH, panelProyecto, 15, BorderLayout.SOUTH, labelNuevo);
-		cLayout.putConstraint(BorderLayout.NORTH, botonCrear, 15, BorderLayout.SOUTH, panelProyecto);
+		cLayout.putConstraint(SpringLayout.NORTH, labelNuevo, 40, SpringLayout.NORTH, this);
+		cLayout.putConstraint(SpringLayout.WEST, labelNuevo, 40, SpringLayout.WEST, this);
+		cLayout.putConstraint(SpringLayout.NORTH, panelProyecto, 15, SpringLayout.SOUTH, labelNuevo);
+		cLayout.putConstraint(SpringLayout.WEST, panelProyecto, 40, SpringLayout.WEST, this);
+		cLayout.putConstraint(SpringLayout.WEST, botonCrear, 40, SpringLayout.WEST, this);
+		cLayout.putConstraint(SpringLayout.NORTH, botonCrear, 15, SpringLayout.SOUTH, panelProyecto);
 
 
 		
@@ -104,9 +107,16 @@ public class CrearProyectoInfraestructura extends JPanel {
 	}
 	
 	public static void addColectivos(List<Colectivo> list) {
+		comboColectivos.removeAllItems();
+		comboColectivos.addItem("No");
 		for(Colectivo c : list) {
 			comboColectivos.addItem(c.getTitulo());
 		}
+	}
+	
+	public void limpiar() {
+		distrito1.setSelected(false);
+		comboColectivos.setSelectedIndex(0);
 	}
 	
 }

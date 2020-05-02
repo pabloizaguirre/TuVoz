@@ -144,5 +144,13 @@ public class InicioRegistro extends JPanel {
 	public String getPasswordReg() {
 		return String.valueOf(passwordreg.getPassword());
 	}
+	
+	public void limpiarJtf() {
+		jtfnombre.setText("");
+		password.setText("");
+		jtfnifreg.setText("");
+		jtfusuarioreg.setText("");
+		passwordreg.setText("");
+	}
 
 }
