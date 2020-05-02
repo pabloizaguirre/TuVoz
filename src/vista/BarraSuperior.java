@@ -12,11 +12,11 @@ public class BarraSuperior extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	private JButton home;
+	private JButton atras;
 	private JTextField busquedaTF;
 	private JButton busqueda;
 	private JButton notificaciones;
 	private JButton miPerfil;
-	private JButton cerrarSesion;
 
 	public BarraSuperior() {
 		setLayout(new BorderLayout());
@@ -24,15 +24,14 @@ public class BarraSuperior extends JPanel {
 		JPanel left = new JPanel();
 
 		home = new JButton("Inicio");
-		
 		home.setActionCommand("home");
 		
-		cerrarSesion = new JButton("Cerrar Sesion");
-		cerrarSesion.setActionCommand("cerrarSesion");
-
+		atras = new JButton("Atrás");
+		atras.setActionCommand("atras");
+		
 		left.add(home);
-		left.add(cerrarSesion);
-
+		left.add(atras);
+		
 		JPanel right = new JPanel();
 		busquedaTF = new JTextField(15);
 		busquedaTF.setActionCommand("busquedaTF");
@@ -54,8 +53,8 @@ public class BarraSuperior extends JPanel {
 
 	public void setControlador(ActionListener c) {  
 		miPerfil.addActionListener(c);
-		cerrarSesion.addActionListener(c);
 		home.addActionListener(c);
+		atras.addActionListener(c);
 		busquedaTF.addActionListener(c);
 		busqueda.addActionListener(c);
 		notificaciones.addActionListener(c);

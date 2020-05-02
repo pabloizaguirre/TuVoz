@@ -26,8 +26,9 @@ public class ControlInicio implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		String source = e.getActionCommand();
 		
-		if (e.getActionCommand().equals("botonIniciarSesion")) {
+		if (source.equals("botonIniciarSesion") || source.equals("nombre") || source.equals("password")) {
 			/*Comprobamos que ambos campos han sido rellenados*/
 	        if(vista.getNombre().equals("") || vista.getPassword().equals("")) {
 	        	JOptionPane.showMessageDialog(vista,
@@ -63,7 +64,7 @@ public class ControlInicio implements ActionListener {
 		}
 		
 		
-		else if(e.getActionCommand().equals("botonRegistrarse")) {
+		else if(source.equals("botonRegistrarse")) {
 			if(vista.getNifReg().equals("") || vista.getUsuarioReg().equals("") || 
 	        		vista.getPasswordReg().equals("")) {
 	        	JOptionPane.showMessageDialog(vista,

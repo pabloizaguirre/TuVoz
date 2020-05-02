@@ -59,7 +59,7 @@ public class Ventana extends JFrame {
 	private ControlInicio contrInicio;
 
 
-
+	private String ultimaVista;
 	private JPanel ventana;
 	
 	public static ImageIcon createImageIcon(String path, String description) {
@@ -81,7 +81,7 @@ public class Ventana extends JFrame {
 		
 		ventana = new JPanel();
 		ventana.setLayout(new CardLayout());
-		ventana.setPreferredSize(new Dimension(100,400));
+		ventana.setPreferredSize(new Dimension(100,500));
 		
 		JScrollPane scroll = new JScrollPane(ventana, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 												ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER); 
@@ -93,6 +93,7 @@ public class Ventana extends JFrame {
 		
 		this.vistaInicioRegistro = new InicioRegistro();
 		ventana.add(vistaInicioRegistro, "inicioRegistro");
+		ultimaVista = "inicioRegistro";
 		
 		//Aplicacion.getAplicacion().cargarAplicacion();
 		
@@ -104,7 +105,7 @@ public class Ventana extends JFrame {
 		List<Distrito> d = new ArrayList<Distrito>();
 	    d.add(Distrito.MONCLOAARAVACA);
 	    d.add(Distrito.MORATALAZ);
-		Proyecto pInfraestructura = new ProyectoInfraestructura("Puente para conejas", descripcion, 10, creador, new Imagen("/Users/casa/Desktop/IMG_0377_Facetune_27-03-2019-12-36-33.jpeg", "postu"), d);
+		Proyecto pInfraestructura = new ProyectoInfraestructura("Puente para conejas", descripcion, 10, creador, new Imagen("/Users/casa/Downloads/guinea-pig-bridge-1.jpg", "postu"), d);
 		
 		creador.aprobarRegistro();
 		
@@ -236,7 +237,6 @@ public class Ventana extends JFrame {
 		return this.vistaCrearProyectoInfraestructura;
 	}
 	
-	
 	public InicioRegistro getVistaInicioRegistro() {
 		return this.vistaInicioRegistro;
 	}
@@ -259,9 +259,19 @@ public class Ventana extends JFrame {
 		return this.colectivos;
 	}
 	
+	public String getUltimaVista() {
+		return ultimaVista;
+	}
+	
 	public void mostrarPanel(String carta) {
 		CardLayout l = (CardLayout)ventana.getLayout();
+		ultimaVista = carta;
 		l.show(ventana, carta);
+	}
+	
+	public void panelAnterior() {
+		CardLayout l = (CardLayout)ventana.getLayout();
+		l.previous(ventana);
 	}
 
 	public void anadirVentana(JPanel vista, String name) {

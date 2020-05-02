@@ -46,8 +46,10 @@ public class InicioRegistro extends JPanel {
 		inicio.setLayout(inicioLayout);
 		labelnombre = new JLabel("Nombre o NIF:");
 		jtfnombre = new JTextField(15);
+		jtfnombre.setActionCommand("nombre");
 		labelpassword = new JLabel("Contraseña");
 		password = new JPasswordField(10);
+		password.setActionCommand("password");
 		botonEntrar = new JButton("Entrar");
 		botonEntrar.setActionCommand("botonIniciarSesion");
 		
@@ -104,7 +106,7 @@ public class InicioRegistro extends JPanel {
 		cLayout.putConstraint(BorderLayout.EAST, registrarse, -50, BorderLayout.EAST, this);
 		cLayout.putConstraint(BorderLayout.WEST, registrarse, -400, BorderLayout.EAST, this);
 		cLayout.putConstraint(BorderLayout.NORTH, registrarse, 40, BorderLayout.SOUTH, inicio);	
-		cLayout.putConstraint(BorderLayout.SOUTH, registrarse, -100, BorderLayout.SOUTH, this);	
+		cLayout.putConstraint(BorderLayout.SOUTH, registrarse, -30, BorderLayout.SOUTH, this);	
 		
 		registrarse.add(intro);
 		registrarse.add(labelnifreg);
@@ -121,6 +123,8 @@ public class InicioRegistro extends JPanel {
 	public void setControlInicio(ActionListener c) {  
 		botonEntrar.addActionListener(c);
 		botonRegistro.addActionListener(c);
+		this.jtfnombre.addActionListener(c);
+		this.password.addActionListener(c);
 	}
 	
 

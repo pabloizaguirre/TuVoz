@@ -11,6 +11,8 @@ import java.awt.event.*;
 
 public class MiPerfil extends JPanel{
 	
+	private JButton cerrarSesion;
+	
 	
 	public MiPerfil() {
 		SpringLayout cLayout = new SpringLayout();
@@ -19,10 +21,13 @@ public class MiPerfil extends JPanel{
 		//Titulo de la ventana: HOME
 		JLabel titulo = new JLabel("Mi Perfil");
 		titulo.setFont(new Font(titulo.getFont().getName(), Font.PLAIN, titulo.getFont().getSize()+20));
-
 		cLayout.putConstraint(BorderLayout.WEST, titulo, 20, BorderLayout.WEST, this);
-
 		add(titulo);
+		
+		cerrarSesion = new JButton("Cerrar sesion");
+		cLayout.putConstraint(BorderLayout.EAST, cerrarSesion, -40, BorderLayout.EAST, this);
+		cerrarSesion.setActionCommand("cerrarSesion");
+		add(cerrarSesion);
 				
 		//panel con los proyectos
 		final JPanel proyectos = new JPanel();
@@ -98,6 +103,10 @@ public class MiPerfil extends JPanel{
 		cLayout.putConstraint(BorderLayout.EAST, colectivos, -40, BorderLayout.EAST, this);
 		
 		// a�adir componentes al contenedor
-		add(colectivos);	
+		add(colectivos);
+	}
+	
+	public void setControlador(ActionListener c) {
+		cerrarSesion.addActionListener(c);
 	}
 }
