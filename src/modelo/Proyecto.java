@@ -21,7 +21,7 @@ public class Proyecto implements Serializable {
 	private LocalDate fechaCreacion;
 	private String descripcion;
 	private double presupuestoSolicitado;
-	private double presupuestoConcedido;
+	private Double presupuestoConcedido;
 	private EstadoProyecto estado;
 	private boolean autorizado;
 	private int apoyos;
@@ -30,6 +30,8 @@ public class Proyecto implements Serializable {
 	private List<ElementoColectivo> listadoApoyos;
 	private List<Ciudadano> listadoSuscripciones;
 	private String idEnvio;
+	
+	private static final Integer NUM_INTENTOS = 3;
 		
 	
 
@@ -79,7 +81,7 @@ public class Proyecto implements Serializable {
 		public LocalDate getFechaCreacion() { return fechaCreacion; }
 		public String getDescripcion()  { return descripcion; }
 		public double getPresupuestoSolicitado() { return presupuestoSolicitado;}
-		public double getPresupuestoConcedido() { return presupuestoConcedido;}
+		public Double getPresupuestoConcedido() { return presupuestoConcedido;}
 		public boolean getAutorizado() { return autorizado;}
 		public int getApoyos() { return apoyos;}
 		public LocalDate getFechaUltimoApoyo() { return fechaUltimoApoyo;}
@@ -95,8 +97,8 @@ public class Proyecto implements Serializable {
 		public void setId(int identificador) { this.id = identificador;}
 		public void setFechaCreacion(LocalDate fechaCreacion) { this.fechaCreacion = fechaCreacion;}
 		public void setDescripcion(String descripcion) { this.descripcion = descripcion;}
-		public void setPresupuestoSolicitado(int presupuestoSolicitado) { this.presupuestoSolicitado = presupuestoSolicitado;}
-		public void setPresupuestoConcedido(int presupuestoConcedido) { this.presupuestoConcedido = presupuestoConcedido;}
+		public void setPresupuestoSolicitado(double presupuestoSolicitado) { this.presupuestoSolicitado = presupuestoSolicitado;}
+		public void setPresupuestoConcedido(Double presupuestoConcedido) { this.presupuestoConcedido = presupuestoConcedido;}
 		public void setEstadoProyecto(EstadoProyecto estado) { this.estado = estado;}
 		public void setAutorizado(boolean autorizado) { this.autorizado = autorizado;}
 		public void setApoyos(int apoyos) { this.apoyos = apoyos;}
@@ -112,18 +114,38 @@ public class Proyecto implements Serializable {
 		 * El metodo envia una notificacion a cada ciudadano suscrito al proyecto
 		 * 
 		 * @param e EstadoProyecto al que queremos actualizar el proyecto.
-		 * 
-		 * 
-		 * 
 		 */	
-		public void cambiarEstado(EstadoProyecto e){
-
+		private void cambiarEstado(EstadoProyecto e){
 			if(e.equals(EstadoProyecto.RECHAZADO)){
 				Aplicacion.getAplicacion().eliminarProyecto(this);
 			}
+			this.estado = e;
 			
 			for(Ciudadano c:listadoSuscripciones){
 				new NotificacionProyectoEstado(this,c);
+			}
+		}
+		
+		/**
+		 * Metodo al que se debe llamar cuando el administrador aprueba un proyecto
+		 */
+		public void aprobarProyecto() {
+			if(Aplicacion.getAplicacion().getUsuarioActual().equals(Aplicacion.getAplicacion().getAdministrador()) && this.estado.equals(EstadoProyecto.PENDIENTECREACION)) {
+				cambiarEstado(EstadoProyecto.NOENVIADO);
+			}
+		}
+		
+		/**
+		 * Metodo al que se debe llamar cuando el administrador rechaza un proyecto
+		 * 
+		 * @param mensaje con el motivo del rechazo
+		 */
+		public void rechazarProyecto(String mensaje) {
+			if(Aplicacion.getAplicacion().getUsuarioActual().equals(Aplicacion.getAplicacion().getAdministrador()) && this.estado.equals(EstadoProyecto.PENDIENTECREACION)) {
+				cambiarEstado(EstadoProyecto.RECHAZADO);
+			}
+			for(Ciudadano c:listadoSuscripciones){
+				new NotificacionProyectoEstado(this,c,mensaje);
 			}
 		}
 
@@ -136,7 +158,7 @@ public class Proyecto implements Serializable {
 		 */
 		public boolean apoyarProyecto(ElementoColectivo e) {
 			if(listadoApoyos.contains(e) || this.estado.equals(EstadoProyecto.CADUCADO)
-				|| this.estado.equals(EstadoProyecto.APROBADO)) {
+				|| this.estado.equals(EstadoProyecto.FINANCIADO)) {
 				return false;
 			}
 			
@@ -146,7 +168,7 @@ public class Proyecto implements Serializable {
 			//Si se vota como ciudadano
 			if(e.getClass().equals(Ciudadano.class)) {
 				apoyos+=1;
-				if(apoyos >= Aplicacion.getAplicacion().getApoyosMin()){
+				if(apoyos >= Aplicacion.getAplicacion().getApoyosMin() && (estado.equals(EstadoProyecto.NOENVIADO) || estado.equals(EstadoProyecto.CADUCADO))){
 					cambiarEstado(EstadoProyecto.DISPONIBLE);;
 				}
 				fechaUltimoApoyo = FechaSimulada.getHoy();
@@ -227,7 +249,7 @@ public class Proyecto implements Serializable {
 		public EstadoProyecto consultarEstadoProyecto(){
 			if(estado.equals(EstadoProyecto.NOENVIADO) && fechaUltimoApoyo.isBefore(FechaSimulada.getHoy().minusDays(30))){
 				this.cambiarEstado(EstadoProyecto.CADUCADO);
-			} if(apoyos >= Aplicacion.getAplicacion().getApoyosMin()) {
+			} if((estado.equals(EstadoProyecto.NOENVIADO) || estado.equals(EstadoProyecto.CADUCADO)) && apoyos >= Aplicacion.getAplicacion().getApoyosMin()) {
 				this.cambiarEstado(EstadoProyecto.DISPONIBLE);
 			}
 
@@ -235,17 +257,29 @@ public class Proyecto implements Serializable {
 		}
 		
 		/**
-		 * Método que envía un proyecto al sistema externo para la financiacion
+		 * Método que envía un proyecto al sistema externo para la financiacion, si surge la excepcion
+		 * IOException, vuelve a intentarlo 2 veces mas
 		 * 
-		 *
 		 */
 		public void enviarProyecto() throws Exception {
-			if(this.consultarEstadoProyecto().equals(EstadoProyecto.DISPONIBLE)) {
+			if(this.consultarEstadoProyecto().equals(EstadoProyecto.DISPONIBLE) || (this.consultarEstadoProyecto().equals(EstadoProyecto.CADUCADO) && apoyos >= Aplicacion.getAplicacion().getApoyosMin())) {
 				GrantRequest req = new SolicitudFinanciacion(this);
-				CCGG proxy = CCGG.getGateway();
-				String id = proxy.submitRequest(req);
-				System.out.println("Valor:" + id);
-				this.idEnvio=id;
+				int i = 0;
+				while(i < NUM_INTENTOS) {
+					i+=1;
+					try {
+						CCGG proxy = CCGG.getGateway();
+						String requestId = proxy.submitRequest(req);
+						this.idEnvio=requestId;
+						this.cambiarEstado(EstadoProyecto.PENDIENTEFINANCIACION);
+					} catch (IOException e) {
+						if(i==NUM_INTENTOS) {
+							e.printStackTrace();
+						}
+						continue;
+					}
+					break;
+				}
 			}
 		}
 
@@ -253,13 +287,33 @@ public class Proyecto implements Serializable {
 
 
 		/**
-		 * Método que consulta el estado de un proyecto enviado a financiación
+		 * Método que consulta el estado de un proyecto enviado a financiación, si surge la excepcion
+		 * IOException, vuelve a intentarlo 2 veces mas
 		 * 
-		 *
 		 */
 		void consultar() throws Exception {
-			CCGG proxy = CCGG.getGateway();
-			presupuestoConcedido = proxy.getAmountGranted(this.idEnvio);
+			int i = 0;
+			while(i < NUM_INTENTOS) {
+				i+=1;
+				try {
+					CCGG proxy = CCGG.getGateway();
+					presupuestoConcedido = proxy.getAmountGranted(this.idEnvio);
+					
+					if(presupuestoConcedido==null) {
+						cambiarEstado(EstadoProyecto.PENDIENTEFINANCIACION);
+					}else if(presupuestoConcedido > 0) {
+						cambiarEstado(EstadoProyecto.FINANCIADO);
+					} else {
+						cambiarEstado(EstadoProyecto.RECHAZADO);
+					}
+				} catch (IOException e) {
+					if(i==NUM_INTENTOS) {
+						e.printStackTrace();
+					}
+					continue;
+				}
+				break;
+			}
 		} 
 
 		/**

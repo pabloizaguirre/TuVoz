@@ -4,7 +4,11 @@ import es.uam.eps.sadp.grants.*;
 
 public class SolicitudFinanciacion implements GrantRequest {
 	Proyecto p; 
-	SolicitudFinanciacion(Proyecto p) {this.p=p;}
+	
+	SolicitudFinanciacion(Proyecto p) {
+		this.p=p;
+	}
+	
 	public String getExtraData() {
 		return "extraData";
 	}

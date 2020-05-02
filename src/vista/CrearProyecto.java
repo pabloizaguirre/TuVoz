@@ -31,13 +31,13 @@ public class CrearProyecto extends JPanel {
 		JPanel panelNuevoProyecto = new JPanel();
 		panelNuevoProyecto.add(labelNuevo);
 		
-		JPanel panelProyecto = new JPanel(new GridLayout(4,2,2,2));
+		JPanel panelProyecto = new JPanel(new GridLayout(4,2));
 		labelNombre = new JLabel(" Nombre del proyecto: ");
 		jtfNombre = new JTextField(20);
 		
 		
 		labelDescripcion = new JLabel(" Descripción del proyecto: ");
-		jtfDescripcion = new JTextField(40);
+		jtfDescripcion = new JTextField(20);
 		
 		labelPresupuesto = new JLabel(" Presupuesto a solicitar: ");
 		jtfPresupuesto = new JTextField(10);

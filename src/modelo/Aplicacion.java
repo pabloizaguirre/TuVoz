@@ -249,7 +249,7 @@ public class Aplicacion implements Serializable {
         //Creamos un proyecto como colectivo
         List<Distrito> d = new ArrayList<Distrito>();
         d.add(Distrito.MONCLOAARAVACA);
-        ProyectoInfraestructura p1 = new ProyectoInfraestructura("Puente", "Puente por encima del rio", 5000, c1, new Imagen("planopuente.jpg","PlanoPuente"), d);
+        ProyectoInfraestructura p1 = new ProyectoInfraestructura("Puente", "Puente por encima del rio", 5000000, c1, new Imagen("planopuente.jpg","PlanoPuente"), d);
         System.out.println("\nEl colectivo " + c1 + " ha creado el proyecto " + p1);
         
         //Comprobamos que el proyecto tiene un apoyo, el del representante
@@ -262,7 +262,8 @@ public class Aplicacion implements Serializable {
         System.out.println("El proyecto " + p1 + " tiene " + p1.getApoyos() + " apoyos\n");
 
         //Aprobar proyecto
-        p1.cambiarEstado(EstadoProyecto.NOENVIADO); 
+        aplicacion.setUsuarioActual(aplicacion.administrador);
+        p1.aprobarProyecto();
 
         //Comprobar las notificaciones que ha recibido u1
         System.out.println(u1 + " ha recibido las siguientes notificaciones:");
@@ -283,25 +284,33 @@ public class Aplicacion implements Serializable {
 
 
 
-        aplicacion.getAplicacion().setApoyosMin(1);
+        Aplicacion.getAplicacion().setApoyosMin(1);
         p1.apoyarProyecto(u1);
 
         System.out.println("Estado del proyecto tras el apoyo: "+p1.consultarEstadoProyecto());
+        
+        
         
         //Enviar a financiacion
 
 
         try {
-        CCGG proxy = CCGG.getGateway();
-        proxy.setDate(FechaSimulada.getHoy());
-        p1.enviarProyecto();
-        FechaSimulada.avanzar(80);
-        proxy.setDate(FechaSimulada.getHoy());
-        p1.consultar();
-        System.out.println("Presupuesto Concedido: "+p1.getPresupuestoConcedido());
-        }catch(Exception ex) {
-            System.out.println("Error en la comunicación con el sistema externo");
+	        CCGG proxy = CCGG.getGateway();
+	        proxy.setDate(FechaSimulada.getHoy());
+	        p1.enviarProyecto();
+	        FechaSimulada.avanzar(30);
+	        proxy.setDate(FechaSimulada.getHoy());
+	        p1.consultar();
+	        System.out.println("Presupuesto Concedido: "+p1.getPresupuestoConcedido());
+        }catch(InvalidIDException ex) {
+            System.out.println(ex + ", invalid id, error en la comunicación con el sistema externo");
+        } catch(InvalidRequestException e) {
+        	System.out.println(e + ", invalid request, error en la comunicacoin con el sistema externo");
+        }catch(IOException e) {
+        	System.out.println(e);
+        }
+        
+        System.out.println("Estado del proyecto tras el apoyo: "+p1.consultarEstadoProyecto());
     }
-}
 
 }
