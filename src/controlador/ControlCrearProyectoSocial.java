@@ -48,6 +48,8 @@ public class ControlCrearProyectoSocial implements ActionListener {
 			
 		
 		// mostrar nueva vista
+		frame.resetHome();
+
 		frame.mostrarPanel("home");
 		
 	}

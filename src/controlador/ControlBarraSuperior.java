@@ -28,6 +28,7 @@ public class ControlBarraSuperior implements ActionListener{
 		String source = e.getActionCommand();
 		if(source.equals("home")) {
 			if(Aplicacion.getAplicacion().getUsuarioActual().getClass().equals(Ciudadano.class)) {
+				frame.resetHome();
 				frame.mostrarPanel("home");
 			}else if(Aplicacion.getAplicacion().getUsuarioActual().getClass().equals(Administrador.class)) {
 				frame.mostrarPanel("homeAdmin");

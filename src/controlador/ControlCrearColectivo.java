@@ -35,12 +35,10 @@ public class ControlCrearColectivo implements ActionListener {
 		}
 		else {
 		new Colectivo(vista.getNombre(), (Ciudadano)Aplicacion.getAplicacion().getUsuarioActual());
-	
-		JOptionPane.showMessageDialog(vista,
-					"Colectivo creado con éxito", "Nuevo colectivo", JOptionPane.INFORMATION_MESSAGE);
 		}	
 		
 		// mostrar nueva vista
+		frame.resetHome();
 		frame.mostrarPanel("home");
 	}
 }

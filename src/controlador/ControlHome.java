@@ -65,6 +65,7 @@ public class ControlHome implements ActionListener{
 	}
 	
 	public void setVista() {
+		vista.resetBotones();
 		setBotonesProyectos();
 		setBotonesColectivos();
 	}
