@@ -107,9 +107,16 @@ public class CrearProyectoInfraestructura extends JPanel {
 	}
 	
 	public static void addColectivos(List<Colectivo> list) {
+		comboColectivos.removeAllItems();
+		comboColectivos.addItem("No");
 		for(Colectivo c : list) {
 			comboColectivos.addItem(c.getTitulo());
 		}
+	}
+	
+	public void limpiar() {
+		distrito1.setSelected(false);
+		comboColectivos.setSelectedIndex(0);
 	}
 	
 }
