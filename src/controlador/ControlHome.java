@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import modelo.*;
+import vista.CrearColectivo;
 import vista.DetalleColectivo;
 import vista.DetalleProyecto;
 import vista.Home;
@@ -44,6 +45,8 @@ public class ControlHome implements ActionListener{
 		if(e.getActionCommand().equals("anadirProyecto")) {
 			frame.mostrarPanel("crearProyecto");
 		} else if(e.getActionCommand().equals("anadirColectivo")){
+			/*Actualizamos la vista de colectivos para crear un subcolectivo*/
+			CrearColectivo.addColectivos(((Ciudadano)Aplicacion.getAplicacion().getUsuarioActual()).getColectivosCreados());
 			frame.mostrarPanel("crearColectivo");
 		} else if(proyectos.containsKey(source)) {
 			Proyecto p = proyectos.get(source);

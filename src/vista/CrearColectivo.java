@@ -64,14 +64,14 @@ public class CrearColectivo extends JPanel{
      * Método para añadir los colectivos que representa el ciudadano actual al combo box
      * para crear el nuevo colectivo como subcolectivo
      * 
-     *@param list Lista de colectivos que representa el ciudadano
+     *@param lista Lista de colectivos que representa el ciudadano
      * 
      */
-	public static void addColectivos(List<Colectivo> list) {
+	public static void addColectivos(List<Colectivo> lista) {
 		comboColectivos.removeAllItems();
 		comboColectivos.addItem("No");
 		
-		for(Colectivo c : list) {
+		for(Colectivo c : lista) {
 			comboColectivos.addItem(c.getTitulo());
 		}
 	}
@@ -85,7 +85,7 @@ public class CrearColectivo extends JPanel{
      */
 	public void limpiarJtf() {
 		jtfNombre.setText("");
-		comboColectivos.setSelectedIndex(0);
+		//comboColectivos.setSelectedIndex(0);
 	}
 
 }
