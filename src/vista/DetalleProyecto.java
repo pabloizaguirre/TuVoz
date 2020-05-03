@@ -138,6 +138,7 @@ public class DetalleProyecto extends JPanel{
 		for(String c : colectivos) {
 			comboColectivos.addItem(c);
 		}
+		comboColectivos.setSelectedIndex(0);
 		botones.add(comboColectivos);
 		
 	}
@@ -263,7 +264,14 @@ public class DetalleProyecto extends JPanel{
 	}
 	
 	public String getColectivoApoyante() {
-		return (String)comboColectivos.getSelectedItem();
+		String buf ="";
+		try {
+			buf = (String)comboColectivos.getSelectedItem(); 
+			return buf;
+		}catch(NullPointerException ex) {
+			return "Apoyar individualmente";
+		}
+		
 	}
 	
 	public void resetButtonPanel() {
