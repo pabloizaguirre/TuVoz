@@ -155,6 +155,15 @@ public class DetalleColectivo extends JPanel {
 			botonUnirme.setEnabled(true);
 		}
 	}
+	
+	/**
+	 * metodo para resetear toda la ventana
+	 */
+	public void resetAll() {
+		this.listaColectivos.removeAll();
+		this.listaProyectos.removeAll();
+		resetButtonPanel();
+	}
 
 }
 

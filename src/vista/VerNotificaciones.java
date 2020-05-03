@@ -154,9 +154,12 @@ public class VerNotificaciones extends JPanel{
      * 
      */
 	public void borrarNotificacion(int id) {
-		this.remove(listaNotificaciones.get(id));
+		JPanel panel = listaNotificaciones.get(id);
+		panel.setVisible(false);
+		this.remove(panel);
 		listaNotificaciones.remove(id);
 		this.validate();
+		this.getIgnoreRepaint();
 	}
 	
 	

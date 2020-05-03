@@ -38,6 +38,7 @@ public class Colectivo implements ElementoColectivo, Serializable {
         colectivoSuperior.anadirSubcolectivo(this);
         superColectivo = colectivoSuperior;
         unirseAColectivo(representante);
+        Aplicacion.getAplicacion().anadirElementoColectivo(this);
     }
 
     public String getTitulo() {

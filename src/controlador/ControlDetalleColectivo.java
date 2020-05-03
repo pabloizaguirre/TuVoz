@@ -17,6 +17,7 @@ import modelo.Proyecto;
 import modelo.Usuario;
 import vista.DetalleColectivo;
 import vista.DetalleProyecto;
+import vista.Ventana;
 /**
  * Clase ControlDetalleColectivo.
  * 
@@ -26,7 +27,7 @@ import vista.DetalleProyecto;
  */
 public class ControlDetalleColectivo implements ActionListener{
 	
-	private JFrame frame;
+	private Ventana frame;
 	private DetalleColectivo vista;
 	private Colectivo colectivo;
 	
@@ -34,7 +35,7 @@ public class ControlDetalleColectivo implements ActionListener{
 	private HashMap<JButton, Colectivo> colectivos = new HashMap<JButton, Colectivo>();
 	
 
-	public ControlDetalleColectivo(JFrame frame, DetalleColectivo vista, Colectivo c) {
+	public ControlDetalleColectivo(Ventana frame, DetalleColectivo vista, Colectivo c) {
 		this.frame = frame;
 		this.vista = vista;
 		this.colectivo = c;
@@ -46,11 +47,48 @@ public class ControlDetalleColectivo implements ActionListener{
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		Object source = e.getSource();
 		if(e.getActionCommand().equals("unirme")) {
 			colectivo.unirseAColectivo((Ciudadano) Aplicacion.getAplicacion().getUsuarioActual());
 			((Ciudadano) Aplicacion.getAplicacion().getUsuarioActual()).anadirAMisColectivos(colectivo);
 			vista.getBotonUnirme().setEnabled(false);
 
+		}
+		/*Si pulsamos en cualquier proyecto*/
+		else if(proyectos.containsKey(source)) {
+			Proyecto p = proyectos.get(source);
+			
+			//comprobamos si ya se ha creado una visa para este proyecto
+			if(frame.getProyectos().containsKey(p.getId())) {
+				ControlDetalleProyecto contr = frame.getProyectos().get(p.getId());
+				contr.resetVista();
+			} else {
+				DetalleProyecto vistaProyecto = new DetalleProyecto();
+				ControlDetalleProyecto c = new ControlDetalleProyecto(frame, vistaProyecto, p);
+				c.setVistaDetalleProyecto();
+				frame.getProyectos().put(p.getId(), c);
+				
+				frame.anadirVentana(vistaProyecto, "" + p.getId());
+			}
+			
+			frame.mostrarPanel("" + p.getId());
+		}/*Si pulsamos en cualquier colectivo*/ 
+		else if (colectivos.containsKey(source)) {
+			Colectivo c = colectivos.get(source);
+			
+			//comprobamos si ya hemos creado una vista para este colectivo
+			if(frame.getColectivos().containsKey(c.getTitulo())) {
+				ControlDetalleColectivo contr = frame.getColectivos().get(c.getTitulo());
+				contr.resetVista();
+			} else {
+				DetalleColectivo vistaColectivo = new DetalleColectivo();
+				ControlDetalleColectivo contr = new ControlDetalleColectivo(frame, vistaColectivo, c);
+				contr.setVistaDetalleColectivo();
+				frame.getColectivos().put(c.getTitulo(), contr);
+				
+				frame.anadirVentana(vistaColectivo, c.getTitulo());
+			}
+			frame.mostrarPanel("" + c.getTitulo());
 		}
 	}
 	
@@ -84,6 +122,21 @@ public class ControlDetalleColectivo implements ActionListener{
 				
 			}
 		}
+		JButton botonProyecto;
+		flag = false;
+		for(Proyecto e:colectivo.getProyectosPropuestos()) {
+			flag=true;
+			botonProyecto = new JButton(e.getTitulo());
+			botonProyecto.addActionListener(this);
+			vista.addBotonProyecto(botonProyecto);
+			proyectos.put(botonProyecto, e);
+			if(flag) {
+				
+			} else {
+				
+			}
+		}
+		
 		vista.setControlador(this);
 	}
 	
@@ -93,16 +146,7 @@ public class ControlDetalleColectivo implements ActionListener{
 	 * @param e action event
 	 */
 	public void resetVista() {
-		Usuario usuario = Aplicacion.getAplicacion().getUsuarioActual();
-		
-		vista.resetButtonPanel();
-		
-		if(!(usuario instanceof Administrador)) {
-			vista.setUnirme(colectivo.getElementos().contains((Ciudadano) usuario));
-		}
-		
-		vista.setControlador(this);
-		
-
+		vista.resetAll();
+		setVistaDetalleColectivo();
 	}
 }
