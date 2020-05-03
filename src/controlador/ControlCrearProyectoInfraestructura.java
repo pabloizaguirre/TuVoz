@@ -20,10 +20,12 @@ public class ControlCrearProyectoInfraestructura implements ActionListener {
 	private CrearProyectoInfraestructura vista;
 	private Ventana frame;
 	private String ruta = "Unknown";
+	private Controlador controlador;
 	
-	public ControlCrearProyectoInfraestructura(Ventana frame) {
+	public ControlCrearProyectoInfraestructura(Ventana frame, Controlador contr) {
 		this.frame = frame;
 		this.vista = frame.getVistaCrearProyectoInfraestructura();
+		this.controlador = contr;
 	}
 
 	
@@ -66,8 +68,8 @@ public class ControlCrearProyectoInfraestructura implements ActionListener {
 						"Proyecto creado y enviado a supervisión por parte de la Administración de Tu Voz.", "Proyecto creado", JOptionPane.INFORMATION_MESSAGE);
 			
 			// mostrar nueva vista
-			frame.getControlHome().addBotonProyecto(p);
-			frame.getControlMiPerfil().addBotonProyecto(p);
+			controlador.getControlHome().addBotonProyecto(p);
+			controlador.getControlMiPerfil().addBotonProyecto(p);
 			frame.mostrarPanel("home");
 		
 		} else if(e.getActionCommand().equals("examinar")) {

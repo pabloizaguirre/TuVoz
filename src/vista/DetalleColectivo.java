@@ -93,11 +93,31 @@ public class DetalleColectivo extends JPanel {
 		cLayout.putConstraint(BorderLayout.EAST, colectivos, -40, BorderLayout.EAST, this);
 		
 		// a�adir componentes al contenedor
-		add(colectivos);	
+		add(colectivos);
 	}
 	
 	public void setTitulo(String titulo) {
 		this.titulo.setText(titulo);
+	}
+	
+	/**
+	 * Metodo para añadir un mensaje cuando el colectivo no haya creado proyectos
+	 */
+	public void setProyectosVacios() {
+		this.proyectosVacio = new JLabel("El colectivo " + titulo.getText() + " todavia no ha creado ningún proyecto.");
+		this.proyectosVacio.setFont(new Font(proyectosVacio.getFont().getName(), Font.ITALIC, proyectosVacio.getFont().getSize()));
+		this.listaProyectos.add(Box.createRigidArea(new Dimension(10,120)));
+		this.listaProyectos.add(proyectosVacio);
+	}
+	
+	/**
+	 * Metodo para añadir un mensaje cuando el colectio no tenga subcolectivos
+	 */
+	public void setColectivosVacios() {
+		this.colectivosVacio = new JLabel("El colectivo " + titulo.getText() + " todavia no tiene ningún subcolectivo.");
+		this.colectivosVacio.setFont(new Font(colectivosVacio.getFont().getName(), Font.ITALIC, colectivosVacio.getFont().getSize()));
+		this.listaColectivos.add(Box.createRigidArea(new Dimension(10,120)));
+		this.listaColectivos.add(colectivosVacio);
 	}
 	
 	 /**

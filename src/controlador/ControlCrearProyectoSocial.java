@@ -21,11 +21,13 @@ public class ControlCrearProyectoSocial implements ActionListener {
 	private CrearProyectoSocial vista;
 	private Ventana frame;
 	private CrearProyecto vistaProyecto;
+	private Controlador controlador;
 	
-	public ControlCrearProyectoSocial(Ventana frame) {
+	public ControlCrearProyectoSocial(Ventana frame, Controlador contr) {
 		this.frame = frame;
 		this.vista = frame.getVistaCrearProyectoSocial();
 		this.vistaProyecto = frame.getVistaCrearProyecto();
+		this.controlador = contr;
 	}
 	
 	/**
@@ -70,8 +72,8 @@ public class ControlCrearProyectoSocial implements ActionListener {
 					"Proyecto creado y enviado a supervisión por parte de la Administración de Tu Voz.", "Proyecto creado", JOptionPane.INFORMATION_MESSAGE);	
 		
 		// mostrar nueva vista
-		frame.getControlHome().addBotonProyecto(p);
-		frame.getControlMiPerfil().addBotonProyecto(p);
+		controlador.getControlHome().addBotonProyecto(p);
+		controlador.getControlMiPerfil().addBotonProyecto(p);
 
 		frame.mostrarPanel("home");
 		

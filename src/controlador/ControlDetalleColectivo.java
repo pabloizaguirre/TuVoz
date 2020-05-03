@@ -116,11 +116,10 @@ public class ControlDetalleColectivo implements ActionListener{
 				vista.addBotonColectivo(botonColectivo);
 				colectivos.put(botonColectivo, (Colectivo) e);
 			}
-			if(flag) {
-				
-			} else {
-				
-			}
+			
+		}
+		if(!flag) {
+			vista.setProyectosVacios();
 		}
 		JButton botonProyecto;
 		flag = false;
@@ -130,13 +129,11 @@ public class ControlDetalleColectivo implements ActionListener{
 			botonProyecto.addActionListener(this);
 			vista.addBotonProyecto(botonProyecto);
 			proyectos.put(botonProyecto, e);
-			if(flag) {
-				
-			} else {
-				
-			}
+			
 		}
-		
+		if(!flag) {
+			vista.setColectivosVacios();
+		} 
 		vista.setControlador(this);
 	}
 	
