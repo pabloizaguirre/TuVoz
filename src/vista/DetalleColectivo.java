@@ -26,9 +26,13 @@ public class DetalleColectivo extends JPanel {
 	private JPanel listaProyectos;
 	private JPanel listaColectivos;
 	
+	private JLabel proyectosVacio;
+	private JLabel colectivosVacio;
+	
 	public DetalleColectivo() {
 		SpringLayout cLayout = new SpringLayout();
-	
+		this.setLayout(cLayout);
+		
 		titulo.setFont(new Font(titulo.getFont().getName(), Font.PLAIN, titulo.getFont().getSize()+20));
 		
 		cLayout.putConstraint(SpringLayout.WEST, titulo, 20, SpringLayout.WEST, this);
@@ -37,6 +41,7 @@ public class DetalleColectivo extends JPanel {
 		panelBotonUnirme = new JPanel();
 		cLayout.putConstraint(BorderLayout.NORTH, panelBotonUnirme, 5, BorderLayout.SOUTH, titulo);
 		cLayout.putConstraint(BorderLayout.WEST, panelBotonUnirme, 20, BorderLayout.WEST, this);
+		add(panelBotonUnirme);
 		
 		//Panel con los proyectos
 		final JPanel proyectos = new JPanel();
@@ -45,7 +50,7 @@ public class DetalleColectivo extends JPanel {
 		JLabel labelProyectos = new JLabel("  Proyectos del colectivo: ");
 		labelProyectos.setFont(new Font(labelProyectos.getFont().getName(), Font.PLAIN, labelProyectos.getFont().getSize()+5));
 		
-		JPanel listaProyectos = new JPanel();
+		listaProyectos = new JPanel();
 		listaProyectos.setLayout(new FlowLayout(FlowLayout.LEFT));
 	
 		JScrollPane scroll = new JScrollPane(listaProyectos);
@@ -57,7 +62,7 @@ public class DetalleColectivo extends JPanel {
 		proyectos.setPreferredSize(new Dimension(700,200)); 
 		
 		//añadir constraints del contenedor
-		cLayout.putConstraint(BorderLayout.NORTH, proyectos, 15, BorderLayout.SOUTH, titulo);
+		cLayout.putConstraint(BorderLayout.NORTH, proyectos, 0, BorderLayout.SOUTH, panelBotonUnirme);
 		cLayout.putConstraint(BorderLayout.WEST, proyectos, 40, BorderLayout.WEST, this);
 		cLayout.putConstraint(BorderLayout.EAST, proyectos, -40, BorderLayout.EAST, this);
 		
@@ -71,7 +76,7 @@ public class DetalleColectivo extends JPanel {
 		JLabel labelColectivos = new JLabel("  Subcolectivos: ");
 		labelColectivos.setFont(new Font(labelColectivos.getFont().getName(), Font.PLAIN, labelColectivos.getFont().getSize()+5));
 		
-		final JPanel listaColectivos = new JPanel();
+		listaColectivos = new JPanel();
 		listaColectivos.setLayout(new FlowLayout(FlowLayout.LEFT));
 
 		JScrollPane scrollC = new JScrollPane(listaColectivos);
@@ -120,14 +125,14 @@ public class DetalleColectivo extends JPanel {
      * @param esMiembro. Booleano que indica si el usuario actual (ciudadano) pertenece a dicho colectivo
      */
 	public void setUnirme(boolean esMiembro) {
-			if(esMiembro) {
+		if(esMiembro) {
 			botonUnirme = new JButton("Ya eres miembro");
 			botonUnirme.setEnabled(false);
-			} else {
+		} else {
 			botonUnirme= new JButton("Unirme al colectivo");
-			}
-			botonUnirme.setActionCommand("unirme");
-			panelBotonUnirme.add(botonUnirme);
+		}
+		botonUnirme.setActionCommand("unirme");
+		panelBotonUnirme.add(botonUnirme);
 	}
 	
 	

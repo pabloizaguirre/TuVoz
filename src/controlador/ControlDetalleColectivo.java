@@ -2,6 +2,7 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -28,6 +29,10 @@ public class ControlDetalleColectivo implements ActionListener{
 	private JFrame frame;
 	private DetalleColectivo vista;
 	private Colectivo colectivo;
+	
+	private HashMap<JButton, Proyecto> proyectos = new HashMap<JButton, Proyecto>();
+	private HashMap<JButton, Colectivo> colectivos = new HashMap<JButton, Colectivo>();
+	
 
 	public ControlDetalleColectivo(JFrame frame, DetalleColectivo vista, Colectivo c) {
 		this.frame = frame;
@@ -63,8 +68,19 @@ public class ControlDetalleColectivo implements ActionListener{
 		if(!(usuario instanceof Administrador)) {
 			vista.setUnirme(colectivo.getElementos().contains((Ciudadano) usuario));
 		}
+		JButton botonColectivo;
+		boolean flag = false;
 		for(ElementoColectivo e:colectivo.getElementos()) {
 			if(e instanceof Colectivo) {
+				flag=true;
+				botonColectivo = new JButton(((Colectivo)e).getTitulo());
+				botonColectivo.addActionListener(this);
+				vista.addBotonColectivo(botonColectivo);
+				colectivos.put(botonColectivo, (Colectivo) e);
+			}
+			if(flag) {
+				
+			} else {
 				
 			}
 		}
