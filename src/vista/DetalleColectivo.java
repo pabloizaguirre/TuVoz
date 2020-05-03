@@ -156,5 +156,6 @@ public class DetalleColectivo extends JPanel {
 			botonUnirme.setEnabled(true);
 		}
 	}
+
 }
 
