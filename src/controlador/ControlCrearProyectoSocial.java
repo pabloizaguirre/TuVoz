@@ -39,23 +39,29 @@ public class ControlCrearProyectoSocial implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		ProyectoSocial p;
 
-		if(vista.getGrupoSocial().equals("") || vista.getTipoAlcance().equals(null)) {
+		if(vista.getGrupoSocial().equals("") || vista.getTipoAlcance().equals("")) {
 			JOptionPane.showMessageDialog(vista,
 					"Debe completar todos los apartados.", "Error", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		CrearProyecto v = frame.getVistaCrearProyecto();
+		TipoAlcance tipoAlcance;
+		if(vista.getTipoAlcance().equals("nacional")) {
+			tipoAlcance = TipoAlcance.NACIONAL;
+		} else {
+			tipoAlcance = TipoAlcance.INTERNACIONAL;
+		}
 		
 		if(vista.getColectivos().equals("No")) {
 			p = new ProyectoSocial(v.getNombre(),v.getDescripcion(),v.getPresupuesto(),
-					(Ciudadano)Aplicacion.getAplicacion().getUsuarioActual(), vista.getGrupoSocial(),vista.getTipoAlcance());
+					(Ciudadano)Aplicacion.getAplicacion().getUsuarioActual(), vista.getGrupoSocial(),tipoAlcance);
 			vista.limpiarJtf();
 			v.limpiarJtf();
 		} else {
 			Colectivo col = Colectivo.buscarColectivo(vista.getColectivos());
 			
 			p = new ProyectoSocial(v.getNombre(),v.getDescripcion(),v.getPresupuesto(),
-				col, vista.getGrupoSocial(),vista.getTipoAlcance());
+				col, vista.getGrupoSocial(),tipoAlcance);
 			vista.limpiarJtf();
 			v.limpiarJtf();
 		}

@@ -3,6 +3,8 @@ package controlador;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+
 import javax.swing.*;
 import modelo.*;
 import vista.*;
@@ -51,9 +53,40 @@ public class ControlCrearProyecto implements ActionListener{
         	CrearProyectoSocial.addColectivos(((Ciudadano)Aplicacion.getAplicacion().getUsuarioActual()).getColectivosCreados());
             frame.mostrarPanel("crearProyectoSocial");
         } else {
+        	setDistritos();
         	CrearProyectoInfraestructura.addColectivos(((Ciudadano)Aplicacion.getAplicacion().getUsuarioActual()).getColectivosCreados());
             frame.mostrarPanel("crearProyectoInfraestructura");
         }
+		
+	}
+	
+	public void setDistritos() {
+		ArrayList<JCheckBox> distritos = new ArrayList<JCheckBox>();
+		
+		distritos.add(new JCheckBox(Distrito.ARGANZUELA.toString()));
+		distritos.add(new JCheckBox(Distrito.BARAJAS.toString()));
+		distritos.add(new JCheckBox(Distrito.CARABANCHEL.toString()));
+		distritos.add(new JCheckBox(Distrito.CENTRO.toString()));
+		distritos.add(new JCheckBox(Distrito.CHAMARTIN.toString()));
+		distritos.add(new JCheckBox(Distrito.CHAMBERI.toString()));
+		distritos.add(new JCheckBox(Distrito.CIUDADLINEAL.toString()));
+		distritos.add(new JCheckBox(Distrito.FUENCARRALELPARDO.toString()));
+		distritos.add(new JCheckBox(Distrito.HORTALEZA.toString()));
+		distritos.add(new JCheckBox(Distrito.LATINA.toString()));
+		distritos.add(new JCheckBox(Distrito.MONCLOAARAVACA.toString()));
+		distritos.add(new JCheckBox(Distrito.MORATALAZ.toString()));
+		distritos.add(new JCheckBox(Distrito.PUENTEVALLECAS.toString()));
+		distritos.add(new JCheckBox(Distrito.RETIRO.toString()));
+		distritos.add(new JCheckBox(Distrito.SALAMANCA.toString()));
+		distritos.add(new JCheckBox(Distrito.SANBLASCANILLEJAS.toString()));
+		distritos.add(new JCheckBox(Distrito.TETUAN.toString()));
+		distritos.add(new JCheckBox(Distrito.USERA.toString()));
+		distritos.add(new JCheckBox(Distrito.VICALVARO.toString()));
+		distritos.add(new JCheckBox(Distrito.VILLAVALLECAS.toString()));
+		distritos.add(new JCheckBox(Distrito.VILLAVERDE.toString()));
+
+		CrearProyectoInfraestructura.addDistritos(distritos);
+		
 		
 	}
 }

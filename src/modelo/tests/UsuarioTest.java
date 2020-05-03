@@ -21,28 +21,14 @@ public class UsuarioTest {
 
     }
 
-
-    @Test
-    public void TestAnadirNotificacion(){
-        //Crear los objetos necesarios para la prueba
-        Ciudadano c = Ciudadano.registrarCiudadano("14004", "usr1",  "78653499X");
-        Notificacion n1 = new Notificacion("Bicho", c);
-     
-       
-        //Comprobamos que la funcion devuelve false pues al crear la notificacion ya se añadio a la notificaciones del usuario
-        assertFalse(c.anadirNotificacion(n1));
-        
-    }
-
     @Test
     public void TestEliminarNotificacion(){
         //Crear los objetos necesarios para la prueba
         Ciudadano c = new Ciudadano("14004", "usr2", "78636499J");
-        Notificacion n = new Notificacion("Adios", c);
-        c.anadirNotificacion(n);
+        assertEquals(2, Aplicacion.getAplicacion().getAdministrador().getNotificaciones().size());
 
-        //Comprobamos que se elimina correctamente la notificacion
-        assertTrue(c.eliminarNotificacion(n));
+        Aplicacion.getAplicacion().getAdministrador().eliminarNotificacion(Aplicacion.getAplicacion().getAdministrador().getNotificaciones().get(0));
+        assertEquals(1, Aplicacion.getAplicacion().getAdministrador().getNotificaciones().size());
     }
 
 

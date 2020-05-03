@@ -162,7 +162,6 @@ public class Aplicacion implements Serializable {
             Usuario.setListaNombres(aplicacion.getListaNombres());
         } catch(InvalidClassException ex) {
         	obj = Aplicacion.getAplicacion();
-        	ex.printStackTrace();
         } catch(FileNotFoundException ex) {
             obj = Aplicacion.getAplicacion();
         } catch(IOException ex) {

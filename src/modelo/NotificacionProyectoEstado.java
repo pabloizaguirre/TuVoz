@@ -22,7 +22,7 @@ public class NotificacionProyectoEstado extends Notificacion {
 	}
 
     public NotificacionProyectoEstado(Proyecto p, Usuario usuario) {
-        super("El proyecto " + p.getTitulo() + " ha cambiado a estado: " + p.getEstado().toString(),usuario);
+        super("El proyecto " + p.getTitulo() + " ha cambiado a estado: " + p.consultarEstadoProyecto().toString(),usuario);
         proyecto = p;
     }
 

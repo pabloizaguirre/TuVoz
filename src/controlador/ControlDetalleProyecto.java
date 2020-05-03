@@ -37,27 +37,43 @@ public class ControlDetalleProyecto implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		Usuario usuarioActual = Aplicacion.getAplicacion().getUsuarioActual();
 		Object source = e.getSource();
-		if(e.getActionCommand().contentEquals("apoyar")) {
-			proyecto.apoyarProyecto((ElementoColectivo) usuarioActual);
+		if(e.getActionCommand().contentEquals("apoyar")) { // al pulsar en el boton apoyar
+			String colectivoApoyante = vista.getColectivoApoyante();
+			if(colectivoApoyante.equals("Apoyar individualmente")) {
+				proyecto.apoyarProyecto((ElementoColectivo) usuarioActual);
+			} else {
+				colectivoApoyante = colectivoApoyante.substring(23);
+				proyecto.apoyarProyecto(Colectivo.buscarColectivo(colectivoApoyante));
+			}
+			vista.getComboColectivos().setVisible(false);
 			((JButton) source).setText("Apoyado");
 			((JButton) source).setEnabled(false);
-		} else if(e.getActionCommand().contentEquals("suscribirse")) {
+		} else if(e.getActionCommand().contentEquals("suscribirse")) { // al pulsar en el boton suscribirse
 			proyecto.suscribirProyecto((Ciudadano) usuarioActual);
 			((JButton) source).setText("Suscrito");
 			((JButton) source).setEnabled(false);
-		} else if(e.getActionCommand().contentEquals("solicitarInforme")) {
-			JOptionPane.showMessageDialog(vista,
-					"Queda implementar bien solicitar informe", "Pulsado solicitar informe", JOptionPane.DEFAULT_OPTION);
-		} else if(e.getActionCommand().contentEquals("enviarAFinanciacion")) {
+		} else if(e.getActionCommand().contentEquals("solicitarInforme")) { // al pulsar en el boton solicitar informe
+			if (usuarioActual instanceof Ciudadano) {
+				int apoyos = ((Ciudadano) usuarioActual).solicitarInformePopularidad(proyecto);
+				if(apoyos==-1) {
+					JOptionPane.showMessageDialog(vista,
+							"No tienes acceso al informe.", "Informe de popularidad del proyecto " + proyecto.getTitulo(), JOptionPane.ERROR_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(vista,
+							"Número de apoyos del proyecto: " + apoyos, "Informe de popularidad del proyecto " + proyecto.getTitulo(), JOptionPane.DEFAULT_OPTION);
+				}
+			}
+		} else if(e.getActionCommand().contentEquals("enviarAFinanciacion")) { // al pulsar en el boton de enviar a financiacion
 			try {
 				proyecto.enviarProyecto();
 				JOptionPane.showMessageDialog(vista,
-						"Queda controlar bien las excepciones", "Pulsado enviar Proyecto", JOptionPane.DEFAULT_OPTION);
+						proyecto.consultarEstadoProyecto(), "Pulsado enviar Proyecto", JOptionPane.DEFAULT_OPTION);
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
 		}
 	}
+	
 	/**
 	 * Método encargado de gestionar los elementos de la vista de detalle de un proyecto: el estado,
 	 * titulo, presupuesto, botones, etc
@@ -65,7 +81,7 @@ public class ControlDetalleProyecto implements ActionListener{
 	 * 
 	 */
 	public void setVistaDetalleProyecto() {
-		EstadoProyecto estado = proyecto.getEstado();
+		EstadoProyecto estado = proyecto.consultarEstadoProyecto();
 		vista.setTitulo(proyecto.getTitulo());
 		Usuario usuario = Aplicacion.getAplicacion().getUsuarioActual();
 		if(proyecto instanceof ProyectoSocial) {
@@ -74,7 +90,19 @@ public class ControlDetalleProyecto implements ActionListener{
 			vista.setLabelTipo("Proyecto de infraestructura");
 		}
 		if(!(usuario instanceof Administrador)) {
-			vista.setApoyar(proyecto.getListadoApoyos().contains(usuario));
+			boolean apoyado = proyecto.getListadoApoyos().contains(usuario);
+			
+			//establecemos la lista de colectivos creados para poder apoyar como colectivo
+			if (!apoyado) {
+				List<String> lista = new ArrayList<String>();
+				for (ElementoColectivo c:((Ciudadano)usuario).getColectivosCreados()) {
+					lista.add("Apoyar como colectivo: " + c.toString());
+				}
+				if(lista.size()>0) {
+					vista.setComboColectivos(lista);
+				}
+			}
+			vista.setApoyar(apoyado);
 			vista.setSuscribirse(proyecto.getListadoSuscripciones().contains(usuario));
 			if(proyecto.getCreador().equals(usuario)) {
 				vista.setSolicitarInforme();
@@ -111,7 +139,7 @@ public class ControlDetalleProyecto implements ActionListener{
 	 * 
 	 */
 	public void resetVista() {
-		EstadoProyecto estado = proyecto.getEstado();
+		EstadoProyecto estado = proyecto.consultarEstadoProyecto();
 		Usuario usuario = Aplicacion.getAplicacion().getUsuarioActual();
 		if(estado.equals(EstadoProyecto.FINANCIADO)) {
 			vista.setLabelEstado("Estado: " + estado + ", con presupuesto concedido de " + proyecto.getPresupuestoConcedido() + "€");
@@ -122,7 +150,19 @@ public class ControlDetalleProyecto implements ActionListener{
 		vista.resetButtonPanel();
 		
 		if(!(usuario instanceof Administrador)) {
-			vista.setApoyar(proyecto.getListadoApoyos().contains(usuario));
+			boolean apoyado = proyecto.getListadoApoyos().contains(usuario);
+			
+			//establecemos la lista de colectivos creados para poder apoyar como colectivo
+			if (!apoyado) {
+				List<String> lista = new ArrayList<String>();
+				for (ElementoColectivo c:((Ciudadano)usuario).getColectivosCreados()) {
+					lista.add("Apoyar como colectivo: " + c.toString());
+				}
+				if(lista.size()>0) {
+					vista.setComboColectivos(lista);
+				}
+			}
+			vista.setApoyar(apoyado);
 			vista.setSuscribirse(proyecto.getListadoSuscripciones().contains(usuario));
 			if(proyecto.getCreador().equals(usuario)) {
 				vista.setSolicitarInforme();

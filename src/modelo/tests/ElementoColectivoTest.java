@@ -24,7 +24,7 @@ public class ElementoColectivoTest {
 	public void setUp() {
 		u1 = new Ciudadano("NiMalaNiSanta", "Safaera", "666");
 		u3 = new Ciudadano("SoyUnico", "ChicoUnico", "00101001P");
-        p1 = new ProyectoSocial("Voluntariado","Este es un proyecto de voluntariado", 5000, u3, "jovenes", TipoAlcance.nacional);
+        p1 = new ProyectoSocial("Voluntariado","Este es un proyecto de voluntariado", 5000, u3, "jovenes", TipoAlcance.NACIONAL);
      
 	}
 

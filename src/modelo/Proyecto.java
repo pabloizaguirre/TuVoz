@@ -87,7 +87,6 @@ public class Proyecto implements Serializable {
 		public ElementoColectivo getCreador() { return creador; }
 		public List<ElementoColectivo> getListadoApoyos() { return listadoApoyos;}
 		public List<Ciudadano> getListadoSuscripciones() { return listadoSuscripciones;}
-		public EstadoProyecto getEstado() {return estado;}
 
 	
 		
@@ -98,7 +97,6 @@ public class Proyecto implements Serializable {
 		public void setDescripcion(String descripcion) { this.descripcion = descripcion;}
 		public void setPresupuestoSolicitado(double presupuestoSolicitado) { this.presupuestoSolicitado = presupuestoSolicitado;}
 		public void setPresupuestoConcedido(Double presupuestoConcedido) { this.presupuestoConcedido = presupuestoConcedido;}
-		public void setEstadoProyecto(EstadoProyecto estado) { this.estado = estado;}
 		public void setAutorizado(boolean autorizado) { this.autorizado = autorizado;}
 		public void setApoyos(int apoyos) { this.apoyos = apoyos;}
 		public void setFechaUltimoApoyo(LocalDate fechaUltimoApoyo) { this.fechaUltimoApoyo = fechaUltimoApoyo; }
@@ -248,10 +246,17 @@ public class Proyecto implements Serializable {
 		public EstadoProyecto consultarEstadoProyecto(){
 			if(estado.equals(EstadoProyecto.NOENVIADO) && fechaUltimoApoyo.isBefore(FechaSimulada.getHoy().minusDays(30))){
 				this.cambiarEstado(EstadoProyecto.CADUCADO);
-			} if((estado.equals(EstadoProyecto.NOENVIADO) || estado.equals(EstadoProyecto.CADUCADO)) && apoyos >= Aplicacion.getAplicacion().getApoyosMin()) {
+			} 
+			if((estado.equals(EstadoProyecto.NOENVIADO) || estado.equals(EstadoProyecto.CADUCADO)) && apoyos >= Aplicacion.getAplicacion().getApoyosMin()) {
 				this.cambiarEstado(EstadoProyecto.DISPONIBLE);
 			}
-
+			if(estado.equals(EstadoProyecto.PENDIENTEFINANCIACION)) {
+				try {
+					consultar();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 			return estado;
 		}
 		
