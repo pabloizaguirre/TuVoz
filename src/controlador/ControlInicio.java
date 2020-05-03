@@ -53,7 +53,7 @@ public class ControlInicio implements ActionListener {
 	        	controlador.getControlNotificaciones().setVista();
 	        	frame.getVistaBarraSuperior().setVisible(true);
 	        	vista.limpiarJtf();
-	        	frame.getControlMiPerfil().setVista();
+	        	controlador.getControlMiPerfil().setVista();
 	        	frame.getVistaHome().setAdminMode();
 	        	frame.mostrarPanel("home");
 	        } 
@@ -67,7 +67,7 @@ public class ControlInicio implements ActionListener {
 	        		controlador.getControlNotificaciones().setVista();
 	        		frame.getVistaBarraSuperior().setVisible(true);
 		        	vista.limpiarJtf();
-		        	frame.getControlMiPerfil().setVista();
+		        	controlador.getControlMiPerfil().setVista();
 		        	frame.getVistaHome().setCiudadanoMode();
 	        		frame.mostrarPanel("home");
 	        	} else {
