@@ -44,7 +44,7 @@ public class ControlMiPerfil implements ActionListener {
 			Aplicacion.getAplicacion().getListadoElementoColectivos().clear();
 			Aplicacion.getAplicacion().getListadoProyectos().clear();
 			Aplicacion.getAplicacion().getListaNombres().clear();
-			Aplicacion.getAplicacion().getUsuarioActual().getNotificaciones().clear();
+			Aplicacion.getAplicacion().getAdministrador().getNotificaciones().clear();
 			Aplicacion.getAplicacion().setUsuarioActual(null);
 			
 			File fichero = new File("data.dat");
