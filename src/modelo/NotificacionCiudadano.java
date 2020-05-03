@@ -14,7 +14,7 @@ public class NotificacionCiudadano extends Notificacion {
 
 
     public NotificacionCiudadano(Ciudadano ciudadano) {
-        super("Aprobacion de registro "+ ciudadano.getNombreUsuario() +"pendiente ", Aplicacion.getAplicacion().getAdministrador());
+        super("Aprobacion de registro "+ ciudadano.getNombreUsuario() +" pendiente ", Aplicacion.getAplicacion().getAdministrador());
         
         this.ciudadano = ciudadano;
     }
