@@ -24,10 +24,8 @@ public class CrearProyectoInfraestructura extends JPanel {
 	private JLabel labelColectivos;
 	private static JComboBox<String> comboColectivos;
 	private JButton botonCrear;
-	JCheckBox distrito1;
-	JCheckBox distrito2;
-	JCheckBox distrito3;
-	
+	private static JPanel panelBotones;
+	private static List<JCheckBox> listaDistritos;
 	
 	public CrearProyectoInfraestructura() {
 		SpringLayout cLayout = new SpringLayout();
@@ -47,33 +45,25 @@ public class CrearProyectoInfraestructura extends JPanel {
 		
 		
 		labelDistritos = new JLabel("Seleccione los distritos afectados:");
-		JPanel panelBotones = new JPanel();
+		
+		panelBotones = new JPanel(new GridLayout(6,4));
 		
 
-
-		distrito1 = new JCheckBox("Distrito1");
-	 	distrito2 = new JCheckBox("Distrito2");
-		distrito3 = new JCheckBox("Distrito3");
-
-
-		panelBotones.add(distrito1);
-		panelBotones.add(distrito2);
-		panelBotones.add(distrito3);
 		
 		
 		labelColectivos = new JLabel("Selecciona para crear proyecto de colectivo");
 		comboColectivos = new JComboBox<String>();
 		
 		comboColectivos.addItem("No");
-	
+		
 		
 		JPanel panelProyecto = new JPanel(new GridLayout(3,2,2,2));
 		panelProyecto.add(labelExaminar);
 		panelProyecto.add(panelExaminar);
-		panelProyecto.add(labelDistritos);
-		panelProyecto.add(panelBotones);
 		panelProyecto.add(labelColectivos);
 		panelProyecto.add(comboColectivos);
+		panelProyecto.add(labelDistritos);
+		//panelProyecto.add(panelBotones);
 		
 		botonCrear = new JButton("Crear");
 		botonCrear.setActionCommand("crear");
@@ -82,13 +72,16 @@ public class CrearProyectoInfraestructura extends JPanel {
 		cLayout.putConstraint(SpringLayout.WEST, labelNuevo, 40, SpringLayout.WEST, this);
 		cLayout.putConstraint(SpringLayout.NORTH, panelProyecto, 15, SpringLayout.SOUTH, labelNuevo);
 		cLayout.putConstraint(SpringLayout.WEST, panelProyecto, 40, SpringLayout.WEST, this);
+		cLayout.putConstraint(SpringLayout.WEST, panelBotones, 40, SpringLayout.WEST, this);
+		cLayout.putConstraint(SpringLayout.NORTH, panelBotones, 15, SpringLayout.SOUTH, panelProyecto);
 		cLayout.putConstraint(SpringLayout.WEST, botonCrear, 40, SpringLayout.WEST, this);
-		cLayout.putConstraint(SpringLayout.NORTH, botonCrear, 15, SpringLayout.SOUTH, panelProyecto);
+		cLayout.putConstraint(SpringLayout.NORTH, botonCrear, 50, SpringLayout.SOUTH, panelBotones);
 
 
 		
 		add(labelNuevo);
 		add(panelProyecto);
+		add(panelBotones);
 		add(botonCrear);
 
 	}
@@ -99,13 +92,21 @@ public class CrearProyectoInfraestructura extends JPanel {
 	}
 
 
-	public ArrayList<Distrito> getDistritos() {
-		ArrayList<Distrito> distritos = new ArrayList<Distrito>();
+	public ArrayList<String> getDistritos() {
+		ArrayList<String> distritosSeleccionados = new ArrayList<String>();
 		
-		if(distrito1.isSelected()) distritos.add(Distrito.CENTRO);
-		if(distrito2.isSelected()) distritos.add(Distrito.CHAMARTIN);
-		if(distrito3.isSelected()) distritos.add(Distrito.RETIRO);
-		return distritos;
+		for(JCheckBox p: listaDistritos) {
+			if(p.isSelected()) {
+				distritosSeleccionados.add(p.getText());
+			}
+		}
+		return distritosSeleccionados;
+	}
+	public static void addDistritos (List<JCheckBox> distritos) {
+		for(JCheckBox p: distritos) {
+			panelBotones.add(p);
+		}
+		listaDistritos = distritos;
 	}
 
 	public String getColectivos() {
@@ -130,7 +131,9 @@ public class CrearProyectoInfraestructura extends JPanel {
      * 
      */
 	public void limpiar() {
-		distrito1.setSelected(false);
+		for(JCheckBox p : listaDistritos) {
+			p.setSelected(false);
+		}
 		comboColectivos.setSelectedIndex(0);
 	}
 	

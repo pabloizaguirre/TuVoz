@@ -50,14 +50,14 @@ public class ControlCrearProyectoInfraestructura implements ActionListener {
 			
 			if(vista.getColectivos().equals("No")) {
 				p = new ProyectoInfraestructura(v.getNombre(),v.getDescripcion(),v.getPresupuesto(),
-					(Ciudadano)Aplicacion.getAplicacion().getUsuarioActual(), new Imagen(ruta, "Imagen"),vista.getDistritos());
+					(Ciudadano)Aplicacion.getAplicacion().getUsuarioActual(), new Imagen(ruta, "Imagen"),getDistritoEnum());
 				vista.limpiar();
 				v.limpiarJtf();
 			} else {
 				Colectivo col = Colectivo.buscarColectivo(vista.getColectivos());
 				
 				p = new ProyectoInfraestructura(v.getNombre(),v.getDescripcion(),v.getPresupuesto(),
-					col, new Imagen(ruta, "imagen"),vista.getDistritos());
+					col, new Imagen(ruta, "imagen"),getDistritoEnum());
 				vista.limpiar();
 				v.limpiarJtf();
 			}
@@ -78,5 +78,34 @@ public class ControlCrearProyectoInfraestructura implements ActionListener {
 	        	
 		}
 		}
+	}
+	
+	public ArrayList<Distrito> getDistritoEnum() {
+		ArrayList<String> string = vista.getDistritos();
+		ArrayList<Distrito> e = new ArrayList<Distrito>();
+		
+		if(string.contains("ARGANZUELA")) e.add(Distrito.ARGANZUELA);
+		if(string.contains("BARAJAS")) e.add(Distrito.BARAJAS);
+		if(string.contains("CARABANCHEL")) e.add(Distrito.CARABANCHEL);
+		if(string.contains("CENTRO")) e.add(Distrito.CENTRO);
+		if(string.contains("CHAMARTIN")) e.add(Distrito.CHAMARTIN);
+		if(string.contains("CHAMBERI")) e.add(Distrito.CHAMBERI);
+		if(string.contains("CIUDADLINEAL")) e.add(Distrito.CIUDADLINEAL);
+		if(string.contains("FUENCARRALELPARDO")) e.add(Distrito.FUENCARRALELPARDO);
+		if(string.contains("HORTALEZA")) e.add(Distrito.HORTALEZA);
+		if(string.contains("LATINA")) e.add(Distrito.LATINA);
+		if(string.contains("MONCLOAARAVACA")) e.add(Distrito.MONCLOAARAVACA);
+		if(string.contains("MORATALAZ")) e.add(Distrito.MORATALAZ);
+		if(string.contains("PUENTEVALLECAS")) e.add(Distrito.PUENTEVALLECAS);
+		if(string.contains("RETIRO")) e.add(Distrito.RETIRO);
+		if(string.contains("SALAMANCA")) e.add(Distrito.SALAMANCA);
+		if(string.contains("SANBLASCANILLEJAS")) e.add(Distrito.SANBLASCANILLEJAS);
+		if(string.contains("TETUAN")) e.add(Distrito.TETUAN);
+		if(string.contains("USERA")) e.add(Distrito.USERA);
+		if(string.contains("VICALVARO")) e.add(Distrito.VICALVARO);
+		if(string.contains("VILLAVALLECAS")) e.add(Distrito.VILLAVALLECAS);
+		if(string.contains("VILLAVERDE")) e.add(Distrito.VILLAVERDE);
+
+		return e;
 	}
 }
