@@ -63,6 +63,7 @@ public class ControlNotificaciones implements ActionListener {
 		else if (HMRechazarRegistro.containsKey(source)) {
 			Notificacion n= HMRechazarRegistro.get(source);
 			Ciudadano c = ((NotificacionCiudadano)n).getCiudadano();
+			System.out.println("fff");
 			c.eliminarNotificacion(n);
 			Aplicacion.getAplicacion().getListadoElementoColectivos().remove(c);
 			String i = e.getActionCommand();
@@ -96,6 +97,7 @@ public class ControlNotificaciones implements ActionListener {
 	}
 	
 	public void setVista() {
+		vista.resetNoti();
 		for(Notificacion n:Aplicacion.getAplicacion().getUsuarioActual().getNotificaciones()) {
 			String texto = n.getTextoNotificacion();
 			

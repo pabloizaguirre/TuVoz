@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
@@ -151,10 +153,19 @@ public class VerNotificaciones extends JPanel{
      * 
      */
 	public void borrarNotificacion(int id) {
-		/*int id=Integer.parseInt(i);*/
 		this.remove(listaNotificaciones.get(id));
 		listaNotificaciones.remove(id);
 	}
+	
+	
+	public void resetNoti() {
+		for (int i = 0; i < id; ++i) {
+			listaNotificaciones.remove(id);
+		}
+		id=0; 
+	
+		}
+	
 	
 	
 	
