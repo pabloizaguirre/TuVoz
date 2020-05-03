@@ -87,7 +87,7 @@ public class ControlBarraSuperior implements ActionListener{
 				
 				frame.mostrarPanel(""+colectivo.getTitulo());
 
-			}
+			}vista.limpiarJtf();
 		}
 		return;
 	}

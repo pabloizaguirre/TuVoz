@@ -6,7 +6,13 @@ import javax.swing.*;
 import modelo.*;
 import vista.*;
 
-
+/**
+ * Clase ControlIrACrearColectivo.
+ * 
+ * @author Elena Cano
+ * @author Pablo Izaguirre
+ * @author Miguel Escribano
+ */
 public class ControlIrACrearColectivo implements ActionListener {
 	
 	private MiPerfil vista;
@@ -18,7 +24,8 @@ public class ControlIrACrearColectivo implements ActionListener {
 	}
 
 	/**
-	 * Cambia la vista a CrearColectivo
+	 * Método encargado de mostrar la vista de creacion de colectivo cuando se acciona el
+	 * boton para crear un nuevo colectivo
 	 * 
 	 * @param e action event
 	 */

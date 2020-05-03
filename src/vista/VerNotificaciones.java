@@ -10,7 +10,13 @@ import javax.swing.*;
 import javax.swing.border.BevelBorder;
 
 import modelo.Notificacion;
-
+/**
+ * Clase de la vista Ver Notificaciones.
+ * 
+ * @author Elena Cano
+ * @author Pablo Izaguirre
+ * @author Miguel Escribano
+ */
 public class VerNotificaciones extends JPanel{
 	
 	private JButton IrProyecto = new JButton("a");

@@ -8,7 +8,13 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.*;
-
+/**
+ * Clase de la vista Mi Perfil.
+ * 
+ * @author Elena Cano
+ * @author Pablo Izaguirre
+ * @author Miguel Escribano
+ */
 public class MiPerfil extends JPanel{
 	
 	private JButton cerrarSesion;

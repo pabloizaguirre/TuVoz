@@ -9,7 +9,13 @@ import javax.swing.*;
 import modelo.*;
 
 import vista.*;
-
+/**
+ * Clase ControlHomeAdmin.
+ * 
+ * @author Elena Cano
+ * @author Pablo Izaguirre
+ * @author Miguel Escribano
+ */
 public class ControlHomeAdmin implements ActionListener{
 	private HomeAdmin vista;
 	private Ventana frame;
@@ -20,6 +26,12 @@ public class ControlHomeAdmin implements ActionListener{
 		this.frame = frame;
 		this.vista = frame.getVistaHomeAdmin();
 	}
+	
+	/**
+	 * Método encargado de gestionar los botones de la vista de Home Administrador
+	 * 
+	 * 
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("apoyoProyecto")) {

@@ -9,7 +9,13 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.*;
 import java.util.*;
-
+/**
+ * Clase de la vista Home.
+ * 
+ * @author Elena Cano
+ * @author Pablo Izaguirre
+ * @author Miguel Escribano
+ */
 public class Home extends JPanel{
 	
 	private JButton botonAnadirProyecto;
@@ -93,12 +99,20 @@ public class Home extends JPanel{
 		// a�adir componentes al contenedor
 		add(colectivos);	
 	}
-	
+	 /**
+     * Metodo para añadir un boton a la lista de botones de proyectos 
+     * @param boton Boton que queremos añadir
+     * 
+     */
 	public void addBotonProyecto(JButton boton) {
 		boton.setPreferredSize(new Dimension(120, 120));
 		listaProyectos.add(boton);
 	}
-	
+	 /**
+     * Metodo para añadir un boton a la lista de botones de colectivo 
+     * @param boton Boton que queremos añadir
+     * 
+     */
 	public void addBotonColectivo(JButton boton) {
 		boton.setPreferredSize(new Dimension(120, 120));
 		listaColectivos.add(boton);
@@ -108,7 +122,10 @@ public class Home extends JPanel{
 		botonAnadirProyecto.addActionListener(c);
 		botonAnadirColectivo.addActionListener(c);
 	}
-	
+	 /**
+     * Metodo para resetear los botones de la vista Home
+     * 
+     */
 	public void resetBotones() {
 		listaProyectos.removeAll();
 		botonAnadirProyecto = new JButton(icon1);

@@ -13,7 +13,13 @@ import modelo.Ciudadano;
 import modelo.Colectivo;
 import modelo.Proyecto;
 import modelo.Usuario;
-
+/**
+ * Clase de la vista DetalleColectivo.
+ * 
+ * @author Elena Cano
+ * @author Pablo Izaguirre
+ * @author Miguel Escribano
+ */
 public class DetalleColectivo extends JPanel {
 	
 	
@@ -114,7 +120,11 @@ public class DetalleColectivo extends JPanel {
 	}
 	
 	
-	
+	 /**
+     * Metodo para establecer los botones de la vista segun el usuario actual
+     * 
+     * @param esMiembro. Booleano que indica si el usuario actual (ciudadano) pertenece a dicho colectivo
+     */
 	public void setUnirme(boolean esMiembro) {
 			if(esMiembro) {
 			botonUnirme = new JButton("Ya eres miembro");
@@ -135,7 +145,10 @@ public class DetalleColectivo extends JPanel {
 	public JButton getBotonUnirme() {
 		return botonUnirme;
 	}
-	
+	 /**
+     * Metodo para resetear los botones de la vista de detalle colectivo
+     * 
+     */
 	public void resetButtonPanel() {
 		panelBotonUnirme.removeAll();
 		

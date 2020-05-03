@@ -4,7 +4,13 @@ import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
-
+/**
+ * Clase de la vista BarraSuperior.
+ * 
+ * @author Elena Cano
+ * @author Pablo Izaguirre
+ * @author Miguel Escribano
+ */
 public class BarraSuperior extends JPanel {
 	/**
 	 * 
@@ -61,5 +67,13 @@ public class BarraSuperior extends JPanel {
 	}
 	public String getBusqueda() {
 		return busquedaTF.getText();
+	}
+	 /**
+     * Metodo para limpiar el campo de busqueda de la barra superior, es llamado
+     * tras realizar una búsqueda
+     * 
+     */
+	public void limpiarJtf() {
+		busquedaTF.setText("");
 	}
 }
