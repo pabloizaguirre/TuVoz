@@ -47,6 +47,7 @@ public class VerNotificaciones extends JPanel{
 		
 		JTextArea mensaje = new JTextArea();
 		mensaje.append(texto);
+		
 		mensaje.setEditable(false);
 		mensaje.setLineWrap(true);
 		mensaje.setBackground(null);
@@ -112,10 +113,11 @@ public class VerNotificaciones extends JPanel{
 		notiProye.setLayout(layoutNotiproye);
 		
 		JTextArea mensaje = new JTextArea();
-		mensaje.append(texto);
-		mensaje.setEditable(false);
-		mensaje.setLineWrap(true);
-		mensaje.setBackground(null);
+		mensaje.setText(texto);
+		mensaje.setPreferredSize(new Dimension(400, 400));
+		
+		
+	    
 		mensaje.setAlignmentX(Component.LEFT_ALIGNMENT);
 		notiProye.add(mensaje);
 		
@@ -123,15 +125,15 @@ public class VerNotificaciones extends JPanel{
 		BoxLayout layoutbotonesNotiproye = new BoxLayout(botonesnotiProye, BoxLayout.X_AXIS);
 		botonesnotiProye.setLayout(layoutbotonesNotiproye);
 		
-		JButton AprobarProyecto = new JButton("Aprobar proyecto");
+		JButton AprobarProyecto = aprobar;
 		AprobarProyecto.setActionCommand(String.valueOf(id));
 		botonesnotiProye.add(AprobarProyecto);
 		
-		JButton RechazarProyecto = new JButton("Rechazar proyecto");
+		JButton RechazarProyecto = rechazar;
 		RechazarProyecto.setActionCommand(String.valueOf(id));
 		botonesnotiProye.add(RechazarProyecto);
 		
-		JButton VerProyecto = new JButton("Ver proyecto");
+		JButton VerProyecto = ver;
 		VerProyecto.setActionCommand(String.valueOf(id));
 		botonesnotiProye.add(VerProyecto);
 		

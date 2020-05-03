@@ -48,7 +48,27 @@ public class ControlNotificaciones implements ActionListener {
 		
 		if(HMIrProyecto.containsKey(source)) {
 			Notificacion n = HMIrProyecto.get(source);
+			Proyecto p = ((NotificacionProyectoEstado)n).getProyecto();
 			
+			//comprobamos si ya se ha creado una visa para este proyecto
+			if(frame.getProyectos().containsKey(p.getId())) {
+				ControlDetalleProyecto contr = frame.getProyectos().get(p.getId());
+				contr.resetVista();
+			} 
+			
+			else {
+				DetalleProyecto vistaProyecto = new DetalleProyecto();
+				ControlDetalleProyecto c = new ControlDetalleProyecto(frame, vistaProyecto, p);
+				c.setVistaDetalleProyecto();
+				frame.getProyectos().put(p.getId(), c);
+				
+				frame.anadirVentana(vistaProyecto, "" + p.getId());
+			}
+			
+			frame.mostrarPanel("" + p.getId());
+			String i =e.getActionCommand();
+			int id =Integer.valueOf(i);
+			vista.borrarNotificacion(id);
 		}
 
 		else if (HMAprobarRegistro.containsKey(source)) {
@@ -72,7 +92,25 @@ public class ControlNotificaciones implements ActionListener {
 		}
 		
 		else if(HMVerProyecto.containsKey(source)) {
+			Notificacion n= HMVerProyecto.get(source);
+			Proyecto p = ((NotificacionProyectoNuevo)n).getProyecto();
 			
+			//comprobamos si ya se ha creado una visa para este proyecto
+			if(frame.getProyectos().containsKey(p.getId())) {
+				ControlDetalleProyecto contr = frame.getProyectos().get(p.getId());
+				contr.resetVista();
+			} 
+			
+			else {
+				DetalleProyecto vistaProyecto = new DetalleProyecto();
+				ControlDetalleProyecto c = new ControlDetalleProyecto(frame, vistaProyecto, p);
+				c.setVistaDetalleProyecto();
+				frame.getProyectos().put(p.getId(), c);
+				
+				frame.anadirVentana(vistaProyecto, "" + p.getId());
+			}
+			
+			frame.mostrarPanel("" + p.getId());
 			
 		}
 		
@@ -80,6 +118,7 @@ public class ControlNotificaciones implements ActionListener {
 			Notificacion n= HMAprobarProyecto.get(source);
 			Proyecto p = ((NotificacionProyectoNuevo)n).getProyecto();
 			p.aprobarProyecto();
+			Aplicacion.getAplicacion().getUsuarioActual().eliminarNotificacion(n);
 			String i =e.getActionCommand();
 			int id =Integer.valueOf(i);
 			vista.borrarNotificacion(id);
@@ -89,6 +128,7 @@ public class ControlNotificaciones implements ActionListener {
 			Notificacion n= HMRechazarProyecto.get(source);
 			Proyecto p = ((NotificacionProyectoNuevo)n).getProyecto();
 			p.rechazarProyecto("Su proyecto ha sido rechazado por infringir las normas de la comunidad");
+			Aplicacion.getAplicacion().getUsuarioActual().eliminarNotificacion(n);
 			String i =e.getActionCommand();
 			int id =Integer.parseInt(i);
 			vista.borrarNotificacion(id);
