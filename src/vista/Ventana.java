@@ -249,14 +249,6 @@ public class Ventana extends JFrame {
 		return this.vistaApoyoMinimoProyecto;
 	}
 	
-	public ControlHome getControlHome() {
-		return this.contrHome;
-	}
-	
-	public ControlMiPerfil getControlMiPerfil() {
-		return this.contrMiPerfil;
-	}
-	
 	public HashMap<Integer, ControlDetalleProyecto> getProyectos(){
 		return this.proyectos;
 	}

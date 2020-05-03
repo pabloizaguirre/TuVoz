@@ -35,10 +35,10 @@ public class Controlador {
 	
 	public Controlador(Ventana frame) {
 		this.frame = frame;
-		this.contrCrearColectivo = new ControlCrearColectivo(frame);
+		this.contrCrearColectivo = new ControlCrearColectivo(frame, this);
 		this.contrCrearProyecto = new ControlCrearProyecto(frame);
-		this.contrCrearProyectoSocial = new ControlCrearProyectoSocial(frame);
-		this.contrCrearProyectoInfraestructura = new ControlCrearProyectoInfraestructura(frame);
+		this.contrCrearProyectoSocial = new ControlCrearProyectoSocial(frame, this);
+		this.contrCrearProyectoInfraestructura = new ControlCrearProyectoInfraestructura(frame, this);
 		this.contrBarraSuperior= new ControlBarraSuperior(frame);
 		this.contrInicio = new ControlInicio(frame, this);
 		this.contrApoyoMinimoProyecto = new ControlApoyoMinimoProyecto(frame);

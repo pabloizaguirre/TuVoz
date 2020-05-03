@@ -15,11 +15,13 @@ import vista.*;
 public class ControlCrearColectivo implements ActionListener {
 	private CrearColectivo vista;
 	private Ventana frame;
+	private Controlador controlador;
 	
 	
-	public ControlCrearColectivo(Ventana frame) {
+	public ControlCrearColectivo(Ventana frame, Controlador contr) {
 		this.frame = frame;
 		this.vista = frame.getVistaCrearColectivo();
+		this.controlador = contr;
 	}
 	
 	/**
@@ -49,8 +51,8 @@ public class ControlCrearColectivo implements ActionListener {
 		}
 		
 		// mostrar nueva vista
-		frame.getControlHome().addBotonColectivo(c);
-		frame.getControlMiPerfil().addBotonColectivo(c);
+		controlador.getControlHome().addBotonColectivo(c);
+		controlador.getControlMiPerfil().addBotonColectivo(c);
 		frame.mostrarPanel("home");
 	}
 }
