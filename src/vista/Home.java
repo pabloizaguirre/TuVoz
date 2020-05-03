@@ -145,6 +145,7 @@ public class Home extends JPanel{
 		this.botonAnadirColectivo.setVisible(false);
 		this.botonAnadirProyecto.setVisible(false);
 		this.botonApoyoProyecto.setVisible(true);
+		this.botonAdelantoFecha.setVisible(true);
 	}
 	
 	/**
@@ -154,6 +155,8 @@ public class Home extends JPanel{
 		this.botonAnadirColectivo.setVisible(true);
 		this.botonAnadirProyecto.setVisible(true);
 		this.botonApoyoProyecto.setVisible(false);
+		this.botonAdelantoFecha.setVisible(false);
+
 	}
 	
 	 /**
