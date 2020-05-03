@@ -45,7 +45,7 @@ public class ControlInicio implements ActionListener {
 	        	return;
 	        } /*Comprobamos si las credenciales introducidas corresponden con el administrador*/
 	        
-	        	if(Aplicacion.getAplicacion().getAdministrador().getNombreUsuario().equals(vista.getNombre()) &&
+	        if(Aplicacion.getAplicacion().getAdministrador().getNombreUsuario().equals(vista.getNombre()) &&
 	        		Aplicacion.getAplicacion().getAdministrador().getContrasena().equals(vista.getPassword())) {
 	        	Aplicacion.getAplicacion().setUsuarioActual(Aplicacion.getAplicacion().getAdministrador());
 	        	
@@ -54,7 +54,8 @@ public class ControlInicio implements ActionListener {
 	        	frame.getVistaBarraSuperior().setVisible(true);
 	        	vista.limpiarJtf();
 	        	frame.getControlMiPerfil().setVista();
-	        	frame.mostrarPanel("homeAdmin");
+	        	frame.getVistaHome().setAdminMode();
+	        	frame.mostrarPanel("home");
 	        } 
 	        /*Comprobamos si las credenciales introducidas corresponden a un ciudadano registrado*/
 	        else {
@@ -67,10 +68,10 @@ public class ControlInicio implements ActionListener {
 	        		frame.getVistaBarraSuperior().setVisible(true);
 		        	vista.limpiarJtf();
 		        	frame.getControlMiPerfil().setVista();
+		        	frame.getVistaHome().setCiudadanoMode();
 	        		frame.mostrarPanel("home");
-	        	}
-	        	else {
-	        	JOptionPane.showMessageDialog(vista,
+	        	} else {
+	        		JOptionPane.showMessageDialog(vista,
 						"No existe un usuario con las credenciales proporcionadas", "Error de credenciales", JOptionPane.ERROR_MESSAGE);
 	        	}
 	        }

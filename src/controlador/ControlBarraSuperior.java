@@ -35,12 +35,7 @@ public class ControlBarraSuperior implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		String source = e.getActionCommand();
 		if(source.equals("home")) {
-			if(Aplicacion.getAplicacion().getUsuarioActual().getClass().equals(Ciudadano.class)) {
-				//frame.resetHome();
-				frame.mostrarPanel("home");
-			}else if(Aplicacion.getAplicacion().getUsuarioActual().getClass().equals(Administrador.class)) {
-				frame.mostrarPanel("homeAdmin");
-			}
+			frame.mostrarPanel("home");
 		}else if(source.equals("atras")) {
 			String ultimaVista = frame.getUltimaVista();
 			if(ultimaVista==null || ultimaVista.equals("inicioRegistro")) {
@@ -48,7 +43,6 @@ public class ControlBarraSuperior implements ActionListener{
 			}
 			frame.mostrarPanel(ultimaVista);
 		}else if(source.equals("miPerfil")) {
-
 			frame.mostrarPanel("miPerfil");
 			
 		}else if(source.equals("notificaciones")) {

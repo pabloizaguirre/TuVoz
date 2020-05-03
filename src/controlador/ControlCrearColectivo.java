@@ -50,6 +50,7 @@ public class ControlCrearColectivo implements ActionListener {
 		
 		// mostrar nueva vista
 		frame.getControlHome().addBotonColectivo(c);
+		frame.getControlMiPerfil().addBotonColectivo(c);
 		frame.mostrarPanel("home");
 	}
 }

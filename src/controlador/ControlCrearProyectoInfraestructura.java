@@ -67,6 +67,7 @@ public class ControlCrearProyectoInfraestructura implements ActionListener {
 			
 			// mostrar nueva vista
 			frame.getControlHome().addBotonProyecto(p);
+			frame.getControlMiPerfil().addBotonProyecto(p);
 			frame.mostrarPanel("home");
 		
 		} else if(e.getActionCommand().equals("examinar")) {

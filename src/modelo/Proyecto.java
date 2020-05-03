@@ -302,9 +302,8 @@ public class Proyecto implements Serializable {
 				try {
 					CCGG proxy = CCGG.getGateway();
 					presupuestoConcedido = proxy.getAmountGranted(this.idEnvio);
-					
 					if(presupuestoConcedido==null) {
-						cambiarEstado(EstadoProyecto.PENDIENTEFINANCIACION);
+						return;
 					}else if(presupuestoConcedido > 0) {
 						cambiarEstado(EstadoProyecto.FINANCIADO);
 					} else {

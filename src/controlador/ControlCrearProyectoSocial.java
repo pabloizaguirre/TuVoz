@@ -70,7 +70,8 @@ public class ControlCrearProyectoSocial implements ActionListener {
 					"Proyecto creado y enviado a supervisión por parte de la Administración de Tu Voz.", "Proyecto creado", JOptionPane.INFORMATION_MESSAGE);	
 		
 		// mostrar nueva vista
-		frame.getControlHome().addBotonProyecto(p);;
+		frame.getControlHome().addBotonProyecto(p);
+		frame.getControlMiPerfil().addBotonProyecto(p);
 
 		frame.mostrarPanel("home");
 		
