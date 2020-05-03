@@ -22,6 +22,7 @@ public class Home extends JPanel{
 	private JButton botonAnadirProyecto;
 	private JButton botonAnadirColectivo;
 	private JButton botonApoyoProyecto;
+	private JButton botonAdelantoFecha;
 	
 	private JPanel listaProyectos;
 	private JPanel listaColectivos;
@@ -64,16 +65,22 @@ public class Home extends JPanel{
 		botonApoyoProyecto = new JButton("Gestionar minimo de apoyos");
 		botonApoyoProyecto.setActionCommand("apoyoProyecto");
 		
+		botonAdelantoFecha = new JButton("Adelantar fecha 30 dias");
+		botonAdelantoFecha.setActionCommand("adelantoFecha");
+
 		//añadir constraints del contenedor
 		cLayout.putConstraint(BorderLayout.NORTH, proyectos, 15, BorderLayout.SOUTH, titulo);
 		cLayout.putConstraint(BorderLayout.WEST, proyectos, 40, BorderLayout.WEST, this);
 		cLayout.putConstraint(BorderLayout.EAST, proyectos, -40, BorderLayout.EAST, this);
 		cLayout.putConstraint(BorderLayout.WEST, botonApoyoProyecto, 40, BorderLayout.WEST, this);
 		cLayout.putConstraint(BorderLayout.NORTH,botonApoyoProyecto, 0, BorderLayout.SOUTH, proyectos);
-		
+		cLayout.putConstraint(BorderLayout.WEST, botonAdelantoFecha, 10, BorderLayout.EAST, botonApoyoProyecto);
+		cLayout.putConstraint(BorderLayout.NORTH,botonAdelantoFecha, 0, BorderLayout.SOUTH, proyectos);
+
 		// a�adir componentes al contenedor
 		add(proyectos);
 		add(botonApoyoProyecto);
+		add(botonAdelantoFecha);
 		
 		//panel con mis colectivos:
 		final JPanel colectivos = new JPanel();
@@ -127,6 +134,8 @@ public class Home extends JPanel{
 	public void setControlador(ActionListener c) {  
 		botonAnadirProyecto.addActionListener(c);
 		botonAnadirColectivo.addActionListener(c);
+		botonApoyoProyecto.addActionListener(c);
+		botonAdelantoFecha.addActionListener(c);
 	}
 	
 	/**
@@ -136,6 +145,7 @@ public class Home extends JPanel{
 		this.botonAnadirColectivo.setVisible(false);
 		this.botonAnadirProyecto.setVisible(false);
 		this.botonApoyoProyecto.setVisible(true);
+		this.botonAdelantoFecha.setVisible(true);
 	}
 	
 	/**
@@ -145,6 +155,8 @@ public class Home extends JPanel{
 		this.botonAnadirColectivo.setVisible(true);
 		this.botonAnadirProyecto.setVisible(true);
 		this.botonApoyoProyecto.setVisible(false);
+		this.botonAdelantoFecha.setVisible(false);
+
 	}
 	
 	 /**

@@ -43,19 +43,28 @@ public class ControlHome implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
 		String aCommand = e.getActionCommand();
+		/*Si pulsamos en añadir nuevo proyecto*/
 		if(aCommand.equals("anadirProyecto")) {
 			frame.mostrarPanel("crearProyecto");
-		} else if(e.getActionCommand().equals("anadirColectivo")){
+			
+		}/*Si pulsamos en añadir nuevo colectivo*/
+		else if(e.getActionCommand().equals("anadirColectivo")){
 			/*Actualizamos la vista de colectivos para crear un subcolectivo*/
 			CrearColectivo.addColectivos(((Ciudadano)Aplicacion.getAplicacion().getUsuarioActual()).getColectivosCreados());
 			frame.mostrarPanel("crearColectivo");
-		} else if(aCommand.equals("apoyoProyecto")) {
-			if(e.getActionCommand().equals("apoyoProyecto")) {
+		}/*Si pulsamos en gestionar el numero minimo de apoyo de los proyectos siendo Admin*/ 
+		else if(e.getActionCommand().equals("apoyoProyecto")) {
 				JOptionPane.showMessageDialog(vista,
-						"Numero de apoyos actuales: " +Aplicacion.getAplicacion().getApoyosMin() , "Gestionar apoyos minimos", JOptionPane.INFORMATION_MESSAGE);
+					"Numero de apoyos actuales: " +Aplicacion.getAplicacion().getApoyosMin() , "Gestionar apoyos minimos", JOptionPane.INFORMATION_MESSAGE);
 				frame.mostrarPanel("apoyoMinimoProyecto");
-			}
-		} else if(proyectos.containsKey(source)) {
+			
+		}/*Si pulsamos en avanzar la fecha siendo Admin*/
+		else if(e.getActionCommand().contentEquals("adelantoFecha")) {
+			FechaSimulada.avanzar(30);
+			JOptionPane.showMessageDialog(vista,
+					"Avanzado 30 días" , "Avanzando", JOptionPane.INFORMATION_MESSAGE);
+		}/*Si pulsamos en cualquier proyecto*/
+		else if(proyectos.containsKey(source)) {
 			Proyecto p = proyectos.get(source);
 			
 			//comprobamos si ya se ha creado una visa para este proyecto
@@ -72,7 +81,8 @@ public class ControlHome implements ActionListener{
 			}
 			
 			frame.mostrarPanel("" + p.getId());
-		} else if (colectivos.containsKey(source)) {
+		}/*Si pulsamos en cualquier colectivo*/ 
+		else if (colectivos.containsKey(source)) {
 			Colectivo c = colectivos.get(source);
 			
 			//comprobamos si ya hemos creado una vista para este colectivo
@@ -92,13 +102,21 @@ public class ControlHome implements ActionListener{
 		
 		
 	}
-	
+	/**
+     * Metodo encargado de añadir los proyectos y colectivos a la vista
+     * 
+     * 
+     */
 	public void setVista() {
 		vista.resetBotones();
 		setBotonesProyectos();
 		setBotonesColectivos();
 	}
-	
+	/**
+	 * Método encargado de añadir los botones de proyecto a la vista.
+	 * Se añaden todos los proyectos en la lista de proyectos de la aplicación
+	 * 
+	 */
 	public void setBotonesProyectos() {
 		JButton botonProyecto;
 		for(Proyecto p:Aplicacion.getAplicacion().getListadoProyectos()) {
@@ -108,7 +126,12 @@ public class ControlHome implements ActionListener{
 			proyectos.put(botonProyecto, p);
 		}
 	}
-	
+	/**
+	 * Método encargado de añadir un proyecto pasado como argumento a la vista de home
+	 * 
+	 * @param p proyecto al cual queremos añadir a la lista de proyectos de home
+	 * 
+	 */
 	public void addBotonProyecto(Proyecto p) {
 		JButton botonProyecto = new JButton(p.getTitulo());
 		botonProyecto.addActionListener(this);
@@ -116,7 +139,11 @@ public class ControlHome implements ActionListener{
 		proyectos.put(botonProyecto, p);
 	}
 	
-	
+	/**
+	 * Método encargado de añadir los botones de colectivos a la vista.
+	 * Se añaden todos los proyectos en la lista de proyectos de la aplicación
+	 * 
+	 */
 	public void setBotonesColectivos() {
 		JButton botonColectivo;
 		for(ElementoColectivo c:Aplicacion.getAplicacion().getListadoElementoColectivos()) {
@@ -129,6 +156,12 @@ public class ControlHome implements ActionListener{
 		}
 	}
 	
+	/**
+	 * Método encargado de añadir un colectivo pasado como argumento a la vista de home
+	 * 
+	 * @param c colectivo al cual queremos añadir a la lista de colectivos de home
+	 * 
+	 */
 	public void addBotonColectivo(Colectivo c) {
 		JButton botonColectivo = new JButton(c.getTitulo());
 		botonColectivo.addActionListener(this);

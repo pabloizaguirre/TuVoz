@@ -40,7 +40,7 @@ private ApoyoMinimoProyecto vista;
 			JOptionPane.showMessageDialog(vista,
 					"Se ha actualizado el numero minimo de apoyos para proyecto a "+Integer.parseInt(vista.getEntrada()), 
 					"Cambio de numero minimo de apoyos", JOptionPane.INFORMATION_MESSAGE);
-			frame.mostrarPanel("homeAdmin");
+			frame.mostrarPanel("home");
 		}
 	}
 	}
