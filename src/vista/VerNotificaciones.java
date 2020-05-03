@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
@@ -19,14 +20,8 @@ import modelo.Notificacion;
  */
 public class VerNotificaciones extends JPanel{
 	
-	private JButton IrProyecto = new JButton("a");
-	private JButton AprobarRegistro = new JButton("b");
-	private JButton AprobarProyecto = new JButton("c");
-	private JButton RechazarRegistro = new JButton("d");
-	private JButton RechazarProyecto = new JButton("e");
-	private JButton VerRegistro = new JButton("f");
-	private JButton VerProyecto = new JButton("g");
-	
+	private static int id=0;
+	private HashMap<Integer, JPanel> listaNotificaciones = new HashMap<Integer, JPanel>();
 	
 	public VerNotificaciones(){
 		BoxLayout notiLayout = new BoxLayout(this, BoxLayout.PAGE_AXIS);
@@ -41,7 +36,7 @@ public class VerNotificaciones extends JPanel{
 		
     }
     
-	public void addNotificacionCiudadanoProyecto(String texto) {
+	public void addNotificacionCiudadanoProyecto(String texto, JButton boton) {
 		final JPanel notiCiudadano = new JPanel();
 		BoxLayout layoutNoticiu = new BoxLayout(notiCiudadano, BoxLayout.PAGE_AXIS);
 		notiCiudadano.setLayout(layoutNoticiu);
@@ -55,8 +50,8 @@ public class VerNotificaciones extends JPanel{
 		mensaje.setAlignmentX(LEFT_ALIGNMENT);
 		notiCiudadano.add(mensaje);
 		
-		IrProyecto = new JButton("Ir al proyecto");
-		IrProyecto.setActionCommand("botonIrProyecto");
+		JButton IrProyecto = boton;
+		IrProyecto.setActionCommand(String.valueOf(id));
 		IrProyecto.setAlignmentX(LEFT_ALIGNMENT);
 		notiCiudadano.add(IrProyecto);
 		
@@ -65,9 +60,12 @@ public class VerNotificaciones extends JPanel{
 		
 		notiCiudadano.setVisible(true);
 		this.add(notiCiudadano);
+		
+		listaNotificaciones.put(id, notiCiudadano);
+		id+=1;
 		}
 	
-	public void addNotificacionAprobarRegistro(String texto) {
+	public void addNotificacionAprobarRegistro(String texto, JButton aprobar, JButton rechazar) {
 		final JPanel notiRegistro = new JPanel();
 		BoxLayout layoutNotireg = new BoxLayout(notiRegistro, BoxLayout.PAGE_AXIS);
 		notiRegistro.setLayout(layoutNotireg);
@@ -83,20 +81,13 @@ public class VerNotificaciones extends JPanel{
 		final JPanel botonesnotiRegistro = new JPanel();
 		BoxLayout layoutbotonesNotireg = new BoxLayout(botonesnotiRegistro, BoxLayout.X_AXIS);
 		botonesnotiRegistro.setLayout(layoutbotonesNotireg);
-		
-		VerRegistro = new JButton("Ver registro");
-		VerRegistro.setActionCommand("botonVerRegistro");
-		/*VerRegistro.setAlignmentX(Component.LEFT_ALIGNMENT);(*/
-		botonesnotiRegistro.add(VerRegistro);
-		
-		AprobarRegistro = new JButton("Aprobar registro");
-		AprobarRegistro.setActionCommand("botonAprobarRegistro");
-		/*AprobarRegistro.setAlignmentX(Component.LEFT_ALIGNMENT);*/
+			
+		JButton AprobarRegistro = aprobar;
+		AprobarRegistro.setActionCommand(String.valueOf(id));
 		botonesnotiRegistro.add(AprobarRegistro);
 		
-		RechazarRegistro = new JButton("Rechazar registro");
-		RechazarRegistro.setActionCommand("botonRechazarRegistro");
-		/*RechazarRegistro.setAlignmentX(Component.LEFT_ALIGNMENT);*/
+		JButton RechazarRegistro = rechazar;
+		RechazarRegistro.setActionCommand(String.valueOf(id));
 		botonesnotiRegistro.add(RechazarRegistro);
 		
 		botonesnotiRegistro.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -107,9 +98,12 @@ public class VerNotificaciones extends JPanel{
 		
 		notiRegistro.setVisible(true);
 		this.add(notiRegistro);
+		
+		listaNotificaciones.put(id, notiRegistro);
+		id+=1;
 	}
 	
-	public void addNotificacionAprobarProyecto(String texto) {
+	public void addNotificacionAprobarProyecto(String texto, JButton ver, JButton aprobar, JButton rechazar) {
 		final JPanel notiProye = new JPanel();
 		BoxLayout layoutNotiproye = new BoxLayout(notiProye, BoxLayout.PAGE_AXIS);
 		notiProye.setLayout(layoutNotiproye);
@@ -126,20 +120,17 @@ public class VerNotificaciones extends JPanel{
 		BoxLayout layoutbotonesNotiproye = new BoxLayout(botonesnotiProye, BoxLayout.X_AXIS);
 		botonesnotiProye.setLayout(layoutbotonesNotiproye);
 		
-		VerProyecto = new JButton("Ver proyecto");
-		VerProyecto.setActionCommand("botonVerProyecto");
-		/*VerProyecto.setAlignmentX(Component.LEFT_ALIGNMENT);*/
-		botonesnotiProye.add(VerProyecto);
-		
-		AprobarProyecto = new JButton("Aprobar proyecto");
-		AprobarProyecto.setActionCommand("botonAprobarProyecto");
-		/*AprobarProyecto.setAlignmentX(Component.LEFT_ALIGNMENT);*/
+		JButton AprobarProyecto = new JButton("Aprobar proyecto");
+		AprobarProyecto.setActionCommand(String.valueOf(id));
 		botonesnotiProye.add(AprobarProyecto);
 		
-		RechazarProyecto = new JButton("Rechazar proyecto");
-		RechazarProyecto.setActionCommand("botonRechazarProyecto");
-		/*RechazarProyecto.setAlignmentX(Component.LEFT_ALIGNMENT);*/
+		JButton RechazarProyecto = new JButton("Rechazar proyecto");
+		RechazarProyecto.setActionCommand(String.valueOf(id));
 		botonesnotiProye.add(RechazarProyecto);
+		
+		JButton VerProyecto = new JButton("Ver proyecto");
+		VerProyecto.setActionCommand(String.valueOf(id));
+		botonesnotiProye.add(VerProyecto);
 		
 		botonesnotiProye.setAlignmentX(Component.LEFT_ALIGNMENT);
 		notiProye.add(botonesnotiProye);
@@ -150,49 +141,21 @@ public class VerNotificaciones extends JPanel{
 		notiProye.setVisible(true);
 		this.add(notiProye);
 		
-		
+		listaNotificaciones.put(id, notiProye);
+		id+=1;
+	}
+	
+	
+	/**
+     * Metodo para borrar notificaciones de la vista
+     * 
+     */
+	public void borrarNotificacion(int id) {
+		/*int id=Integer.parseInt(i);*/
+		this.remove(listaNotificaciones.get(id));
+		listaNotificaciones.remove(id);
 	}
 	
 	
 	
-	public JButton getIrProyecto() {
-		return IrProyecto;
-	}
-	
-	
-	public JButton getVerRegistro() {
-		return VerRegistro;
-	}
-	public JButton getAprobarRegistro() {
-		return AprobarRegistro;
-	}
-	public JButton getRechazarRegistro() {
-		return RechazarRegistro;
-	}
-	
-	
-	public JButton getVerProyecto() {
-		return VerProyecto;
-	}
-	public JButton getAprobarProyecto() {
-		return AprobarProyecto;
-	}
-	public JButton getRechazarProyecto() {
-		return RechazarProyecto;
-	}
-	
-	
-	
-	
-
-	
-	public void setControlNotificaciones(ActionListener c) {  
-		IrProyecto.addActionListener(c);
-		AprobarRegistro.addActionListener(c);
-		AprobarProyecto.addActionListener(c);
-		RechazarRegistro.addActionListener(c);
-		RechazarProyecto.addActionListener(c);
-		VerRegistro.addActionListener(c);
-		VerProyecto.addActionListener(c);
-	}
 }

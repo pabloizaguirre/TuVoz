@@ -45,10 +45,7 @@ public class ControlDetalleColectivo implements ActionListener{
 			colectivo.unirseAColectivo((Ciudadano) Aplicacion.getAplicacion().getUsuarioActual());
 			((Ciudadano) Aplicacion.getAplicacion().getUsuarioActual()).anadirAMisColectivos(colectivo);
 			vista.getBotonUnirme().setEnabled(false);
-			JOptionPane.showMessageDialog(vista,
-					"Te has unido a " +colectivo.getTitulo(), "Unirme a colectivo", JOptionPane.INFORMATION_MESSAGE);
-		}else {
-			
+
 		}
 	}
 	

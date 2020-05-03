@@ -45,7 +45,6 @@ public class Ventana extends JFrame {
 	private ControlCrearColectivo contrCrearColectivo;
 	
 	private CrearProyecto vistaCrearProyecto;
-	private ControlIrACrearProyecto contrIrACrearProyecto;
 	private ControlCrearProyecto contrCrearProyecto;
 	
 	private CrearProyectoSocial vistaCrearProyectoSocial;
@@ -55,7 +54,6 @@ public class Ventana extends JFrame {
 	private ControlCrearProyectoInfraestructura contrCrearProyectoInfraestructura;
 	
 	private VerNotificaciones vistaNotificaciones;
-	private ControlNotificaciones contrNoti;
 	
 	private HashMap<Integer, ControlDetalleProyecto> proyectos = new HashMap<Integer, ControlDetalleProyecto>();
 	private HashMap<String, ControlDetalleColectivo> colectivos = new HashMap<String, ControlDetalleColectivo>();
@@ -124,10 +122,10 @@ public class Ventana extends JFrame {
 		
 		
 		//prueba de la pantalla de proyecto
-		Ciudadano creador = new Ciudadano("ponbebe", "Anuel", "72231461P");
+		/*Ciudadano creador = new Ciudadano("ponbebe", "Anuel", "72231461P");
 		creador.aprobarRegistro();
 		Ciudadano punkizius = new Ciudadano ("badg" , "Punkizius", "123456789A");
-		punkizius.aprobarRegistro();
+		punkizius.aprobarRegistro();*/
 		
 		
 		
@@ -168,7 +166,6 @@ public class Ventana extends JFrame {
 	}
 
 	public void setControlador(Controlador controlador) {
-		this.contrIrACrearProyecto = controlador.getControlIrACrearProyecto();
 		
 		this.contrBarraSuperior = controlador.getControlBarraSuperior();
 		vistaBarraSuperior.setControlador(contrBarraSuperior);
@@ -192,15 +189,10 @@ public class Ventana extends JFrame {
 		this.contrInicio = controlador.getControlInicio();
 		vistaInicioRegistro.setControlInicio(contrInicio);
 		
-		this.contrNoti = controlador.getControlNotificaciones();
-		vistaNotificaciones.setControlNotificaciones(contrNoti);
 		
 		this.contrMiPerfil = controlador.getControlMiPerfil();
 		vistaMiPerfil.setControlador(contrMiPerfil);
 		
-	
-		//this.contrApoyar = controlador.getControlApoyar();
-		//vistaDetalleProyecto.setControlador(contrApoyar);
 		
 		// Establecer controlador Home
 		this.contrHome = controlador.getControlHome();
@@ -303,8 +295,7 @@ public class Ventana extends JFrame {
      */
 	public void resetHome() {
 		contrHome.setVista();
-		vistaHome.setControladorAnadirColectivo(contIrACrearColectivo);
-		vistaHome.setControladorAnadirProyecto(contrIrACrearProyecto);
+		
 	}
 }
 

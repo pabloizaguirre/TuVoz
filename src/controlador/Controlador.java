@@ -17,10 +17,8 @@ import vista.*;
 
 public class Controlador {
 	
-	private ControlIrACrearColectivo contIrACrearColectivo;
 	private ControlCrearColectivo contrCrearColectivo;
 	private ControlBarraSuperior contrBarraSuperior;
-	private ControlIrACrearProyecto contrIrACrearProyecto;
 	private ControlCrearProyecto contrCrearProyecto;
 	private ControlCrearProyectoSocial contrCrearProyectoSocial;
 	private ControlCrearProyectoInfraestructura contrCrearProyectoInfraestructura;
@@ -37,9 +35,7 @@ public class Controlador {
 	
 	public Controlador(Ventana frame) {
 		this.frame = frame;
-		this.contIrACrearColectivo = new ControlIrACrearColectivo(frame);
 		this.contrCrearColectivo = new ControlCrearColectivo(frame);
-		this.contrIrACrearProyecto = new ControlIrACrearProyecto(frame);
 		this.contrCrearProyecto = new ControlCrearProyecto(frame);
 		this.contrCrearProyectoSocial = new ControlCrearProyectoSocial(frame);
 		this.contrCrearProyectoInfraestructura = new ControlCrearProyectoInfraestructura(frame);
@@ -54,9 +50,7 @@ public class Controlador {
 	
 	
 
-	public ControlIrACrearColectivo getControlIrACrearColectivo() {
-		return this.contIrACrearColectivo;
-	}
+	
 	public ControlCrearColectivo getControlCrearColectivo() {
 		return this.contrCrearColectivo;
 	}
@@ -69,9 +63,6 @@ public class Controlador {
 		return this.contrMiPerfil;
 	}
 	
-	public ControlIrACrearProyecto getControlIrACrearProyecto() {
-		return this.contrIrACrearProyecto;
-	} 
 	
 	public ControlCrearProyecto getControlCrearProyecto() {
 		return this.contrCrearProyecto;
