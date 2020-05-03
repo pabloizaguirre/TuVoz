@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import controlador.ControlDetalleProyecto;
+import modelo.Colectivo;
 
 /**
  * Clase de la vista DetalleProyecto.
@@ -25,6 +26,7 @@ public class DetalleProyecto extends JPanel{
 	private JButton enviarAFinanciacion;
 	private JButton suscribirse;
 	private JButton apoyar = new JButton("");
+	private JComboBox<String> comboColectivos;
 	private JTextArea titulo = new JTextArea();
 	private JLabel labelTipo = new JLabel("");
 	private JPanel botones;
@@ -124,6 +126,19 @@ public class DetalleProyecto extends JPanel{
 			apoyar.setEnabled(false);
 		}
 		botones.add(apoyar);
+		
+	}
+	
+	public void setComboColectivos(List<String> colectivos) {
+		comboColectivos = new JComboBox<String>();
+		comboColectivos.setActionCommand("comboColectivos");
+		comboColectivos.addItem("Apoyar individualmente");
+		comboColectivos.setPreferredSize(new Dimension(100,25));
+		
+		for(String c : colectivos) {
+			comboColectivos.addItem(c);
+		}
+		botones.add(comboColectivos);
 		
 	}
 	
@@ -243,11 +258,22 @@ public class DetalleProyecto extends JPanel{
 		return apoyar;
 	}
 	
+	public JComboBox<String> getComboColectivos() {
+		return this.comboColectivos;
+	}
+	
+	public String getColectivoApoyante() {
+		return (String)comboColectivos.getSelectedItem();
+	}
+	
 	public void resetButtonPanel() {
 		botones.removeAll();
 		
 		if(apoyar!=null) {
 			apoyar.setEnabled(true);
+		}
+		if(comboColectivos!=null) {
+			comboColectivos.setEnabled(true);
 		}
 		if(suscribirse!=null) {
 			suscribirse.setEnabled(true);
@@ -263,6 +289,9 @@ public class DetalleProyecto extends JPanel{
 	public void setControlador(ActionListener c) {
 		if(apoyar!=null) {
 			apoyar.addActionListener(c);
+		}
+		if(comboColectivos!=null) {
+			comboColectivos.addActionListener(c);
 		}
 		if(suscribirse!=null) {
 			suscribirse.addActionListener(c);

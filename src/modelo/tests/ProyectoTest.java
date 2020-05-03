@@ -34,7 +34,7 @@ public class ProyectoTest {
 
 	@Before
 	public void setUp() {
-        foto = new Imagen("Maqueta complejo");
+        foto = new Imagen("Maqueta_complejo.png", "prueba");
 		u1 = new Ciudadano("NiMalaNiSanta", "Safaera", "666");
 		u2 = new Ciudadano("AquiLlegoTuTiburon", "ConejoMalo", "12312332W");
         u3 = new Ciudadano("SoyUnico", "ChicoUnico", "00101001P");
@@ -43,9 +43,9 @@ public class ProyectoTest {
         u6 = new Ciudadano("Love", "Sxe", "07803305C");
 		c1 = new Colectivo("Voluntariado", u1);
         c2 = new Colectivo("Apoyo a ancianos", c1);
-        p1 = new ProyectoSocial("Voluntariado","Este es un proyecto de voluntariado", 5000, u3, "jovenes", TipoAlcance.internacional);
+        p1 = new ProyectoSocial("Voluntariado","Este es un proyecto de voluntariado", 5000, u3, "jovenes", TipoAlcance.INTERNACIONAL);
         p2 = new ProyectoInfraestructura("Uranizacion", "Creacion de un nuevo coomplejo", 2700000, u3, foto, null);
-        p3 = new ProyectoSocial("Prueba", "AAAAAAAA", 10001232, c1, "guaps", TipoAlcance.nacional);
+        p3 = new ProyectoSocial("Prueba", "AAAAAAAA", 10001232, c1, "guaps", TipoAlcance.NACIONAL);
 	}
 
     
@@ -118,42 +118,22 @@ public class ProyectoTest {
     @Test
     public void testSuscribirProyecto(){
         //Comprobamos que los creadores se han suscrito a sus proyetos
-        assertTrue(u3.getProyectosSuscritos().contains(p1));
         assertTrue(p1.getListadoSuscripciones().contains(u3));
 
         //Comprobar que el representante esta suscrito
-        assertTrue(u1.getProyectosSuscritos().contains(p3));
         assertTrue(p3.getListadoSuscripciones().contains(u1));
 
         //El u1 se suscribe a p1
         p1.suscribirProyecto(u1);
 
         //Comprobamos que se añade correctamente a la lista de suscritos
-        assertTrue(u1.getProyectosSuscritos().contains(p1));
         assertTrue(p1.getListadoSuscripciones().contains(u1));
 
         //Comprobamos que los usuarios suscritos reciben notificaciones cuando se cambia el estado del proyecto
         Integer num_notif = (u1.getNotificaciones()).size();
-        p1.cambiarEstado(EstadoProyecto.pendienteAprobacion);
+        Aplicacion.getAplicacion().setUsuarioActual(Aplicacion.getAplicacion().getAdministrador());
+        p1.aprobarProyecto();
         assertEquals(num_notif+1, (u1.getNotificaciones()).size());
-    }
-
-    @Test
-    public void testCambiarEstado(){
-    	Aplicacion.getAplicacion().setApoyosMin(10);
-    	
-        p1.cambiarEstado(EstadoProyecto.noEnviado);
-        assertEquals(p1.consultarEstadoProyecto(), EstadoProyecto.noEnviado);
-
-        p1.cambiarEstado(EstadoProyecto.rechazado);
-        assertEquals(p1.consultarEstadoProyecto(), EstadoProyecto.rechazado);
-
-        //Comprobamos que se ha borrado de la lista de proyectos
-        assertFalse(Aplicacion.getAplicacion().getListadoProyectos().contains(p1));
-        
-        p2.cambiarEstado(EstadoProyecto.aprobado);
-        assertEquals(p2.consultarEstadoProyecto(), EstadoProyecto.aprobado);
-
     }
 
     @Test
@@ -164,12 +144,14 @@ public class ProyectoTest {
         p1.apoyarProyecto(u5);
         assertEquals(e, p1.consultarEstadoProyecto());
         
-        p1.cambiarEstado(EstadoProyecto.noEnviado);
+        //p1.cambiarEstado(EstadoProyecto.NOENVIADO);
+        Aplicacion.getAplicacion().setUsuarioActual(Aplicacion.getAplicacion().getAdministrador());
+        p1.aprobarProyecto();
         FechaSimulada.avanzar(29);
-        assertEquals(EstadoProyecto.noEnviado, p1.consultarEstadoProyecto());
+        assertEquals(EstadoProyecto.NOENVIADO, p1.consultarEstadoProyecto());
         
         FechaSimulada.avanzar(2);
-        assertEquals(EstadoProyecto.caducado, p1.consultarEstadoProyecto());
+        assertEquals(EstadoProyecto.CADUCADO, p1.consultarEstadoProyecto());
         
     }
 

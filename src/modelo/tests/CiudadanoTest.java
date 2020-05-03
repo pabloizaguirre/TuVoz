@@ -23,8 +23,8 @@ public class CiudadanoTest {
     	c1.aprobarRegistro();
     	
     	//Comprobamos si los nifs estan en uso
-        assertTrue(Ciudadano.nifEnUso(c1.getNif()));
-        assertFalse(Ciudadano.nifEnUso("545463773J"));
+        assertTrue(Aplicacion.getAplicacion().nifEnUso(c1.getNif()));
+        assertFalse(Aplicacion.getAplicacion().nifEnUso("545463773J"));
 
     }
 
@@ -67,42 +67,25 @@ public class CiudadanoTest {
         assertTrue(c.eliminarDeMisColectivos(colec));
     }
 
-
-    @Test
-    public void TestAnadirAMisProyectosSuscritos(){
-        //Crear los objetos necesarios para la prueba
-        Ciudadano c = new Ciudadano("12234", "localHost", "66359889F");
-        Ciudadano ciudadano = new Ciudadano("14009", "usr",  "78636499T");
-        ProyectoSocial p = new ProyectoSocial("Voluntariado","Este es un proyecto de voluntariado", 5000, ciudadano, "jovenes", TipoAlcance.nacional);
-
-        //Comprobamos que se añade correctamente el proyecto de la lista de suscritos
-        assertTrue(c.anadirAMisProyectosSuscritos(p));
-    }
-
     @Test
     public void TestInformePopularidad() {
         //Crear los objetos necesarios para la prueba
         Ciudadano c = new Ciudadano("12234", "localHost", "66359889K");
         Ciudadano c1 = new Ciudadano("1214", "usu1",  "76651193F");
         Ciudadano c2 = new Ciudadano("1614", "usu2",  "76652293F");
-        ProyectoSocial p = new ProyectoSocial("Centros Comerciales","Este es un proyecto que incentiva el consumo en centros comerciales", 200000, c, "jovenes", TipoAlcance.nacional);
-        Notificacion n = new Notificacion("Informe de popularidad del proyecto " + p + " :\nNúmero de apoyos = " + "3", c);
+        ProyectoSocial p = new ProyectoSocial("Centros Comerciales","Este es un proyecto que incentiva el consumo en centros comerciales", 200000, c, "jovenes", TipoAlcance.NACIONAL);
+        //Notificacion n = new Notificacion("Informe de popularidad del proyecto " + p + " :\nNúmero de apoyos = " + "3", c);
 
         //Hacemos que dos ciudadanos apoyen al proyecto p
         p.apoyarProyecto(c1);
         p.apoyarProyecto(c2);
 
-        Integer num_notif = (c1.getNotificaciones()).size();
-        //lo solicita alguien que no es el creador y no recibe notificacion
-        c1.solicitarInformePopularidad(p);
-        assertEquals(num_notif, (c1.getNotificaciones()).size());
-
-        num_notif = (c.getNotificaciones()).size();
         assertTrue(c.getProyectosPropuestos().contains(p));
         //lo solicita el creador
-        Notificacion informe = c.solicitarInformePopularidad(p);
-        assertEquals(num_notif+1, (c.getNotificaciones()).size()); 
-        assertEquals(informe.getTextoNotificacion(), n.getTextoNotificacion());
+        assertEquals(3, c.solicitarInformePopularidad(p));
+        
+        p.apoyarProyecto(c2);
+        assertEquals(3, c.solicitarInformePopularidad(p));
     }
 
     @Test
@@ -112,10 +95,10 @@ public class CiudadanoTest {
         Ciudadano ciudadano = new Ciudadano("12234", "localHost", "66359889F");
         Colectivo c1 = new Colectivo("Voluntariado", ciudadano);
         Colectivo c2 = new Colectivo("Catequesis", ciudadano);
-        ProyectoSocial p1 = new ProyectoSocial("prueba1","Este es un proyecto de prueba1", 200000, c1, "jovenes1", TipoAlcance.nacional);
-        ProyectoSocial p2 = new ProyectoSocial("prueba2","Este es un proyecto de prueba2", 200000, c2, "jovenes2", TipoAlcance.nacional);
-        ProyectoSocial p3 = new ProyectoSocial("prueba3","Este es un proyecto de prueba3", 200000, c2, "jovenes3", TipoAlcance.nacional);
-        Notificacion noti = new Notificacion("Informe de afinidad de los colectivos " + c1 + " y " + c2 + " :\nÍndice de afinidad: " + "0", c);
+        ProyectoSocial p1 = new ProyectoSocial("prueba1","Este es un proyecto de prueba1", 200000, c1, "jovenes1", TipoAlcance.NACIONAL);
+        ProyectoSocial p2 = new ProyectoSocial("prueba2","Este es un proyecto de prueba2", 200000, c2, "jovenes2", TipoAlcance.NACIONAL);
+        ProyectoSocial p3 = new ProyectoSocial("prueba3","Este es un proyecto de prueba3", 200000, c2, "jovenes3", TipoAlcance.INTERNACIONAL);
+        //Notificacion noti = new Notificacion("Informe de afinidad de los colectivos " + c1 + " y " + c2 + " :\nÍndice de afinidad: " + "0", c);
 
         //Añadimos c1 y c2 a la lista de colectivos de c
         c.anadirAMisColectivos(c1);
@@ -130,13 +113,8 @@ public class CiudadanoTest {
         assertTrue(p2.getListadoApoyos().contains(c1));
         assertTrue(p1.getListadoApoyos().contains(c2));
 
-        Integer num_notif = (c.getNotificaciones()).size();
-        assertEquals(num_notif, (c.getNotificaciones()).size());
 
-        //Comprobamos que se añade correctamente el proyecto de la lista de suscritos
-        Notificacion n2 = c.solicitarInformeAfinidad(c1,c2);
-        assertEquals(n2.getTextoNotificacion(), noti.getTextoNotificacion());
-        assertEquals(num_notif+1, (c.getNotificaciones()).size());
+        assertEquals(2.0/3,ciudadano.solicitarInformeAfinidad(c1, c2));
     }
 
 }

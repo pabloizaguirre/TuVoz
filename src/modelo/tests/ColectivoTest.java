@@ -70,7 +70,7 @@ public class ColectivoTest {
 
 	@Test
 	void testAnadirAProyectosApoyados() {
-		ProyectoSocial p1 = new ProyectoSocial("prueba1","Este es un proyecto de prueba1", 200000, c1, "jovenes1", TipoAlcance.nacional);
+		ProyectoSocial p1 = new ProyectoSocial("prueba1","Este es un proyecto de prueba1", 200000, c1, "jovenes1", TipoAlcance.NACIONAL);
 
 		c1.anadirAProyectosApoyados(p1);
 		assertTrue(c1.getProyectosApoyados().contains(p1));
@@ -83,6 +83,12 @@ public class ColectivoTest {
 		c1.abandonarColectivo(u1);
 
 		assertFalse(c1.getElementos().contains(u1));
+	}
+	
+	@Test
+	void testBuscarColectivo() {
+		Colectivo c3 = new Colectivo("Pruebita guay", u1);
+		assertSame(c3,Colectivo.buscarColectivo("Pruebita guay"));
 	}
 
 }
