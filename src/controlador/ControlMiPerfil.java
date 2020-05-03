@@ -7,7 +7,13 @@ import javax.swing.JOptionPane;
 
 import modelo.Aplicacion;
 import vista.*;
-
+/**
+ * Clase ControlMiPerfil.
+ * 
+ * @author Elena Cano
+ * @author Pablo Izaguirre
+ * @author Miguel Escribano
+ */
 public class ControlMiPerfil implements ActionListener {
 
 	private Ventana frame;
@@ -18,6 +24,12 @@ public class ControlMiPerfil implements ActionListener {
 		this.vista = frame.getVistaMiPerfil();
 		setVista();
 	}
+	/**
+	 * Método encargado de gestionar los eventos relacionados con los botones de la vista 
+	 * de mi perfil
+	 * 
+	 * 
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("cerrarSesion")){

@@ -8,7 +8,13 @@ import javax.swing.*;
 
 import controlador.ControlApoyoMinimoProyecto;
 
-
+/**
+ * Clase de la vista ApoyoMinimoProyecto.
+ * 
+ * @author Elena Cano
+ * @author Pablo Izaguirre
+ * @author Miguel Escribano
+ */
 public class ApoyoMinimoProyecto extends JPanel {
 	private JLabel labelTitulo;
 	private JTextField jtfEntrada;

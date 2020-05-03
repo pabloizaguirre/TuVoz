@@ -6,7 +6,13 @@ import java.awt.event.*;
 import javax.swing.*;
 import modelo.*;
 import vista.*;
-
+/**
+ * Clase ControlIrACrearProyecto.
+ * 
+ * @author Elena Cano
+ * @author Pablo Izaguirre
+ * @author Miguel Escribano
+ */
 public class ControlIrACrearProyecto implements ActionListener {
 	private CrearProyecto vista;
 	private Ventana frame;
@@ -17,9 +23,11 @@ public class ControlIrACrearProyecto implements ActionListener {
 	}
 	
 	/**
-	 * Cambia la vista a CrearProyecto
+	 * Método encargado de mostrar la vista de detalle de un proyecto. En el proceso, se comprueba
+	 * si el proyecto en cuestión cuenta con una vista ya creada, o en su defecto, es necesario
+	 * crearla
 	 * 
-	 * @param e action event
+	 * 
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {

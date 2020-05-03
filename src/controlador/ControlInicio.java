@@ -7,7 +7,13 @@ import java.io.File;
 import javax.swing.*;
 import modelo.*;
 import vista.*;
-
+/**
+ * Clase ControlInicio.
+ * 
+ * @author Elena Cano
+ * @author Pablo Izaguirre
+ * @author Miguel Escribano
+ */
 public class ControlInicio implements ActionListener {
 	
 	private InicioRegistro vista;
@@ -22,7 +28,8 @@ public class ControlInicio implements ActionListener {
 	}
 	
 	/**
-	 * Cambia la vista a CrearProyectoSocial
+	 * Método encargado de gestionar las acciones en los botones de la vista de inicio de sesión
+	 * y de registro en la aplicacion
 	 * 
 	 * @param e action event
 	 */

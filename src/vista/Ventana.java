@@ -11,7 +11,13 @@ import java.util.List;
 import controlador.*;
 import modelo.*;
 
-
+/**
+ * Clase de la vista Ventana.
+ * 
+ * @author Elena Cano
+ * @author Pablo Izaguirre
+ * @author Miguel Escribano
+ */
 public class Ventana extends JFrame {
 	
 	//prueba de DetalleProyecto:
@@ -62,6 +68,14 @@ public class Ventana extends JFrame {
 	private String vistaActual;
 	private JPanel ventana;
 	
+	/**
+     * Metodo para crear un ImageIcon a partir de un archivo 
+     * @param path, ruta del archivo
+     * @param description, descripcion a añadir 
+     * 
+     * @return ImageIcon deseada, null en caso de error
+     * 
+     */
 	public static ImageIcon createImageIcon(String path, String description) {
 		if (new File(path).exists()) {
 			return new ImageIcon(path, description);
@@ -95,7 +109,6 @@ public class Ventana extends JFrame {
 		ventana.add(vistaInicioRegistro, "inicioRegistro");
 		ultimaVista = "inicioRegistro";
 		
-		//Aplicacion.getAplicacion().cargarAplicacion();
 		
 		
 		//prueba de la pantalla de proyecto
@@ -104,35 +117,10 @@ public class Ventana extends JFrame {
 		Ciudadano punkizius = new Ciudadano ("badg" , "Punkizius", "123456789A");
 		punkizius.aprobarRegistro();
 		
-		/*
-		String descripcion = "Un proyecto rechulon para chicas malas que son rechulonas y molonas, tambien es importante que tengan alto flow, para pertenecer solo tienes que decir las palabras magicas: Que falta de respeto mami como te atreves a venir sin pantis";
-		
-		ProyectoSocial p = new ProyectoSocial("Puente", descripcion, 200000, creador, "Las chicas malas", TipoAlcance.INTERNACIONAL);
-		List<Distrito> d = new ArrayList<Distrito>();
-	    d.add(Distrito.MONCLOAARAVACA);
-	    d.add(Distrito.MORATALAZ);
-		Proyecto pInfraestructura = new ProyectoInfraestructura("Puente para conejas", descripcion, 10, creador, new Imagen("/Users/casa/Downloads/guinea-pig-bridge-1.jpg", "postu"), d);
-		
-		
-		
-		
-		
-		//No consigo que se muestre el colectivo en la pestaña para seleccionar colectivos al crear
-		//un proyecto
-		
-		Colectivo colectivo = new Colectivo("Coquito CF", creador);
-		
-		creador.anadirAMisColectivosCreados(colectivo);*/
-
-		
 		
 		
 		this.vistaHome = new Home();
 		ventana.add(vistaHome, "home");
-		
-		//this.vistaDetalleProyecto = new DetalleProyecto(p);
-		//ventana.add(vistaDetalleProyecto, "detalleProyecto");
-		
 		
 		//contenidos de la ventana:
 
@@ -270,7 +258,11 @@ public class Ventana extends JFrame {
 	public String getUltimaVista() {
 		return ultimaVista;
 	}
-	
+	 /**
+     * Metodo para mostrar el panel requerido pasado por parametro
+     * @param carta, String de la vista a mostrar
+     * 
+     */
 	public void mostrarPanel(String carta) {
 		CardLayout l = (CardLayout)ventana.getLayout();
 		ultimaVista = vistaActual;
@@ -282,11 +274,18 @@ public class Ventana extends JFrame {
 		CardLayout l = (CardLayout)ventana.getLayout();
 		l.previous(ventana);
 	}
-
+	 /**
+     * Metodo para añadir un boton a la lista de botones de proyectos 
+     * @param boton Boton que queremos añadir
+     * 
+     */
 	public void anadirVentana(JPanel vista, String name) {
 		ventana.add(vista, name);
 	}
-	
+	 /**
+     * Metodo para resetear la vista de Home
+     * 
+     */
 	public void resetHome() {
 		contrHome.setVista();
 		vistaHome.setControladorAnadirColectivo(contIrACrearColectivo);

@@ -7,7 +7,13 @@ import java.util.List;
 
 import javax.swing.*;
 import modelo.*;
-
+/**
+ * Clase de la vista CrearProyectoSocial.
+ * 
+ * @author Elena Cano
+ * @author Pablo Izaguirre
+ * @author Miguel Escribano
+ */
 public class CrearProyectoSocial extends JPanel {
 	
 	private JTextField jtfGrupoSocial;
@@ -104,6 +110,13 @@ public class CrearProyectoSocial extends JPanel {
 		return (String)comboColectivos.getSelectedItem();
 	}
 	
+	 /**
+     * Método para añadir los colectivos que representa el ciudadano actual al combo box
+     * para crear el nuevo proyecto como proyecto de un colectivo
+     * 
+     *@param list Lista de colectivos que representa el ciudadano
+     * 
+     */
 	public static void addColectivos(List<Colectivo> list) {
 		comboColectivos.removeAllItems();
 		comboColectivos.addItem("No");
@@ -111,7 +124,10 @@ public class CrearProyectoSocial extends JPanel {
 			comboColectivos.addItem(c.getTitulo());
 		}
 	}
-	
+	 /**
+     * Metodo para limpiar los distintos campos de creación de proyecto social
+     * 
+     */
 	public void limpiarJtf() {
 		jtfGrupoSocial.setText("");
 		comboColectivos.setSelectedIndex(0);

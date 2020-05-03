@@ -5,7 +5,13 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-
+/**
+ * Clase de la vista CrearProyecto.
+ * 
+ * @author Elena Cano
+ * @author Pablo Izaguirre
+ * @author Miguel Escribano
+ */
 public class CrearProyecto extends JPanel {
 	
 	private JLabel labelNuevo;
@@ -99,7 +105,10 @@ public class CrearProyecto extends JPanel {
 		if(jtfPresupuesto.getText().equals("")) return -1.0;
 		return Double.parseDouble(jtfPresupuesto.getText());
 	}
-	
+	 /**
+     * Metodo para limpiar los distintos campos de creación de proyecto
+     * 
+     */
 	public void limpiarJtf() {
 		jtfNombre.setText("");
 		jtfDescripcion.setText("");

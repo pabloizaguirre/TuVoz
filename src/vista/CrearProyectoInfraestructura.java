@@ -8,7 +8,13 @@ import java.util.List;
 
 import javax.swing.*;
 import modelo.*;
-
+/**
+ * Clase de la vista CrearProyectoInfraestructura.
+ * 
+ * @author Elena Cano
+ * @author Pablo Izaguirre
+ * @author Miguel Escribano
+ */
 public class CrearProyectoInfraestructura extends JPanel {
 	
 	private JLabel labelNuevo;
@@ -105,7 +111,13 @@ public class CrearProyectoInfraestructura extends JPanel {
 	public String getColectivos() {
 		return (String)comboColectivos.getSelectedItem();
 	}
-	
+	 /**
+     * Método para añadir los colectivos que representa el ciudadano actual al combo box
+     * para crear el nuevo proyecto como proyecto de un colectivo
+     * 
+     *@param list Lista de colectivos que representa el ciudadano
+     * 
+     */
 	public static void addColectivos(List<Colectivo> list) {
 		comboColectivos.removeAllItems();
 		comboColectivos.addItem("No");
@@ -113,7 +125,10 @@ public class CrearProyectoInfraestructura extends JPanel {
 			comboColectivos.addItem(c.getTitulo());
 		}
 	}
-	
+	 /**
+     * Metodo para limpiar los distintos campos de creación de proyecto de infraestructura
+     * 
+     */
 	public void limpiar() {
 		distrito1.setSelected(false);
 		comboColectivos.setSelectedIndex(0);

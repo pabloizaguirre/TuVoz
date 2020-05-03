@@ -7,7 +7,13 @@ import java.util.List;
 import javax.swing.*;
 
 import modelo.Colectivo;
-
+/**
+ * Clase de la vista CrearColectivo.
+ * 
+ * @author Elena Cano
+ * @author Pablo Izaguirre
+ * @author Miguel Escribano
+ */
 public class CrearColectivo extends JPanel{
 	
 	private JTextField jtfNombre;
@@ -54,6 +60,13 @@ public class CrearColectivo extends JPanel{
 	public String getNombre() {
 		return jtfNombre.getText();
 	}
+	 /**
+     * Método para añadir los colectivos que representa el ciudadano actual al combo box
+     * para crear el nuevo colectivo como subcolectivo
+     * 
+     *@param list Lista de colectivos que representa el ciudadano
+     * 
+     */
 	public static void addColectivos(List<Colectivo> list) {
 		comboColectivos.removeAllItems();
 		comboColectivos.addItem("No");
@@ -65,6 +78,11 @@ public class CrearColectivo extends JPanel{
 	public String getColectivos() {
 		return (String)comboColectivos.getSelectedItem();
 	}
+	/**
+     * Metodo para limpiar el campo de nombre del colectivo cuando se realiza 
+     * la creación del mismo
+     * 
+     */
 	public void limpiarJtf() {
 		jtfNombre.setText("");
 		comboColectivos.setSelectedIndex(0);

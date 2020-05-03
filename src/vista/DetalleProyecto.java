@@ -12,6 +12,13 @@ import javax.swing.*;
 
 import controlador.ControlDetalleProyecto;
 
+/**
+ * Clase de la vista DetalleProyecto.
+ * 
+ * @author Elena Cano
+ * @author Pablo Izaguirre
+ * @author Miguel Escribano
+ */
 public class DetalleProyecto extends JPanel{
 	
 	private JButton solicitarInforme;
@@ -93,38 +100,6 @@ public class DetalleProyecto extends JPanel{
 		
 	}
 	
-	/*
-	public static void main(String[] args) {
-		JFrame ventana = new JFrame("Mi GUI. Ejemplo 2");
-		// obtener contenedor, asignar layout
-		Container contenedor = ventana.getContentPane();
-		Ciudadano c = Ciudadano.registrarCiudadano("MalaSanta", "BeckyG", "7334234P");
-		Ciudadano c2 = Ciudadano.registrarCiudadano("brazos", "ConejoMalo", "1231213I");
-		
-		Aplicacion.getAplicacion().setUsuarioActual(c2);
-		
-		String desc = "Donde estan las gatas ninina palante nananinina palante... no soy ni mala ni santa ninino una como yo a ti te hace falta, calladita pero a veces soy mala empiezo y no kiero parar no soy ni mala ni santa.";
-		Proyecto p = new ProyectoSocial("ONG para ayudar a victimas de belleza despampanante", desc, 123123123, c,"Pablo", TipoAlcance.INTERNACIONAL);
-		List<Distrito> d = new ArrayList<Distrito>();
-	    d.add(Distrito.MONCLOAARAVACA);
-	    d.add(Distrito.MORATALAZ);
-		Proyecto pI = new ProyectoInfraestructura("Infraestructura", desc, 2001211.123123, c2, new Imagen("/Users/casa/Desktop/IMG_0377_Facetune_27-03-2019-12-36-33.jpeg", "postu"), d);
-		DetalleProyecto panel = new DetalleProyecto(pI);
-		contenedor.add(panel);
-		
-		ControlDetalleProyecto contr = new ControlDetalleProyecto(ventana, panel, pI);
-		contr.setVistaDetalleProyecto();
-		
-		
-		
-		panel.setControlador(contr);
-		
-		// mostrar ventana
-		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		ventana.setSize(1000,600);
-		ventana.setLocationRelativeTo(null);
-		ventana.setVisible(true);	
-	}*/
 	
 	public void setTitulo(String titulo) {
 		this.titulo.append(titulo);

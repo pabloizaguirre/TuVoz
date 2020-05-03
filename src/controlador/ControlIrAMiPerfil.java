@@ -5,7 +5,13 @@ import java.awt.event.*;
 import javax.swing.*;
 import modelo.*;
 import vista.*;
-
+/**
+ * Clase ControlMiPerfil.
+ * 
+ * @author Elena Cano
+ * @author Pablo Izaguirre
+ * @author Miguel Escribano
+ */
 
 public class ControlIrAMiPerfil implements ActionListener {
 	
@@ -18,9 +24,10 @@ public class ControlIrAMiPerfil implements ActionListener {
 	}
 
 	/**
-	 * Cambia la vista a mi perfil
+	 * Método encargado de gestionar los eventos relacionados con los botones de la vista 
+	 * de mi perfil
 	 * 
-	 * @param e action event
+	 * 
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {

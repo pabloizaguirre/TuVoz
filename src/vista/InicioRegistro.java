@@ -4,7 +4,13 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
-
+/**
+ * Clase de la vista Inicio-Registro.
+ * 
+ * @author Elena Cano
+ * @author Pablo Izaguirre
+ * @author Miguel Escribano
+ */
 public class InicioRegistro extends JPanel {
 
 	private JLabel labelnombre;
@@ -144,7 +150,10 @@ public class InicioRegistro extends JPanel {
 	public String getPasswordReg() {
 		return String.valueOf(passwordreg.getPassword());
 	}
-	
+	/**
+     * Metodo para limpiar los campos de inicio de sesion y de registro de la vista principal 
+     *       
+     */
 	public void limpiarJtf() {
 		jtfnombre.setText("");
 		password.setText("");

@@ -9,7 +9,13 @@ import javax.swing.*;
 import modelo.*;
 import vista.*;
 
-
+/**
+ * Clase ControlNotificaciones.
+ * 
+ * @author Elena Cano
+ * @author Pablo Izaguirre
+ * @author Miguel Escribano
+ */
 public class ControlNotificaciones implements ActionListener {
 	private VerNotificaciones vista;
 	private Ventana frame;
@@ -23,7 +29,11 @@ public class ControlNotificaciones implements ActionListener {
 		this.vista = frame.getVistaNotificaciones();
 		setVista();
 	}
-	
+	/**
+	 * Método encargado de gestionar las notificaciones
+	 * 
+	 * 
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("IrProyecto")) {
@@ -42,13 +52,13 @@ public class ControlNotificaciones implements ActionListener {
 		for(Notificacion n:Aplicacion.getAplicacion().getUsuarioActual().getNotificaciones()) {
 			String texto = n.getTextoNotificacion();
 			
-			if (n instanceof NotificacionCiudadano) {
+			/*if (n instanceof NotificacionCiudadano) {
 				JPanel j = vista.addNotificacionAprobarRegistro(texto);
 				Proyecto p=((NotificacionProyectoEstado) n).getProyecto();
 				JButton b= 
 				proyectosCambioEstado.put(n,p);
-			}
-			else if (n instanceof NotificacionProyectoNuevo) {
+			}*/
+			/*else */if (n instanceof NotificacionProyectoNuevo) {
 				vista.addNotificacionAprobarProyecto(texto);
 			}
 			else if (n instanceof NotificacionProyectoEstado) {
