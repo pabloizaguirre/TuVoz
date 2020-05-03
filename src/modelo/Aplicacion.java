@@ -131,7 +131,7 @@ public class Aplicacion implements Serializable {
 		FileOutputStream fos = null;
 		try {
 			aplicacion.setListaNombres(Usuario.getListaNombres());
-			fos = new FileOutputStream("data/data.dat");
+			fos = new FileOutputStream("data.dat");
 			salida = new ObjectOutputStream(fos);
             salida.writeObject(Aplicacion.getAplicacion());
             
@@ -155,7 +155,7 @@ public class Aplicacion implements Serializable {
         Aplicacion obj = null;
         
         try {
-            ObjectInputStream entrada = new ObjectInputStream(new FileInputStream("data/data.dat"));
+            ObjectInputStream entrada = new ObjectInputStream(new FileInputStream("data.dat"));
             obj = (Aplicacion)entrada.readObject();
             entrada.close();
             aplicacion = obj;
@@ -273,7 +273,7 @@ public class Aplicacion implements Serializable {
         //Creamos un proyecto como colectivo
         List<Distrito> d = new ArrayList<Distrito>();
         d.add(Distrito.MONCLOAARAVACA);
-        ProyectoInfraestructura p1 = new ProyectoInfraestructura("Puente", "Puente por encima del rio", 5000000, c1, new Imagen("planopuente.jpg","PlanoPuente"), d);
+        ProyectoInfraestructura p1 = new ProyectoInfraestructura("Puente", "Puente por encima del rio", 1000000, c1, new Imagen("planopuente.jpg","PlanoPuente"), d);
         System.out.println("\nEl colectivo " + c1 + " ha creado el proyecto " + p1);
         
         //Comprobamos que el proyecto tiene un apoyo, el del representante

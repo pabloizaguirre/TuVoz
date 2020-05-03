@@ -21,6 +21,7 @@ public class Home extends JPanel{
 	
 	private JButton botonAnadirProyecto;
 	private JButton botonAnadirColectivo;
+	private JButton botonApoyoProyecto;
 	
 	private JPanel listaProyectos;
 	private JPanel listaColectivos;
@@ -60,15 +61,19 @@ public class Home extends JPanel{
 		proyectos.add(scroll, BorderLayout.SOUTH);
 		proyectos.setPreferredSize(new Dimension(700,200)); 
 		
+		botonApoyoProyecto = new JButton("Gestionar minimo de apoyos");
+		botonApoyoProyecto.setActionCommand("apoyoProyecto");
+		
 		//añadir constraints del contenedor
 		cLayout.putConstraint(BorderLayout.NORTH, proyectos, 15, BorderLayout.SOUTH, titulo);
 		cLayout.putConstraint(BorderLayout.WEST, proyectos, 40, BorderLayout.WEST, this);
 		cLayout.putConstraint(BorderLayout.EAST, proyectos, -40, BorderLayout.EAST, this);
+		cLayout.putConstraint(BorderLayout.WEST, botonApoyoProyecto, 40, BorderLayout.WEST, this);
+		cLayout.putConstraint(BorderLayout.NORTH,botonApoyoProyecto, 0, BorderLayout.SOUTH, proyectos);
 		
 		// a�adir componentes al contenedor
 		add(proyectos);
-		
-		
+		add(botonApoyoProyecto);
 		
 		//panel con mis colectivos:
 		final JPanel colectivos = new JPanel();
@@ -123,6 +128,25 @@ public class Home extends JPanel{
 		botonAnadirProyecto.addActionListener(c);
 		botonAnadirColectivo.addActionListener(c);
 	}
+	
+	/**
+	 * Desactiva los botones de añadir proyecto y colectivo.
+	 */
+	public void setAdminMode() {
+		this.botonAnadirColectivo.setVisible(false);
+		this.botonAnadirProyecto.setVisible(false);
+		this.botonApoyoProyecto.setVisible(true);
+	}
+	
+	/**
+	 * Hace visibles los botones de añadir proyectos y colectivos.
+	 */
+	public void setCiudadanoMode() {
+		this.botonAnadirColectivo.setVisible(true);
+		this.botonAnadirProyecto.setVisible(true);
+		this.botonApoyoProyecto.setVisible(false);
+	}
+	
 	 /**
      * Metodo para resetear los botones de la vista Home
      * 

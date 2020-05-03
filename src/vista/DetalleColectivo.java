@@ -8,11 +8,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-import modelo.Aplicacion;
-import modelo.Ciudadano;
-import modelo.Colectivo;
-import modelo.Proyecto;
-import modelo.Usuario;
 /**
  * Clase de la vista DetalleColectivo.
  * 
@@ -24,25 +19,24 @@ public class DetalleColectivo extends JPanel {
 	
 	
 	private JLabel titulo = new JLabel("");
-	private JButton botonUnirme;
+	
 	JPanel panelBotonUnirme;
+	private JButton botonUnirme;
+	
+	private JPanel listaProyectos;
+	private JPanel listaColectivos;
 	
 	public DetalleColectivo() {
 		SpringLayout cLayout = new SpringLayout();
-		
-		
+	
 		titulo.setFont(new Font(titulo.getFont().getName(), Font.PLAIN, titulo.getFont().getSize()+20));
 		
-		
-		panelBotonUnirme = new JPanel();
-		
 		cLayout.putConstraint(SpringLayout.WEST, titulo, 20, SpringLayout.WEST, this);
-		cLayout.putConstraint(SpringLayout.NORTH, titulo, 20, SpringLayout.NORTH, this);
-
-		cLayout.putConstraint(SpringLayout.WEST, panelBotonUnirme, 20, SpringLayout.EAST, titulo);
-
 		add(titulo);
-		add(panelBotonUnirme);
+
+		panelBotonUnirme = new JPanel();
+		cLayout.putConstraint(BorderLayout.NORTH, panelBotonUnirme, 5, BorderLayout.SOUTH, titulo);
+		cLayout.putConstraint(BorderLayout.WEST, panelBotonUnirme, 20, BorderLayout.WEST, this);
 		
 		//Panel con los proyectos
 		final JPanel proyectos = new JPanel();
@@ -54,14 +48,9 @@ public class DetalleColectivo extends JPanel {
 		JPanel listaProyectos = new JPanel();
 		listaProyectos.setLayout(new FlowLayout(FlowLayout.LEFT));
 	
-		
-		
 		JScrollPane scroll = new JScrollPane(listaProyectos);
 		scroll.setPreferredSize(new Dimension(700, 150));
 		scroll.setBorder(null);
-		
-		JButton boton;
-		
 		
 		proyectos.add(labelProyectos, BorderLayout.WEST);
 		proyectos.add(scroll, BorderLayout.SOUTH);
@@ -74,8 +63,6 @@ public class DetalleColectivo extends JPanel {
 		
 		// a�adir componentes al contenedor
 		add(proyectos);
-		
-		
 		
 		//panel con  subcolectivos:
 		final JPanel colectivos = new JPanel();
@@ -90,17 +77,6 @@ public class DetalleColectivo extends JPanel {
 		JScrollPane scrollC = new JScrollPane(listaColectivos);
 		scrollC.setPreferredSize(new Dimension(700, 150));
 		scrollC.setBorder(null);
-		
-		int j = 0;
-		while (j < 5) {
-			String s = "Colectivo " + j;
-			j++;
-			boton = new JButton(s); 
-			boton.setPreferredSize(new Dimension(120, 120));
-			
-			listaColectivos.add(boton); 
-		}
-		listaColectivos.setVisible(true); 
 		
 		colectivos.add(labelColectivos, BorderLayout.WEST);
 		colectivos.add(scrollC, BorderLayout.SOUTH);
@@ -119,6 +95,24 @@ public class DetalleColectivo extends JPanel {
 		this.titulo.setText(titulo);
 	}
 	
+	 /**
+     * Metodo para añadir un boton a la lista de botones de proyectos 
+     * @param boton Boton que queremos añadir
+     * 
+     */
+	public void addBotonProyecto(JButton boton) {
+		boton.setPreferredSize(new Dimension(120, 120));
+		listaProyectos.add(boton);
+	}
+	 /**
+     * Metodo para añadir un boton a la lista de botones de subcolectivos
+     * @param boton Boton que queremos añadir
+     * 
+     */
+	public void addBotonColectivo(JButton boton) {
+		boton.setPreferredSize(new Dimension(120, 120));
+		listaColectivos.add(boton);
+	}
 	
 	 /**
      * Metodo para establecer los botones de la vista segun el usuario actual
@@ -156,5 +150,6 @@ public class DetalleColectivo extends JPanel {
 			botonUnirme.setEnabled(true);
 		}
 	}
+
 }
 

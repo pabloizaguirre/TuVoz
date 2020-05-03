@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import modelo.*;
+import vista.CrearColectivo;
 import vista.DetalleColectivo;
 import vista.DetalleProyecto;
 import vista.Home;
@@ -41,10 +42,19 @@ public class ControlHome implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
-		if(e.getActionCommand().equals("anadirProyecto")) {
+		String aCommand = e.getActionCommand();
+		if(aCommand.equals("anadirProyecto")) {
 			frame.mostrarPanel("crearProyecto");
 		} else if(e.getActionCommand().equals("anadirColectivo")){
+			/*Actualizamos la vista de colectivos para crear un subcolectivo*/
+			CrearColectivo.addColectivos(((Ciudadano)Aplicacion.getAplicacion().getUsuarioActual()).getColectivosCreados());
 			frame.mostrarPanel("crearColectivo");
+		} else if(aCommand.equals("apoyoProyecto")) {
+			if(e.getActionCommand().equals("apoyoProyecto")) {
+				JOptionPane.showMessageDialog(vista,
+						"Numero de apoyos actuales: " +Aplicacion.getAplicacion().getApoyosMin() , "Gestionar apoyos minimos", JOptionPane.INFORMATION_MESSAGE);
+				frame.mostrarPanel("apoyoMinimoProyecto");
+			}
 		} else if(proyectos.containsKey(source)) {
 			Proyecto p = proyectos.get(source);
 			

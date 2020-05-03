@@ -11,6 +11,7 @@ import modelo.Administrador;
 import modelo.Aplicacion;
 import modelo.Ciudadano;
 import modelo.Colectivo;
+import modelo.ElementoColectivo;
 import modelo.Proyecto;
 import modelo.Usuario;
 import vista.DetalleColectivo;
@@ -44,10 +45,7 @@ public class ControlDetalleColectivo implements ActionListener{
 			colectivo.unirseAColectivo((Ciudadano) Aplicacion.getAplicacion().getUsuarioActual());
 			((Ciudadano) Aplicacion.getAplicacion().getUsuarioActual()).anadirAMisColectivos(colectivo);
 			vista.getBotonUnirme().setEnabled(false);
-			JOptionPane.showMessageDialog(vista,
-					"Te has unido a " +colectivo.getTitulo(), "Unirme a colectivo", JOptionPane.INFORMATION_MESSAGE);
-		}else {
-			
+
 		}
 	}
 	
@@ -63,7 +61,12 @@ public class ControlDetalleColectivo implements ActionListener{
 		Usuario usuario = Aplicacion.getAplicacion().getUsuarioActual();
 		
 		if(!(usuario instanceof Administrador)) {
-			vista.setUnirme(colectivo.getElementos().contains(usuario));
+			vista.setUnirme(colectivo.getElementos().contains((Ciudadano) usuario));
+		}
+		for(ElementoColectivo e:colectivo.getElementos()) {
+			if(e instanceof Colectivo) {
+				
+			}
 		}
 		vista.setControlador(this);
 	}
@@ -73,14 +76,13 @@ public class ControlDetalleColectivo implements ActionListener{
 	 * 
 	 * @param e action event
 	 */
-	
 	public void resetVista() {
 		Usuario usuario = Aplicacion.getAplicacion().getUsuarioActual();
 		
 		vista.resetButtonPanel();
 		
 		if(!(usuario instanceof Administrador)) {
-			vista.setUnirme(colectivo.getElementos().contains(usuario));
+			vista.setUnirme(colectivo.getElementos().contains((Ciudadano) usuario));
 		}
 		
 		vista.setControlador(this);
