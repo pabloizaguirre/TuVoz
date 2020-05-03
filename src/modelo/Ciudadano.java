@@ -247,16 +247,13 @@ public class Ciudadano extends Usuario implements ElementoColectivo, Serializabl
      * Método para solicitar el informe de popularidad
      *
      * @param p proyecto creado por el usuario del cual se quiere solicitar el informe
-     * @return numero de apoyos que tiene el proyecto p
+     * @return numero de apoyos que tiene el proyecto p, -1 si el ciudadano no tiene acceso al documento
      */
-    public Notificacion solicitarInformePopularidad(Proyecto p){
-        String s;
+    public int solicitarInformePopularidad(Proyecto p){
         if (getProyectosPropuestos().contains(p)){
-            s = "Informe de popularidad del proyecto " + p + " :\nNúmero de apoyos = " + p.getApoyos();
-
-            //return new Notificacion(s, this);
+        	return p.getApoyos();
         }
-        return null;
+        return -1;
     }
 
     /**
@@ -268,12 +265,11 @@ public class Ciudadano extends Usuario implements ElementoColectivo, Serializabl
      *
      * @return double que representa el indice de afinidad entre dos colectivos.
      */
-    public Notificacion solicitarInformeAfinidad(Colectivo c1, Colectivo c2){
-        int proyeC1=0;
-        int proyeC2=0;
-        int proyeC1apoyC2=0;
-        int proyeC2apoyC1=0;
-        String s;
+    public double solicitarInformeAfinidad(Colectivo c1, Colectivo c2){
+        double proyeC1=0;
+        double proyeC2=0;
+        double proyeC1apoyC2=0;
+        double proyeC2apoyC1=0;
 
         if (misColectivos.contains(c1) && misColectivos.contains(c2)){
             for (Proyecto p:c1.getProyectosPropuestos()){
@@ -282,6 +278,7 @@ public class Ciudadano extends Usuario implements ElementoColectivo, Serializabl
                     proyeC1apoyC2+=1;
                 }
             }
+            System.out.println("p1a2: " + proyeC1apoyC2);
             for (Proyecto p:c2.getProyectosPropuestos()){
                 proyeC2+=1;
 
@@ -289,10 +286,10 @@ public class Ciudadano extends Usuario implements ElementoColectivo, Serializabl
                     proyeC2apoyC1+=1;
                 }
             }
-            s = "Informe de afinidad de los colectivos " + c1 + " y " + c2 + " :\nÍndice de afinidad: " + (proyeC1apoyC2 + proyeC2apoyC1)/(proyeC1 + proyeC2);
-            //return new Notificacion(s, this);
+            System.out.println("p2a1: " + proyeC2apoyC1);
+            return (proyeC1apoyC2 + proyeC2apoyC1)/(proyeC1 + proyeC2);
         }
-        return null;
+        return -1;
     }
 
 

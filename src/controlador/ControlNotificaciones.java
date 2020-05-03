@@ -27,7 +27,7 @@ public class ControlNotificaciones implements ActionListener {
 	public ControlNotificaciones(Ventana frame) {
 		this.frame = frame;
 		this.vista = frame.getVistaNotificaciones();
-		setVista();
+		//setVista();
 	}
 	/**
 	 * Método encargado de gestionar las notificaciones

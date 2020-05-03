@@ -100,6 +100,7 @@ public class Ventana extends JFrame {
             }
         });
 		setSize(new Dimension(1000,600));
+		setMinimumSize(new Dimension(720,200));
 		setLocationRelativeTo(null);
 		Container contentPane = getContentPane();
 		contentPane.setLayout(new BorderLayout());
@@ -162,7 +163,7 @@ public class Ventana extends JFrame {
 		ventana.add(vistaApoyoMinimoProyecto, "apoyoMinimoProyecto");
 		
 	
-
+		
 		contentPane.add(scroll, BorderLayout.CENTER);
 	}
 
