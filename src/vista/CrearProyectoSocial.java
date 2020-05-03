@@ -94,15 +94,15 @@ public class CrearProyectoSocial extends JPanel {
 	public String getGrupoSocial() {
 		return jtfGrupoSocial.getText();
 	}
-	public TipoAlcance getTipoAlcance() {
+	public String getTipoAlcance() {
 		if(nacional.isSelected()) {
-			return TipoAlcance.NACIONAL;
+			return "nacional";
 		}
 		else if(internacional.isSelected()) {
-			return TipoAlcance.INTERNACIONAL;
+			return "internacinal";
 		}
 		else {
-			return null;
+			return "";
 		}
 	}
 
