@@ -54,6 +54,7 @@ public class Ventana extends JFrame {
 	private ControlCrearProyectoInfraestructura contrCrearProyectoInfraestructura;
 	
 	private VerNotificaciones vistaNotificaciones;
+	private ControlNotificaciones contrNotificaciones;
 	
 	private HashMap<Integer, ControlDetalleProyecto> proyectos = new HashMap<Integer, ControlDetalleProyecto>();
 	private HashMap<String, ControlDetalleColectivo> colectivos = new HashMap<String, ControlDetalleColectivo>();
@@ -200,6 +201,8 @@ public class Ventana extends JFrame {
 		
 		this.contrHomeAdmin = controlador.getControlHomeAdmin();
 		vistaHomeAdmin.setControlHomeAdmin(contrHomeAdmin);
+		
+		this.contrNotificaciones = controlador.getControlNotificaciones();
 	}
 	
 	public DetalleProyecto getVistaDetalleProyecto() {

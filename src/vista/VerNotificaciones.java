@@ -24,17 +24,18 @@ public class VerNotificaciones extends JPanel{
 	
 	private static int id=0;
 	private HashMap<Integer, JPanel> listaNotificaciones = new HashMap<Integer, JPanel>();
+	private JLabel intro = new JLabel ("Notificaciones");;
 	
 	public VerNotificaciones(){
 		BoxLayout notiLayout = new BoxLayout(this, BoxLayout.PAGE_AXIS);
 		this.setLayout(notiLayout);
+		this.setBorder(BorderFactory.createEmptyBorder(0, 20, 20, 20));
 		
-		JLabel intro = new JLabel ("Notificaciones");
 		intro.setFont(new Font(intro.getFont().getName(), Font.PLAIN, intro.getFont().getSize()+20));
 		intro.setAlignmentX(LEFT_ALIGNMENT);
 		this.add(intro);
 		this.add(Box.createRigidArea(new Dimension(0, 40)));
-		this.add(Box.createHorizontalStrut(40));
+		//this.add(Box.createHorizontalStrut(20));
 		
     }
     
@@ -155,16 +156,20 @@ public class VerNotificaciones extends JPanel{
 	public void borrarNotificacion(int id) {
 		this.remove(listaNotificaciones.get(id));
 		listaNotificaciones.remove(id);
+		this.validate();
 	}
 	
 	
 	public void resetNoti() {
-		for (int i = 0; i < id; ++i) {
-			listaNotificaciones.remove(id);
-		}
+		this.removeAll();
+		this.add(intro);
+		this.add(Box.createRigidArea(new Dimension(0, 40)));
+		//this.add(Box.createHorizontalStrut(40));
+		
+		listaNotificaciones = new HashMap<Integer, JPanel>();
 		id=0; 
 	
-		}
+	}
 	
 	
 	

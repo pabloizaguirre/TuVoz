@@ -55,16 +55,16 @@ public class ControlNotificaciones implements ActionListener {
 			Notificacion n= HMAprobarRegistro.get(source);
 			Ciudadano c= ((NotificacionCiudadano)n).getCiudadano();
 			c.aprobarRegistro();
+			Aplicacion.getAplicacion().getUsuarioActual().eliminarNotificacion(n);
 			String i =e.getActionCommand();
 			int id =Integer.parseInt(i);
 			vista.borrarNotificacion(id);
 		}
 		
 		else if (HMRechazarRegistro.containsKey(source)) {
-			Notificacion n= HMRechazarRegistro.get(source);
+			Notificacion n = HMRechazarRegistro.get(source);
 			Ciudadano c = ((NotificacionCiudadano)n).getCiudadano();
-			System.out.println("fff");
-			c.eliminarNotificacion(n);
+			Aplicacion.getAplicacion().getUsuarioActual().eliminarNotificacion(n);
 			Aplicacion.getAplicacion().getListadoElementoColectivos().remove(c);
 			String i = e.getActionCommand();
 			int id = Integer.parseInt(i);
