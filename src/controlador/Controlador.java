@@ -65,6 +65,9 @@ public class Controlador {
 		return this.contrBarraSuperior;
 	}
 	
+	public ControlMiPerfil getControlMiPerfil() {
+		return this.contrMiPerfil;
+	}
 	
 	public ControlIrACrearProyecto getControlIrACrearProyecto() {
 		return this.contrIrACrearProyecto;

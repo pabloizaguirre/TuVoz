@@ -46,6 +46,7 @@ public class ControlInicio implements ActionListener {
 	        	controlador.getControlNotificaciones().setVista();
 	        	frame.getVistaBarraSuperior().setVisible(true);
 	        	vista.limpiarJtf();
+	        	frame.getControlMiPerfil().setVista();
 	        	frame.mostrarPanel("homeAdmin");
 	        } 
 	        /*Comprobamos si las credenciales introducidas corresponden a un ciudadano registrado*/
@@ -58,6 +59,7 @@ public class ControlInicio implements ActionListener {
 	        		controlador.getControlNotificaciones().setVista();
 	        		frame.getVistaBarraSuperior().setVisible(true);
 		        	vista.limpiarJtf();
+		        	frame.getControlMiPerfil().setVista();
 	        		frame.mostrarPanel("home");
 	        	}
 	        	else {

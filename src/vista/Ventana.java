@@ -3,6 +3,8 @@ package vista;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,7 +24,7 @@ public class Ventana extends JFrame {
 	private ControlBarraSuperior contrBarraSuperior;
 	
 	private MiPerfil vistaMiPerfil;
-	private ControlIrACrearColectivo contIrACrearColectivo;
+	private ControlMiPerfil contrMiPerfil;
 	
 	private Home vistaHome;
 	private ControlHome contrHome;
@@ -74,6 +76,15 @@ public class Ventana extends JFrame {
 	public Ventana() {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		addWindowListener(new WindowAdapter()
+        {
+            @Override
+            public void windowClosing(WindowEvent e)
+            {
+                Aplicacion.guardarAplicacion();
+                e.getWindow().dispose();
+            }
+        });
 		setSize(new Dimension(1000,600));
 		setLocationRelativeTo(null);
 		Container contentPane = getContentPane();
@@ -168,12 +179,7 @@ public class Ventana extends JFrame {
 	}
 
 	public void setControlador(Controlador controlador) {
-		this.contIrACrearColectivo = controlador.getControlIrACrearColectivo();
 		this.contrIrACrearProyecto = controlador.getControlIrACrearProyecto();
-		
-		vistaHome.setControladorAnadirColectivo(contIrACrearColectivo);
-		vistaHome.setControladorAnadirProyecto(contrIrACrearProyecto);
-		
 		
 		this.contrBarraSuperior = controlador.getControlBarraSuperior();
 		vistaBarraSuperior.setControlador(contrBarraSuperior);
@@ -200,12 +206,16 @@ public class Ventana extends JFrame {
 		this.contrNoti = controlador.getControlNotificaciones();
 		vistaNotificaciones.setControlNotificaciones(contrNoti);
 		
+		this.contrMiPerfil = controlador.getControlMiPerfil();
+		vistaMiPerfil.setControlador(contrMiPerfil);
+		
 	
 		//this.contrApoyar = controlador.getControlApoyar();
 		//vistaDetalleProyecto.setControlador(contrApoyar);
 		
 		// Establecer controlador Home
 		this.contrHome = controlador.getControlHome();
+		vistaHome.setControlador(contrHome);
 		
 		this.contrHomeAdmin = controlador.getControlHomeAdmin();
 		vistaHomeAdmin.setControlHomeAdmin(contrHomeAdmin);
@@ -257,6 +267,10 @@ public class Ventana extends JFrame {
 	
 	public ControlHome getControlHome() {
 		return this.contrHome;
+	}
+	
+	public ControlMiPerfil getControlMiPerfil() {
+		return this.contrMiPerfil;
 	}
 	
 	public HashMap<Integer, ControlDetalleProyecto> getProyectos(){

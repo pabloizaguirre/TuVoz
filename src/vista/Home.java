@@ -42,14 +42,12 @@ public class Home extends JPanel{
 		listaProyectos.setLayout(new FlowLayout(FlowLayout.LEFT));
 		botonAnadirProyecto = new JButton(icon1);
 		botonAnadirProyecto.setPreferredSize(new Dimension(120, 120));
+		botonAnadirProyecto.setActionCommand("anadirProyecto");
 		listaProyectos.add(botonAnadirProyecto);
-		
 		
 		JScrollPane scroll = new JScrollPane(listaProyectos);
 		scroll.setPreferredSize(new Dimension(700, 150));
 		scroll.setBorder(null);
-		
-		JButton boton;
 		
 		proyectos.add(labelProyectos, BorderLayout.WEST);
 		proyectos.add(scroll, BorderLayout.SOUTH);
@@ -76,6 +74,7 @@ public class Home extends JPanel{
 		listaColectivos.setLayout(new FlowLayout(FlowLayout.LEFT));
 		botonAnadirColectivo = new JButton(icon1);
 		botonAnadirColectivo.setPreferredSize(new Dimension(120, 120));
+		botonAnadirColectivo.setActionCommand("anadirColectivo");
 		listaColectivos.add(botonAnadirColectivo);
 		
 		JScrollPane scrollC = new JScrollPane(listaColectivos);
@@ -105,11 +104,8 @@ public class Home extends JPanel{
 		listaColectivos.add(boton);
 	}
 	
-	public void setControladorAnadirProyecto(ActionListener c) {  
+	public void setControlador(ActionListener c) {  
 		botonAnadirProyecto.addActionListener(c);
-	}
-	
-	public void setControladorAnadirColectivo(ActionListener c) {  
 		botonAnadirColectivo.addActionListener(c);
 	}
 	
@@ -117,11 +113,13 @@ public class Home extends JPanel{
 		listaProyectos.removeAll();
 		botonAnadirProyecto = new JButton(icon1);
 		botonAnadirProyecto.setPreferredSize(new Dimension(120, 120));
+		botonAnadirProyecto.setActionCommand("anadirProyecto");
 		listaProyectos.add(botonAnadirProyecto);
 		
 		listaColectivos.removeAll();
 		botonAnadirColectivo = new JButton(icon1);
 		botonAnadirColectivo.setPreferredSize(new Dimension(120, 120));
+		botonAnadirColectivo.setActionCommand("anadirColectivo");
 		listaColectivos.add(botonAnadirColectivo);
 	}
 }

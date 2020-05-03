@@ -41,9 +41,14 @@ public class ControlHome implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
-		if(proyectos.containsKey(source)) {
+		if(e.getActionCommand().equals("anadirProyecto")) {
+			frame.mostrarPanel("crearProyecto");
+		} else if(e.getActionCommand().equals("anadirColectivo")){
+			frame.mostrarPanel("crearColectivo");
+		} else if(proyectos.containsKey(source)) {
 			Proyecto p = proyectos.get(source);
 			
+			//comprobamos si ya se ha creado una visa para este proyecto
 			if(frame.getProyectos().containsKey(p.getId())) {
 				ControlDetalleProyecto contr = frame.getProyectos().get(p.getId());
 				contr.resetVista();
@@ -60,6 +65,7 @@ public class ControlHome implements ActionListener{
 		} else if (colectivos.containsKey(source)) {
 			Colectivo c = colectivos.get(source);
 			
+			//comprobamos si ya hemos creado una vista para este colectivo
 			if(frame.getColectivos().containsKey(c.getTitulo())) {
 				ControlDetalleColectivo contr = frame.getColectivos().get(c.getTitulo());
 				contr.resetVista();
