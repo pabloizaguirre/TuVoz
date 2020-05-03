@@ -18,6 +18,7 @@ import java.awt.event.*;
 public class MiPerfil extends JPanel{
 	
 	private JButton cerrarSesion;
+	private JButton botonReset;
 	private JLabel titulo;
 	
 	private JPanel listaProyectos;
@@ -38,6 +39,12 @@ public class MiPerfil extends JPanel{
 		cLayout.putConstraint(BorderLayout.EAST, cerrarSesion, -40, BorderLayout.EAST, this);
 		cerrarSesion.setActionCommand("cerrarSesion");
 		add(cerrarSesion);
+		
+		botonReset = new JButton("Resetear aplicacion");
+		cLayout.putConstraint(BorderLayout.EAST, botonReset, -5, BorderLayout.WEST, cerrarSesion);
+		botonReset.setActionCommand("reset");
+		add(botonReset);
+		botonReset.setVisible(false);
 				
 		//panel con los proyectos
 		final JPanel proyectos = new JPanel();
@@ -107,6 +114,9 @@ public class MiPerfil extends JPanel{
 	public void setTitulo(String titulo) {
 		this.titulo.setText(titulo);
 	}
+	public void setReset(boolean b) {
+		botonReset.setVisible(b);
+	}
 	
 	public void resetBotones() {
 		listaProyectos.removeAll();
@@ -115,5 +125,6 @@ public class MiPerfil extends JPanel{
 	
 	public void setControlador(ActionListener c) {
 		cerrarSesion.addActionListener(c);
+		botonReset.addActionListener(c);
 	}
 }
