@@ -55,7 +55,6 @@ public class Ventana extends JFrame {
 	private ControlCrearProyectoInfraestructura contrCrearProyectoInfraestructura;
 	
 	private VerNotificaciones vistaNotificaciones;
-	private ControlNotificaciones contrNoti;
 	
 	private HashMap<Integer, ControlDetalleProyecto> proyectos = new HashMap<Integer, ControlDetalleProyecto>();
 	private HashMap<String, ControlDetalleColectivo> colectivos = new HashMap<String, ControlDetalleColectivo>();
@@ -123,10 +122,10 @@ public class Ventana extends JFrame {
 		
 		
 		//prueba de la pantalla de proyecto
-		Ciudadano creador = new Ciudadano("ponbebe", "Anuel", "72231461P");
+		/*Ciudadano creador = new Ciudadano("ponbebe", "Anuel", "72231461P");
 		creador.aprobarRegistro();
 		Ciudadano punkizius = new Ciudadano ("badg" , "Punkizius", "123456789A");
-		punkizius.aprobarRegistro();
+		punkizius.aprobarRegistro();*/
 		
 		
 		
@@ -191,8 +190,6 @@ public class Ventana extends JFrame {
 		this.contrInicio = controlador.getControlInicio();
 		vistaInicioRegistro.setControlInicio(contrInicio);
 		
-		this.contrNoti = controlador.getControlNotificaciones();
-		vistaNotificaciones.setControlNotificaciones(contrNoti);
 		
 		this.contrMiPerfil = controlador.getControlMiPerfil();
 		vistaMiPerfil.setControlador(contrMiPerfil);
