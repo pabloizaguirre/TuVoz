@@ -43,8 +43,11 @@ public class ControlBarraSuperior implements ActionListener{
 			}
 			frame.mostrarPanel(ultimaVista);
 		}else if(source.equals("miPerfil")) {
-			frame.mostrarPanel("miPerfil");
-			
+			if(Aplicacion.getAplicacion().getUsuarioActual() instanceof Ciudadano) {
+				frame.mostrarPanel("miPerfil");
+			}else if(Aplicacion.getAplicacion().getUsuarioActual() instanceof Administrador) {
+				frame.mostrarPanel("miPerfilAdmin");
+			}
 		}else if(source.equals("notificaciones")) {
 			frame.mostrarPanel("notificaciones");
 			

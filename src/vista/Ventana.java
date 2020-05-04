@@ -32,11 +32,11 @@ public class Ventana extends JFrame {
 	private MiPerfil vistaMiPerfil;
 	private ControlMiPerfil contrMiPerfil;
 	
+	private MiPerfilAdmin vistaMiPerfilAdmin;
+	private ControlMiPerfilAdmin contrMiPerfilAdmin;
+	
 	private Home vistaHome;
 	private ControlHome contrHome;
-
-	private HomeAdmin vistaHomeAdmin;
-	private ControlHomeAdmin contrHomeAdmin;
 	
 	private ApoyoMinimoProyecto vistaApoyoMinimoProyecto;
 	private ControlApoyoMinimoProyecto contrApoyoMinimoProyecto;
@@ -119,29 +119,19 @@ public class Ventana extends JFrame {
 		this.vistaInicioRegistro = new InicioRegistro();
 		ventana.add(vistaInicioRegistro, "inicioRegistro");
 		ultimaVista = "inicioRegistro";
-		
-		
-		
-		//prueba de la pantalla de proyecto
-		/*Ciudadano creador = new Ciudadano("ponbebe", "Anuel", "72231461P");
-		creador.aprobarRegistro();
-		Ciudadano punkizius = new Ciudadano ("badg" , "Punkizius", "123456789A");
-		punkizius.aprobarRegistro();*/
-		
+
 		
 		
 		this.vistaHome = new Home();
 		ventana.add(vistaHome, "home");
 		
 		//contenidos de la ventana:
-
-		
-		
-		this.vistaHomeAdmin = new HomeAdmin();
-		ventana.add(vistaHomeAdmin, "homeAdmin");
 		
 		this.vistaMiPerfil = new MiPerfil();
 		ventana.add(vistaMiPerfil, "miPerfil");
+		
+		this.vistaMiPerfilAdmin = new MiPerfilAdmin();
+		ventana.add(vistaMiPerfilAdmin, "miPerfilAdmin");
 		
 		this.vistaCrearColectivo = new CrearColectivo();
 		ventana.add(vistaCrearColectivo, "crearColectivo");
@@ -194,13 +184,14 @@ public class Ventana extends JFrame {
 		this.contrMiPerfil = controlador.getControlMiPerfil();
 		vistaMiPerfil.setControlador(contrMiPerfil);
 		
+		this.contrMiPerfilAdmin = controlador.getControlMiPerfilAdmin();
+		vistaMiPerfilAdmin.setControlador(contrMiPerfilAdmin);
+		
 		
 		// Establecer controlador Home
 		this.contrHome = controlador.getControlHome();
 		vistaHome.setControlador(contrHome);
-		
-		this.contrHomeAdmin = controlador.getControlHomeAdmin();
-		vistaHomeAdmin.setControlHomeAdmin(contrHomeAdmin);
+	
 		
 		this.contrNotificaciones = controlador.getControlNotificaciones();
 	}
@@ -212,12 +203,13 @@ public class Ventana extends JFrame {
 	public MiPerfil getVistaMiPerfil() {
 		return this.vistaMiPerfil;
 	}
+	public MiPerfilAdmin getVistaMiPerfilAdmin() {
+		return this.vistaMiPerfilAdmin;
+	}
 	public Home getVistaHome() {
 		return this.vistaHome;
 	}
-	public HomeAdmin getVistaHomeAdmin() {
-		return this.vistaHomeAdmin;
-	}
+	
 	
 	public CrearColectivo getVistaCrearColectivo() {
 		return this.vistaCrearColectivo;

@@ -60,6 +60,12 @@ public class ControlInicio implements ActionListener {
 	        /*Comprobamos si las credenciales introducidas corresponden a un ciudadano registrado*/
 	        else {
 	        	Ciudadano ciu = Ciudadano.buscarCiudadano(vista.getNombre());
+	        	if(ciu !=null && ciu.isBloqueado()) {
+	        		JOptionPane.showMessageDialog(vista,
+							"El usuario introducido ha sido bloqueado.", "Error", JOptionPane.ERROR_MESSAGE);
+	        		return;
+	        	}
+	        	
 	        	if(ciu !=null && ciu.getContrasena().equals(vista.getPassword())) {
 	        		Aplicacion.getAplicacion().setUsuarioActual((Usuario)ciu);
 	        	

@@ -24,10 +24,10 @@ public class Controlador {
 	private ControlCrearProyectoInfraestructura contrCrearProyectoInfraestructura;
 	private ControlInicio contrInicio;
 	private ControlHome contrHome;
-	private ControlHomeAdmin contrHomeAdmin;
 	private ControlApoyoMinimoProyecto contrApoyoMinimoProyecto;
 	private ControlNotificaciones contrNoti;
 	private ControlMiPerfil contrMiPerfil;
+	private ControlMiPerfilAdmin contrMiPerfilAdmin;
 
 	private List<ControlIrAProyecto> contrIrAProyectos;
 	
@@ -44,7 +44,7 @@ public class Controlador {
 		this.contrApoyoMinimoProyecto = new ControlApoyoMinimoProyecto(frame);
 		this.contrNoti = new ControlNotificaciones(frame);
 		this.contrHome = new ControlHome(frame);
-		this.contrHomeAdmin = new ControlHomeAdmin(frame);
+		this.contrMiPerfilAdmin = new ControlMiPerfilAdmin(frame);
 		this.contrMiPerfil = new ControlMiPerfil(frame);
 	}
 	
@@ -62,7 +62,9 @@ public class Controlador {
 	public ControlMiPerfil getControlMiPerfil() {
 		return this.contrMiPerfil;
 	}
-	
+	public ControlMiPerfilAdmin getControlMiPerfilAdmin() {
+		return this.contrMiPerfilAdmin;
+	}
 	
 	public ControlCrearProyecto getControlCrearProyecto() {
 		return this.contrCrearProyecto;
@@ -78,9 +80,6 @@ public class Controlador {
 	}
 	public ControlHome getControlHome() {
 		return this.contrHome;
-	}
-	public ControlHomeAdmin getControlHomeAdmin() {
-		return this.contrHomeAdmin;
 	}
 	public ControlApoyoMinimoProyecto getControlApoyoMinimoProyecto() {
 		return this.contrApoyoMinimoProyecto;
