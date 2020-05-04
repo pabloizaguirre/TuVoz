@@ -2,7 +2,9 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,6 +15,7 @@ import modelo.Aplicacion;
 import modelo.Ciudadano;
 import modelo.Colectivo;
 import modelo.ElementoColectivo;
+import modelo.EstadoProyecto;
 import modelo.Proyecto;
 import modelo.Usuario;
 import vista.DetalleColectivo;
@@ -48,11 +51,30 @@ public class ControlDetalleColectivo implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
+		Usuario usuarioActual = Aplicacion.getAplicacion().getUsuarioActual();
 		if(e.getActionCommand().equals("unirme")) {
-			colectivo.unirseAColectivo((Ciudadano) Aplicacion.getAplicacion().getUsuarioActual());
-			((Ciudadano) Aplicacion.getAplicacion().getUsuarioActual()).anadirAMisColectivos(colectivo);
+			colectivo.unirseAColectivo((Ciudadano) usuarioActual);
+			((Ciudadano) usuarioActual).anadirAMisColectivos(colectivo);
 			vista.getBotonUnirme().setEnabled(false);
 
+		} else if (e.getActionCommand().equals("solicitarInforme")) {
+			if (usuarioActual instanceof Ciudadano) {
+				String colectivo2 = vista.getColectivo2();
+				colectivo2 = colectivo2.substring(48);
+				System.out.println(colectivo2);
+				double indice = ((Ciudadano) usuarioActual).solicitarInformeAfinidad(colectivo, Colectivo.buscarColectivo(colectivo2));
+				
+				if(indice == -1) {
+					JOptionPane.showMessageDialog(vista,
+							"No tienes acceso al informe.", "Informe de afinidad con el colectivo " + colectivo2, JOptionPane.ERROR_MESSAGE);
+				} else if(indice == -2) {
+					JOptionPane.showMessageDialog(vista,
+							"No se puede determinar el indice de afinidad porque ninguno de los dos proyectos ha creado algun proyecto.", "Informe de afinidad con el colectivo " + colectivo2, JOptionPane.DEFAULT_OPTION);
+				} else {
+					JOptionPane.showMessageDialog(vista,
+							"Indice de afinidad con el colectivo " + colectivo2 + ": " + indice, "Informe de afinidad con el colectivo " + colectivo2, JOptionPane.DEFAULT_OPTION);
+				}
+			}
 		}
 		/*Si pulsamos en cualquier proyecto*/
 		else if(proyectos.containsKey(source)) {
@@ -105,6 +127,20 @@ public class ControlDetalleColectivo implements ActionListener{
 		
 		if(!(usuario instanceof Administrador)) {
 			vista.setUnirme(colectivo.getElementos().contains((Ciudadano) usuario));
+			
+			if(((Ciudadano) usuario).getMisColectivos().contains(colectivo)) {
+				List<String> lista = new ArrayList<String>();
+				for (Colectivo c:((Ciudadano)usuario).getMisColectivos()) {
+					if(!c.equals(colectivo)) {
+						lista.add("Solicitar informe de afinidad con el colectivo: " + c.getTitulo());
+
+					}
+				}
+				if(lista.size()>0) {
+					vista.setSolicitarInforme(lista);
+				}
+			}
+			
 		}
 		JButton botonColectivo;
 		boolean flag = false;

@@ -41,7 +41,7 @@ public class ControlInicio implements ActionListener {
 			/*Comprobamos que ambos campos han sido rellenados*/
 	        if(vista.getNombre().equals("") || vista.getPassword().equals("")) {
 	        	JOptionPane.showMessageDialog(vista,
-						"Debe introducir un nombre de usuario/NIF y contraseÃ±a.", "Error", JOptionPane.ERROR_MESSAGE);
+						"Debe introducir un nombre de usuario/NIF y contraseña.", "Error", JOptionPane.ERROR_MESSAGE);
 	        	return;
 	        } /*Comprobamos si las credenciales introducidas corresponden con el administrador*/
 	        
@@ -52,7 +52,6 @@ public class ControlInicio implements ActionListener {
 	        	
 	        	controlador.getControlNotificaciones().setVista();
 	        	frame.getVistaBarraSuperior().setVisible(true);
-	        	vista.limpiarJtf();
 	        	controlador.getControlMiPerfil().setVista();
 	        	frame.getVistaHome().setAdminMode();
 	        	frame.mostrarPanel("home");
@@ -63,6 +62,7 @@ public class ControlInicio implements ActionListener {
 	        	if(ciu !=null && ciu.isBloqueado()) {
 	        		JOptionPane.showMessageDialog(vista,
 							"El usuario introducido ha sido bloqueado.", "Error", JOptionPane.ERROR_MESSAGE);
+	        		vista.limpiarJtf();
 	        		return;
 	        	}
 	        	
@@ -98,7 +98,7 @@ public class ControlInicio implements ActionListener {
 						"Registro satisfactorio, a la espera de admision por la Administracion de Tu Voz", "Registro en Tu Voz", JOptionPane.INFORMATION_MESSAGE);
 	        }
 		}
-		
+		vista.limpiarJtf();
 	}
 }
 

@@ -39,7 +39,7 @@ public class Controlador {
 		this.contrCrearProyecto = new ControlCrearProyecto(frame);
 		this.contrCrearProyectoSocial = new ControlCrearProyectoSocial(frame, this);
 		this.contrCrearProyectoInfraestructura = new ControlCrearProyectoInfraestructura(frame, this);
-		this.contrBarraSuperior= new ControlBarraSuperior(frame);
+		this.contrBarraSuperior= new ControlBarraSuperior(frame, this);
 		this.contrInicio = new ControlInicio(frame, this);
 		this.contrApoyoMinimoProyecto = new ControlApoyoMinimoProyecto(frame);
 		this.contrNoti = new ControlNotificaciones(frame);

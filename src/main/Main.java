@@ -19,13 +19,11 @@ public class Main {
 		try {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 		} catch (Exception e){
-			System.out.println("error");
 		}
 		
 		try {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
 		} catch (Exception e){
-			System.out.println("error2");
 		}
 		Aplicacion.cargarAplicacion();
 		Ventana frame = new Ventana();

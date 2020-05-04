@@ -68,6 +68,7 @@ public class ControlNotificaciones implements ActionListener {
 			frame.mostrarPanel("" + p.getId());
 			String i =e.getActionCommand();
 			int id =Integer.valueOf(i);
+			Aplicacion.getAplicacion().getUsuarioActual().eliminarNotificacion(n);
 			vista.borrarNotificacion(id);
 		}
 

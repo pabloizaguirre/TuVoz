@@ -43,7 +43,7 @@ public class CrearProyecto extends JPanel {
 		labelNombre = new JLabel(" Nombre del proyecto (25 caracteres): ");
 		jtfNombre = new JTextField(17);
 		
-		labelDescripcion = new JLabel(" Descripción del proyecto (500 caracteres): ");
+		labelDescripcion = new JLabel(" Descripcion del proyecto (500 caracteres): ");
 		jtfDescripcion = new JTextArea();
 		jtfDescripcion.setPreferredSize(new Dimension(200,100));
 		jtfDescripcion.setBorder(jtfNombre.getBorder());

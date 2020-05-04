@@ -19,11 +19,13 @@ import vista.*;
 public class ControlBarraSuperior implements ActionListener{
 	private BarraSuperior vista;
 	private Ventana frame;
+	private Controlador controlador;
 	
 	
-	public ControlBarraSuperior(Ventana frame) {
+	public ControlBarraSuperior(Ventana frame, Controlador contr) {
 		this.frame = frame;
 		this.vista = frame.getVistaBarraSuperior();
+		this.controlador = contr;
 	}
 	
 	/**
@@ -49,8 +51,8 @@ public class ControlBarraSuperior implements ActionListener{
 				frame.mostrarPanel("miPerfilAdmin");
 			}
 		}else if(source.equals("notificaciones")) {
+			controlador.getControlNotificaciones().setVista();
 			frame.mostrarPanel("notificaciones");
-			
 		}else if(source.equals("busqueda") || source.equals("busquedaTF")) {
 			if(Proyecto.buscarProyecto(vista.getBusqueda())!=null) {
 				Proyecto proyecto = Proyecto.buscarProyecto(vista.getBusqueda());

@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.swing.*;
 
+import es.uam.eps.sadp.grants.CCGG;
 import modelo.*;
 import vista.DetalleProyecto;
 /**
@@ -47,6 +48,7 @@ public class ControlDetalleProyecto implements ActionListener{
 			}
 			((JButton) source).setText("Apoyado");
 			((JButton) source).setEnabled(false);
+			vista.getComboColectivos().setVisible(false);
 		} else if(e.getActionCommand().contentEquals("suscribirse")) { // al pulsar en el boton suscribirse
 			proyecto.suscribirProyecto((Ciudadano) usuarioActual);
 			((JButton) source).setText("Suscrito");
@@ -59,16 +61,20 @@ public class ControlDetalleProyecto implements ActionListener{
 							"No tienes acceso al informe.", "Informe de popularidad del proyecto " + proyecto.getTitulo(), JOptionPane.ERROR_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(vista,
-							"NÃºmero de apoyos del proyecto: " + apoyos, "Informe de popularidad del proyecto " + proyecto.getTitulo(), JOptionPane.DEFAULT_OPTION);
+							"Numero de apoyos del proyecto: " + apoyos, "Informe de popularidad del proyecto " + proyecto.getTitulo(), JOptionPane.DEFAULT_OPTION);
 				}
 			}
 		} else if(e.getActionCommand().contentEquals("enviarAFinanciacion")) { // al pulsar en el boton de enviar a financiacion
 			try {
+				CCGG proxy = CCGG.getGateway();
+				proxy.setDate(FechaSimulada.getHoy());
 				proyecto.enviarProyecto();
-				JOptionPane.showMessageDialog(vista,
-						proyecto.consultarEstadoProyecto(), "Pulsado enviar Proyecto", JOptionPane.DEFAULT_OPTION);
+				((JButton) source).setText("Enviado a financiacion");
+				((JButton) source).setEnabled(false);
+				vista.setLabelEstado("Estado: " + proyecto.consultarEstadoProyecto());
 			} catch (Exception e1) {
-				e1.printStackTrace();
+				JOptionPane.showMessageDialog(vista,
+						"No se ha podido enviar correctamente a financiacion. Vuelve a intentarlo mas adelante.", "Pulsado enviar Proyecto", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}
@@ -97,11 +103,14 @@ public class ControlDetalleProyecto implements ActionListener{
 				for (ElementoColectivo c:((Ciudadano)usuario).getColectivosCreados()) {
 					lista.add("Apoyar como colectivo: " + c.toString());
 				}
-				if(lista.size()>0) {
+				if(lista.size()>0 && (estado.equals(EstadoProyecto.DISPONIBLE)|| estado.equals(EstadoProyecto.NOENVIADO))) {
 					vista.setComboColectivos(lista);
 				}
 			}
-			vista.setApoyar(apoyado);
+			if(estado.equals(EstadoProyecto.DISPONIBLE) || estado.equals(EstadoProyecto.NOENVIADO)) {
+				vista.setApoyar(apoyado);
+				
+			}
 			vista.setSuscribirse(proyecto.getListadoSuscripciones().contains(usuario));
 			if(proyecto.getCreador().equals(usuario)) {
 				vista.setSolicitarInforme();
@@ -141,7 +150,7 @@ public class ControlDetalleProyecto implements ActionListener{
 		EstadoProyecto estado = proyecto.consultarEstadoProyecto();
 		Usuario usuario = Aplicacion.getAplicacion().getUsuarioActual();
 		if(estado.equals(EstadoProyecto.FINANCIADO)) {
-			vista.setLabelEstado("Estado: " + estado + ", con presupuesto concedido de " + proyecto.getPresupuestoConcedido() + "€");
+			vista.setLabelEstado("Estado: " + estado + ", con presupuesto concedido de " + proyecto.getPresupuestoConcedido() + "ï¿½");
 		} else {
 			vista.setLabelEstado("Estado: " + estado);
 		}
@@ -157,14 +166,15 @@ public class ControlDetalleProyecto implements ActionListener{
 				for (ElementoColectivo c:((Ciudadano)usuario).getColectivosCreados()) {
 					lista.add("Apoyar como colectivo: " + c.toString());
 				}
-				if(lista.size()>0) {
+				if(lista.size()>0 && (estado.equals(EstadoProyecto.DISPONIBLE)|| estado.equals(EstadoProyecto.NOENVIADO))) {
 					vista.setComboColectivos(lista);
 				}
 			}
-			if(estado.equals(EstadoProyecto.DISPONIBLE)|| estado.equals(EstadoProyecto.DISPONIBLE)) {
-			vista.setApoyar(apoyado);
-			vista.setSuscribirse(proyecto.getListadoSuscripciones().contains(usuario));
+			if(estado.equals(EstadoProyecto.DISPONIBLE) || estado.equals(EstadoProyecto.NOENVIADO)) {
+				vista.setApoyar(apoyado);
+				
 			}
+			vista.setSuscribirse(proyecto.getListadoSuscripciones().contains(usuario));
 			if(proyecto.getCreador().equals(usuario)) {
 				vista.setSolicitarInforme();
 				if(estado.equals(EstadoProyecto.DISPONIBLE)) {

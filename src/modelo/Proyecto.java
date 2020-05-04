@@ -252,6 +252,8 @@ public class Proyecto implements Serializable {
 			}
 			if(estado.equals(EstadoProyecto.PENDIENTEFINANCIACION)) {
 				try {
+					CCGG proxy = CCGG.getGateway();
+					proxy.setDate(FechaSimulada.getHoy());
 					consultar();
 				} catch (Exception e) {
 					e.printStackTrace();
