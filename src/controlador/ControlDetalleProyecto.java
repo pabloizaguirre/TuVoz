@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.swing.*;
 
+import es.uam.eps.sadp.grants.CCGG;
 import modelo.*;
 import vista.DetalleProyecto;
 /**
@@ -65,6 +66,8 @@ public class ControlDetalleProyecto implements ActionListener{
 			}
 		} else if(e.getActionCommand().contentEquals("enviarAFinanciacion")) { // al pulsar en el boton de enviar a financiacion
 			try {
+				CCGG proxy = CCGG.getGateway();
+				proxy.setDate(FechaSimulada.getHoy());
 				proyecto.enviarProyecto();
 				((JButton) source).setText("Enviado a financiacion");
 				((JButton) source).setEnabled(false);
@@ -147,7 +150,7 @@ public class ControlDetalleProyecto implements ActionListener{
 		EstadoProyecto estado = proyecto.consultarEstadoProyecto();
 		Usuario usuario = Aplicacion.getAplicacion().getUsuarioActual();
 		if(estado.equals(EstadoProyecto.FINANCIADO)) {
-			vista.setLabelEstado("Estado: " + estado + ", con presupuesto concedido de " + proyecto.getPresupuestoConcedido() + "€");
+			vista.setLabelEstado("Estado: " + estado + ", con presupuesto concedido de " + proyecto.getPresupuestoConcedido() + "ï¿½");
 		} else {
 			vista.setLabelEstado("Estado: " + estado);
 		}
