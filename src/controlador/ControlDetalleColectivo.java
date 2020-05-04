@@ -119,7 +119,7 @@ public class ControlDetalleColectivo implements ActionListener{
 			
 		}
 		if(!flag) {
-			vista.setProyectosVacios();
+			vista.setColectivosVacios();
 		}
 		JButton botonProyecto;
 		flag = false;
@@ -132,7 +132,7 @@ public class ControlDetalleColectivo implements ActionListener{
 			
 		}
 		if(!flag) {
-			vista.setColectivosVacios();
+			vista.setProyectosVacios();
 		} 
 		vista.setControlador(this);
 	}
