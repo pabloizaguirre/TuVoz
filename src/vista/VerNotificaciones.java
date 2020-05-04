@@ -164,7 +164,10 @@ public class VerNotificaciones extends JPanel{
 		this.getIgnoreRepaint();
 	}
 	
-	
+	/**
+     * Metodo para vaciar la vista dejando solo el titulo
+     * 
+     */
 	public void resetNoti() {
 		this.removeAll();
 		this.add(intro);

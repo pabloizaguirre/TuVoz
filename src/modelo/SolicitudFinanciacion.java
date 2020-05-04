@@ -2,6 +2,13 @@ package modelo;
 
 import es.uam.eps.sadp.grants.*; 
 
+/**
+ * Clase para solicitar la financiacion de un proyecto.
+ * 
+ * @author Elena Cano
+ * @author Pablo Izaguirre
+ * @author Miguel Escribano
+ */
 public class SolicitudFinanciacion implements GrantRequest {
 	Proyecto p; 
 	
@@ -15,6 +22,13 @@ public class SolicitudFinanciacion implements GrantRequest {
 	public String getProjectDescription() {
 		return p.getDescripcion();
 	}
+
+	
+	/**
+     * Método que devuelve el tipo del proyecto actual
+     *
+     * @return ProjectKind que es el tipo del proyecto
+     */
 	public ProjectKind getProjectKind() {
 		if(p.getClass().equals(ProyectoInfraestructura.class)){
 			return ProjectKind.Infrastructure;

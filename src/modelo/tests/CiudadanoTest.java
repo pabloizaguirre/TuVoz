@@ -12,8 +12,21 @@ import modelo.ProyectoSocial;
 import modelo.TipoAlcance;
 import modelo.*;
 
+
+/**
+ * Tester de ciudadano.
+ *
+ * @author Elena Cano
+ * @author Pablo Izaguirre
+ * @author Miguel Escribano
+ */
 public class CiudadanoTest {
 
+
+    /**
+    * Comprueba si te puedes registrar con un determinado nif
+    *
+    */
     @Test
     public void TestNifEnUso() {
 
@@ -29,7 +42,10 @@ public class CiudadanoTest {
     }
 
 
-
+    /**
+    * Comprueba si funciona el método de buscar ciudadano
+    *
+    */
     @Test
     public void TestBuscarCiudadano() {
         //Crear los objetos necesarios para la prueba
@@ -42,7 +58,10 @@ public class CiudadanoTest {
     }
 
    
-
+    /**
+    * Comprueba si al crear un colectivo se te añade a tus colectivos
+    *
+    */
     @Test
     public void TestAnadirAMisColectivos() {
         //Crear los objetos necesarios para la prueba
@@ -55,6 +74,11 @@ public class CiudadanoTest {
         
     }
 
+
+    /**
+    * Comprueba si e elimina correctamente un colectivo de tu lista de colectivos
+    *
+    */
     @Test
     public void TestEliminarDeMisColectivos() {
         //Crear los objetos necesarios para la prueba
@@ -67,6 +91,12 @@ public class CiudadanoTest {
         assertTrue(c.eliminarDeMisColectivos(colec));
     }
 
+
+
+    /**
+    * Comprueba que el informe de popularidad funcione correctamente
+    *
+    */
     @Test
     public void TestInformePopularidad() {
         //Crear los objetos necesarios para la prueba
@@ -88,6 +118,11 @@ public class CiudadanoTest {
         assertEquals(3, c.solicitarInformePopularidad(p));
     }
 
+
+    /**
+    * Comprueba que el informe de afinindad funcione correctamente
+    *
+    */
     @Test
     public void TestInformeAfinidad(){
         //Crear los objetos necesarios para la prueba

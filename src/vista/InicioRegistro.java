@@ -53,7 +53,7 @@ public class InicioRegistro extends JPanel {
 		labelnombre = new JLabel("Nombre o NIF:");
 		jtfnombre = new JTextField(15);
 		jtfnombre.setActionCommand("nombre");
-		labelpassword = new JLabel("Contraseña");
+		labelpassword = new JLabel("Contraseï¿½a");
 		password = new JPasswordField(10);
 		password.setActionCommand("password");
 		botonEntrar = new JButton("Entrar");
@@ -85,7 +85,7 @@ public class InicioRegistro extends JPanel {
 		jtfnifreg = new JTextField(15);
 		labelusuarioreg = new JLabel("Usuario");
 		jtfusuarioreg = new JTextField(15);
-		labelpasswordreg = new JLabel("Contraseña");
+		labelpasswordreg = new JLabel("Contraseï¿½a");
 		passwordreg = new JPasswordField(15);
 		botonRegistro = new JButton("Registrarse");
 		botonRegistro.setActionCommand("botonRegistrarse");
@@ -150,6 +150,7 @@ public class InicioRegistro extends JPanel {
 	public String getPasswordReg() {
 		return String.valueOf(passwordreg.getPassword());
 	}
+	
 	/**
      * Metodo para limpiar los campos de inicio de sesion y de registro de la vista principal 
      *       

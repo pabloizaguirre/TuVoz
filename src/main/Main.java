@@ -7,6 +7,13 @@ import javax.swing.UIManager;
 
 import controlador.*;
 
+/**
+ * Clase del main.
+ * 
+ * @author Elena Cano
+ * @author Pablo Izaguirre
+ * @author Miguel Escribano
+ */
 public class Main {
 	public static void main(String[] args) {
 		try {

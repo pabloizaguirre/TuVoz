@@ -93,6 +93,10 @@ public class MiPerfilAdmin extends JPanel{
 		return jtfUsuario.getText();
 	}
 	
+	/** 
+	* Se encarga de borrrar el JTextField de usuario de la vista
+	*
+	*/
 	public void limpiarJtf() {
 		jtfUsuario.setText("");
 	}

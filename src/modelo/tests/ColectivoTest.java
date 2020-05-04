@@ -12,6 +12,13 @@ import modelo.ProyectoSocial;
 import modelo.TipoAlcance;
 import modelo.*;
 
+/**
+ * Tester de colectivo.
+ *
+ * @author Elena Cano
+ * @author Pablo Izaguirre
+ * @author Miguel Escribano
+ */
 public class ColectivoTest {
 	private Ciudadano u1;
 	private Ciudadano u2;
@@ -19,7 +26,10 @@ public class ColectivoTest {
 	private Colectivo c1;
 	private Colectivo c2;
 
-
+	/**
+    * Crea ciudadanos y colectivos para usarlos en los testers
+    *
+    */
 	@BeforeEach
 	public void setUp(){
 		u1 = new Ciudadano("NiMalaNiSanta", "Safaera", "666");
@@ -31,7 +41,10 @@ public class ColectivoTest {
 		c2.unirseAColectivo(u2); 
 	}
 
-
+	/**
+    * Comprueba que el ciudadano es miembro colectivo
+    *
+    */
 	@Test
 	public void testEsMiembro() {
 		boolean resultado1 = c1.esMiembro(u1);
@@ -48,6 +61,10 @@ public class ColectivoTest {
 
 	}
 
+	/**
+    * Comprueba se une correctamente al colectivo
+    *
+    */
 	@Test
 	void testUnirseAColectivo() {
 		Ciudadano u4 = new Ciudadano("aaaa", "Bernarda Alba", "0000000N");
@@ -60,6 +77,10 @@ public class ColectivoTest {
 		assertTrue(resultado);
 	}
 
+	/**
+    * Comprueba se une correctamente al subcolectivo
+    *
+    */
 	@Test
 	void testAnadirSubcolectivo() {
 		c1.anadirSubcolectivo(c2);
@@ -68,6 +89,10 @@ public class ColectivoTest {
 		assertTrue(c1.esMiembro(c2));
 	}
 
+	/**
+    * Comprueba que un proyecto se añade correctamente a la lista de proyectos apoyados por ese ciudadano
+    *
+    */
 	@Test
 	void testAnadirAProyectosApoyados() {
 		ProyectoSocial p1 = new ProyectoSocial("prueba1","Este es un proyecto de prueba1", 200000, c1, "jovenes1", TipoAlcance.NACIONAL);
@@ -76,7 +101,10 @@ public class ColectivoTest {
 		assertTrue(c1.getProyectosApoyados().contains(p1));
 	}
 
-
+	/**
+    * Comprueba que un ciudadano abandone correctamente un colectivo
+    *
+    */
 	@Test
 	void testAbandonarColectivo() {
 		assertTrue(c1.esMiembro(u2));
@@ -85,6 +113,10 @@ public class ColectivoTest {
 		assertFalse(c1.getElementos().contains(u1));
 	}
 	
+	/**
+    * Comprueba que funcione la busqueda de colectivos
+    *
+    */
 	@Test
 	void testBuscarColectivo() {
 		Colectivo c3 = new Colectivo("Pruebita guay", u1);

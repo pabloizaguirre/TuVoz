@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.swing.*;
 import modelo.*;
+
 /**
  * Clase de la vista CrearProyectoInfraestructura.
  * 
@@ -102,6 +103,13 @@ public class CrearProyectoInfraestructura extends JPanel {
 		}
 		return distritosSeleccionados;
 	}
+
+	/**
+     * Método para añadir los botones pasados como argumento al panel de botones
+     * 
+     *@param distritos Lista de botones de los distritos que se quiere añadir
+     * 
+     */
 	public static void addDistritos (List<JCheckBox> distritos) {
 		for(JCheckBox p: distritos) {
 			panelBotones.add(p);
@@ -112,6 +120,7 @@ public class CrearProyectoInfraestructura extends JPanel {
 	public String getColectivos() {
 		return (String)comboColectivos.getSelectedItem();
 	}
+
 	 /**
      * Método para añadir los colectivos que representa el ciudadano actual al combo box
      * para crear el nuevo proyecto como proyecto de un colectivo

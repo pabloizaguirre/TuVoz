@@ -129,6 +129,7 @@ public class DetalleColectivo extends JPanel {
 		boton.setPreferredSize(new Dimension(120, 120));
 		listaProyectos.add(boton);
 	}
+
 	 /**
      * Metodo para añadir un boton a la lista de botones de subcolectivos
      * @param boton Boton que queremos añadir
@@ -164,6 +165,7 @@ public class DetalleColectivo extends JPanel {
 	public JButton getBotonUnirme() {
 		return botonUnirme;
 	}
+
 	 /**
      * Metodo para resetear los botones de la vista de detalle colectivo
      * 
@@ -177,7 +179,7 @@ public class DetalleColectivo extends JPanel {
 	}
 	
 	/**
-	 * metodo para resetear toda la ventana
+	 * Método para resetear toda la ventana
 	 */
 	public void resetAll() {
 		this.listaColectivos.removeAll();

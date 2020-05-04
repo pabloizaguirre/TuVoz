@@ -16,6 +16,13 @@ import modelo.*;
 import org.junit.Before;
 import java.util.*;
 
+/**
+ * Tester de proyecto.
+ *
+ * @author Elena Cano
+ * @author Pablo Izaguirre
+ * @author Miguel Escribano
+ */
 public class ProyectoTest {
 
     private Ciudadano u1;
@@ -25,13 +32,15 @@ public class ProyectoTest {
     private Ciudadano u5;
     private Ciudadano u6;
 	private Colectivo c1;
-    private Colectivo c2;
     private ProyectoSocial p1;
     private ProyectoInfraestructura p2;
     private ProyectoSocial p3;
     private Imagen foto;
 
-
+    /**
+    * Crea ciudadanos, colectivos y proyectos para usarlos en los testers
+    *
+    */
 	@Before
 	public void setUp() {
         foto = new Imagen("Maqueta_complejo.png", "prueba");
@@ -42,14 +51,16 @@ public class ProyectoTest {
         u5 = new Ciudadano("Mercadona", "LaBadgy", "07803303M");
         u6 = new Ciudadano("Love", "Sxe", "07803305C");
 		c1 = new Colectivo("Voluntariado", u1);
-        c2 = new Colectivo("Apoyo a ancianos", c1);
         p1 = new ProyectoSocial("Voluntariado","Este es un proyecto de voluntariado", 5000, u3, "jovenes", TipoAlcance.INTERNACIONAL);
         p2 = new ProyectoInfraestructura("Uranizacion", "Creacion de un nuevo coomplejo", 2700000, u3, foto, null);
         p3 = new ProyectoSocial("Prueba", "AAAAAAAA", 10001232, c1, "guaps", TipoAlcance.NACIONAL);
 	}
 
     
-    
+    /**
+    * Comprueba que un proyecto se apoya correctamente
+    *
+    */
     @Test
     public void testApoyarProyecto(){
 
@@ -95,6 +106,10 @@ public class ProyectoTest {
         assertTrue(c1.getProyectosPropuestos().contains(p3));
     }
 
+    /**
+    * Comprueba que se elimina correctamente un apoyo de un proyecto 
+    *
+    */
     @Test
     public void testEliminarApoyo(){
         //Comprobar que los resultados son correctos
@@ -115,6 +130,10 @@ public class ProyectoTest {
 
     }
 
+    /**
+    * Comprueba que un usuario se suscribe correctamente a un proyecto
+    *
+    */
     @Test
     public void testSuscribirProyecto(){
         //Comprobamos que los creadores se han suscrito a sus proyetos
@@ -136,6 +155,10 @@ public class ProyectoTest {
         assertEquals(num_notif+1, (u1.getNotificaciones()).size());
     }
 
+    /**
+    * Comprueba que el estado del proyecto consultado es el que debería ser
+    *
+    */
     @Test
     public void testConsultarEstadoProyecto(){
         //Comprobar que se cambia el estado a caducado si pasan 30 dias

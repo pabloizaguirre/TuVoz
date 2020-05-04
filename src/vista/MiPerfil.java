@@ -8,6 +8,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.*;
+
 /**
  * Clase de la vista Mi Perfil.
  * 
@@ -94,11 +95,21 @@ public class MiPerfil extends JPanel{
 		add(colectivos);
 	}
 	
+	/**
+	 * Añade el boton del proyecto pasado como parametro a la listaProyectos
+	 * @param boton es el boton que se quiere incluir en la lista
+	 * 
+	 */
 	public void addBotonProyecto(JButton boton) {
 		boton.setPreferredSize(new Dimension(120, 120));
 		listaProyectos.add(boton);
 	}
 	
+	/**
+	 * Añade el boton de colectivo pasado como parametro a la listaColectivos
+	 * @param boton es el boton que se quiere incluir en la lista
+	 * 
+	 */
 	public void addBotonColectivo(JButton boton) {
 		boton.setPreferredSize(new Dimension(120, 120));
 		listaColectivos.add(boton);
@@ -108,7 +119,10 @@ public class MiPerfil extends JPanel{
 		this.titulo.setText(titulo);
 	}
 	
-	
+	/**
+	 * Borra todos los botones
+	 * 
+	 */
 	public void resetBotones() {
 		listaProyectos.removeAll();
 		listaColectivos.removeAll();

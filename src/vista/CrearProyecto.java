@@ -133,6 +133,7 @@ public class CrearProyecto extends JPanel {
 		if(jtfPresupuesto.getText().equals("")) return -1.0;
 		return Double.parseDouble(jtfPresupuesto.getText());
 	}
+	
 	 /**
      * Metodo para limpiar los distintos campos de creación de proyecto
      * 

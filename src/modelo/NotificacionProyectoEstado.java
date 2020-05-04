@@ -10,9 +10,7 @@ import java.io.*;
  * @author Miguel Escribano
  */
 public class NotificacionProyectoEstado extends Notificacion {
-    /**
-	 * 
-	 */
+    
 	private static final long serialVersionUID = 1L;
 	private Proyecto proyecto;
 	

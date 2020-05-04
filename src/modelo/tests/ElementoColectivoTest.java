@@ -10,6 +10,13 @@ import modelo.*;
 
 import org.junit.Before;
 
+/**
+ * Tester de elemento colectivo.
+ *
+ * @author Elena Cano
+ * @author Pablo Izaguirre
+ * @author Miguel Escribano
+ */
 
 public class ElementoColectivoTest {
 
@@ -20,6 +27,10 @@ public class ElementoColectivoTest {
  
 
 
+	/**
+    * Crea ciudadanos y un proyecto para usarlos en los testers
+    *
+    */
 	@Before
 	public void setUp() {
 		u1 = new Ciudadano("NiMalaNiSanta", "Safaera", "666");
@@ -30,6 +41,10 @@ public class ElementoColectivoTest {
 
 
     
+	/**
+    * Comprueba que un proyecto se añada a la lista de los proyectos propuestos por un elemento colectivo
+    *
+    */
     @Test
     public void TestAnadirAMisProyectosPropuestos(){
         u3.anadirAMisProyectosPropuestos(p1);
@@ -37,7 +52,10 @@ public class ElementoColectivoTest {
         assertTrue(u3.getProyectosPropuestos().contains(p1));
     }
 
-    
+    /**
+    * Comprueba que un proyecto se añada a la lista de los proyectos apoyados por un elemento colectivo
+    *
+    */
     @Test
     public void TestAnadirAMisProyectosApoyados(){
         u1.anadirAMisProyectosApoyados(p1);
@@ -45,6 +63,10 @@ public class ElementoColectivoTest {
         assertTrue(u1.getProyectosApoyados().contains(p1));
     }
 
+    /**
+    * Comprueba que un proyecto se elimina de la lista de los proyectos apoyados por un elemento colectivo
+    *
+    */
     @Test
     public void TestEliminarDeMisProyectosApoyados(){
         u1.anadirAMisProyectosApoyados(p1);

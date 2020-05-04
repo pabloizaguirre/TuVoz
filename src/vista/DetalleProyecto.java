@@ -265,6 +265,10 @@ public class DetalleProyecto extends JPanel{
 		return this.comboColectivos;
 	}
 	
+	/**
+	 * Devulve el colectivo apoyante, lanza una excepcion en caso de error
+	 *
+	 */
 	public String getColectivoApoyante() {
 		String buf ="";
 		try {
@@ -275,7 +279,11 @@ public class DetalleProyecto extends JPanel{
 		}
 		
 	}
-	
+		
+	/**
+	 * Borra los botones del panel
+	 * 
+	 */
 	public void resetButtonPanel() {
 		botones.removeAll();
 		

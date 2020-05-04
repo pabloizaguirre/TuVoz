@@ -60,6 +60,7 @@ public class CrearColectivo extends JPanel{
 	public String getNombre() {
 		return jtfNombre.getText();
 	}
+
 	 /**
      * Método para añadir los colectivos que representa el ciudadano actual al combo box
      * para crear el nuevo colectivo como subcolectivo
@@ -75,9 +76,11 @@ public class CrearColectivo extends JPanel{
 			comboColectivos.addItem(c.getTitulo());
 		}
 	}
+	
 	public String getColectivos() {
 		return (String)comboColectivos.getSelectedItem();
 	}
+
 	/**
      * Metodo para limpiar el campo de nombre del colectivo cuando se realiza 
      * la creación del mismo

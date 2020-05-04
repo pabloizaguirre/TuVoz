@@ -7,9 +7,19 @@ import modelo.Ciudadano;
 import modelo.Notificacion;
 import modelo.*;
 
+/**
+ * Tester de usuario.
+ *
+ * @author Elena Cano
+ * @author Pablo Izaguirre
+ * @author Miguel Escribano
+ */
 public class UsuarioTest {
 
-
+    /**
+    * Comprueba si un nombre de usuario está en uso
+    *
+    */
     @Test
     public void TestNombreEnUso(){
         //Crear los objetos necesarios para la prueba
@@ -21,6 +31,10 @@ public class UsuarioTest {
 
     }
 
+    /**
+    * Comprueba que se eliminen las notificaciones correctamente
+    *
+    */
     @Test
     public void TestEliminarNotificacion(){
         //Crear los objetos necesarios para la prueba
