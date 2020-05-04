@@ -11,7 +11,33 @@ import java.util.HashMap;
 import java.util.List;
 
 import controlador.*;
+import controlador.colectivo.crear.ControlCrearColectivo;
+import controlador.colectivo.detalle.ControlDetalleColectivo;
+import controlador.interfaz.ControlBarraSuperior;
+import controlador.interfaz.ControlHome;
+import controlador.interfaz.ControlInicio;
+import controlador.miperfil.ControlMiPerfil;
+import controlador.miperfil.ControlMiPerfilAdmin;
+import controlador.notificacion.ControlNotificaciones;
+import controlador.proyecto.ControlApoyoMinimoProyecto;
+import controlador.proyecto.crear.ControlCrearProyecto;
+import controlador.proyecto.crear.ControlCrearProyectoInfraestructura;
+import controlador.proyecto.crear.ControlCrearProyectoSocial;
+import controlador.proyecto.detalle.ControlDetalleProyecto;
 import modelo.*;
+import modelo.aplicacion.Aplicacion;
+import vista.colectivo.crear.CrearColectivo;
+import vista.interfaz.BarraSuperior;
+import vista.interfaz.Home;
+import vista.interfaz.InicioRegistro;
+import vista.notificacion.VerNotificaciones;
+import vista.perfil.MiPerfil;
+import vista.perfil.MiPerfilAdmin;
+import vista.proyecto.ApoyoMinimoProyecto;
+import vista.proyecto.crear.CrearProyecto;
+import vista.proyecto.crear.CrearProyectoInfraestructura;
+import vista.proyecto.crear.CrearProyectoSocial;
+import vista.proyecto.detalle.DetalleProyecto;
 
 /**
  * Clase de la vista Ventana.

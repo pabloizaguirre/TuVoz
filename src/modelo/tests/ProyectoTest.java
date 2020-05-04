@@ -2,16 +2,15 @@ package modelo.tests;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-import modelo.Aplicacion;
-import modelo.Ciudadano;
-import modelo.Colectivo;
-import modelo.EstadoProyecto;
-import modelo.FechaSimulada;
-import modelo.Imagen;
-import modelo.ProyectoInfraestructura;
-import modelo.ProyectoSocial;
-import modelo.TipoAlcance;
 import modelo.*;
+import modelo.aplicacion.Aplicacion;
+import modelo.elementocolectivo.colectivo.Colectivo;
+import modelo.proyecto.EstadoProyecto;
+import modelo.proyecto.Imagen;
+import modelo.proyecto.ProyectoInfraestructura;
+import modelo.proyecto.ProyectoSocial;
+import modelo.proyecto.TipoAlcance;
+import modelo.proyecto.gateway.FechaSimulada;
 
 import org.junit.Before;
 import java.util.*;

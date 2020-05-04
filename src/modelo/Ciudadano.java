@@ -1,5 +1,13 @@
 package modelo;
 import java.util.*;
+
+import modelo.aplicacion.Aplicacion;
+import modelo.elementocolectivo.ElementoColectivo;
+import modelo.elementocolectivo.colectivo.Colectivo;
+import modelo.notificacion.ciudadano.NotificacionCiudadano;
+import modelo.proyecto.Proyecto;
+import modelo.usuario.Usuario;
+
 import java.io.*;
 
 

@@ -5,12 +5,11 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
-import modelo.Ciudadano;
-import modelo.Colectivo;
-import modelo.Notificacion;
-import modelo.ProyectoSocial;
-import modelo.TipoAlcance;
 import modelo.*;
+import modelo.aplicacion.Aplicacion;
+import modelo.elementocolectivo.colectivo.Colectivo;
+import modelo.proyecto.ProyectoSocial;
+import modelo.proyecto.TipoAlcance;
 
 
 /**

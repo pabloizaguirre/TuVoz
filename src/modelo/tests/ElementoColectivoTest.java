@@ -3,10 +3,9 @@ package modelo.tests;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-import modelo.Ciudadano;
-import modelo.ProyectoSocial;
-import modelo.TipoAlcance;
 import modelo.*;
+import modelo.proyecto.ProyectoSocial;
+import modelo.proyecto.TipoAlcance;
 
 import org.junit.Before;
 
