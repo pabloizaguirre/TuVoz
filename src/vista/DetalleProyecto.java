@@ -185,7 +185,7 @@ public class DetalleProyecto extends JPanel{
 	 * @param presupuesto
 	 */
 	public void setPresupuestoSolicitado(Double presupuesto) {
-		presupuestoSolicitado.setText("Presupesto solicitado: " + presupuesto + "€");
+		presupuestoSolicitado.setText("Presupesto solicitado: " + presupuesto + "E");
 	}
 	
 	/**
