@@ -41,18 +41,7 @@ public class ControlMiPerfil implements ActionListener {
 			Aplicacion.getAplicacion().setUsuarioActual(null);
 			frame.getVistaBarraSuperior().setVisible(false);
 			frame.mostrarPanel("inicioRegistro");
-		} else if (e.getActionCommand().contentEquals("reset")) {
-			Aplicacion.getAplicacion().getListadoElementoColectivos().clear();
-			Aplicacion.getAplicacion().getListadoProyectos().clear();
-			Aplicacion.getAplicacion().getListaNombres().clear();
-			Aplicacion.getAplicacion().getAdministrador().getNotificaciones().clear();
-			Aplicacion.getAplicacion().setUsuarioActual(null);
-			
-			File fichero = new File("data.dat");
-			fichero.delete();
-			frame.getVistaBarraSuperior().setVisible(false);
-			frame.mostrarPanel("inicioRegistro");
-		}else if(proyectos.containsKey(source)) {
+		} else if(proyectos.containsKey(source)) {
 			Proyecto p = proyectos.get(source);
 			
 			//comprobamos si ya se ha creado una vista para este proyecto
@@ -98,7 +87,6 @@ public class ControlMiPerfil implements ActionListener {
 		setBotonesProyectos();
 		setBotonesColectivos();
 		vista.setTitulo(Aplicacion.getAplicacion().getUsuarioActual().getNombreUsuario());
-		if(Aplicacion.getAplicacion().getUsuarioActual() instanceof Administrador) vista.setReset(true);
 		vista.setControlador(this);
 	}
 	

@@ -45,7 +45,6 @@ public class ControlDetalleProyecto implements ActionListener{
 				colectivoApoyante = colectivoApoyante.substring(23);
 				proyecto.apoyarProyecto(Colectivo.buscarColectivo(colectivoApoyante));
 			}
-			//vista.getComboColectivos().setVisible(false);
 			((JButton) source).setText("Apoyado");
 			((JButton) source).setEnabled(false);
 		} else if(e.getActionCommand().contentEquals("suscribirse")) { // al pulsar en el boton suscribirse
@@ -142,7 +141,7 @@ public class ControlDetalleProyecto implements ActionListener{
 		EstadoProyecto estado = proyecto.consultarEstadoProyecto();
 		Usuario usuario = Aplicacion.getAplicacion().getUsuarioActual();
 		if(estado.equals(EstadoProyecto.FINANCIADO)) {
-			vista.setLabelEstado("Estado: " + estado + ", con presupuesto concedido de " + proyecto.getPresupuestoConcedido() + "â‚¬");
+			vista.setLabelEstado("Estado: " + estado + ", con presupuesto concedido de " + proyecto.getPresupuestoConcedido() + "€");
 		} else {
 			vista.setLabelEstado("Estado: " + estado);
 		}

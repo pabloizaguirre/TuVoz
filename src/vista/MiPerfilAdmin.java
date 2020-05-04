@@ -22,6 +22,7 @@ public class MiPerfilAdmin extends JPanel{
 	private JButton botonBloquear;
 	private JButton botonDesbloquear;
 	private JLabel titulo;
+	private JButton botonAdelantoFecha;
 	
 	private JTextField jtfUsuario;
 	
@@ -45,6 +46,11 @@ public class MiPerfilAdmin extends JPanel{
 		cLayout.putConstraint(BorderLayout.EAST, botonReset, -5, BorderLayout.WEST, cerrarSesion);
 		botonReset.setActionCommand("reset");
 		add(botonReset);
+		
+		botonAdelantoFecha = new JButton("Avanzar 30 dias");
+		cLayout.putConstraint(BorderLayout.EAST, botonAdelantoFecha, -5, BorderLayout.WEST, botonReset);
+		botonAdelantoFecha.setActionCommand("adelantoFecha");
+		add(botonAdelantoFecha);
 		
 		JLabel labelBloquear = new JLabel("Introduce el nombre del usuario o DNI para bloquear/desbloquear");
 		jtfUsuario = new JTextField(20);
@@ -80,6 +86,7 @@ public class MiPerfilAdmin extends JPanel{
 		botonReset.addActionListener(c);
 		botonBloquear.addActionListener(c);
 		botonDesbloquear.addActionListener(c);
+		botonAdelantoFecha.addActionListener(c);
 	}
 	
 	public String getUsuario() {

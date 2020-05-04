@@ -58,11 +58,6 @@ public class ControlHome implements ActionListener{
 					"Numero de apoyos actuales: " +Aplicacion.getAplicacion().getApoyosMin() , "Gestionar apoyos minimos", JOptionPane.INFORMATION_MESSAGE);
 				frame.mostrarPanel("apoyoMinimoProyecto");
 			
-		}/*Si pulsamos en avanzar la fecha siendo Admin*/
-		else if(e.getActionCommand().contentEquals("adelantoFecha")) {
-			FechaSimulada.avanzar(30);
-			JOptionPane.showMessageDialog(vista,
-					"Avanzado 30 días" , "Avanzando", JOptionPane.INFORMATION_MESSAGE);
 		}/*Si pulsamos en cualquier proyecto*/
 		else if(proyectos.containsKey(source)) {
 			Proyecto p = proyectos.get(source);
