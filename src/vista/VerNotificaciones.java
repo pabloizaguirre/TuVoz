@@ -43,6 +43,9 @@ public class VerNotificaciones extends JPanel{
 	public void addNotificacionCiudadanoProyecto(String texto, JButton boton) {
 		final JPanel notiCiudadano = new JPanel();
 		notiCiudadano.setSize(new Dimension(400,100));
+		notiCiudadano.setMaximumSize(new Dimension(1000,100));
+		notiCiudadano.setMinimumSize(new Dimension(100,100));
+		
 		notiCiudadano.setBorder(BorderFactory.createLineBorder(Color.red));
 		BoxLayout layoutNoticiu = new BoxLayout(notiCiudadano, BoxLayout.PAGE_AXIS);
 		notiCiudadano.setLayout(layoutNoticiu);
