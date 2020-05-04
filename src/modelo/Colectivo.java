@@ -160,9 +160,12 @@ public class Colectivo implements ElementoColectivo, Serializable {
      * @return false si hay un error, true si el ciudadano ha sido registrado correctamente
      */
     public boolean unirseAColectivo(Ciudadano miembro){
-        if(ColectivoRaiz().esMiembro(miembro)){
+        /*if(ColectivoRaiz().esMiembro(miembro)){
             return false;
-        }
+        }*/
+    	if(this.esMiembro(miembro)) {
+    		return false;
+    	}
         elementos.add(miembro);
 
         miembro.anadirAMisColectivos(this);

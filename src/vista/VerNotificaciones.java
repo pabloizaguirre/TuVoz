@@ -1,6 +1,7 @@
 package vista;
 
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -24,7 +25,7 @@ public class VerNotificaciones extends JPanel{
 	
 	private static int id=0;
 	private HashMap<Integer, JPanel> listaNotificaciones = new HashMap<Integer, JPanel>();
-	private JLabel intro = new JLabel ("Notificaciones");;
+	private JLabel intro = new JLabel ("Notificaciones");
 	
 	public VerNotificaciones(){
 		BoxLayout notiLayout = new BoxLayout(this, BoxLayout.PAGE_AXIS);
@@ -35,12 +36,14 @@ public class VerNotificaciones extends JPanel{
 		intro.setAlignmentX(LEFT_ALIGNMENT);
 		this.add(intro);
 		this.add(Box.createRigidArea(new Dimension(0, 40)));
-		//this.add(Box.createHorizontalStrut(20));
+		
 		
     }
     
 	public void addNotificacionCiudadanoProyecto(String texto, JButton boton) {
 		final JPanel notiCiudadano = new JPanel();
+		notiCiudadano.setSize(new Dimension(400,100));
+		notiCiudadano.setBorder(BorderFactory.createLineBorder(Color.red));
 		BoxLayout layoutNoticiu = new BoxLayout(notiCiudadano, BoxLayout.PAGE_AXIS);
 		notiCiudadano.setLayout(layoutNoticiu);
 		

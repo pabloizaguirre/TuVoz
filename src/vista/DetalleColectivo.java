@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.*;
 
@@ -20,8 +21,11 @@ public class DetalleColectivo extends JPanel {
 	
 	private JLabel titulo = new JLabel("");
 	
-	JPanel panelBotonUnirme;
+	private JPanel panelBotonUnirme;
 	private JButton botonUnirme;
+	
+	private JComboBox<String> comboColectivos;
+	private JButton solicitarInforme;
 	
 	private JPanel listaProyectos;
 	private JPanel listaColectivos;
@@ -96,6 +100,10 @@ public class DetalleColectivo extends JPanel {
 		add(colectivos);
 	}
 	
+	public String getColectivo2() {
+		return (String)comboColectivos.getSelectedItem(); 
+	}
+	
 	public void setTitulo(String titulo) {
 		this.titulo.setText(titulo);
 	}
@@ -146,7 +154,7 @@ public class DetalleColectivo extends JPanel {
      */
 	public void setUnirme(boolean esMiembro) {
 		if(esMiembro) {
-			botonUnirme = new JButton("Ya eres miembro");
+			botonUnirme = new JButton("Eres miembro");
 			botonUnirme.setEnabled(false);
 		} else {
 			botonUnirme= new JButton("Unirme al colectivo");
@@ -155,10 +163,32 @@ public class DetalleColectivo extends JPanel {
 		panelBotonUnirme.add(botonUnirme);
 	}
 	
+	/**
+	 * Método para establecer los botones para solicitar informe de afinidad con otro colectivo
+	 * @param colectivos
+	 */
+	public void setSolicitarInforme(List<String> colectivos) {
+		solicitarInforme = new JButton("Solicitar");
+		solicitarInforme.setActionCommand("solicitarInforme");
+		comboColectivos = new JComboBox<String>();
+		comboColectivos.setActionCommand("comboColectivos");
+		comboColectivos.setPreferredSize(new Dimension(100,25));
+		
+		for(String c : colectivos) {
+			comboColectivos.addItem(c);
+		}
+		comboColectivos.setSelectedIndex(0);
+		panelBotonUnirme.add(comboColectivos);
+		panelBotonUnirme.add(solicitarInforme);
+	}
+	
 	
 	public void setControlador(ActionListener c) {
 		if(botonUnirme!=null) {
 			botonUnirme.addActionListener(c);
+		}
+		if(solicitarInforme!=null) {
+			solicitarInforme.addActionListener(c);
 		}
 	}
 	public JButton getBotonUnirme() {

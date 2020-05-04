@@ -263,7 +263,8 @@ public class Ciudadano extends Usuario implements ElementoColectivo, Serializabl
      * @param c2 Segundo colectivo del cual se quiere solicitar este informe.
      * El usuario debe pertenecer a ambos colectivos.
      *
-     * @return double que representa el indice de afinidad entre dos colectivos.
+     * @return double que representa el indice de afinidad entre dos colectivos. devuelve -1 si el ciudadano
+     * no ha creado ambos colectivos y -2 si no han creado ningun proyecto
      */
     public double solicitarInformeAfinidad(Colectivo c1, Colectivo c2){
         double proyeC1=0;
@@ -287,6 +288,9 @@ public class Ciudadano extends Usuario implements ElementoColectivo, Serializabl
                 }
             }
             System.out.println("p2a1: " + proyeC2apoyC1);
+            if(proyeC1 + proyeC2==0) {
+            	return -2;
+            }
             return (proyeC1apoyC2 + proyeC2apoyC1)/(proyeC1 + proyeC2);
         }
         return -1;
