@@ -43,10 +43,22 @@ public class ControlCrearProyecto implements ActionListener{
 			return;
         }
 		
-        if (vista.getNombre().equals("") || vista.getDescripcion().equals("") || presupuesto==-1.0
+        if (vista.getNombre().equals("") || vista.getDescripcion().equals("")
             || vista.getTipoProyecto().equals(null)) {
 			JOptionPane.showMessageDialog(vista,
 					"Debe completar todos los apartados.", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		} else if (presupuesto < 0) {
+			JOptionPane.showMessageDialog(vista,
+					"El presupuesto tiene que ser mayor o igual a 0€.", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		} else if (vista.getNombre().length()>25) {
+			JOptionPane.showMessageDialog(vista,
+					"El título es demasiado largo.", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		} else if (vista.getDescripcion().length()>500) {
+			JOptionPane.showMessageDialog(vista,
+					"La descipción es demasiado larga.", "Error", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
         if (vista.getTipoProyecto().equals("social")) {

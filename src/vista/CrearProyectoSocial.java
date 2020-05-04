@@ -32,8 +32,8 @@ public class CrearProyectoSocial extends JPanel {
 		
 		JLabel labelNuevo = new JLabel("Nuevo proyecto social");
 		
-		JLabel labelGrupoSocial = new JLabel("Grupo social: ");
-		jtfGrupoSocial = new JTextField(20);
+		JLabel labelGrupoSocial = new JLabel("Grupo social (25 caracteres): ");
+		jtfGrupoSocial = new JTextField(15);
 		
 		JLabel labelAlcance = new JLabel("Seleccione ámbito del proyecto:");
 		nacional = new JRadioButton("Nacional");

@@ -18,7 +18,7 @@ public class CrearProyecto extends JPanel {
 	private JLabel labelNombre;
 	private JTextField jtfNombre;
 	private JLabel labelDescripcion;
-	private JTextField jtfDescripcion;
+	private JTextArea jtfDescripcion;
 	private JLabel labelPresupuesto;
 	private JTextField jtfPresupuesto;
 	private JLabel labelTipo;
@@ -32,19 +32,23 @@ public class CrearProyecto extends JPanel {
 		SpringLayout cLayout = new SpringLayout();
 		setLayout(cLayout);
 		
+		this.setBorder(BorderFactory.createEmptyBorder(0, 20, 20, 20));
 		
 		labelNuevo = new JLabel("Nuevo proyecto");
+		labelNuevo.setFont(new Font(labelNuevo.getFont().getName(), Font.PLAIN, labelNuevo.getFont().getSize()+20));
 		
-		JPanel panelNuevoProyecto = new JPanel();
-		panelNuevoProyecto.add(labelNuevo);
+		SpringLayout pLayout = new SpringLayout();
+		JPanel panelProyecto = new JPanel(pLayout);
 		
-		JPanel panelProyecto = new JPanel(new GridLayout(4,2));
-		labelNombre = new JLabel(" Nombre del proyecto: ");
-		jtfNombre = new JTextField(20);
+		labelNombre = new JLabel(" Nombre del proyecto (25 caracteres): ");
+		jtfNombre = new JTextField(17);
 		
-		
-		labelDescripcion = new JLabel(" Descripción del proyecto: ");
-		jtfDescripcion = new JTextField(20);
+		labelDescripcion = new JLabel(" Descripción del proyecto (500 caracteres): ");
+		jtfDescripcion = new JTextArea();
+		jtfDescripcion.setPreferredSize(new Dimension(200,100));
+		jtfDescripcion.setBorder(jtfNombre.getBorder());
+		jtfDescripcion.setLineWrap(true);
+		jtfDescripcion.setWrapStyleWord(true);
 		
 		labelPresupuesto = new JLabel(" Presupuesto a solicitar: ");
 		jtfPresupuesto = new JTextField(10);
@@ -60,6 +64,26 @@ public class CrearProyecto extends JPanel {
 		panelTipo.add(opcionsocial);
 		panelTipo.add(opcioninfraestructura);
 		
+		pLayout.putConstraint(BorderLayout.WEST, labelNombre, 20, BorderLayout.WEST, panelProyecto);
+		pLayout.putConstraint(BorderLayout.EAST, jtfNombre, -20, BorderLayout.EAST, panelProyecto);
+		
+		pLayout.putConstraint(BorderLayout.WEST, labelDescripcion, 20, BorderLayout.WEST, panelProyecto);
+		pLayout.putConstraint(BorderLayout.NORTH, labelDescripcion, 5, BorderLayout.SOUTH, jtfNombre);
+		pLayout.putConstraint(BorderLayout.WEST, jtfDescripcion, 20, BorderLayout.EAST, labelDescripcion);
+		pLayout.putConstraint(BorderLayout.NORTH, jtfDescripcion, 5, BorderLayout.SOUTH, jtfNombre);
+		pLayout.putConstraint(BorderLayout.EAST, jtfDescripcion, -22, BorderLayout.EAST, panelProyecto);
+		
+		pLayout.putConstraint(BorderLayout.WEST, labelPresupuesto, 20, BorderLayout.WEST, panelProyecto);
+		pLayout.putConstraint(BorderLayout.NORTH, labelPresupuesto, 10, BorderLayout.SOUTH, jtfDescripcion);
+		pLayout.putConstraint(BorderLayout.EAST, jtfPresupuesto, -20, BorderLayout.EAST, panelProyecto);
+		pLayout.putConstraint(BorderLayout.NORTH, jtfPresupuesto, 5, BorderLayout.SOUTH, jtfDescripcion);
+		
+		pLayout.putConstraint(BorderLayout.WEST, labelTipo, 20, BorderLayout.WEST, panelProyecto);
+		pLayout.putConstraint(BorderLayout.NORTH, labelTipo, 5, BorderLayout.NORTH, panelTipo);
+		pLayout.putConstraint(BorderLayout.EAST, panelTipo, -20, BorderLayout.EAST, panelProyecto);
+		pLayout.putConstraint(BorderLayout.NORTH, panelTipo, 5, BorderLayout.SOUTH, jtfPresupuesto);
+		
+		
 		panelProyecto.add(labelNombre);
 		panelProyecto.add(jtfNombre);
 		panelProyecto.add(labelDescripcion);
@@ -71,12 +95,16 @@ public class CrearProyecto extends JPanel {
 
 		
 		botonSiguiente = new JButton("Siguiente");
-			
-		cLayout.putConstraint(BorderLayout.NORTH, panelNuevoProyecto, 30, BorderLayout.NORTH, this);
-		cLayout.putConstraint(BorderLayout.NORTH, panelProyecto, 8, BorderLayout.SOUTH, panelNuevoProyecto);
-		cLayout.putConstraint(BorderLayout.NORTH, botonSiguiente, 8, BorderLayout.SOUTH, panelProyecto);
 		
-		this.add(panelNuevoProyecto);
+		cLayout.putConstraint(BorderLayout.NORTH, labelNuevo, 0, BorderLayout.NORTH, this);
+		cLayout.putConstraint(BorderLayout.NORTH, panelProyecto, 8, BorderLayout.SOUTH, labelNuevo);
+		cLayout.putConstraint(BorderLayout.EAST, panelProyecto, 0, BorderLayout.EAST, this);
+		cLayout.putConstraint(BorderLayout.WEST, panelProyecto, 0, BorderLayout.WEST, this);
+		cLayout.putConstraint(BorderLayout.SOUTH, panelProyecto, 200, BorderLayout.NORTH, panelProyecto);
+		cLayout.putConstraint(BorderLayout.NORTH, botonSiguiente, 8, BorderLayout.SOUTH, panelProyecto);
+		cLayout.putConstraint(BorderLayout.EAST, botonSiguiente, -20, BorderLayout.EAST, this);
+		
+		this.add(labelNuevo);	
 		this.add(panelProyecto);
 		this.add(botonSiguiente);
 		}

@@ -51,6 +51,7 @@ public class DetalleProyecto extends JPanel{
 		
 		titulo.setEditable(false);
 		titulo.setLineWrap(true);
+		titulo.setWrapStyleWord(true);
 		titulo.setBackground(null);
 		titulo.setFont(new Font(titulo.getFont().getName(), Font.PLAIN, titulo.getFont().getSize()+20));
 		
@@ -82,6 +83,7 @@ public class DetalleProyecto extends JPanel{
 		this.descripcion.setEditable(false);
 		this.descripcion.setLineWrap(true);
 		this.descripcion.setBackground(null);
+		this.descripcion.setWrapStyleWord(true);
 		
 		detalles.add(descripcion);
 		detalles.add(Box.createRigidArea(new Dimension(0, 5)));

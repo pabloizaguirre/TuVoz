@@ -45,6 +45,10 @@ public class ControlCrearProyectoSocial implements ActionListener {
 			JOptionPane.showMessageDialog(vista,
 					"Debe completar todos los apartados.", "Error", JOptionPane.ERROR_MESSAGE);
 			return;
+		} else if (vista.getGrupoSocial().length()>25) {
+			JOptionPane.showMessageDialog(vista,
+					"Nombre del grupo social demasiado largo.", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
 		}
 		CrearProyecto v = frame.getVistaCrearProyecto();
 		TipoAlcance tipoAlcance;
