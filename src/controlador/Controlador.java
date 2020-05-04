@@ -2,6 +2,18 @@ package controlador;
 
 import java.util.List;
 
+import controlador.colectivo.crear.ControlCrearColectivo;
+import controlador.interfaz.ControlBarraSuperior;
+import controlador.interfaz.ControlHome;
+import controlador.interfaz.ControlInicio;
+import controlador.miperfil.ControlMiPerfil;
+import controlador.miperfil.ControlMiPerfilAdmin;
+import controlador.notificacion.ControlNotificaciones;
+import controlador.proyecto.ControlApoyoMinimoProyecto;
+import controlador.proyecto.ControlIrAProyecto;
+import controlador.proyecto.crear.ControlCrearProyecto;
+import controlador.proyecto.crear.ControlCrearProyectoInfraestructura;
+import controlador.proyecto.crear.ControlCrearProyectoSocial;
 import modelo.*;
 import vista.*;
 

@@ -1,0 +1,34 @@
+package modelo.proyecto;
+import java.util.*;
+
+import modelo.elementocolectivo.ElementoColectivo;
+
+import java.io.*;
+
+/**
+ * Subclase proyecto social.
+ * 
+ * @author Elena Cano
+ * @author Pablo Izaguirre
+ * @author Miguel Escribano
+ */
+
+public class ProyectoSocial extends Proyecto {
+    private String grupoSocial;
+    private TipoAlcance alcance;
+    
+    public ProyectoSocial(String tit, String desc, double presSolicitado,
+                            ElementoColectivo creador, String grupoSocial, TipoAlcance alcance){
+                super(tit, desc, presSolicitado, creador);
+                this.grupoSocial = grupoSocial;
+                this.alcance = alcance;
+    }
+    
+    public String getGrupoSocial() {
+    	return grupoSocial;
+    }
+    
+    public TipoAlcance getAlcance() {
+    	return alcance;
+    }
+}

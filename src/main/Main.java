@@ -1,6 +1,7 @@
 package main;
 
 import modelo.*;
+import modelo.aplicacion.Aplicacion;
 import vista.*;
 
 import javax.swing.UIManager;

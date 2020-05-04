@@ -3,9 +3,9 @@ package modelo.tests;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-import modelo.Ciudadano;
-import modelo.Notificacion;
 import modelo.*;
+import modelo.aplicacion.Aplicacion;
+import modelo.notificacion.Notificacion;
 
 /**
  * Tester de usuario.

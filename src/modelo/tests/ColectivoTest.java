@@ -6,11 +6,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import modelo.Ciudadano;
-import modelo.Colectivo;
-import modelo.ProyectoSocial;
-import modelo.TipoAlcance;
 import modelo.*;
+import modelo.elementocolectivo.colectivo.Colectivo;
+import modelo.proyecto.ProyectoSocial;
+import modelo.proyecto.TipoAlcance;
 
 /**
  * Tester de colectivo.
