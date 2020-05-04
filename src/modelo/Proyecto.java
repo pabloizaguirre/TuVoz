@@ -115,6 +115,8 @@ public class Proyecto implements Serializable {
 		private void cambiarEstado(EstadoProyecto e){
 			if(e.equals(EstadoProyecto.RECHAZADO)){
 				Aplicacion.getAplicacion().eliminarProyecto(this);
+				this.estado = e;
+				return;
 			}
 			this.estado = e;
 			
