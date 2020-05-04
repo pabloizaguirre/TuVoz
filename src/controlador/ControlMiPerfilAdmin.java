@@ -40,15 +40,23 @@ public class ControlMiPerfilAdmin implements ActionListener {
 			frame.getVistaBarraSuperior().setVisible(false);
 			frame.mostrarPanel("inicioRegistro");
 		} else if (e.getActionCommand().contentEquals("reset")) {
-			Aplicacion.getAplicacion().getListadoElementoColectivos().clear();
-			Aplicacion.getAplicacion().getListadoProyectos().clear();
-			Aplicacion.getAplicacion().getListaNombres().clear();
-			Aplicacion.getAplicacion().getAdministrador().getNotificaciones().clear();
-			Aplicacion.getAplicacion().setUsuarioActual(null);
+			int option = JOptionPane.showConfirmDialog(
+					frame, 
+					"¿Estás seguro de que quieres resetear la aplicacion?",
+					"Confirmacion", 
+					JOptionPane.YES_NO_OPTION, 
+					JOptionPane.QUESTION_MESSAGE);
+			if(option == JOptionPane.YES_OPTION) {
+				Aplicacion.getAplicacion().getListadoElementoColectivos().clear();
+				Aplicacion.getAplicacion().getListadoProyectos().clear();
+				Aplicacion.getAplicacion().getListaNombres().clear();
+				Aplicacion.getAplicacion().getAdministrador().getNotificaciones().clear();
+				Aplicacion.getAplicacion().setUsuarioActual(null);
 			
-			File fichero = new File("data.dat");
-			fichero.delete();
-			System.exit(0);
+				File fichero = new File("data.dat");
+				fichero.delete();
+				System.exit(0);
+			}
 		}/*Si pulsamos en avanzar la fecha siendo Admin*/
 		else if(e.getActionCommand().contentEquals("adelantoFecha")) {
 			JOptionPane.showMessageDialog(vista,
