@@ -104,7 +104,7 @@ public class DetalleColectivo extends JPanel {
 	 * Metodo para añadir un mensaje cuando el colectivo no haya creado proyectos
 	 */
 	public void setProyectosVacios() {
-		this.proyectosVacio = new JLabel("El colectivo " + titulo.getText() + " todavia no ha creado ningún proyecto.");
+		this.proyectosVacio = new JLabel("El colectivo " + titulo.getText() + " todavia no ha creado ningun proyecto.");
 		this.proyectosVacio.setFont(new Font(proyectosVacio.getFont().getName(), Font.ITALIC, proyectosVacio.getFont().getSize()));
 		this.listaProyectos.add(Box.createRigidArea(new Dimension(10,120)));
 		this.listaProyectos.add(proyectosVacio);
@@ -114,7 +114,7 @@ public class DetalleColectivo extends JPanel {
 	 * Metodo para añadir un mensaje cuando el colectio no tenga subcolectivos
 	 */
 	public void setColectivosVacios() {
-		this.colectivosVacio = new JLabel("El colectivo " + titulo.getText() + " todavia no tiene ningún subcolectivo.");
+		this.colectivosVacio = new JLabel("El colectivo " + titulo.getText() + " todavia no tiene ningun subcolectivo.");
 		this.colectivosVacio.setFont(new Font(colectivosVacio.getFont().getName(), Font.ITALIC, colectivosVacio.getFont().getSize()));
 		this.listaColectivos.add(Box.createRigidArea(new Dimension(10,120)));
 		this.listaColectivos.add(colectivosVacio);

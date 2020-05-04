@@ -53,7 +53,7 @@ public class InicioRegistro extends JPanel {
 		labelnombre = new JLabel("Nombre o NIF:");
 		jtfnombre = new JTextField(15);
 		jtfnombre.setActionCommand("nombre");
-		labelpassword = new JLabel("ContraseÃ±a");
+		labelpassword = new JLabel("Contraseña");
 		password = new JPasswordField(10);
 		password.setActionCommand("password");
 		botonEntrar = new JButton("Entrar");
@@ -85,7 +85,7 @@ public class InicioRegistro extends JPanel {
 		jtfnifreg = new JTextField(15);
 		labelusuarioreg = new JLabel("Usuario");
 		jtfusuarioreg = new JTextField(15);
-		labelpasswordreg = new JLabel("ContraseÃ±a");
+		labelpasswordreg = new JLabel("Contraseña");
 		passwordreg = new JPasswordField(15);
 		botonRegistro = new JButton("Registrarse");
 		botonRegistro.setActionCommand("botonRegistrarse");

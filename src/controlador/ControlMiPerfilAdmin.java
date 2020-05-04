@@ -50,6 +50,13 @@ public class ControlMiPerfilAdmin implements ActionListener {
 			fichero.delete();
 			frame.getVistaBarraSuperior().setVisible(false);
 			frame.mostrarPanel("inicioRegistro");
+		}/*Si pulsamos en avanzar la fecha siendo Admin*/
+		else if(e.getActionCommand().contentEquals("adelantoFecha")) {
+			JOptionPane.showMessageDialog(vista,
+					"Hoy es "+FechaSimulada.getHoy() , "Avanzando 30 dias", JOptionPane.INFORMATION_MESSAGE);
+			FechaSimulada.avanzar(30);
+			JOptionPane.showMessageDialog(vista,
+					"Ahora, hoy es " + FechaSimulada.getHoy() , "Avanzando 30 dias", JOptionPane.INFORMATION_MESSAGE);
 		}
 		
 		else if(e.getActionCommand().equals("bloquear") || e.getActionCommand().equals("desbloquear")) {

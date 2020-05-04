@@ -32,7 +32,7 @@ public class BarraSuperior extends JPanel {
 		home = new JButton("Inicio");
 		home.setActionCommand("home");
 		
-		atras = new JButton("AtrÃ¡s");
+		atras = new JButton("Atrás");
 		atras.setActionCommand("atras");
 		
 		left.add(home);
@@ -41,7 +41,7 @@ public class BarraSuperior extends JPanel {
 		JPanel right = new JPanel();
 		busquedaTF = new JTextField(15);
 		busquedaTF.setActionCommand("busquedaTF");
-		busqueda = new JButton("Busqueda");
+		busqueda = new JButton("Búsqueda");
 		busqueda.setActionCommand("busqueda");
 		notificaciones = new JButton("Notificaciones");
 		notificaciones.setActionCommand("notificaciones");
