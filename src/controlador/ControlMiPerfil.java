@@ -27,6 +27,7 @@ public class ControlMiPerfil implements ActionListener {
 		this.frame = frame;
 		this.vista = frame.getVistaMiPerfil();
 	}
+
 	/**
 	 * Método encargado de gestionar los eventos relacionados con los botones de la vista 
 	 * de mi perfil
@@ -87,6 +88,11 @@ public class ControlMiPerfil implements ActionListener {
 		}
 	}
 	
+	/**
+	 * Método encargado de establecer la vista de mi perfil
+	 * 
+	 * 
+	 */
 	public void setVista() {
 		vista.resetBotones();
 		setBotonesProyectos();
@@ -96,6 +102,11 @@ public class ControlMiPerfil implements ActionListener {
 		vista.setControlador(this);
 	}
 	
+	/**
+	 * Método encargado de establecer los botones de los proyectos que aparecen en mi perfil
+	 * 
+	 * 
+	 */
 	public void setBotonesProyectos() {
 		JButton botonProyecto;
 		Usuario usuario = Aplicacion.getAplicacion().getUsuarioActual();
@@ -109,6 +120,12 @@ public class ControlMiPerfil implements ActionListener {
 		}
 	}
 	
+	/**
+	 * Método encargado de crear los botones de los proyectos pasados como argumento
+	 * 
+	 * @param p proyecto del cual queremos crear un boton
+	 * 
+	 */
 	public void addBotonProyecto(Proyecto p) {
 		JButton botonProyecto = new JButton(p.getTitulo());
 		botonProyecto.addActionListener(this);
@@ -116,7 +133,11 @@ public class ControlMiPerfil implements ActionListener {
 		proyectos.put(botonProyecto, p);
 	}
 	
-	
+	/**
+	 * Método encargado de establecer los botones de los colectivo que aparecen en mi perfil
+	 * 
+	 * 
+	 */
 	public void setBotonesColectivos() {
 		JButton botonColectivo;
 		Usuario usuario = Aplicacion.getAplicacion().getUsuarioActual();
@@ -130,6 +151,12 @@ public class ControlMiPerfil implements ActionListener {
 		}
 	}
 	
+	/**
+	 * Método encargado de crear los botones de los colectivos pasados como argumento
+	 * 
+	 * @param c colectivo del cual queremos crear un boton
+	 * 
+	 */
 	public void addBotonColectivo(Colectivo c) {
 		JButton botonColectivo = new JButton(c.getTitulo());
 		botonColectivo.addActionListener(this);

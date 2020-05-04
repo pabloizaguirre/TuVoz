@@ -72,6 +72,11 @@ public class ControlCrearProyecto implements ActionListener{
 		
 	}
 	
+	/**
+	 * Método para gestionar los botones de los distritos que se pueden elegir a la hora de crear
+	 * un proyecto de infraestructura
+	 * 
+	 */
 	public void setDistritos() {
 		ArrayList<JCheckBox> distritos = new ArrayList<JCheckBox>();
 		

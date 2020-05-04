@@ -83,6 +83,12 @@ public class ControlCrearProyectoInfraestructura implements ActionListener {
 		}
 	}
 	
+	/**
+	 * Método para gestionar los distritos seleccionados a la hora de la creación de un proyecto
+	 * de infraestructura
+	 * 
+	 * @param e action event
+	 */
 	public ArrayList<Distrito> getDistritoEnum() {
 		ArrayList<String> string = vista.getDistritos();
 		ArrayList<Distrito> e = new ArrayList<Distrito>();

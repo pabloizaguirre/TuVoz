@@ -136,6 +136,12 @@ public class ControlNotificaciones implements ActionListener {
 		
 	}
 	
+
+	/**
+	 * Método encargado de establecer la vista de las notificaciones
+	 * 
+	 * 
+	 */
 	public void setVista() {
 		vista.resetNoti();
 		for(Notificacion n:Aplicacion.getAplicacion().getUsuarioActual().getNotificaciones()) {
