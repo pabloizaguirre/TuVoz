@@ -48,8 +48,7 @@ public class ControlMiPerfilAdmin implements ActionListener {
 			
 			File fichero = new File("data.dat");
 			fichero.delete();
-			frame.getVistaBarraSuperior().setVisible(false);
-			frame.mostrarPanel("inicioRegistro");
+			System.exit(0);
 		}/*Si pulsamos en avanzar la fecha siendo Admin*/
 		else if(e.getActionCommand().contentEquals("adelantoFecha")) {
 			JOptionPane.showMessageDialog(vista,

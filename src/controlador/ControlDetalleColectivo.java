@@ -69,10 +69,10 @@ public class ControlDetalleColectivo implements ActionListener{
 							"No tienes acceso al informe.", "Informe de afinidad con el colectivo " + colectivo2, JOptionPane.ERROR_MESSAGE);
 				} else if(indice == -2) {
 					JOptionPane.showMessageDialog(vista,
-							"No se puede determinar el índice de afinidad porque ninguno de los dos proyectos ha creado algún proyecto.", "Informe de afinidad con el colectivo " + colectivo2, JOptionPane.DEFAULT_OPTION);
+							"No se puede determinar el indice de afinidad porque ninguno de los dos proyectos ha creado algun proyecto.", "Informe de afinidad con el colectivo " + colectivo2, JOptionPane.DEFAULT_OPTION);
 				} else {
 					JOptionPane.showMessageDialog(vista,
-							"Índice de afinidad con el colectivo " + colectivo2 + ": " + indice, "Informe de afinidad con el colectivo " + colectivo2, JOptionPane.DEFAULT_OPTION);
+							"Indice de afinidad con el colectivo " + colectivo2 + ": " + indice, "Informe de afinidad con el colectivo " + colectivo2, JOptionPane.DEFAULT_OPTION);
 				}
 			}
 		}

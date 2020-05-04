@@ -61,7 +61,7 @@ public class ControlDetalleProyecto implements ActionListener{
 							"No tienes acceso al informe.", "Informe de popularidad del proyecto " + proyecto.getTitulo(), JOptionPane.ERROR_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(vista,
-							"Número de apoyos del proyecto: " + apoyos, "Informe de popularidad del proyecto " + proyecto.getTitulo(), JOptionPane.DEFAULT_OPTION);
+							"Numero de apoyos del proyecto: " + apoyos, "Informe de popularidad del proyecto " + proyecto.getTitulo(), JOptionPane.DEFAULT_OPTION);
 				}
 			}
 		} else if(e.getActionCommand().contentEquals("enviarAFinanciacion")) { // al pulsar en el boton de enviar a financiacion
@@ -74,7 +74,7 @@ public class ControlDetalleProyecto implements ActionListener{
 				vista.setLabelEstado("Estado: " + proyecto.consultarEstadoProyecto());
 			} catch (Exception e1) {
 				JOptionPane.showMessageDialog(vista,
-						"No se ha podido enviar correctamente a financiacion. Vuelve a intentarlo más adelante.", "Pulsado enviar Proyecto", JOptionPane.ERROR_MESSAGE);
+						"No se ha podido enviar correctamente a financiacion. Vuelve a intentarlo mas adelante.", "Pulsado enviar Proyecto", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}
